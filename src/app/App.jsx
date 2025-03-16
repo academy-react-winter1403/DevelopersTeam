@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "../screens/mainLayout";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LandingPage from "../screens/landingPage";
 import CoursesPage from "../screens/coursePage";
 import CourseDetailPage from "../screens/courseDetailPage";
