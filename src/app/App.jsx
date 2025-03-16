@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainLayout from "../screens/mainLayout";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LandingPage from "../screens/landingPage";
 import CoursesPage from "../screens/coursePage";
@@ -10,6 +9,7 @@ import LoginPage from "../screens/loginPage";
 import RegisterPage from "../screens/registerPage";
 import ForgetPasswordPage from "../screens/forgetPasswordPage";
 import AuthLayout from "./authLayout";
+import MainLayout from "./mainLayout";
 
 function App() {
   const client = new QueryClient();
