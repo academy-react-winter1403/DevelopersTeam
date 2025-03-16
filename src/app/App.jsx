@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainLayout from "../screens/mainLayout";
+import MainLayout from "./mainLayout";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LandingPage from "../screens/landingPage";
 import CoursesPage from "../screens/coursePage";
@@ -9,6 +9,7 @@ import NewsDetailPage from "../screens/newsDetailPage";
 import LoginPage from "../screens/loginPage";
 import RegisterPage from "../screens/registerPage";
 import ForgetPasswordPage from "../screens/forgetPasswordPage";
+import AuthLayout from "./authLayout";
 
 function App() {
   const client = new QueryClient();
@@ -38,14 +39,32 @@ function App() {
           path: "/newsdetail/:id",
           element: <NewsDetailPage />,
         },
+      ],
+    },
+    {
+      path: "/login",
+      element: <AuthLayout />,
+      children: [
         {
           path: "/login",
           element: <LoginPage />,
         },
+      ],
+    },
+    {
+      path: "/register",
+      element: <AuthLayout />,
+      children: [
         {
           path: "/register",
           element: <RegisterPage />,
         },
+      ],
+    },
+    {
+      path: "/forgetpass",
+      element: <AuthLayout />,
+      children: [
         {
           path: "/forgetpass",
           element: <ForgetPasswordPage />,
