@@ -1,5 +1,6 @@
 import React from 'react'
 import Login from '../../components/login'
+import { Outlet } from 'react-router-dom'
 
 const LoginPage = () => {
   return (
