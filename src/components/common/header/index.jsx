@@ -1,7 +1,7 @@
 import React from 'react'
-import logo from "./../../assets/images/logo.svg";
-import logoText from "./../../assets/images/logoText.svg";
-import darkMood from "./../../../../../assets/images/darkLego.svg";
+import logo from "./../../../assets/images/logo.svg";
+import logoText from "./../../../assets/images/logoText.svg";
+import darkMood from "./../../../assets/images/darkLego.svg";
 
 
 const Header = () => {
@@ -14,7 +14,7 @@ const Header = () => {
       <span>دوره ها</span>
       <span>اخبار و مقالات</span>
       <span>ارتباط با ما</span>
-      <img src={darkMood} alt="" className='w-56 h-56 border-[1px] left-[254px]' />
+      <img src={darkMood} alt="" className='w-14 h-56 border-[1px] left-[254px]' />
       <span className=''>ورود یا ثبت نام</span>
     </div>
   )
