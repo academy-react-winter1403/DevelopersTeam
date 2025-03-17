@@ -14,7 +14,7 @@ const Auth = () => {
         <div className="border w-96 h-96 ">
           <div className="border w-96 h-32 ">
             <div className="w-16 h-16 rounded-full bg-white">
-              <LuMailCheck />
+              <LuMailCheck className="w-10" />
             </div>
           </div>
           <div className="border w-96 h-32"></div>
