@@ -10,8 +10,6 @@ import LoginPage from "../screens/loginPage";
 import RegisterPage from "../screens/registerPage";
 import ForgetPasswordPage from "../screens/forgetPasswordPage";
 import AuthLayout from "./authLayout";
-import MainLayout from "./mainLayout";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const client = new QueryClient();
