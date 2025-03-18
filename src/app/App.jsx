@@ -12,12 +12,9 @@ import NewsDetailPage from "../screens/newsDetailPage";
 import LoginPage from "../screens/loginPage";
 import RegisterPage from "../screens/registerPage";
 import ForgetPasswordPage from "../screens/forgetPasswordPage";
-<<<<<<< HEAD
-=======
 import AuthLayout from "./authLayout";
 import MainLayout from "./mainLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
->>>>>>> origin/develop
 
 function App() {
   const client = new QueryClient();
