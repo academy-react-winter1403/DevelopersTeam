@@ -1,8 +1,7 @@
 import React from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
-import { LuMailCheck } from "react-icons/lu";
-
+import { CiMail } from "react-icons/ci";
 const Auth = () => {
   return (
     <div dir="rtl" className="grid grid-cols-5 w-full h-[800px] ">
@@ -14,7 +13,7 @@ const Auth = () => {
         <div className="border w-96 h-96 ">
           <div className="border w-96 h-32 ">
             <div className="w-16 h-16 rounded-full bg-white">
-              <LuMailCheck className="w-10" />
+              <CiMail/>
             </div>
           </div>
           <div className="border w-96 h-32"></div>
