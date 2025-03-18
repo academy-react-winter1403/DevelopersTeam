@@ -3,3 +3,7 @@
 @theme {
   --color-lightGrey: #e4e4e4;
 }
+
+body{
+  direction: rtl;
+}
