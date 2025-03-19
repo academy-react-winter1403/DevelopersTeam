@@ -1,4 +1,7 @@
 import React from "react";
+import logo from "./../../assets/images/logo.svg";
+import logoText from "./../../assets/images/logoText.svg";
+import { CiMail } from "react-icons/ci";
 
 const Auth = () => {
   
@@ -25,8 +28,7 @@ const Auth = () => {
     //   </div>
     //   <div className="col-span-3"></div>
     // </div>
-
-    <></>
+<></>
   );
 };
 

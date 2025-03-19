@@ -3,19 +3,15 @@ import { CiMail } from "react-icons/ci";
 import { TbLockPassword } from "react-icons/tb";
 import { TbUserSquareRounded } from "react-icons/tb";
 
-const Steps = () => {
+const StepsLogin = () => {
   const detail = [
     {
-      title: "وارد کردن شماره همراه",
+      title: "وارد کردن شماره همراه یا ایمیل",
       icon: <CiMail className="w-6 h-6" />,
     },
     {
-      title: "تایید کد ارسال شده به شماره همراه",
+      title: "تایید کد ارسال شده",
       icon: <TbLockPassword className="w-6 h-6" />,
-    },
-    {
-      title: "وارد کردن اطلاعات حساب کاربری",
-      icon: <TbUserSquareRounded className="w-6 h-6" />,
     },
   ];
 
@@ -38,4 +34,4 @@ const Steps = () => {
   );
 };
 
-export default Steps;
+export default StepsLogin;

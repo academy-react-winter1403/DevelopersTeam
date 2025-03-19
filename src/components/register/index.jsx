@@ -2,8 +2,6 @@ import React, { Fragment, useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
 import Steps from "./steps";
-import AuthInput from "../common/auth-inputs";
-import { NavLink } from "react-router-dom";
 import EnterNumber from "./enterNumber";
 import VerifyCode from "./verifyCode";
 import UserInfo from "./userInfo";
@@ -12,6 +10,9 @@ const Register = () => {
   const [step, setStep] = useState(1);
   const nextStep = () => {
     setStep(step + 1);
+  };
+  const prevStep = () => {
+    setStep(step - 1);
   };
   return (
     <div dir="rtl" className="grid grid-cols-5 w-full h-[800px] ">
@@ -48,7 +49,7 @@ const Register = () => {
         </div>
         {/* inputs section */}
         {step == 1 && <EnterNumber nextStep={nextStep} text={"ارسال کد تایید"} />}
-        {step == 2 && <VerifyCode nextStep={nextStep} text={"تایید"} />}
+        {step == 2 && <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />}
         {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
       </div>
     </div>

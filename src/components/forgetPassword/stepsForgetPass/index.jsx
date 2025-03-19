@@ -3,19 +3,15 @@ import { CiMail } from "react-icons/ci";
 import { TbLockPassword } from "react-icons/tb";
 import { TbUserSquareRounded } from "react-icons/tb";
 
-const Steps = () => {
+const StepsForgetPass = () => {
   const detail = [
     {
-      title: "وارد کردن شماره همراه",
+      title: "وارد کردن ایمیل",
       icon: <CiMail className="w-6 h-6" />,
     },
     {
-      title: "تایید کد ارسال شده به شماره همراه",
+      title: "وارد کردن رمزعبور جدید",
       icon: <TbLockPassword className="w-6 h-6" />,
-    },
-    {
-      title: "وارد کردن اطلاعات حساب کاربری",
-      icon: <TbUserSquareRounded className="w-6 h-6" />,
     },
   ];
 
@@ -23,7 +19,6 @@ const Steps = () => {
     <div className=" w-96 h-20 mt-10">
       {detail.map((item) => {
         return (
-          // {step == item && ()}
           <div className="w-full h-full flex items-center space-x-5">
             <div className="w-14 h-14 rounded-full bg-white flex justify-center items-center">
               {item.icon}
@@ -38,4 +33,4 @@ const Steps = () => {
   );
 };
 
-export default Steps;
+export default StepsForgetPass;

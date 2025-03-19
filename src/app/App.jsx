@@ -43,7 +43,7 @@ function App() {
     },
     {
       path: "/login",
-      element: <AuthLayout />,
+      element: <LoginPage />,
       children: [
         {
           path: "/login",
@@ -53,7 +53,7 @@ function App() {
     },
     {
       path: "/register",
-      element: <AuthLayout />,
+      element: <RegisterPage />,
       children: [
         {
           path: "/register",
@@ -63,7 +63,7 @@ function App() {
     },
     {
       path: "/forgetpass",
-      element: <AuthLayout />,
+      element: <ForgetPasswordPage />,
       children: [
         {
           path: "/forgetpass",
