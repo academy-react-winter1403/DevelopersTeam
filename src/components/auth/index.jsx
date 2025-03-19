@@ -5,7 +5,7 @@ const Auth = () => {
 
   return (
     // <div dir="rtl" className="grid grid-cols-5 w-full h-[800px] ">
-    //   <div className="col-span-2 bg-lightGrey pt-24 pr-16">
+    //   <div className="col-span-2 bg-lightGray pt-24 pr-16">
     //     <div className="w-fit flex flex-row items-center">
     //       <img src={logo} alt="logo" className="w-14" />
     //       <img src={logoText} alt="text" className="w-44 h-8 mt-3" />
