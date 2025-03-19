@@ -1,9 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-lightGrey: #e4e4e4;
+  --color-lightGray: #f4f4f4;
   --color-navyBlue: #3772ff;
   --color-white: #fefdff;
+  --color-gray: #787878;
+  --color-lightBlue: #3772FF3B;
+
+}
+
+body {
+  font-family: "yekan";
 }
 
 body{

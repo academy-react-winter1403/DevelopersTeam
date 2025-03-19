@@ -39,14 +39,32 @@ function App() {
           path: "/newsdetail/:id",
           element: <NewsDetailPage />,
         },
+      ],
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
+      children: [
         {
           path: "/login",
           element: <LoginPage />,
         },
+      ],
+    },
+    {
+      path: "/register",
+      element: <RegisterPage />,
+      children: [
         {
           path: "/register",
           element: <RegisterPage />,
         },
+      ],
+    },
+    {
+      path: "/forgetpass",
+      element: <ForgetPasswordPage />,
+      children: [
         {
           path: "/forgetpass",
           element: <ForgetPasswordPage />,
