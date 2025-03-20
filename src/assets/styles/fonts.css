@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "yekan";
+  src: url("./../fonts/iranYekan/IRANYekanWebRegular.woff2") format("woff2"),
+    url("./../fonts/iranYekan/IRANYekanWebMedium.woff2") format("woff2"),
+    url("./../fonts/iranYekan/IRANYekanWebBold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
