@@ -9,7 +9,7 @@ const HeroSection = () => {
         از <span className='text-blue-500 '>مبتدی</span> تا <span className='text-red-500'>حرفه ای</span> 
         </h2>
       <h5 className='mx-auto h-10 w-[700px] text-gray-400 text-[12px] indent-36'>آکادمی فوق تخصصی کدنویسی و برنامه نویسی از سنین کودکی تا بزگسالی</h5>
-      <Link className='mx-auto h-10 w-32  rounded-2xl bg-[#3772FF] text-white px-4 pt-1'>شروع یادگیری</Link>
+      <Link className='mx-auto h-10 w-[130px]  rounded-2xl bg-[#3772FF] text-white px-4 pt-1'>شروع یادگیری</Link>
     </div>
   )
 }
