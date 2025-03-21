@@ -3,7 +3,10 @@ import { NavLink } from "react-router-dom";
 import AuthInput from "../../common/auth-inputs";
 import AuthButton from "../../common/auth-button";
 
-const EnterNumber = ({ nextStep, text }) => {
+const EnterNumber = ({ nextStep, text ,handleRegister }) => {
+
+
+
   return (
     <div>
       <Fragment>
@@ -13,6 +16,7 @@ const EnterNumber = ({ nextStep, text }) => {
             placeholder={"شماره همراه خود را وارد کنید"}
             nextStep={nextStep}
             text={text}
+            handleRegister={handleRegister}
           />
           <AuthButton nextStep={nextStep} text={text} />
         </div>

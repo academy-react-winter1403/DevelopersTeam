@@ -5,6 +5,7 @@ import Steps from "./steps";
 import EnterNumber from "./enterNumber";
 import VerifyCode from "./verifyCode";
 import UserInfo from "./userInfo";
+import http from "./../../core/services/interceptor";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -14,6 +15,12 @@ const Register = () => {
   const prevStep = () => {
     setStep(step - 1);
   };
+
+  const handleSendVerificationCode = async (values) => {
+    const res = await http.post("/Sign/SendVerifyMessage", values);
+    console.log("res", res.status(200));
+  };
+
   return (
     <div dir="rtl" className="grid grid-cols-5 w-full h-[800px] ">
       {/* right section */}
@@ -22,7 +29,7 @@ const Register = () => {
           <img src={logo} alt="logo" className="w-14" />
           <img src={logoText} alt="text" className="w-44 h-8 mt-3" />
         </div>
-        <Steps />
+        <Steps step={step} />
       </div>
       {/* left section */}
       <div className="col-span-3 pt-24 pr-28">
@@ -48,8 +55,16 @@ const Register = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && <EnterNumber nextStep={nextStep} text={"ارسال کد تایید"} />}
-        {step == 2 && <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />}
+        {step == 1 && (
+          <EnterNumber
+            nextStep={nextStep}
+            text={"ارسال کد تایید"}
+            handleRegister={handleSendVerificationCode}
+          />
+        )}
+        {step == 2 && (
+          <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />
+        )}
         {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
       </div>
     </div>
