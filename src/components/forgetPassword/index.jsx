@@ -24,7 +24,7 @@ const ForgetPassword = () => {
           <img src={logo} alt="logo" className="w-14" />
           <img src={logoText} alt="text" className="w-44 h-8 mt-3" />
         </div>
-        <StepsForgetPass />
+        <StepsForgetPass step={step} />
       </div>
       {/* left section */}
       <div className="col-span-3 pt-24 pr-28">

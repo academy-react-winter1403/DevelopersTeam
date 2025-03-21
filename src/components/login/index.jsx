@@ -5,7 +5,6 @@ import StepsLogin from "./stepsLogin";
 import EnterNumberLogin from "./enterNumberLogin";
 import VerifyCodeLogin from "./verifyCodeLogin";
 
-
 const Login = () => {
   const [step, setStep] = useState(1);
   const nextStep = () => {
@@ -22,7 +21,7 @@ const Login = () => {
           <img src={logo} alt="logo" className="w-14" />
           <img src={logoText} alt="text" className="w-44 h-8 mt-3" />
         </div>
-        <StepsLogin />
+        <StepsLogin step={step} />
       </div>
       {/* left section */}
       <div className="col-span-3 pt-24 pr-28">
@@ -30,7 +29,8 @@ const Login = () => {
           <h1 className="text-3xl font-bold">خوش برگشتی! 👋</h1>
           {step == 1 && (
             <p className="text-md mt-5 text-gray ">
-       لطفا برای ورود به پنل خود ایمیل یا شماره همراه و رمزعبور خود را وارد کنید
+              لطفا برای ورود به پنل خود ایمیل یا شماره همراه و رمزعبور خود را
+              وارد کنید
             </p>
           )}
           {step == 2 && (
@@ -40,11 +40,18 @@ const Login = () => {
               <span>را وارد کنید</span>
             </div>
           )}
-        
         </div>
         {/* inputs section */}
-        {step == 1 && <EnterNumberLogin nextStep={nextStep} text={"ورود به حساب کاربری"} />}
-        {step == 2 && <VerifyCodeLogin nextStep={nextStep} prevStep={prevStep} text={"تایید"} />}
+        {step == 1 && (
+          <EnterNumberLogin nextStep={nextStep} text={"ورود به حساب کاربری"} />
+        )}
+        {step == 2 && (
+          <VerifyCodeLogin
+            nextStep={nextStep}
+            prevStep={prevStep}
+            text={"تایید"}
+          />
+        )}
       </div>
     </div>
   );

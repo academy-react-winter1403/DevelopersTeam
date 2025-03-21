@@ -22,7 +22,7 @@ const Register = () => {
           <img src={logo} alt="logo" className="w-14" />
           <img src={logoText} alt="text" className="w-44 h-8 mt-3" />
         </div>
-        <Steps />
+        <Steps step={step} />
       </div>
       {/* left section */}
       <div className="col-span-3 pt-24 pr-28">
@@ -48,8 +48,12 @@ const Register = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && <EnterNumber nextStep={nextStep} text={"ارسال کد تایید"} />}
-        {step == 2 && <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />}
+        {step == 1 && (
+          <EnterNumber nextStep={nextStep} text={"ارسال کد تایید"} />
+        )}
+        {step == 2 && (
+          <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />
+        )}
         {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
       </div>
     </div>
