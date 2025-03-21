@@ -13,11 +13,11 @@ const Footer = () => {
         <img src={Academi} alt="" className='w-20 h-20 mr-2'/>
 
       
-        <div className='flex justify-center bg-white rounded-2xl text-red-400 h-8 w-32 mr-1 gap-1 mt-3 leading-6'>
+        <div className='flex justify-center bg-white rounded-2xl text-red-400 h-8 w-32 mr-1 gap-1 mt-3 leading-8'>
           <span><img src={Instagram} alt="" className='h-5 w-5 mt-1'/></span> <span>اینستاگرام</span>
         </div>
 
-        <div className='flex justify-center  bg-white rounded-2xl text-blue-400 h-8 w-24 mr-1 gap-1 mt-3'>
+        <div className='flex justify-center  bg-white rounded-2xl text-blue-400 h-8 w-24 mr-1 gap-1 mt-3 leading-8'>
           <span><img src={Telegram} alt="" className='h-5 w-5 mt-1'/></span> <span>تلگرام</span>
         </div>
 

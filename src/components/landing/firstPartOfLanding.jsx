@@ -60,7 +60,7 @@ const FirstPartOfLanding = () => {
           </Link>
         </div>
       </div>
-      <div className="bg-[#3772FF] h-10 w-full mt-15 flex flex-row gap-10 text-white text-[15px]  -rotate-x-15 rotate-y-15">
+      <div className="bg-[#3772FF] h-10 w-full mt-15 flex flex-row gap-7 text-white text-[15px]  -rotate-x-15 rotate-y-15">
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
