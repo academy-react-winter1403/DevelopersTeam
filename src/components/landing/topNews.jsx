@@ -23,7 +23,7 @@ const TopNews = () => {
       <div className=" h-96 my-4 flex justify-center gap-4 border-2">
         {data?.slice(1.5).map((item) => {
           return (
-           <NewsCard image={item.image} googleTitle={item.googleTitle}/>
+           <NewsCard image={item.image} googleTitle={item.googleTitle} googleDescribe={item.googleDescribe} iconName={item.iconName}/>
           );
         })}
       </div>
