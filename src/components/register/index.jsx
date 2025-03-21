@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
-import Steps from "./steps";
-import EnterNumber from "./enterNumber";
-import VerifyCode from "./verifyCode";
-import UserInfo from "./userInfo";
+import Steps from "./steps/steps";
+import EnterNumber from "./enterNumber/enterNumber";
+import VerifyCode from "./verifyCode/verifyCode";
+import UserInfo from "./userInfo/userInfo";
 import http from "./../../core/services/interceptor";
 
 const Register = () => {

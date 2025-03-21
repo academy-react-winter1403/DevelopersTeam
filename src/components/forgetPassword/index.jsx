@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
-import StepsForgetPass from "./stepsForgetPass";
-import EnterEmail from "./enterEmail";
-import NewPassword from "./newPassword";
+import StepsForgetPass from "./stepsForgetPass/stepsForgetPass";
+import EnterEmail from "./enterEmail/enterEmail";
+import NewPassword from "./newPassword/newPassword";
 // import StepsLogin from "./stepsLogin";
 // import EnterNumberLogin from "./enterNumberLogin";
 // import VerifyCodeLogin from "./verifyCodeLogin";
