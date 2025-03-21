@@ -18,7 +18,7 @@ const CourseCard = ({title , img , teacherName , statusName , describe , student
         <h2 className="mt-14 mr-2">{title}</h2>
       </div>
       <div className="flex flex-wrap">
-        <h2 className="text-gray-400 text-[11px] mt-2 mr-2 ">{describe}</h2>
+        <h2 className="text-gray-400 text-[11px] mt-2 mr-2 overflow-hidden whitespace-nowrap text-ellipsis">{describe}</h2>
       </div>
       <div className="flex gap-2 mt-3 mr-2 leading-4 text-[12px]">
         <img src={TeacherIcon} alt=""  className="h-5 w-5"/> {teacherName}

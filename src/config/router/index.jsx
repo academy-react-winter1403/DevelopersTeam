@@ -8,6 +8,7 @@ import NewsDetailPage from "../../screens/newsDetailPage";
 import LoginPage from "../../screens/loginPage";
 import RegisterPage from "../../screens/registerPage";
 import ForgetPasswordPage from "../../screens/forgetPasswordPage";
+import NotFoundPage from "../../screens/notFound";
 
 
 
@@ -69,4 +70,8 @@ export const router = createBrowserRouter([
         },
       ],
     },
+    {
+      path:"/*",
+      element:<NotFoundPage/>,
+    }
   ]);
