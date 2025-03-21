@@ -3,12 +3,9 @@ import { NavLink } from "react-router-dom";
 import AuthInput from "../../common/auth-inputs";
 import AuthButton from "../../common/auth-button";
 
-const EnterNumber = ({ nextStep, text ,onSubmit }) => {
+const EnterNumber = ({ nextStep, text ,handleRegister }) => {
 
-  const handleRegister = async (values) => {
-    const res = await http.post('/Sign/SendVerifyMessage' , values)
-    
-  }
+
 
   return (
     <div>
@@ -19,9 +16,9 @@ const EnterNumber = ({ nextStep, text ,onSubmit }) => {
             placeholder={"شماره همراه خود را وارد کنید"}
             nextStep={nextStep}
             text={text}
-            handle={handleRegister}
+            handleRegister={handleRegister}
           />
-          {/* <AuthButton nextStep={nextStep} text={text} /> */}
+          <AuthButton nextStep={nextStep} text={text} />
         </div>
         <div className="w-md mt-3 text-sm flex justify-center space-x-2">
           <span> حساب کاربری دارید؟ </span>
