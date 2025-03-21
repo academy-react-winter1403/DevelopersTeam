@@ -1,4 +1,5 @@
 import React from "react";
+import http from '../../core/services/interceptor'
 import NewsCard from "../common/news-card/newsCard";
 import { useQuery } from "@tanstack/react-query";
 
