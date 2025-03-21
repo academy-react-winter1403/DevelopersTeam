@@ -5,6 +5,7 @@ import Steps from "./steps";
 import EnterNumber from "./enterNumber";
 import VerifyCode from "./verifyCode";
 import UserInfo from "./userInfo";
+import http from './../../core/services/interceptor'
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -14,6 +15,9 @@ const Register = () => {
   const prevStep = () => {
     setStep(step - 1);
   };
+
+
+  
   return (
     <div dir="rtl" className="grid grid-cols-5 w-full h-[800px] ">
       {/* right section */}
