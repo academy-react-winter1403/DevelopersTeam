@@ -4,6 +4,7 @@ import HeroSection from '../../components/landing/heroSection'
 import FirstPartOfLanding from '../../components/landing/firstPartOfLanding'
 import GoodTeacher from '../../components/landing/goodTeacher'
 import TopCourses from '../../components/landing/topCourses'
+import TopNews from '../../components/landing/topNews'
 
 const LandingPage = () => {
   return (
@@ -12,6 +13,7 @@ const LandingPage = () => {
       <FirstPartOfLanding/>
       <TopCourses/>
       <GoodTeacher/>
+      <TopNews/>
     </div>
   )
 }

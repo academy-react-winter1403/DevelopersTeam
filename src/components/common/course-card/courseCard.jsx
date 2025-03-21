@@ -27,7 +27,7 @@ const CourseCard = ({title , img , teacherName , statusName , describe , student
         <img src={CalenderIcon} alt="" className="h-5 w-5"/> {statusName}
       </div>
       <div className="flex gap-2 mt-3 mr-2 leading-4 text-[12px]">
-        <img src={StudentIcon} alt="" className="h-5 w-5"/>{student}
+        <img src={StudentIcon} alt="" className="h-5 w-5"/><span className="text-[14px] leading-6">{student}</span>
       </div>
       <div className="flex justify-around gap-4 mt-2">
         <div>
