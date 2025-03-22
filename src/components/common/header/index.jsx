@@ -12,19 +12,19 @@ const Header = () => {
         <img src={logo} alt="logo" className=" h-[42px] " />
         <img src={logoText} alt="text" className="w-[189px] h-[38px] mt-3 " />
       </div>     
-      <div className='w-3/5 flex justify-center gap-10'>
-        <span className=' mt-3 '>خانه</span>
-        <span className='mt-3 '>دوره ها</span>
-        <span className=' h-28 mt-3'>اخبار و مقالات</span>
-        <span className=' h-28 mt-3'>ارتباط با ما</span>
+      <div className='w-3/5 xl:flex justify-center gap-10 hidden'>
+        <Link><span className='leading-12 '>خانه</span></Link>
+        <Link><span className='leading-12'>دوره ها</span></Link>
+        <Link><span className=' h-28 leading-12'>اخبار و مقالات</span></Link>
+        <Link><span className=' h-28 leading-12'>ارتباط با ما</span></Link>
       </div>
 
-      <div className='w-1/5 ps-10 flex gap-5'>
-      <div className='border-2 border-gray-200 h-9 w-9 p-2 mt-3 rounded-full'>
-      <img src={darkMood} alt="" className=' ' />
-      </div>
-      <Link className='bg-[#3772FF] px-7 text-white pt-1 rounded-2xl h-2/3 mt-3'>ورود یا ثبت نام</Link>
+      <div className='ps-10 hidden xl:flex'>
+        <div className='border-2 border-gray-200 h-9 w-9 p-2 mt-3 rounded-full'>
+          <img src={darkMood} alt="" className=' ' />
+        </div>
       </div>    
+      <Link className='bg-[#3772FF] px-7 text-white pt-1 rounded-3xl m-2 p-2'>ورود یا ثبت نام</Link>
     </div>
   )
 }
