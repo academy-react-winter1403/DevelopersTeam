@@ -4,6 +4,7 @@ import AuthInput from "../../common/auth-inputs";
 import AuthButton from "../../common/auth-button";
 import AuthPassInput from "../../common/auth-pass-input";
 import { GrSecure } from "react-icons/gr";
+import { Checkbox } from "antd";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
   return (
@@ -22,12 +23,13 @@ const EnterNumberLogin = ({ nextStep, text }) => {
           />
           <div className="flex">
             <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-lightGray rounded-lg"></div>
-                <span className="text-sm">مرا به خاطر بسپار</span>
+              <Checkbox className="text-sm font-semibold">
+                مرا به خاطر بسپار
+              </Checkbox>
             </div>
             <div className="relative right-[156px] flex justify-center items-center space-x-2 w-40 h-9 rounded-full bg-lightBlue text-navyBlue text-sm">
-                    <GrSecure className="text-lg"/>
-                    <NavLink to={"/forgetpass"}>فراموشی رمزعبور</NavLink>
+              <GrSecure className="text-lg" />
+              <NavLink to={"/forgetpass"}>فراموشی رمزعبور</NavLink>
             </div>
           </div>
           <AuthButton nextStep={nextStep} text={text} />

@@ -10,7 +10,7 @@ import thumbDown from "./../../../assets/images/thumb-down.svg";
 
 const CourseCard = ({title , img , teacherName , statusName , describe , student , cost , likeCount , dissLikeCount}) => {
   return (
-    <div className="h-[400px] w-1/5 border-2 border-gray-50 rounded-2xl bg-gray-50">
+    <div className="h-[400px] w-80 border-2 border-gray-50 rounded-2xl bg-gray-50">
       <div className="h-1/3 rounded-3xl">
         <img src={img} alt="" />
       </div>
