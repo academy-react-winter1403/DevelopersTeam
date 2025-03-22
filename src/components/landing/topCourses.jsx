@@ -17,9 +17,9 @@ const TopCourses = () => {
 
   return (
    <div>
-    <h1 className='text-[25px]  h-10 mx-auto mt-16 indent-[650px] font-bold'>محبوب ترین دوره ها</h1>
-    <h6 className='text-[13px] mx-auto indent-[620px] h-10 text-gray-600'>دوره هایی که بین دانشجویان محبوبیت بالایی داشتند</h6>
-     <div className=' h-96 my-4 flex justify-center gap-4'>
+    <h1 className='text-[25px]  h-10 mx-auto mt-16 text-center font-bold'>محبوب ترین دوره ها</h1>
+    <h6 className='text-[13px] mx-auto text-center h-10 text-gray-600'>دوره هایی که بین دانشجویان محبوبیت بالایی داشتند</h6>
+     <div className=' my-4 sm:flex flex-wrap justify-evenly '>
         {data?.map(item=>{
             return(
                 <CourseCard title={item.title} img={item.tumbImageAddress} describe={item.describe} teacherName={item.teacherName} statusName={item.statusName} student={item.commandCount} cost={item.cost} likeCount={item.likeCount} dissLikeCount={item.dissLikeCount}/>

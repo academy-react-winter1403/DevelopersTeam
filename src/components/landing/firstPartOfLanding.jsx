@@ -7,8 +7,8 @@ import AxPanel from "./../../assets/images/AxPanel.png";
 const FirstPartOfLanding = () => {
   return (
     <>
-      <div className=" w-[1400px] h-52 mt-16 mx-auto flex flex-row justify-center gap-3">
-        <div className="w-[400px] border-gray-300 border-2 rounded-2xl relative">
+      <div className=" w-10/12 md:flex mt-16 mx-auto  flex-row justify-center gap-3">
+        <div className="text-center mb-6 border-gray-300 border-2 rounded-2xl relative">
           <h1 className="font-bold text-[20px] pr-4  leading-14">
             پنل اختصاصی دانشجو
           </h1>
@@ -16,7 +16,7 @@ const FirstPartOfLanding = () => {
           <h6 className=" text-[12px] pr-4 mt-2">
             برای مدیریت دوره ها و تمرین ها
           </h6>
-          <img src={AxPanel} alt="" className="w-52 h-24 absolute top-[109px] left-0 rounded-2xl" />
+          <img src={AxPanel} alt="" className="w-52 h-24 hidden md:block left-0 rounded-2xl" />
         </div>
         <div className="w-[350px] border-gray-300 border-2 rounded-2xl bg-[#3772FF] relative">
           <h1 className="text-white font-bold mt-4 mr-3">

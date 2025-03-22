@@ -4,7 +4,7 @@ import News from '../../components/news'
 const NewsPage = () => {
   return (
     <div>
-        <News/>
+      <News/>
     </div>
   )
 }
