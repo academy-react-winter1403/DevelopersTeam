@@ -7,18 +7,18 @@ import AxPanel from "./../../assets/images/AxPanel.png";
 const FirstPartOfLanding = () => {
   return (
     <>
-      <div className=" w-[1400px] h-52 mt-16 mx-auto flex flex-row justify-center gap-3">
-        <div className="w-[400px] border-gray-300 border-2 rounded-2xl relative">
-          <h1 className="font-bold text-[20px] pr-4  leading-14">
+      <div className=" mt-16 mx-auto md:flex md:flex-row gap-4 justify-center border-2 md:w-10/12">
+        <div className="text-right indent-2  w-[300px] h-[45%] mx-auto sm:mx-0 mb-6 border-gray-300 border-2 rounded-2xl relative xl:w-4/12">
+          <h1 className="font-bold mt-4 text-[20px] ">
             پنل اختصاصی دانشجو
           </h1>
-          <h6 className=" text-[12px] pr-4 mt-2">پنل های اختصاصی دانشجویی</h6>
-          <h6 className=" text-[12px] pr-4 mt-2">
+          <h6 className=" text-[12px] indent-2 mt-4 ">پنل های اختصاصی دانشجویی</h6>
+          <h6 className=" text-[12px]  mt-2 indent-4 ">
             برای مدیریت دوره ها و تمرین ها
           </h6>
-          <img src={AxPanel} alt="" className="w-52 h-24 absolute top-[109px] left-0 rounded-2xl" />
+          <img src={AxPanel} alt="" className="w-[50%] h-[50%] mt-4 xl:mr-53  rounded-2xl" />
         </div>
-        <div className="w-[350px] border-gray-300 border-2 rounded-2xl bg-[#3772FF] relative">
+        <div className="w-[300px] h-[45%] border-gray-300 border-2 rounded-2xl bg-[#3772FF] relative xl:w-3/12">
           <h1 className="text-white font-bold mt-4 mr-3">
             دوره های جدید تابستانه!
           </h1>
@@ -29,7 +29,7 @@ const FirstPartOfLanding = () => {
             <img
               src={arrowUpLeft}
               alt=""
-              className=" rounded-full bg-white absolute top-2 left-2 "
+              className=" rounded-full bg-white "
             />
           </Link>
           <img
@@ -38,7 +38,7 @@ const FirstPartOfLanding = () => {
             className="w-40 h-36 absolute left-0 top-18"
           />
         </div>
-        <div className="w-[270px] border-gray-300 border-2 rounded-2xl relative">
+        <div className="w-[270px] border-gray-300 border-2 rounded-2xl relative xl:w-2/12">
           <div>
             <h3 className="mt-3 mr-2">درباره ما</h3>
             <h4 className=" mr-2">بیشتر بخوانید</h4>
