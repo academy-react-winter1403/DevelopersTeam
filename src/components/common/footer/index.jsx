@@ -42,6 +42,7 @@ const Footer = () => {
         <Link><h2  className=' mr-6' >درباره ما</h2></Link>
         <Link><h2  className=' mr-6'>ارتباط با ما </h2></Link>
       </div>
+      <HugeiconsIcon icon={ArrowRight01Icon} />
 
       <div className='w-4/12 h-60'>
         <h2 className='w-24 h-14 bg-gray-300 mt-15 mr-28 pr-3'>نماد اعتماد الکترونیک</h2>
