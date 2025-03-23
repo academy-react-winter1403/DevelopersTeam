@@ -7,19 +7,20 @@ import { Link } from "react-router-dom";
 
 const GoodTeacher = () => {
   return (
-    <div className="container  mx-auto border-2  xl:mt-20 mt-[1400px] md:mt-[500px]">
-      <div className="text-center border-2 border-red-500 ">
-        <h1 className="text-xl md:text-center  font-bold">
+    <div className="container  mx-auto w-[75%] xl:mt-20 mt-[1350px] md:mt-[500px]">
+      <div className="text-center ">
+        <h1 className="text-2xl md:text-center  font-bold">
           برترین اساتید هفته
         </h1>
         <h6 className="text-sm md:text-center  text-gray-700 mt-2">
           اساتیدی که با نظرسنجی در دوره ها به آنها بیشترین رای مثبت را دادند
         </h6>
       </div>
-      <div className="flex flex-col md:flex-row gap-10 justify-center mt-14  xl:mt-20 ">
-        {/* Teacher Card 1 */}
-        <div className="w-full md:w-[300px] border-2 rounded-2xl border-[#E4E4E4] relative flex flex-col items-center p-4 min-h-[200px]">
-          <div className="size-16 md:size-20 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75% absolute top-[-32px] md:top-[-45px] right-65  md:right-18 lg:right-25"></div>
+      <div className="flex flex-col md:flex-row -space-x-0 gap-y-10 justify-center mt-14  xl:mt-20 ">
+
+
+        <div className="w-full sm:w-[250px] md:w-[300px] lg:w-[350px] mx-auto border-2 rounded-2xl border-[#E4E4E4] md:m-4 relative flex flex-col items-center p-4 min-h-[200px]">
+          <div className="size-16 md:size-18 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75% absolute top-[-32px] md:top-[-45px] right-22 md:right-20 lg:right-20 xl:right-36"></div>
           <h1 className="text-lg md:text-center mt-6 font-semibold">
             محمدحسین بحرالعلومی
           </h1>
@@ -37,15 +38,14 @@ const GoodTeacher = () => {
             استفاده از طراحان گرافیک است.
           </h6>
           <Link to="#">
-            <h6 className="w-full md:w-48 mx-auto mt-4 text-white leading-8 h-10 bg-[#3772FF] rounded-2xl text-center">
+            <h6 className=" md:w-48 mx-auto mt-4 text-white leading-8 h-8 w-full  bg-[#3772FF] rounded-2xl text-center text-[14px] px-4">
               صفحه استاد
             </h6>
           </Link>
         </div>
 
-        {/* Teacher Card 2 */}
-        <div className="w-full lg:mt-[-20px] md:w-[350px] border-2 rounded-2xl border-[#E4E4E4] relative flex flex-col items-center p-4 min-h-[400px]">
-          <div className="size-18 md:size-22 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75% absolute top-[-36px] md:top-[-45px] right-65 md:right-22 lg:right-30"></div>
+        <div className="w-full sm:w-[250px] md:w-[350px] lg:w-[350px] mx-auto lg:mt-[-15px] md:mt-[-8px]  border-2 rounded-2xl border-[#E4E4E4] relative flex flex-col items-center p-4 min-h-[200px]">
+          <div className="size-16 md:size-18 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75% absolute top-[-36px] md:top-[-45px] right-22 md:right-20 lg:right-20 xl:right-36"></div>
           <h1 className="text-lg md:text-center mt-6 font-semibold">
             محمدحسین بحرالعلومی
           </h1>
@@ -63,15 +63,14 @@ const GoodTeacher = () => {
             استفاده از طراحان گرافیک است.
           </h6>
           <Link to="#">
-            <h6 className="w-full md:w-56 mx-auto mt-4 text-white leading-8 h-10 bg-[#3772FF] rounded-2xl text-center">
+            <h6 className="md:w-48 mx-auto mt-4 text-white leading-8 h-8 w-full  bg-[#3772FF] rounded-2xl text-center text-[14px] px-4">
               صفحه استاد
             </h6>
           </Link>
         </div>
 
-        {/* Teacher Card 3 */}
-        <div className="w-full  md:w-[300px] border-2 rounded-2xl border-[#E4E4E4] relative flex flex-col items-center p-4 min-h-[400px]">
-          <div className="size-16 md:size-20 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75% absolute top-[-32px] md:top-[-45px] right-65 md:right-18 lg:right-25"></div>
+        <div className="w-full sm:w-[250px] md:w-[300px] lg:w-[350px] mx-auto border-2 rounded-2xl border-[#E4E4E4] md:m-4 relative flex flex-col items-center p-4 min-h-[200px]">
+          <div className="size-16 md:size-18 rounded-full bg-radial-[at_25%_25%] from-white to-zinc-900 to-75% absolute top-[-32px] md:top-[-45px] right-22 md:right-20 lg:right-20 xl:right-36"></div>
           <h1 className="text-lg md:text-center mt-6 font-semibold">
             محمدحسین بحرالعلومی
           </h1>
@@ -89,7 +88,7 @@ const GoodTeacher = () => {
             استفاده از طراحان گرافیک است.
           </h6>
           <Link to="#">
-            <h6 className="w-full md:w-48 mx-auto mt-4 text-white leading-8 h-10 bg-[#3772FF] rounded-2xl text-center">
+            <h6 className="md:w-48 mx-auto mt-4 text-white leading-8 h-8 w-full  bg-[#3772FF] rounded-2xl text-center text-[14px] px-4">
               صفحه استاد
             </h6>
           </Link>
@@ -100,4 +99,7 @@ const GoodTeacher = () => {
 };
 
 export default GoodTeacher;
+
+
+
 

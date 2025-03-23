@@ -7,8 +7,8 @@ import AxPanel from "./../../assets/images/AxPanel.png";
 const FirstPartOfLanding = () => {
   return (
     <>
-      <div className=" mt-16 mx-auto md:flex md:flex-row gap-4 justify-center md:w-10/12">
-        <div className="text-right indent-2  w-[300px] h-[45%] mx-auto sm:mx-0 mb-6 border-gray-300 border-2 rounded-2xl relative xl:w-4/12 md:h-64">
+      <div className="border-2 mt-16 mx-auto md:flex md:flex-row gap-4 justify-center md:w-10/12">
+        <div className="text-right indent-2  w-[300px] h-[45%] mx-auto sm:mx-0 mb-6 border-red-400 border-2 rounded-2xl relative xl:w-4/12 md:h-64">
           <h1 className="font-bold mt-4 text-[20px] ">
             پنل اختصاصی دانشجو
           </h1>
