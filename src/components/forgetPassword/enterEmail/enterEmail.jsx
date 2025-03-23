@@ -7,8 +7,8 @@ import AuthButton from "../../common/auth-button";
 const EnterEmail = ({ nextStep, text }) => {
   return (
     <div>
-      <Fragment>
-        <div className="w-md mt-12 space-y-4">
+      <div className="flex flex-col justify-center items-center xs:block ">
+        <div className="w-xs xs:w-md mt-12 space-y-4 ">
           <AuthInput
             inputLabel={"ایمیل"}
             placeholder={"ایمیل خود را وارد کنید"}
@@ -24,7 +24,7 @@ const EnterEmail = ({ nextStep, text }) => {
             ورود به حساب کاربری
           </NavLink>
         </div>
-      </Fragment>
+      </div>
     </div>
   );
 };
