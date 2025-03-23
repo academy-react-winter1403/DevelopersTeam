@@ -5,18 +5,25 @@ import AuthButton from "../../common/auth-button";
 import AuthPassInput from "../../common/auth-pass-input";
 import { GrSecure } from "react-icons/gr";
 import { Checkbox } from "antd";
+import { Form, Formik } from "formik";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center xs:block">
         <div className="w-xs xs:w-md lg:w-md   mt-12 space-y-4">
-          <AuthInput
+          <Formik initialValues={{name:'d'}}>
+            <Form>
+                  <AuthInput
             inputLabel={"شماره یا ایمیل"}
             placeholder={"شماره همراه یا ایمیل خود را وارد کنید"}
             nextStep={nextStep}
             text={text}
+            name="d"
           />
+            </Form>
+          </Formik>
+      
           <AuthPassInput
             inputLabel={"رمزعبور"}
             placeholder={"رمزعبور خود را وارد کنید"}

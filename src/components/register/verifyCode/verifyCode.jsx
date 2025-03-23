@@ -3,6 +3,7 @@ import AuthButton from "../../common/auth-button";
 import { PiClockCountdown } from "react-icons/pi";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import { Input } from "antd";
+import { Field, Form, Formik } from "formik";
 
 const VerifyCode = ({ text, nextStep, prevStep }) => {
   const [otp, setOtp] = useState("");
@@ -16,17 +17,39 @@ const VerifyCode = ({ text, nextStep, prevStep }) => {
     onChange,
     onInput,
   };
+
+  // const { mutateAsync, isSuccess } = useMutation({
+  //   mutationFn: (values) => http.post("/Sign/VerifyMessage", values),
+  //   mutationKey: ["message"],
+  //   onSuccess: (data) => {
+  //     alert("success");
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     alert("error");
+  //   },
+  //   // isSuccess:(data)=>{toast.success('csv')}
+  // });
+
+
   return (
     <div className="w-xs xs:w-sm sm:w-md mt-10 ">
       <span>کد تایید</span>
 
       <div dir="ltr" className="w-full ">
+        {/* <Formik>
+          <Form>
+            <Field />
+
+          </Form>
+        </Formik> */}
         <Input.OTP
           variant="filled"
           {...sharedProps}
           size="large"
           style={{ width: "440px", height: "100px" }}
           className="border w-52 h-20"
+          name="verifyCode"
         />
       </div>
       <AuthButton text={text} nextStep={nextStep} />

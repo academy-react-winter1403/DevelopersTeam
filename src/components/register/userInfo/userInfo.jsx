@@ -6,7 +6,7 @@ import AuthButton from "../../common/auth-button";
 const UserInfo = ({ text }) => {
   return (
     <div className="w-xs xs:w-sm sm:w-md mt-14 space-y-6">
-      <AuthInput inputLabel="ایمیل" placeholder="ایمیل خود را وارد کنید" />
+      <AuthInput inputLabel="ایمیل" placeholder="ایمیل خود را وارد کنید" name='' />
       <AuthPassInput
         inputLabel={"رمزعبور"}
         placeholder={"رمزعبور خود را وارد کنید"}

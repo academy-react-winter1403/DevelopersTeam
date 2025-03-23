@@ -6,19 +6,16 @@ import EnterNumber from "./enterNumber/enterNumber";
 import VerifyCode from "./verifyCode/verifyCode";
 import UserInfo from "./userInfo/userInfo";
 import http from "./../../core/services/interceptor";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Register = () => {
+
   const [step, setStep] = useState(1);
   const nextStep = () => {
     setStep(step + 1);
   };
   const prevStep = () => {
     setStep(step - 1);
-  };
-
-  const handleSendVerificationCode = async (values) => {
-    const res = await http.post("/Sign/SendVerifyMessage", values);
-    console.log("res", res.status(200));
   };
 
   return (
@@ -61,11 +58,7 @@ const Register = () => {
         </div>
         {/* inputs section */}
         {step == 1 && (
-          <EnterNumber
-            nextStep={nextStep}
-            text={"ارسال کد تایید"}
-            handleRegister={handleSendVerificationCode}
-          />
+          <EnterNumber nextStep={nextStep}  />
         )}
         {step == 2 && (
           <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />
