@@ -5,8 +5,6 @@ import { Button, Input } from "antd";
 import { SyncOutlined, UserOutlined } from "@ant-design/icons";
 import { HiOutlineMail } from "react-icons/hi";
 
-
-
 const AuthInput = ({
   inputLabel,
   placeholder,
@@ -14,16 +12,16 @@ const AuthInput = ({
   text,
   handleRegister,
 }) => {
-
   const prefix = <HiOutlineMail className="text-xl ml-3" />;
-
 
   return (
     <div>
       <Formik onSubmit={handleRegister} initialValues={{ phone: "" }}>
         {() => (
           <Form className="flex flex-col space-y-3">
-            <span className="font-semibold">{inputLabel}</span>
+            <span className="font-semibold text-xs sm:text-sm lg:text-base">
+              {inputLabel}
+            </span>
             {/* <Field
               name="phone"
               className="bg-lightGray h-9 outline-none rounded-xl p-5 pr-12 placeholder:text-xs"

@@ -8,7 +8,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 
 const AuthPassInput = ({ inputLabel, placeholder }) => {
   const prefix = <TbLockPassword className="text-xl ml-3" />;
-  
+
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => {
     setShowPass(!showPass);
@@ -21,7 +21,9 @@ const AuthPassInput = ({ inputLabel, placeholder }) => {
       <Formik>
         {() => (
           <Form className="flex flex-col space-y-3">
-            <span className="font-semibold">{inputLabel}</span>
+            <span className="font-semibold text-xs sm:text-sm lg:text-base">
+              {inputLabel}
+            </span>
             {/* <Field
            className="bg-lightGray h-9 outline-none rounded-xl p-5 pr-12 placeholder:text-xs"
            placeholder={placeholder}

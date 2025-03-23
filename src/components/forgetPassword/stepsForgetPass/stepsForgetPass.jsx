@@ -28,7 +28,7 @@ const StepsForgetPass = ({ step }) => {
             </div>
             <div>
               <h1
-                className={`text-gray ${
+                className={`text-gray text-sm lg:text-base ${
                   step > index && "font-semibold !text-black"
                 }`}
               >
