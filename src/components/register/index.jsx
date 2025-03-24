@@ -1,24 +1,19 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
 import Steps from "./steps/steps";
 import EnterNumber from "./enterNumber/enterNumber";
 import VerifyCode from "./verifyCode/verifyCode";
 import UserInfo from "./userInfo/userInfo";
-import http from "./../../core/services/interceptor";
 
 const Register = () => {
+  const [PhoneNumber, setPhoneNumber] = useState();
   const [step, setStep] = useState(1);
   const nextStep = () => {
     setStep(step + 1);
   };
   const prevStep = () => {
     setStep(step - 1);
-  };
-
-  const handleSendVerificationCode = async (values) => {
-    const res = await http.post("/Sign/SendVerifyMessage", values);
-    console.log("res", res.status(200));
   };
 
   return (
@@ -60,17 +55,9 @@ const Register = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && (
-          <EnterNumber
-            nextStep={nextStep}
-            text={"ارسال کد تایید"}
-            handleRegister={handleSendVerificationCode}
-          />
-        )}
-        {step == 2 && (
-          <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />
-        )}
-        {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
+        {step == 1 && <EnterNumber nextStep={nextStep} setPhoneNumber={setPhoneNumber}/>}
+        {step == 2 && (<VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} PhoneNumber={PhoneNumber} />)}
+        {step == 3 && <UserInfo text={"ثبت اطلاعات"} PhoneNumber={PhoneNumber} />}
       </div>
     </div>
   );
