@@ -10,21 +10,25 @@ import { useMutationCustom } from "../../../core/services/api/authApi/register.a
 import CountdownTimer from "../countDownTimer/countDownTimer";
 import toast from "react-hot-toast";
 
-const VerifyCode = ({ text, nextStep, prevStep }) => {
+const VerifyCode = ({ text, nextStep, prevStep , PhoneNumber }) => {
   // const [otp, setOtp] = useState("");
 
   const { mutateAsync } = useMutationCustom(
     "/Sign/VerifyMessage",
-    "VerifyMessage"
+    "VerifyMessage",
+    "عملیات با موفقیت انجام شد"
   );
-  const handleMutation = async (e) => {
-    await mutateAsync({ verifyCode: values.verifyCode });
+
+  const handleMutation = async (values) => {
+    console.log(values);
+    await mutateAsync({phoneNumber :PhoneNumber , verifyCode: values.verifyCode });
     nextStep();
-    console.log("registerCodeMessage", values.verifyCode);
+    // console.log("registerCodeMessage", values.verifyCode);
   };
-  const handleTimerExpire = () => {
-    toast.error("لطفا دوباره امتحان کنید");
-  };
+
+  // const handleTimerExpire = () => {
+  //   toast.error("لطفا دوباره امتحان کنید");
+  // };
   return (
     <div className="w-xs xs:w-sm sm:w-md mt-10 ">
       <span>کد تایید</span>
@@ -34,6 +38,7 @@ const VerifyCode = ({ text, nextStep, prevStep }) => {
           {({ setFieldValue, values }) => (
             <Form className="space-y-5">
               <OTPInput
+              name='verifyCode'
                 value={values.verifyCode}
                 onChange={(otp) => setFieldValue("verifyCode", otp)}
                 numInputs={5}

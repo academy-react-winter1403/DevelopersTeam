@@ -14,7 +14,7 @@ const EnterNumberLogin = ({ nextStep, text }) => {
     <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
   );
 
-  const { mutateAsync } = useMutationCustom("/Sign/Login", "Login");
+  const { mutateAsync } = useMutationCustom("/Sign/Login", "Login","عملیات با موفقیت انجام شد");
   const handleMutation = async (e) => {
     await mutateAsync(e);
     nextStep();

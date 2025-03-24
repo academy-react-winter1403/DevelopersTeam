@@ -6,19 +6,21 @@ import { Form, Formik } from "formik";
 import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 
-const EnterNumber = ({ nextStep, text }) => {
-
+const EnterNumber = ({ nextStep, text , setPhoneNumber }) => {
   const { mutateAsync } = useMutationCustom(
     "/Sign/SendVerifyMessage",
-    "SendVerifyMessage"
+    "SendVerifyMessage",
+    "عملیات با موفقیت انجام شد"
   );
-  const handleMutation = async (e) => {
-    await mutateAsync(e);
+  const handleMutation = async (values) => {
+    setPhoneNumber(values.phoneNumber)
+    await mutateAsync(values);
     nextStep();
   };
 
-
-  const icon = <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
+  const icon = (
+    <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
+  );
 
   return (
     <div>
@@ -33,9 +35,9 @@ const EnterNumber = ({ nextStep, text }) => {
                 text={text}
                 icon={icon}
               />
-              <AuthButton text={"ارسال کد تایید"}  />
-              </Form>
-              </Formik>
+              <AuthButton text={"ارسال کد تایید"} />
+            </Form>
+          </Formik>
         </div>
         <div className="w-md mt-3 text-sm flex justify-center space-x-2">
           <span> حساب کاربری دارید؟ </span>

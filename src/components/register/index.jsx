@@ -7,6 +7,7 @@ import VerifyCode from "./verifyCode/verifyCode";
 import UserInfo from "./userInfo/userInfo";
 
 const Register = () => {
+  const [PhoneNumber, setPhoneNumber] = useState();
   const [step, setStep] = useState(1);
   const nextStep = () => {
     setStep(step + 1);
@@ -54,9 +55,9 @@ const Register = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && <EnterNumber nextStep={nextStep} />}
-        {step == 2 && (<VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />)}
-        {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
+        {step == 1 && <EnterNumber nextStep={nextStep} setPhoneNumber={setPhoneNumber}/>}
+        {step == 2 && (<VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} PhoneNumber={PhoneNumber} />)}
+        {step == 3 && <UserInfo text={"ثبت اطلاعات"} PhoneNumber={PhoneNumber} />}
       </div>
     </div>
   );
