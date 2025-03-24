@@ -4,55 +4,61 @@ import { PiClockCountdown } from "react-icons/pi";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import { Input } from "antd";
 import { Field, Form, Formik } from "formik";
+import AuthInput from "../../common/auth-inputs";
+import OTPInput from "react-otp-input";
+import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
+import CountdownTimer from "../countDownTimer/countDownTimer";
+import toast from "react-hot-toast";
 
 const VerifyCode = ({ text, nextStep, prevStep }) => {
-  const [otp, setOtp] = useState("");
-  const onChange = (text) => {
-    console.log("onChange:", text);
-  };
-  const onInput = (value) => {
-    console.log("onInput:", value);
-  };
-  const sharedProps = {
-    onChange,
-    onInput,
-  };
+  // const [otp, setOtp] = useState("");
 
-  // const { mutateAsync, isSuccess } = useMutation({
-  //   mutationFn: (values) => http.post("/Sign/VerifyMessage", values),
-  //   mutationKey: ["message"],
-  //   onSuccess: (data) => {
-  //     alert("success");
-  //   },
-  //   onError: (error) => {
-  //     console.log(error);
-  //     alert("error");
-  //   },
-  //   // isSuccess:(data)=>{toast.success('csv')}
-  // });
-
-
+  const { mutateAsync } = useMutationCustom(
+    "/Sign/VerifyMessage",
+    "VerifyMessage"
+  );
+  const handleMutation = async (e) => {
+    await mutateAsync({ verifyCode: values.verifyCode });
+    nextStep();
+    console.log("registerCodeMessage", values.verifyCode);
+  };
+  const handleTimerExpire = () => {
+    toast.error("لطفا دوباره امتحان کنید");
+  };
   return (
     <div className="w-xs xs:w-sm sm:w-md mt-10 ">
       <span>کد تایید</span>
 
-      <div dir="ltr" className="w-full ">
-        {/* <Formik>
-          <Form>
-            <Field />
-
-          </Form>
-        </Formik> */}
-        <Input.OTP
-          variant="filled"
-          {...sharedProps}
-          size="large"
-          style={{ width: "440px", height: "100px" }}
-          className="border w-52 h-20"
-          name="verifyCode"
-        />
+      <div dir="ltr" className="w-full mt-5">
+        <Formik onSubmit={handleMutation} initialValues={{ verifyCode: "" }}>
+          {({ setFieldValue, values }) => (
+            <Form className="space-y-5">
+              <OTPInput
+                value={values.verifyCode}
+                onChange={(otp) => setFieldValue("verifyCode", otp)}
+                numInputs={5}
+                renderSeparator={<span></span>}
+                renderInput={(props) => <input {...props} />}
+                containerStyle={{
+                  height: "56px",
+                  display: "flex",
+                  gap: "15px",
+                }}
+                inputStyle={{
+                  width: "65px",
+                  height: "67px",
+                  backgroundColor: "#f4f4f4",
+                  borderRadius: "14px",
+                  minWidth: "40px",
+                  minHeight: "42px",
+                }}
+              />
+              <AuthButton text={text} />
+            </Form>
+          )}
+        </Formik>
       </div>
-      <AuthButton text={text} nextStep={nextStep} />
+      {/* <CountdownTimer initialTime={120} onExpire={handleTimerExpire} /> */}
       <div className=" mt-4 flex justify-around space-x-18">
         <div className="flex items-center space-x-4">
           <div className="sm:flex justify-center items-center space-x-2 w-24 h-9 rounded-full bg-lightBlue hidden">

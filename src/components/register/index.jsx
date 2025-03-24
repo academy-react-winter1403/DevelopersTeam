@@ -1,15 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
 import Steps from "./steps/steps";
 import EnterNumber from "./enterNumber/enterNumber";
 import VerifyCode from "./verifyCode/verifyCode";
 import UserInfo from "./userInfo/userInfo";
-import http from "./../../core/services/interceptor";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Register = () => {
-
   const [step, setStep] = useState(1);
   const nextStep = () => {
     setStep(step + 1);
@@ -57,12 +54,8 @@ const Register = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && (
-          <EnterNumber nextStep={nextStep}  />
-        )}
-        {step == 2 && (
-          <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />
-        )}
+        {step == 1 && <EnterNumber nextStep={nextStep} />}
+        {step == 2 && (<VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />)}
         {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
       </div>
     </div>
