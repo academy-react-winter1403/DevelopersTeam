@@ -17,7 +17,7 @@ const VerifyCode = ({ text, nextStep, prevStep }) => {
     onInput,
   };
   return (
-    <div className="w-md mt-10 space-y-">
+    <div className="w-xs xs:w-sm sm:w-md mt-10 ">
       <span>کد تایید</span>
 
       <div dir="ltr" className="w-full ">
@@ -30,18 +30,21 @@ const VerifyCode = ({ text, nextStep, prevStep }) => {
         />
       </div>
       <AuthButton text={text} nextStep={nextStep} />
-      <div className="mt-4 flex space-x-16">
+      <div className=" mt-4 flex justify-around space-x-18">
         <div className="flex items-center space-x-4">
-          <div className="flex justify-center items-center space-x-2 w-24 h-9 rounded-full bg-lightBlue">
+          <div className="sm:flex justify-center items-center space-x-2 w-24 h-9 rounded-full bg-lightBlue hidden">
             <PiClockCountdown className="w-5 h-5 text-navyBlue" />
             <span className=" text-navyBlue font-semibold">02:20</span>
           </div>
-          <span className="text-navyBlue underline font-semibold text-sm">
+          <span className="text-navyBlue underline font-semibold text-sm whitespace-nowrap">
             ارسال مجدد کد
           </span>
         </div>
-        <div className="flex justify-center items-center space-x-2 w-44 h-9 rounded-full bg-lightBlue text-navyBlue">
-          <button onClick={prevStep} className="text-sm font-semibold">
+        <div className="flex justify-center items-center w-auto p-2 sm:w-44 h-9  space-x-2 rounded-full bg-lightBlue text-navyBlue">
+          <button
+            onClick={prevStep}
+            className="text-xs sm:text-sm whitespace-nowrap font-semibold"
+          >
             تغییر شماره همراه
           </button>
           <IoReturnUpBackOutline className="w-6 h-6" />

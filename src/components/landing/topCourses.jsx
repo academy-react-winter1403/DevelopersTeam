@@ -16,13 +16,13 @@ const TopCourses = () => {
     data && console.log(data)
 
   return (
-   <div>
-    <h1 className='text-[25px]  h-10 mx-auto mt-16 indent-[650px] font-bold'>محبوب ترین دوره ها</h1>
-    <h6 className='text-[13px] mx-auto indent-[620px] h-10 text-gray-600'>دوره هایی که بین دانشجویان محبوبیت بالایی داشتند</h6>
-     <div className=' h-96 my-4 flex justify-center gap-4'>
+   <div className='w-full'>
+    <h1 className='text-xl sm:text-2xl md:text-[25px]  h-10 mx-auto mt-16 text-center  font-bold'>محبوب ترین دوره ها</h1>
+    <h6 className='text-sm sm:text-base mx-auto text-center  mt-2 h-10 text-gray-600'>دوره هایی که بین دانشجویان محبوبیت بالایی داشتند</h6>
+     <div className=' h-96 my-4 flex justify-center gap-4 flex-wrap'>
         {data?.map(item=>{
             return(
-                <CourseCard title={item.title} img={item.tumbImageAddress} describe={item.describe} teacherName={item.teacherName} statusName={item.statusName} student={item.commandCount} cost={item.cost} likeCount={item.likeCount} dissLikeCount={item.dissLikeCount}/>
+                <CourseCard key={item.id} title={item.title} img={item.tumbImageAddress} describe={item.describe} teacherName={item.teacherName} statusName={item.statusName} student={item.commandCount} cost={item.cost} likeCount={item.likeCount} dissLikeCount={item.dissLikeCount}/>
             )
         })}
 

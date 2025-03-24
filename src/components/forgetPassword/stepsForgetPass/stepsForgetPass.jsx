@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { CiMail } from "react-icons/ci";
+import { HiOutlineMail } from "react-icons/hi";
 import { TbLockPassword } from "react-icons/tb";
-import { TbUserSquareRounded } from "react-icons/tb";
 
 const StepsForgetPass = ({ step }) => {
   const detail = [
     {
       title: "وارد کردن ایمیل",
-      icon: <CiMail className="w-6 h-6" />,
+      icon: <HiOutlineMail className="w-6 h-6" />,
     },
     {
       title: "وارد کردن رمزعبور جدید",
@@ -29,7 +28,7 @@ const StepsForgetPass = ({ step }) => {
             </div>
             <div>
               <h1
-                className={`text-gray ${
+                className={`text-gray text-sm lg:text-base ${
                   step > index && "font-semibold !text-black"
                 }`}
               >

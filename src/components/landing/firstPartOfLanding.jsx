@@ -7,59 +7,70 @@ import AxPanel from "./../../assets/images/AxPanel.png";
 const FirstPartOfLanding = () => {
   return (
     <>
-      <div className=" w-[1400px] h-52 mt-16 mx-auto flex flex-row justify-center gap-3">
-        <div className="w-[400px] border-gray-300 border-2 rounded-2xl relative">
-          <h1 className="font-bold text-[20px] pr-4  leading-14">
+      <div className="border-2 border-amber-600 mt-16 mx-auto md:flex md:flex-row sm:gap-4 md:justify-center  md:w-10/12 md:gap-2">
+        <div className="text-right indent-2  w-[300px] h-[45%] mx-auto sm:mx-auto mb-6 border-[#E4E4E4] border-2 rounded-2xl relative xl:w-4/12 md:h-64">
+          <h1 className="font-bold mt-4 text-[20px] ">
             پنل اختصاصی دانشجو
           </h1>
-          <h6 className=" text-[12px] pr-4 mt-2">پنل های اختصاصی دانشجویی</h6>
-          <h6 className=" text-[12px] pr-4 mt-2">
+          <h6 className=" text-[12px] indent-2 mt-4 ">پنل های اختصاصی دانشجویی</h6>
+          <h6 className=" text-[12px]  mt-2 indent-4 ">
             برای مدیریت دوره ها و تمرین ها
           </h6>
-          <img src={AxPanel} alt="" className="w-52 h-24 absolute top-[109px] left-0 rounded-2xl" />
+          <img src={AxPanel} alt="" className="w-[60%] h-[50%] mt-4 mr-28 md:mr-20 lg:mr-24 xl:mr-32 2xl:mr-40  rounded-2xl" />
         </div>
-        <div className="w-[350px] border-gray-300 border-2 rounded-2xl bg-[#3772FF] relative">
-          <h1 className="text-white font-bold mt-4 mr-3">
+
+
+        <div className="w-[300px] indent-2 mx-auto sm:mx-auto h-[45%] border-[#E4E4E4] border-2 rounded-2xl bg-[#3772FF] relative xl:w-3/12 md:h-64 font-bold md:text-[12px]">
+          <h1 className="text-white font-bold mt-4">
             دوره های جدید تابستانه!
           </h1>
-          <div className="w-36 h-16 mt-2 text-[13px] mr-3 text-white">
-            شروع دوره های جدید مبتدی و پیشرفته برای همین تابستان
+          <div className="w-36 h-16 mt-2 text-[13px] mr-3 text-white md:text-[10px] md:mr-0 ">
+            <h2>
+              شروع دوره های جدید مبتدی و
+            </h2>
+            <h2>
+              پیشرفته برای همین تابستان   
+            </h2> 
           </div>
           <Link>
             <img
               src={arrowUpLeft}
               alt=""
-              className=" rounded-full bg-white absolute top-2 left-2 "
+              className=" rounded-full bg-white absolute top-2 left-2 w-8 h-8 p-1 object-contain "
             />
           </Link>
           <img
             src={Group}
             alt=""
-            className="w-40 h-36 absolute left-0 top-18"
+            className="w-[55%] h-[40%] mr-36 md:mr-20 md:w-[65%] md:h-[50%] md:mt-8 lg:mr-24 lg:w-[75%] lg:h-[60%] lg:mt-4 2xl:mr-32" 
           />
         </div>
-        <div className="w-[270px] border-gray-300 border-2 rounded-2xl relative">
+
+
+        <div className="w-[300px] indent-2 mx-auto sm:mx-auto h-[45%] mt-4 md:h-64 md:mt-0 border-[#E4E4E4] border-2 rounded-2xl relative xl:w-2/12">
           <div>
             <h3 className="mt-3 mr-2">درباره ما</h3>
             <h4 className=" mr-2">بیشتر بخوانید</h4>
           </div>
-          <div className="mt-9 mr-2">
+          <div className="mt-15 mr-2">
             <h1>+1000</h1>
             <h6 className="text-[10px] text-gray-500">دانشجو آنلاین در دوره</h6>
           </div>
-          <div className="mt-5 mr-2">
+          <div className="mt-10 mr-2">
             <h1>+13</h1>
-            <h6 className="text-[10px] text-gray-500">سال سابقه آموزشی</h6>
+            <h6 className="text-[10px] text-gray-500 mb-4">سال سابقه آموزشی</h6>
           </div>
           <Link>
             <img
               src={arrowUpLeft}
               alt=""
-              className=" rounded-full bg-[#3772FF] absolute top-2 left-2 "
+              className="  rounded-full bg-[#3772FF] absolute top-2 left-2 w-8 h-8 p-1 object-contain fill-white" 
             />
           </Link>
         </div>
       </div>
+
+
       <div className="bg-[#3772FF] h-10 w-full mt-15 flex flex-row gap-7 text-white text-[15px]  -rotate-x-15 rotate-y-15">
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
@@ -68,18 +79,24 @@ const FirstPartOfLanding = () => {
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>   
       </div>
-      <div className="w-[1100px] h-48 mt-20 mx-auto flex flex-row gap-3">
-        <div className="w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
+
+
+      <div className=" mt-20 mx-auto flex flex-row gap-3 p-4 justify-center items-center flex-wrap ">
+        {/* card1*/}
+        <div className="w-full sm:w-1/2 md-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">01</h1>
          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
         </div>
-        <div className="w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
+        {/* card2*/}
+        <div className="w-full sm:w-1/2 md:w-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">02</h1>
          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
-        </div> <div className="w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
+        {/* card3*/}
+        </div> <div className="w-full sm:w-1/2 md:w-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">03</h1>
          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
-        </div> <div className="w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
+        {/* card4*/}
+        </div> <div className="w-full sm:w-1/2 md:w-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">04</h1>
          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
         </div>
