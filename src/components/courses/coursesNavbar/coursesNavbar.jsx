@@ -4,6 +4,7 @@ import { CiGrid41 } from "react-icons/ci";
 import { CiGrid2H } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosSearch } from "react-icons/io";
+import DrawerFilterSection from "../drawerFilterSection/drawerFilterSection";
 
 const CoursesNavbar = () => {
   return (
@@ -33,11 +34,9 @@ const CoursesNavbar = () => {
           حذف
         </Button>
       </div>
-      <div className="flex items-center justify-between h-10 border w-full lg:hidden">
+      <div className="flex items-center justify-between h-10 w-full lg:hidden">
         <IoIosSearch className="text-3xl" />
-        <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
-          ترتیب و فیلتر
-        </Button>
+        <DrawerFilterSection />
       </div>
     </div>
   );
