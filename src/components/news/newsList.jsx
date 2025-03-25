@@ -1,9 +1,9 @@
 import React from 'react'
 import http from '../../core/services/interceptor'
 import { useQuery } from '@tanstack/react-query';
-import CoursesNavbar from '../courses/coursesNavbar/coursesNavbar';
-import FilterPartOfNews from './filterPartOfNews';
 import NewsCard from '../common/news-card/newsCard';
+import CoursesNavbar from '../courses/coursesNavbar/coursesNavbar';
+import FilterPartOfNews from './filterPartOfSection';
 
 const NewsList = () => {
 
