@@ -26,10 +26,10 @@ const CoursesSection = () => {
   });
 
   return (
-    <div className="grid grid-cols-4 h-auto m-6 border-4 border-borderGray rounded-4xl">
-      <div className="col-span-3 ">
+    <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray rounded-4xl">
+      <div className="col-span-4 lg:col-span-3 w-full ">
         <CoursesNavbar />
-        <div className=" flex flex-wrap justify-evenly space-y-5  p-2">
+        <div className=" flex flex-wrap justify-evenly space-y-5 p-2">
           {data?.courseFilterDtos.map((item, index) => {
             return (
               <CourseCard
@@ -47,7 +47,7 @@ const CoursesSection = () => {
           })}
         </div>
       </div>
-      <div>
+      <div className="hidden md:block p-8">
         <FilterSection />
       </div>
     </div>

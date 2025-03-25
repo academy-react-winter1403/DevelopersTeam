@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const instance = axios.create({
+const http = axios.create({
   baseURL: baseURL,
 });
 
@@ -14,6 +14,6 @@ const onError = (err) => {
   return Promise.reject(err);
 };
 
-instance.interceptors.response.use(onSuccess, onError);
+http.interceptors.response.use(onSuccess, onError);
 
-export default instance;
+export default http;
