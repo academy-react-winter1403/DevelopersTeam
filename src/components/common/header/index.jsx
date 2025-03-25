@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./../../../assets/images/logo.svg";
 import logoText from "./../../../assets/images/logoText.svg";
 import darkMood from "./../../../assets/images/darkLego.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AlignLeftOutlined } from "@ant-design/icons";
 
 const Header = () => {
@@ -17,18 +17,30 @@ const Header = () => {
         <img src={logoText} alt="text" className="w-24 h-10 object-contain " />
       </div>
       <div className="w-3/5 xl:flex justify-center gap-10 hidden">
-        <Link to="/">
-          <span className="leading-12 ">خانه</span>
-        </Link>
-        <Link to="/courses">
+        <NavLink
+          to="/"
+          className={({ isActive }) => `${isActive ? "text-navyBlue" : ""}`}
+        >
+          <span className="leading-12">خانه</span>
+        </NavLink>
+        <NavLink
+          to="/courses"
+          className={({ isActive }) => `${isActive ? "text-navyBlue" : ""}`}
+        >
           <span className="leading-12">دوره ها</span>
-        </Link>
-        <Link to="/news">
+        </NavLink>
+        <NavLink
+          to="/news"
+          className={({ isActive }) => `${isActive ? "text-navyBlue" : ""}`}
+        >
           <span className=" h-28 leading-12">اخبار و مقالات</span>
-        </Link>
-        <Link>
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) => `${isActive ? "text-navyBlue" : ""}`}
+        >
           <span className=" h-28 leading-12">ارتباط با ما</span>
-        </Link>
+        </NavLink>
       </div>
 
       <div className="ps-24 hidden xl:flex">
