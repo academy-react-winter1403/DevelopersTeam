@@ -1,13 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
 import Steps from "./steps/steps";
 import EnterNumber from "./enterNumber/enterNumber";
 import VerifyCode from "./verifyCode/verifyCode";
 import UserInfo from "./userInfo/userInfo";
-import http from "./../../core/services/interceptor";
 
 const Register = () => {
+  const [PhoneNumber, setPhoneNumber] = useState();
   const [step, setStep] = useState(1);
   const nextStep = () => {
     setStep(step + 1);
@@ -16,15 +16,13 @@ const Register = () => {
     setStep(step - 1);
   };
 
-  const handleSendVerificationCode = async (values) => {
-    const res = await http.post("/Sign/SendVerifyMessage", values);
-    console.log("res", res.status(200));
-  };
-
   return (
-    <div dir="rtl" className="grid grid-cols-5 w-full h-[800px] ">
+    <div dir="rtl" className="md:grid md:grid-cols-5 w-full h-[800px] ">
       {/* right section */}
-      <div className="col-span-2 bg-lightGray pt-24 pr-16">
+      <div className="w-fit flex md:hidden p-5 ">
+        <img src={logo} alt="logo" className="w-14" />
+      </div>
+      <div className="col-span-2 bg-lightGray pt-24 md:pr-5 lg:pr-16 hidden md:block">
         <div className="w-fit flex flex-row items-center">
           <img src={logo} alt="logo" className="w-14" />
           <img src={logoText} alt="text" className="w-44 h-8 mt-3" />
@@ -32,11 +30,13 @@ const Register = () => {
         <Steps step={step} />
       </div>
       {/* left section */}
-      <div className="col-span-3 pt-24 pr-28">
-        <div className="w-md h-fit">
-          <h1 className="text-3xl font-bold">به آکادمی بحر خوش اومدی! 😍</h1>
+      <div className=" col-span-3 pt-5 md:pt-24 flex flex-col items-center md:block px-5  md:pr-12 lg:pr-28 ">
+        <div className="md:w-sm lg:w-md h-fit">
+          <h1 className="xs:text-2xl lg:text-3xl font-bold">
+            به آکادمی بحر خوش اومدی! 😍
+          </h1>
           {step == 1 && (
-            <p className="text-md mt-5 text-gray ">
+            <p className="text-xs xs:text-sm lg:text-md mt-5 text-gray ">
               لطفا برای ثبت نام شماره همراه خود را وارد کنید تا برای شما کد
               تایید ارسال شود
             </p>
@@ -55,17 +55,9 @@ const Register = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && (
-          <EnterNumber
-            nextStep={nextStep}
-            text={"ارسال کد تایید"}
-            handleRegister={handleSendVerificationCode}
-          />
-        )}
-        {step == 2 && (
-          <VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} />
-        )}
-        {step == 3 && <UserInfo text={"ثبت اطلاعات"} />}
+        {step == 1 && <EnterNumber nextStep={nextStep} setPhoneNumber={setPhoneNumber}/>}
+        {step == 2 && (<VerifyCode nextStep={nextStep} prevStep={prevStep} text={"تایید"} PhoneNumber={PhoneNumber} />)}
+        {step == 3 && <UserInfo text={"ثبت اطلاعات"} PhoneNumber={PhoneNumber} />}
       </div>
     </div>
   );

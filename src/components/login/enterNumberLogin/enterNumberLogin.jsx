@@ -1,36 +1,64 @@
 import React, { Fragment } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthInput from "../../common/auth-inputs";
 import AuthButton from "../../common/auth-button";
 import AuthPassInput from "../../common/auth-pass-input";
 import { GrSecure } from "react-icons/gr";
+import { Checkbox } from "antd";
+import { Form, Formik } from "formik";
+import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
+  const icon = (
+    <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
+  );
+
+  const { mutateAsync } = useMutationCustom("/Sign/Login", "Login","عملیات با موفقیت انجام شد");
+  const handleMutation = async (e) => {
+    await mutateAsync(e);
+    nextStep();
+    navigate('/');
+  };
+
+  const navigate = useNavigate()
+
   return (
     <div>
-      <Fragment>
-        <div className="w-md mt-12 space-y-4">
-          <AuthInput
-            inputLabel={"شماره یا ایمیل"}
-            placeholder={"شماره همراه یا ایمیل خود را وارد کنید"}
-            nextStep={nextStep}
-            text={text}
-          />
-          <AuthPassInput
-            inputLabel={"رمزعبور"}
-            placeholder={"رمزعبور خود را وارد کنید"}
-          />
-          <div className="flex">
+      <div className="flex flex-col justify-center items-center xs:block">
+        <div className="w-xs xs:w-md lg:w-md   mt-12 space-y-4">
+          <Formik
+            onSubmit={handleMutation}
+            initialValues={{ phoneOrGmail: "", password: "" }}
+          >
+            <Form className="space-y-4">
+              <AuthInput
+                inputLabel={"شماره یا ایمیل"}
+                placeholder={"شماره همراه یا ایمیل خود را وارد کنید"}
+                text={text}
+                name="phoneOrGmail"
+                icon={icon}
+              />
+              <AuthPassInput
+                inputLabel={"رمزعبور"}
+                placeholder={"رمزعبور خود را وارد کنید"}
+                name="password"
+              />
+              <AuthButton text={text} />
+            </Form>
+          </Formik>
+
+          <div className="flex ">
             <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-lightGray rounded-lg"></div>
-                <span className="text-sm">مرا به خاطر بسپار</span>
+              <Checkbox className="text-xs font-semibold">
+                مرا به خاطر بسپار
+              </Checkbox>
             </div>
-            <div className="relative right-[156px] flex justify-center items-center space-x-2 w-40 h-9 rounded-full bg-lightBlue text-navyBlue text-sm">
-                    <GrSecure className="text-lg"/>
-                    <NavLink to={"/forgetpass"}>فراموشی رمزعبور</NavLink>
+            <div className="relative right-8 xs:right-[156px] flex justify-center items-center space-x-2 w-40 h-9 rounded-full bg-lightBlue text-navyBlue text-xs xs:text-sm">
+              <GrSecure className="text-lg" />
+              <NavLink to={"/forgetpass"}>فراموشی رمزعبور</NavLink>
             </div>
           </div>
-          <AuthButton nextStep={nextStep} text={text} />
         </div>
         <div className="w-md mt-5 text-sm flex justify-center space-x-2">
           <span> حساب کاربری ندارید؟</span>
@@ -38,7 +66,7 @@ const EnterNumberLogin = ({ nextStep, text }) => {
             ایجاد حساب کاربری
           </NavLink>
         </div>
-      </Fragment>
+      </div>
     </div>
   );
 };
