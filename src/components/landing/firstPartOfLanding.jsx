@@ -7,18 +7,6 @@ import AxPanel from "./../../assets/images/AxPanel.png";
 const FirstPartOfLanding = () => {
   return (
     <>
-<<<<<<< HEAD
-      <div className=" w-10/12 md:flex mt-16 mx-auto  flex-row justify-center gap-3">
-        <div className="text-center mb-6 border-gray-300 border-2 rounded-2xl relative">
-          <h1 className="font-bold text-[20px] pr-4  leading-14">
-            پنل اختصاصی دانشجو
-          </h1>
-          <h6 className=" text-[12px] pr-4 mt-2">پنل های اختصاصی دانشجویی</h6>
-          <h6 className=" text-[12px] pr-4 mt-2">
-            برای مدیریت دوره ها و تمرین ها
-          </h6>
-          <img src={AxPanel} alt="" className="w-52 h-24 hidden md:block left-0 rounded-2xl" />
-=======
       <div className=" mt-16 mx-auto gap-4 md:flex  md:flex-row  md:justify-center  md:w-10/12 ">
         <div className="text-right indent-2  w-[300px] h-[45%] mx-auto md:mx-0 mb-6 border-[#E4E4E4] border-2 rounded-2xl relative xl:w-4/12 md:h-64">
           <h1 className="font-bold mt-4 text-[20px] ">پنل اختصاصی دانشجو</h1>
@@ -33,7 +21,6 @@ const FirstPartOfLanding = () => {
             alt=""
             className="w-[60%] h-[50%] mt-4 mr-28 md:mr-20 lg:mr-24 xl:mr-32 2xl:mr-40  rounded-2xl"
           />
->>>>>>> origin/develop
         </div>
 
         <div className="w-[300px] indent-2 mx-auto md:mx-0 h-[45%] border-[#E4E4E4] border-2 rounded-2xl bg-[#3772FF] relative xl:w-3/12 md:h-64 font-bold md:text-[12px]">

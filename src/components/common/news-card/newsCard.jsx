@@ -6,27 +6,6 @@ import ThumbUp from "./../../../assets/images/thumbs-up-stroke-rounded 1.svg";
 import thumbDown from "./../../../assets/images/thumb-down.svg";
 import { Link } from "react-router-dom";
 
-<<<<<<< HEAD
-const NewsCard = ({ addUserProfileImage , title , miniDescribe , addUserFullName}) => {
-  return (
-    <div className="h-[400px] w-1/5 border-2 border-gray-200 rounded-2xl bg-gray-50">
-
-      <div className="h-1/3 rounded-3xl">
-        <img src={addUserProfileImage} alt="" className="min-w-min  mx-auto"/>
-      </div>
-
-      <div>
-        <h2 className="mt-24 mr-2 overflow-hidden whitespace-nowrap text-ellipsis">{title}</h2>
-      </div>
-
-      <div className="flex flex-wrap">
-        <h2 className="text-gray-400 text-[11px] mt-2 mr-2 overflow-hidden whitespace-nowrap text-ellipsis">{miniDescribe}</h2>
-      </div>
-
-      <div className="flex gap-2 mt-3 mr-2 leading-4 text-[12px]">
-        <img src={QuillWrite} alt=""  className="h-5 w-5"/> 
-        <span className="text-[14px] leading-6">{addUserFullName}</span>
-=======
 const NewsCard = ({ addUserProfileImage, title, miniDescribe, addUserFullName }) => {
   return (
     <div className="flex flex-col border-2 border-gray-50 rounded-2xl bg-gray-50 p-4 w-full  sm:max-w-[300px] md:max-w-[300px] mx-auto">
@@ -50,7 +29,6 @@ const NewsCard = ({ addUserProfileImage, title, miniDescribe, addUserFullName })
       <div className="flex items-center gap-2 mt-4">
         <img src={QuillWrite} alt="Quill Write" className="h-4 w-5" />
         <span className="text-[12px] text-[#272727]">{addUserFullName}</span>
->>>>>>> origin/develop
       </div>
       <div className="flex items-center gap-2 mt-2">
         <img src={ViewStroke} alt="View Stroke" className="h-4 w-5" />

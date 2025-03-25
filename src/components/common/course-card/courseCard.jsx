@@ -8,16 +8,10 @@ import thumbDown from "./../../../assets/images/thumb-down.svg";
 
 const CourseCard = ({ title, img, teacherName, statusName, describe, student, cost, likeCount, dissLikeCount }) => {
   return (
-<<<<<<< HEAD
-    <div className="h-[400px] w-full sm:w-2/5 lg:w-1/5 border-2 border-gray-50 rounded-2xl bg-gray-50">
-      <div className="h-1/3 rounded-3xl">
-        <img src={img} alt="" />
-=======
     <div className="w-3/5 sm:w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/6 h-[370px] xl:h-[400px] border-2 border-[#E4E4E4] rounded-2xl bg-gray-50 flex flex-col">
       <div className="h-1/3 xl:h-3/2">
         <img  src={img} alt="" className="w-full h-full object-cover rounded-2xl blur-[#54545417] shadow-md"
         />
->>>>>>> origin/develop
       </div>
       <div className="p-2 mt-5 flex flex-col flex-grow">
         <div>
