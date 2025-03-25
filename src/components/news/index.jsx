@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSectionNews from "./heroSectionNews";
 import NewsList from "./newsList";
-import FilterPartOfNews from "./filterPartOfNews";
+import FilterPartOfNews from "./filterPartOfSection";
 
 const News = () => {
   return (
