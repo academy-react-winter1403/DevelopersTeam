@@ -2,26 +2,44 @@ import { Button } from "antd";
 import React from "react";
 import { CiGrid41 } from "react-icons/ci";
 import { CiGrid2H } from "react-icons/ci";
+import { RxCross2 } from "react-icons/rx";
+import { IoIosSearch } from "react-icons/io";
 
 const CoursesNavbar = () => {
   return (
-    <div className="flex w-full border h-24 p-5 space-x-5">
-      <div className=" flex items-center w-20 h-10 text-3xl text-gray border-l space-x-2">
+    <div className="flex w-full h-24 p-5 space-x-5">
+      <div className="hidden lg:flex items-center w-auto h-10 pl-3 text-3xl text-gray border-l space-x-2">
         <CiGrid41 className="hover:text-navyBlue" />
         <CiGrid2H className="hover:text-navyBlue" />
       </div>
-      <div className="flex items-center w-20 h-10 text-gray space-x-3">
-        <Button type="primary" shape="round" className="flex justify-center items-center"  >پرطرفدار ترین</Button>
-        <Button  shape="round" className="flex justify-center items-center"  > محبوب ‌ترین</Button>
-        <Button shape="round" className="flex justify-center items-center"  > پرامتیاز ترین</Button>
+      <div className="hidden lg:flex items-center w-auto h-10 pl-3 border-l text-gray space-x-3">
+        <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
+          پرطرفدار ترین
+        </Button>
+        <Button shape="round" style={{ fontFamily: "yekan" }}>
+          محبوب ‌ترین
+        </Button>
+        <Button shape="round" style={{ fontFamily: "yekan" }}>
+          پرامتیاز ترین
+        </Button>
       </div>
-      <div className="">
-      <Button type="primary" danger ghost>
-      Danger
-    </Button>
+      <div className="hidden lg:flex items-center w-auto h-10">
+        <Button
+          shape="round"
+          icon={<RxCross2 className="text-lg" />}
+          style={{ fontFamily: "yekan" }}
+          danger
+        >
+          حذف
+        </Button>
+      </div>
+      <div className="flex items-center justify-between h-10 border w-full lg:hidden">
+        <IoIosSearch className="text-3xl" />
+        <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
+          ترتیب و فیلتر
+        </Button>
       </div>
     </div>
   );
 };
-
 export default CoursesNavbar;
