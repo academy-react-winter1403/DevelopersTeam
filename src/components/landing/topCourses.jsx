@@ -17,8 +17,8 @@ const TopCourses = () => {
 
   return (
    <div className='w-full'>
-    <h1 className='text-xl sm:text-2xl md:text-[25px]  h-10 mx-auto mt-16 text-center  font-bold'>محبوب ترین دوره ها</h1>
-    <h6 className='text-sm sm:text-base mx-auto text-center  mt-2 h-10 text-gray-600'>دوره هایی که بین دانشجویان محبوبیت بالایی داشتند</h6>
+    <h1 className='text-xl sm:text-2xl md:text-3xl  h-10 mx-auto text-center  font-bold'>محبوب ترین دوره ها</h1>
+    <h6 className='text-sm sm:text-base md:tex-[20px] font-bold mx-auto text-center  mt-2 h-10 text-[#787878]'>دوره هایی که بین دانشجویان محبوبیت بالایی داشتند</h6>
      <div className=' h-96 my-4 flex justify-center gap-4 flex-wrap'>
         {data?.map(item=>{
             return(

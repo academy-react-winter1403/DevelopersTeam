@@ -4,13 +4,13 @@ import CalenderIcon from "./../../../assets/images/calendar-03-stroke-rounded 1.
 import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg";
 import ThumbUp from "./../../../assets/images/thumbs-up-stroke-rounded 1.svg";
 import thumbDown from "./../../../assets/images/thumb-down.svg";
-import ImageWithFallback from './../../common/handle-img-error/handleImgError';
+
 
 const CourseCard = ({ title, img, teacherName, statusName, describe, student, cost, likeCount, dissLikeCount }) => {
   return (
-    <div className="w-3/5 sm:w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/6 h-[370px] xl:h-[400px] border-2 border-red-500 rounded-2xl bg-gray-50 flex flex-col">
+    <div className="w-3/5 sm:w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/6 h-[370px] xl:h-[400px] border-2 border-[#E4E4E4] rounded-2xl bg-gray-50 flex flex-col">
       <div className="h-1/3 xl:h-3/2">
-        <ImageWithFallback  src={img} alt="" className="w-full h-full object-cover rounded-2xl blur-[#54545417] shadow-md"
+        <img  src={img} alt="" className="w-full h-full object-cover rounded-2xl blur-[#54545417] shadow-md"
         />
       </div>
       <div className="p-2 mt-5 flex flex-col flex-grow">
