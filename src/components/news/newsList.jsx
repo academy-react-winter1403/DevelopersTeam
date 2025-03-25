@@ -1,7 +1,8 @@
 import React from 'react'
-import NewsCard from '../common/news-card/newsCard'
 import http from '../../core/services/interceptor'
 import { useQuery } from '@tanstack/react-query';
+import CoursesNavbar from '../courses/coursesNavbar/coursesNavbar';
+import FilterPartOfNews from './filterPartOfNews';
 
 const NewsList = () => {
 
@@ -18,21 +19,19 @@ const NewsList = () => {
 
   // data && console.log(data)
 
-
   return (
-    <div className='border-2 border-gray-200 rounded-2xl w-[1500px] min-h-[1500px] mx-auto'>
-
-      <div className='w-[550px] h-12 border-2 border-gray-200 mr-4 mt-4'></div>
-
-      <div className='border-2 border-gray-200 min-h-[1400px] flex justify-around '>
-        <div className='w-[1100px] border-2 border-blue-400 min-h-[1400px]'>
-            <NewsCard/>
-        </div>
-        <div className='w-[300px] border-2 border-red-400 h-96'></div>
+    <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray rounded-4xl">
+      <div className="col-span-4 lg:col-span-3 w-full ">
+        <CoursesNavbar />
+        <div></div>
       </div>
-
+      <div className="hidden md:block p-8">
+        <FilterPartOfNews />
+      </div>
     </div>
-  )
+  );
+
+ 
 }
 
 export default NewsList

@@ -43,13 +43,9 @@ import { useQuery } from "@tanstack/react-query";
 
 const TopNews = () => {
   const getTopNews = async () => {
-<<<<<<< HEAD
-    const res = await http.get("/News?PageNumber=1&RowsOfPage=4&SortingCol=InsertDate&SortType=DESC");
-=======
     const res = await http.get(
       "/News?PageNumber=1&RowsOfPage=4&SortingCol=InsertDate&SortType=DESC"
     );
->>>>>>> origin/develop
     return res;
   };
 
@@ -66,14 +62,6 @@ const TopNews = () => {
       <h6 className="text-[13px] sm:text-[13px] text-[#787878] text-center font-bold mt-2">
         خبرها و مقاله‌هایی که در این هفته منتشر شدند
       </h6>
-<<<<<<< HEAD
-      <div className="my-4 flex justify-center gap-4 mb-16">
-        {data?.news.map((item) => {
-          return (
-           <NewsCard addUserProfileImage={item.addUserProfileImage} title={item.title} miniDescribe={item.miniDescribe} addUserFullName={item.addUserFullName}/>
-          );
-        })}
-=======
       <div className="flex flex-wrap justify-center gap-y-4  my-8  w-[85%] mx-auto">
         {data?.news.map((item) => (
           <NewsCard
@@ -84,7 +72,6 @@ const TopNews = () => {
             addUserFullName={item.addUserFullName}
           />
         ))}
->>>>>>> origin/develop
       </div>
     </div>
   );
