@@ -1,17 +1,3 @@
-// import React from 'react'
-
-// const NewsItemCard = () => {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
-
-// export default NewsItemCard
-
-
-
 import React from "react";
 // import QuillWrite from "./../../../assets/images/quill-write-02-stroke-rounded 2.svg";
 // import ViewStroke from "./../../../assets/images/view-stroke-rounded (1) 1.svg";
