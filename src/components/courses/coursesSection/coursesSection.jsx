@@ -47,7 +47,7 @@ const CoursesSection = () => {
           })}
         </div>
       </div>
-      <div className="hidden md:block p-8">
+      <div className="hidden lg:block p-8">
         <FilterSection />
       </div>
     </div>
