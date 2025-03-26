@@ -9,33 +9,20 @@ import CourseCard from "../../common/course-card/courseCard";
 import PaginationSection from "../../common/PaginationSection/paginationSection";
 
 const CoursesSection = () => {
-  // const { data } = useQueryGet(
-  //   "/Home/GetCoursesWithPagination?PageNumber=1&RowsOfPage=10&SortingCol=Active&SortType=DESC&TechCount=0",
-  //   "courses"
-  // );
-
-  const [courseList, setCourseList] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [pageNum, setPageNum] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(10);
-  const numberOfPage =
-    courseList && Math.ceil(courseList.totalCount / itemPerPage);
 
-  const getList = async () => {
-    const res = await http.get(
-      `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}`
-    );
-    return res;
-  };
-
-  const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["courses", pageNum, itemPerPage],
-    queryFn: getList,
-  });
+  const { data, isLoading, isError, refetch } = useQueryGet(
+    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}${searchQuery ? `&Query=${searchQuery}` : ""}`,
+    "courses",
+    [pageNum, itemPerPage, searchQuery]
+  );
 
   useEffect(() => {
     refetch();
-  }, [pageNum, itemPerPage, refetch]);
+  }, [pageNum, itemPerPage, searchQuery,refetch]);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching data</div>;
@@ -45,7 +32,7 @@ const CoursesSection = () => {
       <div className="col-span-4 lg:col-span-3 w-full ">
         <CoursesNavbar />
         <div className="flex flex-wrap justify-evenly space-y-5 p-2">
-          {data?.courseFilterDtos?.map((item, index) => {
+          {/* {data?.courseFilterDtos?.map((item, index) => {
             return (
               <CourseCard
                 key={index}
@@ -60,7 +47,10 @@ const CoursesSection = () => {
                 dissLikeCount={item.dissLikeCount}
               />
             );
-          })}
+          })} */}
+          <CourseCard />
+          <CourseCard />
+          <CourseCard />
         </div>
         <PaginationSection
           totalCount={data?.totalCount}
@@ -69,8 +59,10 @@ const CoursesSection = () => {
           setPageNum={setPageNum}
         />
       </div>
-      <div className="hidden lg:block p-8">
-        <FilterSection />
+      <div className="hidden lg:block p-8 xl:py-8 xl:px-3">
+        <FilterSection
+          setSearchQuery={setSearchQuery}
+        />
       </div>
     </div>
   );

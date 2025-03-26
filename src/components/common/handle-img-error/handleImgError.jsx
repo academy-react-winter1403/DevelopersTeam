@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ImageWithFallback({ src, alt, className }) {
+const ImageWithFallback = ({ src, alt, className }) => {
   const [imgSrc, setImgSrc] = useState(src); // تنظیم تصویر اولیه با مقدار props.src
 
   const handleImageError = () => {
