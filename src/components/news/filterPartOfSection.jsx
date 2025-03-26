@@ -2,9 +2,9 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 import { GrShareOption } from "react-icons/gr";
 import { IoCalendarOutline } from "react-icons/io5";
-import FilterInput from "../courses/filterInput/filterInput";
 import SelectDropdown from "../courses/selectDropdown/selectDropdown";
 import DateInput from "../courses/dateInput/dateInput";
+
 
 const FilterPartOfNews = () => {
   return (
