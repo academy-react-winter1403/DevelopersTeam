@@ -8,7 +8,7 @@ import DateInput from "../courses/dateInput/dateInput";
 
 const FilterPartOfNews = () => {
   return (
-    <div className="w-full h-[500px] bg-lightGray rounded-3xl pt-4 space-y-4">
+    <div className="w-full h-[250px] bg-lightGray rounded-3xl pt-4 space-y-4">
       <FilterInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}
@@ -23,7 +23,7 @@ const FilterPartOfNews = () => {
       />
        <DateInput
         icon={<IoCalendarOutline className="text-2xl" />}
-        inputLabel={"تاریخ برگزاری"}
+        inputLabel={"تاریخ انتشار"}
       />
     </div>
   );
