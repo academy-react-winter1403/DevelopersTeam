@@ -16,7 +16,7 @@ const SelectDropdown = ({ icon, inputLabel, name, placeholder }) => {
 
   return (
     <div className="flex flex-col space-y-1 px-4">
-      <div className="text-xs sm:text-sm lg:text-base flex items-center gap-2 ">
+      <div className="text-xs sm:text-sm  flex items-center gap-2 ">
         {icon}
         {inputLabel}
       </div>

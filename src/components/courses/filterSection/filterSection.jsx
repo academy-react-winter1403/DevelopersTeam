@@ -1,5 +1,4 @@
 import React from "react";
-import FilterInput from "../FilterInput/filterInput";
 import { FiSearch } from "react-icons/fi";
 import SelectDropdown from "../selectDropdown/selectDropdown";
 import { GrShareOption } from "react-icons/gr";
@@ -9,6 +8,7 @@ import PriceSlider from "../priceSlider/priceSlider";
 import { PiMoneyWavyLight } from "react-icons/pi";
 import DateInput from "../dateInput/dateInput";
 import { IoCalendarOutline } from "react-icons/io5";
+import FilterInput from "../filterInput/filterInput";
 
 const FilterSection = ({ icon, inputLabel, name, placeholder }) => {
   return (

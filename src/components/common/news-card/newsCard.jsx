@@ -7,6 +7,9 @@ import thumbDown from "./../../../assets/images/thumb-down.svg";
 import { Link } from "react-router-dom";
 
 const NewsCard = ({ addUserProfileImage, title, miniDescribe, addUserFullName }) => {
+
+  
+
   return (
     <div className="flex flex-col border-2 border-gray-50 rounded-2xl bg-gray-50 p-4 w-full  sm:max-w-[300px] md:max-w-[300px] mx-auto">
       <div className="h-40 w-full rounded-2xl overflow-hidden">
