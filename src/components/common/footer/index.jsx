@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="bg-[#E4E4E4] border-[#E4E4E4] border-2 w-4/5 rounded-2xl overflow-hidden  xl:h-64 mx-auto flex flex-wrap flex-row ">
+    <div className="bg-lightGray  w-4/5 md:w-11/12 rounded-2xl overflow-hidden  xl:h-64 mx-auto flex flex-wrap flex-row ">
       <div className="order-1 h-20 mr-5 mt-5 ">
         <img src={Academi} alt="" className="w-20 h-20 mr-2" />
 

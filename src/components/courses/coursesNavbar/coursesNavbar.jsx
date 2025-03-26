@@ -8,12 +8,12 @@ import DrawerFilterSection from "../drawerFilterSection/drawerFilterSection";
 
 const CoursesNavbar = () => {
   return (
-    <div className="flex w-full h-24 p-5 space-x-5 border-2">
-      <div className="hidden lg:flex items-center w-auto h-10 pl-3 text-3xl text-gray border-l space-x-2 border-2 border-blue-400">
+    <div className="flex w-full h-24 p-5 space-x-5">
+      <div className="hidden lg:flex items-center w-auto h-10 pl-3 text-3xl text-gray border-l space-x-2 ">
         <CiGrid41 className="hover:text-navyBlue" />
         <CiGrid2H className="hover:text-navyBlue" />
       </div>
-      <div className="hidden lg:flex items-center w-auto h-10 pl-3 border-l text-gray space-x-3 border-2 border-blue-700">
+      <div className="hidden lg:flex items-center w-auto h-10 pl-3 border-l text-gray space-x-3 ">
         <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
           پرطرفدار ترین
         </Button>

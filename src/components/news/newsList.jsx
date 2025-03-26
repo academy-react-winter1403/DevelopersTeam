@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import CoursesNavbar from '../courses/coursesNavbar/coursesNavbar';
 import FilterPartOfNews from './filterPartOfSection';
 import NewsItemCard from './newsItemCard';
+import PaginationSection from '../common/paginationSection/paginationSection';
 
 const NewsList = () => {
 
@@ -22,9 +23,9 @@ const NewsList = () => {
 
   return (
     <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray rounded-4xl">
-      <div className="col-span-4 lg:col-span-3 w-full border-2 border-red-400 ">
+      <div className="col-span-4 lg:col-span-3 w-full  ">
         <CoursesNavbar />
-        <div className='border-2'>
+        <div className=' '>
           {data?.news.map((item,index)=>{
             return (
               <NewsItemCard
@@ -40,6 +41,7 @@ const NewsList = () => {
       </div>
       <div className="hidden md:block p-8">
         <FilterPartOfNews />
+        <PaginationSection/>
       </div>
     </div>
   );
