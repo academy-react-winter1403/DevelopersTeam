@@ -35,15 +35,19 @@ const NewsItemCard = ({ addUserProfileImage, title, miniDescribe, addUserFullNam
         <img src={ViewStroke} alt="View Stroke" className="md:h-5 md:w-5 w-4 h-4" />
         <span className="md:text-sm text-[10px] font-bold text-[#272727]">225</span>
       </div>
-      <div className="flex justify-between items-center m-2 gap-4  ">
-        <div className="flex items-center gap-1">
+      
+      <div className="flex justify-around items-center my-2 gap-4 border-2 border-amber-500 ">
+       <div className="border-2 flex justify-around gap-10">
+       <div className="flex items-center justify-between gap-1 ">
           <img src={ThumbUp} alt="Thumb Up" className="md:h-5 md:w-5 w-4 h-4" />
           <span className="md:text-sm text-[10px] font-bold text-[#272727]">22</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex  gap-1">
           <img src={thumbDown} alt="Thumb Down" className="md:h-5 md:w-5 w-4 h-4" />
           <span className="md:text-sm text-[10px] font-bold text-[#272727]">1</span>
         </div>
+       </div>
+
         <div>
           <Link>
             <h2 className="bg-navyBlue rounded-xl text-white md:rounded-full md:px-4 py-1 md:text-sm text-[10px] px-1 line-clamp-1 text-center cursor-pointer">
