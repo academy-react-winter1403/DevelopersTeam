@@ -5,10 +5,12 @@ import darkMood from "./../../../assets/images/darkLego.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AlignLeftOutlined } from "@ant-design/icons";
 import { getData } from "../../../core/localStorage/localStorage";
+import { FiUser } from "react-icons/fi";
+import { Button } from "antd";
 
 const Header = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(getData("login"));
+  const token = getData("authToken");
 
 
   return (
@@ -53,15 +55,18 @@ const Header = () => {
           <img src={darkMood} alt="" className=" " />
         </div>
       </div>
-      <div className="flex justify-center items-center">
-        {isLoggedIn ? (<h1>555</h1>
+      <div className="flex justify-center items-center mr-2 ">
+        {token ? ( <Button type="primary" shape="round" icon={<FiUser className="w-5 h-5 mt-1"/>}  style={{fontFamily:'yekan' , marginRight:'4px'}}>
+            پنل دانشجویی
+          </Button>
+        
          
-        ) : ( <Link
+        ) : ( <NavLink
           to="/register"
           className="bg-[#3772FF] flex justify-center items-center h-9 px-2 xs:px-3 whitespace-nowrap text-white py-2 xs:py-1 rounded-full m-4 leading-2  text-[10px] xs:text-sm xs:m-3 xs:leading-4 lg:m-3 lg:w-full  font-medium hover:bg-[#2854cc] transition-all w-full xs:w-auto text-center"
         >
           ورود یا ثبت نام
-        </Link> )}
+        </NavLink> )}
        
         <AlignLeftOutlined className="sm:invisible" />
       </div>
