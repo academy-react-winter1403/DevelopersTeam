@@ -3,8 +3,7 @@ import http from '../../core/services/interceptor'
 import { useQuery } from '@tanstack/react-query';
 import FilterPartOfNews from './filterPartOfSection';
 import NewsItemCard from './newsItemCard';
-import PaginationSection from '../common/paginationSection/paginationSection';
-import NewsNavbar from './newsNavbar';
+import PaginationSection from '../common/PaginationSection/paginationSection';
 
 const NewsList = () => {
 

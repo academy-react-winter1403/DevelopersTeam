@@ -4,7 +4,7 @@ import logoText from "./../../assets/images/logoText.svg";
 import StepsForgetPass from "./stepsForgetPass/stepsForgetPass";
 import EnterEmail from "./enterEmail/enterEmail";
 import NewPassword from "./newPassword/newPassword";
-import { Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const ForgetPassword = () => {
   const [step, setStep] = useState(1);
