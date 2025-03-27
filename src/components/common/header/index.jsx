@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./../../../assets/images/logo.svg";
 import logoText from "./../../../assets/images/logoText.svg";
 import darkMood from "./../../../assets/images/darkLego.svg";
 import { Link } from "react-router-dom";
 import { AlignLeftOutlined } from "@ant-design/icons";
+import { getData } from "../../../core/localStorage/localStorage";
 
 const Header = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(getData("login"));
+
+
   return (
     <div className="   border-[#E4E4E4] mt-5 mx-auto flex flex-nowrap justify-between px-10">
       <div className="flex w-1/5 justify-center items-center">
@@ -37,12 +42,15 @@ const Header = () => {
         </div>
       </div>
       <div className="flex justify-center items-center">
-        <Link
+        {isLoggedIn ? (<h1>555</h1>
+         
+        ) : ( <Link
           to="/register"
           className="bg-[#3772FF] flex justify-center items-center h-9 px-2 xs:px-3 whitespace-nowrap text-white py-2 xs:py-1 rounded-full m-4 leading-2  text-[10px] xs:text-sm xs:m-3 xs:leading-4 lg:m-3 lg:w-full  font-medium hover:bg-[#2854cc] transition-all w-full xs:w-auto text-center"
         >
           ورود یا ثبت نام
-        </Link>
+        </Link> )}
+       
         <AlignLeftOutlined className="sm:invisible" />
       </div>
     </div>

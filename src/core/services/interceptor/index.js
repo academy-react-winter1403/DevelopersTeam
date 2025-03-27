@@ -16,4 +16,12 @@ const onError = (err) => {
 
 http.interceptors.response.use(onSuccess, onError);
 
+
+// http.interceptors.request.use((opt)=>{
+//   const token = getData('login')
+//   opt.headers.Authorization = 'Bearer ' + token 
+//   return opt 
+// }) 
+
+
 export default http;

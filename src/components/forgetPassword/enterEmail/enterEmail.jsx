@@ -20,7 +20,7 @@ const EnterEmail = () => {
   const handleMutation = async (values) => {
     const payload = {
       email: values.email,
-      baseUrl: "https://localhost:5173/forgetpass/setpassword",
+      baseUrl: "http://localhost:5173/forgetpass/setpassword",
     };
     try {
       const response = await mutateAsync(payload);
@@ -36,7 +36,7 @@ const EnterEmail = () => {
   };
 
   return (
-    <div>
+    <div className=" absolute top-48 right-[720px]">
       <div className="flex flex-col justify-center items-center xs:block ">
         <div className="w-xs xs:w-md mt-12 ">
           <Formik onSubmit={handleMutation} initialValues={{ email: "" }}>

@@ -9,69 +9,72 @@ import LoginPage from "../../screens/loginPage";
 import RegisterPage from "../../screens/registerPage";
 import ForgetPasswordPage from "../../screens/forgetPasswordPage";
 import NotFoundPage from "../../screens/notFound";
-
-
-
+import EnterEmail from "../../components/forgetPassword/enterEmail/enterEmail";
+import NewPassword from "../../components/forgetPassword/newPassword/newPassword";
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout />,
-      children: [
-        {
-          path: "/",
-          element: <LandingPage />,
-        },
-        {
-          path: "/courses",
-          element: <CoursesPage />,
-        },
-        {
-          path: "/coursedetail/:id",
-          element: <CourseDetailPage />,
-        },
-        {
-          path: "/news",
-          element: <NewsPage />,
-        },
-        {
-          path: "/newsdetail/:id",
-          element: <NewsDetailPage />,
-        },
-      ],
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
-      children: [
-        {
-          path: "/login",
-          element: <LoginPage />,
-        },
-      ],
-    },
-    {
-      path: "/register",
-      element: <RegisterPage />,
-      children: [
-        {
-          path: "/register",
-          element: <RegisterPage />,
-        },
-      ],
-    },
-    {
-      path: "/forgetpass",
-      element: <ForgetPasswordPage />,
-      children: [
-        {
-          path: "/forgetpass",
-          element: <ForgetPasswordPage />,
-        },
-      ],
-    },
-    {
-      path:"/*",
-      element:<NotFoundPage/>,
-    }
-  ]);
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/courses",
+        element: <CoursesPage />,
+      },
+      {
+        path: "/coursedetail/:id",
+        element: <CourseDetailPage />,
+      },
+      {
+        path: "/news",
+        element: <NewsPage />,
+      },
+      {
+        path: "/newsdetail/:id",
+        element: <NewsDetailPage />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+    children: [
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+    ],
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+    children: [
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+    ],
+  },
+  {
+    path: "/forgetpass",
+    element: <ForgetPasswordPage />,
+    children: [
+      {
+        path: "/forgetpass",
+        element: <EnterEmail />,
+      },
+      {
+        path: "/forgetpass/setpassword/:id",
+        element: <NewPassword />,
+      },
+    ],
+  },
+  {
+    path: "/*",
+    element: <NotFoundPage />,
+  },
+]);
