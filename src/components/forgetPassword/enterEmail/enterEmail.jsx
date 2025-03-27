@@ -36,7 +36,7 @@ const EnterEmail = () => {
   };
 
   return (
-    <div className=" absolute top-48 right-[720px]">
+    <div className=" ">
       <div className="flex flex-col justify-center items-center xs:block ">
         <div className="w-xs xs:w-md mt-12 ">
           <Formik onSubmit={handleMutation} initialValues={{ email: "" }}>

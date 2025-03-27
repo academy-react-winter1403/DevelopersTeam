@@ -23,3 +23,5 @@ body {
   font-family: "yekan";
   direction: rtl;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
