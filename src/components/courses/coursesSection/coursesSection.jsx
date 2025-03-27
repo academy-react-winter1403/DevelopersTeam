@@ -38,36 +38,34 @@ const CoursesSection = () => {
       <div className="col-span-4 lg:col-span-3 w-full ">
         <CoursesNavbar viewMode={viewMode} setViewMode={setViewMode} />
         <div className="flex flex-wrap justify-evenly space-y-5 p-2">
-          {data?.courseFilterDtos?.map((item, index) => 
-            
-             ( viewMode === "list" ? (
-                <CourseCard
-                  key={index}
-                  title={item.title}
-                  img={item.tumbImageAddress}
-                  describe={item.describe}
-                  teacherName={item.teacherName}
-                  statusName={item.statusName}
-                  student={item.commandCount}
-                  cost={item.cost}
-                  likeCount={item.likeCount}
-                  dissLikeCount={item.dissLikeCount}
-                />
-              ) : (
-                <GridCourseCard
-                  key={index}
-                  title={item.title}
-                  img={item.tumbImageAddress}
-                  describe={item.describe}
-                  teacherName={item.teacherName}
-                  statusName={item.statusName}
-                  student={item.commandCount}
-                  cost={item.cost}
-                  likeCount={item.likeCount}
-                  dissLikeCount={item.dissLikeCount}
-                />
-              ))
-            
+          {data?.courseFilterDtos?.map((item, index) =>
+            viewMode === "list" ? (
+              <CourseCard
+                key={index}
+                title={item.title}
+                img={item.tumbImageAddress}
+                describe={item.describe}
+                teacherName={item.teacherName}
+                statusName={item.statusName}
+                student={item.commandCount}
+                cost={item.cost}
+                likeCount={item.likeCount}
+                dissLikeCount={item.dissLikeCount}
+              />
+            ) : (
+              <GridCourseCard
+                key={index}
+                title={item.title}
+                img={item.tumbImageAddress}
+                describe={item.describe}
+                teacherName={item.teacherName}
+                statusName={item.statusName}
+                student={item.commandCount}
+                cost={item.cost}
+                likeCount={item.likeCount}
+                dissLikeCount={item.dissLikeCount}
+              />
+            )
           )}
 
           {/* {viewMode === 'list' ? <CourseCard /> : <GridCourseCard /> } */}

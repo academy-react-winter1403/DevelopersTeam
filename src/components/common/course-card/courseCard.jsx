@@ -17,6 +17,7 @@ const CourseCard = ({
   likeCount,
   dissLikeCount,
 }) => {
+  
   const addDefaultImg = (e) => {
     e.target.src = StudentIcon;
   };

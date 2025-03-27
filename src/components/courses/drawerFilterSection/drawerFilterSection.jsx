@@ -9,7 +9,6 @@ import PriceSlider from "../priceSlider/priceSlider";
 import { PiMoneyWavyLight } from "react-icons/pi";
 import DateInput from "../dateInput/dateInput";
 import { IoCalendarOutline } from "react-icons/io5";
-import FilterInput from "../filterSearchInput/filterSearchInput";
 import { IoIosClose } from "react-icons/io";
 
 const DrawerFilterSection = () => {
@@ -18,7 +17,6 @@ const DrawerFilterSection = () => {
   const showLoading = () => {
     setOpen(true);
     setLoading(true);
-    // Simple loading mock. You should add cleanup logic in real world.
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -61,19 +59,16 @@ const DrawerFilterSection = () => {
           <SelectDropdown
             icon={<GrShareOption className="text-2xl" />}
             inputLabel={"دسته‌بندی"}
-            name={name}
             placeholder="انتخاب کنید"
           />
           <SelectDropdown
             icon={<IoLayersOutline className="text-2xl" />}
             inputLabel={"سطح آموزشی"}
-            name={name}
             placeholder="انتخاب کنید"
           />
           <SelectDropdown
             icon={<LiaChalkboardTeacherSolid className="text-2xl" />}
             inputLabel={"اساتید"}
-            name={name}
             placeholder="انتخاب کنید"
           />
           <PriceSlider
