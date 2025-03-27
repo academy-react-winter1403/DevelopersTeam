@@ -16,7 +16,7 @@ const TopCourses = () => {
   data && console.log(data);
 
   return (
-    <div className="w-full mt-20 border h-auto">
+    <div className="w-full mt-20 h-auto">
       <h1 className="text-xl sm:text-2xl md:text-3xl  h-10 mx-auto text-center  font-bold">
         محبوب ترین دوره ها
       </h1>
