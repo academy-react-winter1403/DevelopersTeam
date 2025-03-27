@@ -42,6 +42,7 @@ const CoursesNavbar = ({setViewMode,viewMode}) => {
         <DrawerFilterSection />
       </div>
     </div>
+    </div>
   );
 };
 export default CoursesNavbar;

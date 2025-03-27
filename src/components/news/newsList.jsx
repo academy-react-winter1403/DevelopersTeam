@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import CoursesNavbar from '../courses/coursesNavbar/coursesNavbar';
 import FilterPartOfNews from './filterPartOfSection';
 import NewsItemCard from './newsItemCard';
-import PaginationSection from '../common/paginationSection/paginationSection';
+import PaginationSection from '../common/PaginationSection/paginationSection';
 
 const NewsList = () => {
 

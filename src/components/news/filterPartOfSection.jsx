@@ -4,13 +4,13 @@ import { GrShareOption } from "react-icons/gr";
 import { IoCalendarOutline } from "react-icons/io5";
 import SelectDropdown from "../courses/selectDropdown/selectDropdown";
 import DateInput from "../courses/dateInput/dateInput";
-import FilterInput from "../courses/filterInput/filterInput";
+import FilterSearchInput from "../courses/filterSearchInput/filterSearchInput";
 
 
 const FilterPartOfNews = () => {
   return (
     <div className="w-full h-[250px] bg-lightGray rounded-3xl pt-4 space-y-4">
-      <FilterInput
+      <FilterSearchInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}
         name={name}
