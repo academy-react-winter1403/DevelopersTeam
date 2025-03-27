@@ -4,6 +4,7 @@ import { GrShareOption } from "react-icons/gr";
 import { IoCalendarOutline } from "react-icons/io5";
 import SelectDropdown from "../courses/selectDropdown/selectDropdown";
 import DateInput from "../courses/dateInput/dateInput";
+import FilterInput from "../courses/filterInput/filterInput";
 
 
 const FilterPartOfNews = () => {
