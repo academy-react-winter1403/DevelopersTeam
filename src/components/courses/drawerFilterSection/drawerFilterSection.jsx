@@ -9,7 +9,7 @@ import PriceSlider from "../priceSlider/priceSlider";
 import { PiMoneyWavyLight } from "react-icons/pi";
 import DateInput from "../dateInput/dateInput";
 import { IoCalendarOutline } from "react-icons/io5";
-import FilterInput from "../filterInput/filterInput";
+import FilterInput from "../filterSearchInput/filterSearchInput";
 import { IoIosClose } from "react-icons/io";
 
 const DrawerFilterSection = () => {
@@ -40,7 +40,12 @@ const DrawerFilterSection = () => {
 
   return (
     <>
-      <Button type="primary" shape="round" onClick={showLoading} style={{fontFamily:'yekan'}}>
+      <Button
+        type="primary"
+        shape="round"
+        onClick={showLoading}
+        style={{ fontFamily: "yekan" }}
+      >
         ترتیب و فیلتر
       </Button>
       <Drawer

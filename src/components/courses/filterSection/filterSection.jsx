@@ -8,27 +8,25 @@ import PriceSlider from "../priceSlider/priceSlider";
 import { PiMoneyWavyLight } from "react-icons/pi";
 import DateInput from "../dateInput/dateInput";
 import { IoCalendarOutline } from "react-icons/io5";
-import FilterInput from "../filterInput/filterInput";
+import FilterSearchInput from "../filterSearchInput/filterSearchInput";
 
-const FilterSection = ({ icon, inputLabel, name, placeholder }) => {
+const FilterSection = ({ setSearchQuery }) => {
   return (
-    <div className="w-full h-[500px] bg-lightGray rounded-3xl pt-4 space-y-4">
-      <FilterInput
+    <div className="w-full 2xl:w-[337px] h-[500px] bg-lightGray rounded-3xl pt-4 space-y-4">
+      <FilterSearchInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}
-        name={name}
         placeholder={"جست جو کنید ..."}
+        setSearchQuery={setSearchQuery}
       />
       <SelectDropdown
         icon={<GrShareOption className="text-2xl" />}
         inputLabel={"دسته‌بندی"}
-        name={name}
         placeholder="انتخاب کنید"
       />
       <SelectDropdown
         icon={<IoLayersOutline className="text-2xl" />}
         inputLabel={"سطح آموزشی"}
-        name={name}
         placeholder="انتخاب کنید"
       />
       <SelectDropdown

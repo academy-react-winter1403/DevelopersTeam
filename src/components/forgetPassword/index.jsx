@@ -4,7 +4,7 @@ import logoText from "./../../assets/images/logoText.svg";
 import StepsForgetPass from "./stepsForgetPass/stepsForgetPass";
 import EnterEmail from "./enterEmail/enterEmail";
 import NewPassword from "./newPassword/newPassword";
-import { NavLink } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const ForgetPassword = () => {
   const [step, setStep] = useState(1);
@@ -54,10 +54,10 @@ const ForgetPassword = () => {
           )}
         </div>
         {/* inputs section */}
-        {step == 1 && <EnterEmail nextStep={nextStep} text={"ارسال لینک"} />}
-        {step == 2 && (
+        {/* {step == 1 && <EnterEmail nextStep={nextStep} text={"ارسال لینک"} />} */}
+        {/* {step == 2 && (
           <NewPassword nextStep={nextStep} text={"تایید رمزعبور"} />
-        )}
+        )} */}
       </div>
     </div>
   );

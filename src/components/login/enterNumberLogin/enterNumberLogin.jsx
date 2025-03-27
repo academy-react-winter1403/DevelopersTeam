@@ -8,6 +8,7 @@ import { Checkbox } from "antd";
 import { Form, Formik } from "formik";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
+import { setData } from "../../../core/localStorage/localStorage";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
   const icon = (
@@ -15,10 +16,19 @@ const EnterNumberLogin = ({ nextStep, text }) => {
   );
 
   const { mutateAsync } = useMutationCustom("/Sign/Login", "Login","عملیات با موفقیت انجام شد");
-  const handleMutation = async (e) => {
-    await mutateAsync(e);
-    nextStep();
-    navigate('/');
+  const handleMutation = async (values) => {
+    try {
+      const response = await mutateAsync(values);
+      console.log('Login response:', response);      
+      if (response) {
+        setData('authToken', response.token); 
+        setData('userData', response.user);       
+        nextStep();
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
   const navigate = useNavigate()

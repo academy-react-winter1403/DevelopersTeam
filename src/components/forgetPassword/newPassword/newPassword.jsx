@@ -16,13 +16,14 @@ const NewPassword = ({ text, nextStep }) => {
 
   const handleSubmit = async (values) => {
     await mutateAsync({
-      id,
+      userId,
       newPassword: values.newPassword,
+      resetValue: values.resetValue,
     });
   };
 
   return (
-    <div className="w-xs xs:w-md mt-12 space-y-4">
+    <div className="w-xs xs:w-md mt-12 space-y-4 absolute top-48 right-[720px]">
       <Formik
         onSubmit={handleSubmit}
         initialValues={{ newPassword: "", resetValue: "" }}
@@ -38,7 +39,7 @@ const NewPassword = ({ text, nextStep }) => {
             placeholder={"رمزعبور جدید خود را دوباره وارد کنید"}
             name="resetValue"
           />
-          <AuthButton text={text} />
+          <AuthButton text={"تایید رمزعبور"} />
         </Form>
       </Formik>
     </div>
