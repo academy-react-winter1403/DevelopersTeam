@@ -77,9 +77,9 @@ const NewsItemCard = ({
               </div>
             </div>
 
-            <div>
+            <div className="md:px-2">
               <Link>
-                <h2 className="bg-navyBlue rounded-xl text-white md:rounded-full md:px-4 py-1 md:text-sm text-[10px] px-1 line-clamp-1 text-center cursor-pointer">
+                <h2 className="bg-navyBlue rounded-xl text-white lg:h-9 md:rounded-full md:px-4 py-1 md:text-sm text-[10px] px-1 line-clamp-1 text-center cursor-pointer">
                   بیشتر بخوانید
                 </h2>
               </Link>
