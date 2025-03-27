@@ -53,15 +53,16 @@ const NewsList = () => {
             )
           })}
         </div>
-      </div>
-      <div className="hidden md:block p-8">
-        <FilterPartOfNews />
         <PaginationSection
           totalCount={data?.totalCount}
           pageNum={pageNum}
           itemPerPage={itemPerPage}
           setPageNum={setPageNum}
         />
+      </div>
+      <div className="hidden md:block p-8">
+        <FilterPartOfNews />
+
       </div>
     </div>
   );
