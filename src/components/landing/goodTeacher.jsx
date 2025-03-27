@@ -21,7 +21,7 @@ const GoodTeacher = () => {
   return (
     
     <div>
-      <h2 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-[1200px] sm:mt-[450px] xl:text-3xl">برترین اساتید هفته</h2>
+      <h2 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[450px] xl:text-3xl">برترین اساتید هفته</h2>
       <h2 className="text-center mx-auto font-bold text-[12px] mt-4 text-[#787878] xl:text-[15px]">اساتیدی که با نظرسنجی در دوره ها به آنها بیشترین رای مثبت را دادند  </h2>
       <div className=" flex flex-col lg:flex-row gap-4 mt-16 sm:mt-14 w-10/12 mx-auto ">
       {data?.slice(0, 3).map((item,index) => (

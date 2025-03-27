@@ -74,37 +74,6 @@ const FirstPartOfLanding = () => {
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
       </div>
-
-      <div className=" mt-20 mx-auto flex flex-row gap-3 p-4 justify-center items-center flex-wrap ">
-        {/* card1*/}
-        <div className="w-full sm:w-1/2 md-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
-          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">
-            01
-          </h1>
-          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
-        </div>
-        {/* card2*/}
-        <div className="w-full sm:w-1/2 md:w-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
-          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">
-            02
-          </h1>
-          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
-          {/* card3*/}
-        </div>{" "}
-        <div className="w-full sm:w-1/2 md:w-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
-          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">
-            03
-          </h1>
-          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
-          {/* card4*/}
-        </div>{" "}
-        <div className="w-full sm:w-1/2 md:w-1/4 max-w-[250px] border-gray-400 border-[1px] h-44 rounded-2xl">
-          <h1 className="border-b-2 border-gray-300 w-[230px] mt-4 pb-3 mx-auto text-[20px]">
-            04
-          </h1>
-          <h3 className="mr-2 mt-2">مدرک معتبر</h3>
-        </div>
-      </div>
     </>
   );
 };
