@@ -26,10 +26,10 @@ const GoodTeacher = () => {
       <div className=" flex flex-col lg:flex-row gap-4 mt-16 sm:mt-14 w-10/12 mx-auto ">
       {data?.slice(0, 3).map((item,index) => (
         <React.Fragment key={item.id}>
-          <div className="border-[#E4E4E4] rounded-2xl border-2 xl:w-1/4 w-4/5 mx-auto mt-16 relative h-[300px] sm:w-3/5 sm:mt-10 md:w-3/7 ">
+          <div className={`border-[#E4E4E4] rounded-2xl border-2 xl:w-1/4 w-4/5 mx-auto mt-16 relative h-[300px] sm:w-3/5 sm:mt-10 md:w-3/7 ${index==1&&"!h-80 !mt-[-2px] !w-1/3"} `}>
             
             <div>
-              <img src={item.pictureAddress ? item.pictureAddress : ax} alt='' className="rounded-full w-25 h-25 absolute xl:right-20 2xl:right-[110px] sm:right-28 md:right-22 right-[80px] top-[-50px] border-2"/>
+              <img src={item.pictureAddress ? item.pictureAddress : ax} alt='' className={`rounded-full w-25 h-25 absolute xl:right-20 2xl:right-[110px] sm:right-28 md:right-22 right-[80px] top-[-50px] border-2} ${index==1 && "!right-40 !border-2 !rounded-full !w-25 !h-25"}`}/>
             </div>
 
             <h2 className="text-center mt-20 font-bold text-xl">{item.fullName ? item.fullName : 'بینام'}</h2>
