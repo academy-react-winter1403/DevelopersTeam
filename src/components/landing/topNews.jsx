@@ -56,10 +56,10 @@ const TopNews = () => {
 
   return (
     <div className="container mx-auto px-4 mt-[80px] sm:px-6 sm:mt-16 lg:px-8">
-      <h1 className="text-2xl sm:text-[25px] font-bold text-center mt-8">
+      <h1 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl">
         اخبار و مقالات هفته
       </h1>
-      <h6 className="text-[13px] sm:text-[13px] text-[#787878] text-center font-bold mt-2">
+      <h6 className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] xl:text-[15px]">
         خبرها و مقاله‌هایی که در این هفته منتشر شدند
       </h6>
       <div className="flex flex-wrap justify-center gap-y-4  my-8  w-[85%] mx-auto">

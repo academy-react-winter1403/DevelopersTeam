@@ -56,7 +56,7 @@ const Header = () => {
         </div>
       </div>
       <div className="flex justify-center items-center mr-2 ">
-        {token ? ( <Button type="primary" shape="round" icon={<FiUser className="w-5 h-5 mt-1"/>}  style={{fontFamily:'yekan' , marginRight:'4px'}}>
+        {token ? ( <Button type="primary" shape="round" icon={<FiUser className="w-5 h-5 mt-1"/>}  style={{fontFamily:'yekan' , marginRight:'6px'}}>
             پنل دانشجویی
           </Button>
         

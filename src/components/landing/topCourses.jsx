@@ -17,10 +17,10 @@ const TopCourses = () => {
 
   return (
     <div className="w-full mt-20 h-auto">
-      <h1 className="text-xl sm:text-2xl md:text-3xl  h-10 mx-auto text-center  font-bold">
+      <h1 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl">
         محبوب ترین دوره ها
       </h1>
-      <h6 className="text-sm sm:text-base md:tex-[20px] font-bold mx-auto text-center  mt-2 h-10 text-[#787878]">
+      <h6 className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] xl:text-[15px]">
         دوره هایی که بین دانشجویان محبوبیت بالایی داشتند
       </h6>
       <div className="my-4 flex justify-center gap-4 flex-wrap">
