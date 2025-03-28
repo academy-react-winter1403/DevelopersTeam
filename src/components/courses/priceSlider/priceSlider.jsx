@@ -1,7 +1,16 @@
 import { Slider } from "antd";
-import React from "react";
+import React, { useState } from "react";
 
-const PriceSlider = ({ icon, inputLabel }) => {
+const PriceSlider = ({ icon, inputLabel,courseList }) => {
+
+  const [min, setMin] = useState();
+  const [max, setMax] = useState();
+
+  
+
+
+
+
   const onChange = (value) => {
     console.log("onChange: ", value);
   };
