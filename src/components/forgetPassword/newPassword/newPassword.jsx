@@ -45,12 +45,12 @@ const NewPassword = ({ text, nextStep }) => {
 
   function submit(data) {
     if (data.newPassword == data.pastPassword) {
-      mutate({ resetValue: id, newPassword: data.newPassword, id: resData.id });
+      mutate({ resetValue: id, newPassword: data.newPassword, userId: resData.id });
     }
   }
 
   return (
-    <div className="w-xs xs:w-md mt-12 space-y-4 absolute top-48 right-[720px]">
+    <div className="w-xs xs:w-md mt-12 space-y-4">
       <Formik
         onSubmit={(e) => submit(e)}
         initialValues={{ newPassword: "", pastPassword: "" }}

@@ -6,7 +6,7 @@ const ForgetPasswordPage = () => {
   return (
     <div>
       <ForgetPassword />
-      <Outlet />
+     
     </div>
   );
 };
