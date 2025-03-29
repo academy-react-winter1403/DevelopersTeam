@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import http from "../../core/services/interceptor";
 import { useParams } from "react-router-dom";
 
-const getNewsDetailList = () => {
+const GetNewsDetail = () => {
   const [detail, setDetail] = useState(null);
-  const params = useParams();
+  const {id} = useParams();
 
-  const getNewsDetail = async () => {
+  const getDetail = async () => {
     const res = await http.get(
-      `/News?PageNumber=1&RowsOfPage=10&SortingCol=InsertDate&SortType=DESC/${params.id}`
+      `/News/${id}`
     );
-    setDetail(res.data);
+    setDetail(res.detailsNewsDto);
   };
 
   useEffect(() => {
-    getNewsDetail();
+    getDetail();
   }, []);
 
   return (
@@ -30,4 +30,4 @@ const getNewsDetailList = () => {
   );
 };
 
-export default getNewsDetailList;
+export default GetNewsDetail;
