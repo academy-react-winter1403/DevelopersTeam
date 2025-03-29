@@ -4,7 +4,7 @@ import ViewStroke from "./../../assets/images/view-stroke-rounded (1) 1.svg";
 import ThumbUp from "./../../assets/images/thumbs-up-stroke-rounded 1.svg";
 import thumbDown from "./../../assets/images/thumb-down.svg";
 import { MdOutlineDateRange } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const NewsItemCard = ({
   addUserProfileImage,
@@ -12,12 +12,17 @@ const NewsItemCard = ({
   miniDescribe,
   addUserFullName,
   insertDate,
+  id
 }) => {
+  const navigate = useNavigate()
+  const handleNavigation = () => {
+    navigate(`/news/newsdetail/${id}`);
+  };
   return (
     <div className="hidden sm:block my-5 rounded-2xl 2xl:h-72 bg-lightGray  w-full ">
       <div className="flex 2xl:gap-5 justify-between">
-        <div className="flex-shrink-0">
-          <img
+        <div className="flex-shrink-0" onClick={handleNavigation}>
+         <img
             src={addUserProfileImage}
             alt="Profile"
             className="2xl:w-[430px] w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl"
