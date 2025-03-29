@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import logo from "./../../../assets/images/logo.svg";
 import logoText from "./../../../assets/images/logoText.svg";
 import darkMood from "./../../../assets/images/darkLego.svg";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AlignLeftOutlined } from "@ant-design/icons";
 import { getData } from "../../../core/localStorage/localStorage";
 import { FiUser } from "react-icons/fi";
 import { Button } from "antd";
+import HeaderDrawer from "../../headerDrawer/headerDrawer";
+import { IoMoonOutline } from "react-icons/io5";
 
 const Header = () => {
-
   const token = getData("authToken");
 
-
   return (
-    <div className="   border-[#E4E4E4] mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      <div className="flex w-1/5 justify-center items-center">
+    <div className="border-[#E4E4E4] mt-5 mx-auto flex flex-nowrap justify-between px-10">
+      <div className=" flex w-1/5 justify-center items-center">
         <img
           src={logo}
           alt="logo"
@@ -23,7 +23,7 @@ const Header = () => {
         />
         <img src={logoText} alt="text" className="w-24 h-10 object-contain " />
       </div>
-      <div className="w-3/5 xl:flex justify-center gap-10 hidden">
+      <div className=" w-3/5 lg:flex justify-center items-center gap-10 hidden">
         <NavLink
           to="/"
           className={({ isActive }) => `${isActive ? "text-navyBlue" : ""}`}
@@ -49,10 +49,35 @@ const Header = () => {
           <span className=" h-28 leading-12">ارتباط با ما</span>
         </NavLink>
       </div>
-
-      <div className="ps-24 hidden xl:flex">
-        <div className="border-2 border-gray-200 h-9 w-9 p-2 mt-3 rounded-full">
-          <img src={darkMood} alt="" className=" " />
+      <div className="flex w-1/5  justify-center items-center space-x-3">
+        <div className="border-2 border-gray-200 w-9 h-9 lg:flex justify-center items-center rounded-full hidden">
+          <IoMoonOutline className="text-2xl" />
+        </div>
+        <div className="flex items-center justify-center">
+          {token ? (
+            <Button
+              type="primary"
+              shape="round"
+              icon={<FiUser className="w-5 h-5 mt-1" />}
+              style={{ fontFamily: "yekan", marginRight: "4px" }}
+            >
+              پنل دانشجویی
+            </Button>
+          ) : (
+            <Button
+              type="primary"
+              shape="round"
+              style={{ fontFamily: "yekan" }}
+            >
+              <NavLink to="/login">
+                <span className="border-l pl-1">ورود</span>
+              </NavLink>
+              <NavLink to="/register">
+                <span>ثبت نام</span>
+              </NavLink>
+            </Button>
+          )}
+          <HeaderDrawer />
         </div>
       </div>
       <div className="flex justify-center items-center mr-2 ">

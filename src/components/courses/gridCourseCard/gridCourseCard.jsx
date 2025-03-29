@@ -1,7 +1,11 @@
 import React from "react";
-import TeacherIcon from "./../../../assets/images/teacher-stroke-rounded 1.svg";
-
-import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg";
+// import TeacherIcon from "./../../../assets/images/teacher-stroke-rounded 1.svg";
+// import QuillWrite from "./../../assets/images/quill-write-02-stroke-rounded 2.svg";
+// import ViewStroke from "./../../assets/images/view-stroke-rounded (1) 1.svg";
+// import ThumbUp from "./../../assets/images/thumbs-up-stroke-rounded 1.svg";
+// import thumbDown from "./../../assets/images/thumb-down.svg";
+import { Link } from "react-router-dom";
+// import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg";
 
 const GridCourseCard = ({
   title,
@@ -12,7 +16,7 @@ const GridCourseCard = ({
   student,
   cost,
   likeCount,
-  dissLikeCount,
+  dissLikeCount,miniDescribe,addUserFullName
 }) => {
   return (
     <div

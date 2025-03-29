@@ -2,17 +2,16 @@ import React from "react";
 import { Select } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
-const SelectDropdown = ({ icon, inputLabel, name, placeholder }) => {
-  //   const options = [];
-  //   for (let i = 10; i < 36; i++) {
-  //     options.push({
-  //       value: i.toString(36) + i,
-  //       label: i.toString(36) + i,
-  //     });
-  //   }
+const SelectDropdown = ({ icon, inputLabel, name, placeholder, data , type }) => {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
+
+  const courseTypeOptions =
+    data?.map((item) => ({
+      value: item.typeName,
+      label: item.typeName,
+    })) || [];
 
   return (
     <div className="flex flex-col space-y-1 px-4">
@@ -30,7 +29,7 @@ const SelectDropdown = ({ icon, inputLabel, name, placeholder }) => {
         placeholder={placeholder}
         onChange={handleChange}
         dropdownStyle={{ fontFamily: "yekan" }}
-        // options={options}
+        options={courseTypeOptions}
       />
     </div>
   );
