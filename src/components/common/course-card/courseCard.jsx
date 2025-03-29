@@ -17,7 +17,6 @@ const CourseCard = ({
   likeCount,
   dissLikeCount,
 }) => {
-  
   const addDefaultImg = (e) => {
     e.target.src = StudentIcon;
   };
@@ -34,47 +33,45 @@ const CourseCard = ({
       </div>
 
       <div className=" w-full h-full px-3 flex flex-col  mt-3 ">
-          <div className="grow ">
-            <h2 className="text-lg font-semibold text-gray- line-clamp-1">
-              {title}
-            </h2>
-            <p className="text-[#787878] text-sm mt-2 line-clamp-2">
-              {describe}
-            </p>
+        <div className="grow ">
+          <h2 className="text-lg font-semibold text-gray- line-clamp-1">
+            {title}
+          </h2>
+          <p className="text-[#787878] text-sm mt-2 line-clamp-2">{describe}</p>
+        </div>
+        <div className="mt-3 flex-none space-y-3 ">
+          <div className="flex items-center gap-3  text-sm">
+            <img src={TeacherIcon} alt="" className="h-5 w-5" />
+            <span>{teacherName}</span>
           </div>
-          <div className="mt-3 flex-none space-y-3 ">
-            <div className="flex items-center gap-3  text-sm">
-              <img src={TeacherIcon} alt="" className="h-5 w-5" />
-              <span>{teacherName}</span>
-            </div>
-            <div className="flex items-center gap-3 mt-2 text-sm">
-              <img src={CalenderIcon} alt="" className="h-5 w-5" />
-              <span>{statusName}</span>
-            </div>
-            <div className="flex items-center gap-3 mt-2 text-sm">
-              <img src={StudentIcon} alt="" className="h-5 w-5" />
-              <span className="text-md space-x-2">
-                <span>{student}</span>
-                <span>دانشجو</span>
-              </span>
-            </div>
+          <div className="flex items-center gap-3 mt-2 text-sm">
+            <img src={CalenderIcon} alt="" className="h-5 w-5" />
+            <span>{statusName}</span>
           </div>
-          <div className="flex flex-none justify-between my-3">
-            <div className="space-x-2 flex justify-center items-center">
-              <span className="text-lg font-bold">{cost}</span>
-              <span className="text-blue-400 text-md line-clamp-1">تومان</span>
+          <div className="flex items-center gap-3 mt-2 text-sm">
+            <img src={StudentIcon} alt="" className="h-5 w-5" />
+            <span className="text-md space-x-2">
+              <span>{student}</span>
+              <span>دانشجو</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-none justify-between my-3">
+          <div className="space-x-2 flex justify-center items-center">
+            <span className="text-lg font-bold">{cost}</span>
+            <span className="text-blue-400 text-md line-clamp-1">تومان</span>
+          </div>
+          <div className="flex gap-2">
+            <div className="flex items-center gap-1">
+              <img src={ThumbUp} alt="" className="w-4 h-4" />
+              <span>{likeCount}</span>
             </div>
-            <div className="flex gap-2">
-              <div className="flex items-center gap-1">
-                <img src={ThumbUp} alt="" className="w-4 h-4" />
-                <span>{likeCount}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <img src={thumbDown} alt="" className="w-3 h-4" />
-                <span>{dissLikeCount}</span>
-              </div>
+            <div className="flex items-center gap-1">
+              <img src={thumbDown} alt="" className="w-3 h-4" />
+              <span>{dissLikeCount}</span>
             </div>
           </div>
+        </div>
       </div>
     </div>
   );
