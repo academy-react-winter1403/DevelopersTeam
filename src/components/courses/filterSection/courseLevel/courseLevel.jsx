@@ -4,7 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import http from "../../../../core/services/interceptor";
 import { Select } from "antd";
 
-const CourseLevel = () => {
+const CourseLevel = ({setSelectedLevel}) => {
+
   const getList = async () => {
     const res = await http.get("/CourseLevel/GetAllCourseLevel");
     return res;
@@ -17,9 +18,10 @@ const CourseLevel = () => {
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+    setSelectedLevel(value)
   };
 
-  const options = data?.slice(1,15).map((item) => ({ label: item.levelName, value: item.levelName }));
+  const options = data?.slice(1,15).map((item) => ({ label: item.levelName, value: item.id }));
 
   return (
     <div className="flex flex-col space-y-1 px-4">

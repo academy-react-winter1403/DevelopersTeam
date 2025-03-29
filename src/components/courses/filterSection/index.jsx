@@ -17,7 +17,7 @@ import CourseTech from "./courseTech/courseTech";
 import { useQuery } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
 
-const FilterSection = ({ setSearchQuery ,setSelectedType}) => {
+const FilterSection = ({ setSearchQuery ,setSelectedType,setSelectedLevel}) => {
 
   return (
     <div className="w-full 2xl:w-[337px] h-[550px] bg-lightGray rounded-3xl pt-4 space-y-4">
@@ -29,7 +29,7 @@ const FilterSection = ({ setSearchQuery ,setSelectedType}) => {
       />
 
       <CourseType setSelectedType={setSelectedType} />
-      <CourseLevel />
+      <CourseLevel setSelectedLevel={setSelectedLevel} />
       {/* <CourseStatus /> */}
       <TeacherName />
       <CourseTech />

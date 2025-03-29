@@ -16,21 +16,26 @@ const CoursesSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState(null);
 
+  const [selectedLevel, setSelectedLevel] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(9);
 
   const { data, isLoading, isError, refetch } = useQueryGet(
-    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}${
-      (searchQuery ? `&Query=${searchQuery}` : "",
-      selectedType ? `&SortingCol=${selectedType}` : "")
-    }`,
+    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}${selectedType ? `&selectedType=${selectedType}`:""}
+    ${selectedLevel ? `&courseLevelId=${selectedLevel}`:""}`,
     "courses",
-    [pageNum, itemPerPage, searchQuery, selectedType]
+    [pageNum, itemPerPage, searchQuery, selectedType,selectedLevel]
   );
+  // ${
+  //   (searchQuery ? `&Query=${searchQuery}` : "",
+  //   selectedType ? `&SortingCol=${selectedType}` : "")
+  // }
+
 
   useEffect(() => {
     refetch();
-  }, [pageNum, itemPerPage, searchQuery, selectedType, refetch]);
+    console.log(selectedType);
+  }, [pageNum, itemPerPage, searchQuery, selectedType, refetch,selectedLevel]);
 
   // if (isLoading) return <div>Loading...</div>;
   // if (isError) return <div>Error fetching data</div>;
@@ -94,6 +99,7 @@ const CoursesSection = () => {
         <FilterSection
           setSearchQuery={setSearchQuery}
           setSelectedType={setSelectedType}
+          setSelectedLevel={setSelectedLevel}
         />
       </div>
     </div>

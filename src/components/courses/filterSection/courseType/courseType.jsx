@@ -22,8 +22,9 @@ const CourseType = ({ setSelectedType }) => {
 
   const options = data?.map((item) => ({
     label: item.typeName,
-    value: item.typeName,
+    value: item.id,
   }));
+  console.log(options);
 
   return (
     <div className="flex flex-col space-y-1 px-4">
