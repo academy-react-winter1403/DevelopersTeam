@@ -23,7 +23,7 @@ const NewsItemCard = ({
             className="2xl:w-[430px] w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl"
             onError={({ currentTarget }) => {
               currentTarget.onerror = null;
-              currentTarget.src = "/assets/#787878"; // مسیر صحیح برای تصویر جایگزین
+              currentTarget.src = "/assets/#787878"; 
             }}
           />
         </div>
@@ -90,7 +90,7 @@ const NewsItemCard = ({
             </div>
 
             <div className="md:px-2">
-              <Link>
+              <Link  > 
                 <h2 className="bg-navyBlue rounded-xl text-white lg:h-9 md:rounded-full md:px-4 py-1 text-sm px-1 line-clamp-1 text-center cursor-pointer">
                   بیشتر بخوانید
                 </h2>
