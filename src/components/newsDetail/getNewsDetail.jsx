@@ -32,4 +32,4 @@ const GetNewsDetailList = () => {
   );
 };
 
-export default getNewsDetailList;
+export default GetNewsDetailList;
