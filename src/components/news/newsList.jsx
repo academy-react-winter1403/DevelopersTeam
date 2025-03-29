@@ -29,13 +29,13 @@ const NewsList = () => {
       refetch();
     }, [pageNum, itemPerPage, refetch]);
   
-    // if (isLoading) return <div>Loading...</div>;
-    // if (isError) return <div>Error fetching data</div>;
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error fetching data</div>;
   
 
   return (
     <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray rounded-4xl">
-      <div className="col-span-4 lg:col-span-3 w-full  ">
+      <div className="col-span-4 lg:col-span-3 w-full">
         <NewsNavbar />
         <div className=' '>
           {data?.news.map((item,index)=>{
@@ -46,6 +46,7 @@ const NewsList = () => {
                 title={item.title}
                 miniDescribe={item.miniDescribe}
                 addUserFullName={item.addUserFullName}
+                insertDate={item.insertDate}
               />
             )
           })}

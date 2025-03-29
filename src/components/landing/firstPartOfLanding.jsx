@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import arrowUpLeft from "./../../assets/images/arrow-up-left-01.svg";
+import arrowUpLeftStoke from "./../../assets/images/arrow-up-left-01-stroke-rounded 1.svg";
 import Group from "./../../assets/images/Group 143.svg";
 import AxPanel from "./../../assets/images/AxPanel.png";
 
@@ -58,7 +59,7 @@ const FirstPartOfLanding = () => {
           </div>
           <Link>
             <img
-              src={arrowUpLeft}
+              src={arrowUpLeftStoke}
               alt=""
               className="  rounded-full bg-[#3772FF] absolute top-2 left-2 w-8 h-8 p-1 object-contain fill-white"
             />

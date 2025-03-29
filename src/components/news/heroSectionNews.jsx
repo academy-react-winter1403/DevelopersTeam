@@ -10,21 +10,21 @@ const HeroSectionNews = () => {
       <img
         src={StarOfNewsPage}
         alt=""
-        className="absolute  md:top-[45px] w-4 h-4 left-20 top-20 sm:left-52 md:left-16 xl:left-56 xl:top-16"
+        className="absolute sm:top-10  md:top-[45px] w-4 h-4 left-20 top-20 sm:left-52 md:left-16 xl:left-56 xl:top-10"
       />
       <h2 className="text-2xl xs:text-3xl md:text-4xl font-bold mb-7 ">
         اخبار و مقالات آکادمی{" "}
       </h2>
-      <div className="text-[#787878] text-[14px] text-center mt-2 font-bold">
-        <p className="w-auto text-sm lg:text-md text-gray text-center ">
+      <div className="text-[#787878] text-[14px] text-center mt-2 ">
+        <p className="w-auto text-sm lg:text-lg text-gray text-center mb-4 ">
         اخبار و مقالات که میتوانند برای پیشرفت و یادگیری شما مفید
         </p>
-        <p className="w-auto text-sm  text-gray text-center mb-10">
+        <p className="w-auto text-sm lg:text-lg text-gray text-center mb-12">
            باشند رو ما
           در اختیار شما قرار میدیم
         </p>
 
-        <h2 className="text-gray hidden sm:block">لیست اخبار و مقالات</h2>
+        <h2 className="text-gray hidden mb-8 sm:block">لیست اخبار و مقالات</h2>
       </div>
       <img src={GlassyGradientNewsPage} alt="" className='w-10 h-10 absolute hidden sm:block sm:right-14 md:right-[-60px] lg:right-0 xl:right-15 2xl:right-[100px] 2xl:top-40'/>
       <img src={StarNewsPage} alt="" className='absolute hidden sm:block sm:left-36 sm:top-56 md:left-6 lg:left-18 xl:left-36 2xl:left-[210px] 2xl:top-58'/>

@@ -80,6 +80,21 @@ const Header = () => {
           <HeaderDrawer />
         </div>
       </div>
+      <div className="flex justify-center items-center mr-2 ">
+        {token ? ( <Button type="primary" shape="round" icon={<FiUser className="w-5 h-5 mt-1"/>}  style={{fontFamily:'yekan' , marginRight:'6px'}}>
+            پنل دانشجویی
+          </Button>
+        
+         
+        ) : ( <NavLink
+          to="/register"
+          className="bg-[#3772FF] flex justify-center items-center h-9 px-2 xs:px-3 whitespace-nowrap text-white py-2 xs:py-1 rounded-full m-4 leading-2  text-[10px] xs:text-sm xs:m-3 xs:leading-4 lg:m-3 lg:w-full  font-medium hover:bg-[#2854cc] transition-all w-full xs:w-auto text-center"
+        >
+          ورود یا ثبت نام
+        </NavLink> )}
+       
+        <AlignLeftOutlined className="sm:invisible" />
+      </div>
     </div>
   );
 };
