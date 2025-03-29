@@ -21,8 +21,9 @@ const CoursesSection = () => {
 
   const { data, isLoading, isError, refetch } = useQueryGet(
     `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}${
-      (searchQuery ? `&Query=${searchQuery}` : "",
-      selectedType ? `&SortingCol=${selectedType}` : "")
+      (searchQuery ? `&Query=${searchQuery}` : ""
+      // selectedType ? `&SortingCol=${selectedType}` : ""
+    )
     }`,
     "courses",
     [pageNum, itemPerPage, searchQuery, selectedType]
@@ -32,10 +33,6 @@ const CoursesSection = () => {
     refetch();
   }, [pageNum, itemPerPage, searchQuery, selectedType, refetch]);
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (isError) return <div>Error fetching data</div>;
-
-  // console.log("data", data?.courseFilterDtos);
   const [viewMode, setViewMode] = useState("list");
 
   return (
@@ -44,7 +41,7 @@ const CoursesSection = () => {
         <CoursesNavbar viewMode={viewMode} setViewMode={setViewMode} />{" "}
         <div className="flex flex-wrap justify-evenly space-y-5 p-2 ">
           {isLoading &&
-            Array.from({ length: 9 }).map((_, index) =>
+            Array.from({ length: 9 }).map((item, index) =>
               viewMode === "list" ? (
                 <CardSkeleton key={index} />
               ) : (
