@@ -17,7 +17,6 @@ const GetNewsDetailList = () => {
     getDetail();
   }, []);
 
-  console.log("ddd",detail);
   return (
     <div className="grid grid-cols-4  m-4 border-4 border-borderGray rounded-4xl h-96">
       <div className="border">
