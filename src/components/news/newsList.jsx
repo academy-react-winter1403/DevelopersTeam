@@ -29,8 +29,8 @@ const NewsList = () => {
       refetch();
     }, [pageNum, itemPerPage, refetch]);
   
-    // if (isLoading) return <div>Loading...</div>;
-    // if (isError) return <div>Error fetching data</div>;
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error fetching data</div>;
   
 
   return (
