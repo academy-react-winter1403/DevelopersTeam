@@ -47,6 +47,7 @@ const NewsList = () => {
                 miniDescribe={item.miniDescribe}
                 addUserFullName={item.addUserFullName}
                 insertDate={item.insertDate}
+                id={item.id}
               />
             )
           })}
