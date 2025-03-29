@@ -1,96 +1,78 @@
 import React, { useEffect, useState } from "react";
-import http from "../../../core/services/interceptor";
 import CoursesNavbar from "../coursesNavbar/coursesNavbar";
-import CardSection from "../cardSection/cardSection";
-import { useQuery } from "@tanstack/react-query";
 import { useQueryGet } from "../../../hooks/useQueryGet/useQueryGet";
-import CourseCard from "../../common/course-card/courseCard";
 import PaginationSection from "../../common/PaginationSection/paginationSection";
-import GridCourseCard from "../gridCourseCard/gridCourseCard";
-import NewsItemCard from "../../news/newsItemCard";
 import FilterSection from "../filterSection";
-import CardSkeleton from "../../common/cardSkeleton/cardSkeleton";
-import GridCarsSkeleton from "../../common/gridCarsSkeleton/gridCarsSkeleton";
+import IsLoadingComponent from "./isLoadingComponent/isLoadingComponent";
+import ViewMoodComponent from "./viewMoodComponent/viewMoodComponent";
 
 const CoursesSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState(null);
-  const [selectedSort, setSelectedSort] = React.useState(null);
+  const [selectedSort, setSelectedSort] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
+  const [selectedTeacher, setSelectedTeacher] = useState(null);
+  const [selectedTech, setSelectedTech] = useState(null);
+  const [selectedPriceMin, setSelectedPriceMin] = useState(100);
+  const [selectedPriceMax, setSelectedPriceMax] = useState(50000000);
+
   const [pageNum, setPageNum] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(9);
 
+  const [viewMode, setViewMode] = useState("list");
+
   const { data, isLoading, isError, refetch } = useQueryGet(
-    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&SortType=Active&RowsOfPage=${itemPerPage}${selectedType ? `&selectedType=${selectedType}`:""}
-    ${selectedLevel ? `&courseLevelId=${selectedLevel}`:""}
-    ${selectedSort ? `&SortingCol=${selectedSort.id}`:""}
-    
+    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&SortType=Active&RowsOfPage=${itemPerPage}
+    ${searchQuery ? `&Query=${searchQuery}` : ""}
+    ${selectedType ? `&selectedType=${selectedType}` : ""}
+    ${selectedLevel ? `&courseLevelId=${selectedLevel}` : ""}
+    ${selectedTeacher ? `&TeacherId=${selectedTeacher}` : ""}
+    ${selectedTech ? `&ListTech=${selectedTech}&TechCount=1` : ""}
+    ${selectedPriceMin ? `&CostDown=${selectedPriceMin}` : ""}
+    ${selectedPriceMax ? `&CostUp=${selectedPriceMax}` : ""}
+    ${selectedSort ? `&SortingCol=${selectedSort.id}` : ""}
     `,
     "courses",
-    [pageNum, itemPerPage, searchQuery, selectedType,selectedLevel]
+    [
+      pageNum,
+      itemPerPage,
+      searchQuery,
+      selectedType,
+      selectedLevel,
+      selectedTech,
+      selectedTeacher,
+      selectedPriceMin,
+      selectedPriceMax,
+    ]
   );
-  // ${
-  //   (searchQuery ? `&Query=${searchQuery}` : "",
-  //   selectedType ? `&SortingCol=${selectedType}` : "")
-  // }
-
 
   useEffect(() => {
     refetch();
-    console.log(selectedType);
-  }, [pageNum, itemPerPage, searchQuery, selectedType, refetch,selectedLevel,selectedSort]);
-
-  // if (isLoading) return <div>Loading...</div>;
-  // if (isError) return <div>Error fetching data</div>;
-
-  // console.log("data", data?.courseFilterDtos);
-  const [viewMode, setViewMode] = useState("list");
+  }, [
+    pageNum,
+    itemPerPage,
+    searchQuery,
+    selectedType,
+    refetch,
+    selectedLevel,
+    selectedSort,
+    selectedTech,
+    selectedTeacher,
+    selectedPriceMin,
+    selectedPriceMax,
+  ]);
 
   return (
     <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray rounded-4xl">
       <div className="col-span-4 lg:col-span-3 w-full ">
-        <CoursesNavbar selectedSort={selectedSort} setSelectedSort={setSelectedSort} viewMode={viewMode} setViewMode={setViewMode} />{" "}
-        <div className="flex flex-wrap justify-evenly space-y-5 p-2 ">
-          {isLoading &&
-            Array.from({ length: 9 }).map((_, index) =>
-              viewMode === "list" ? (
-                <CardSkeleton key={index} />
-              ) : (
-                <GridCarsSkeleton key={index} />
-              )
-            )}
-        </div>
-        <div className="flex flex-wrap justify-evenly space-y-5 p-2 ">
-          {data?.courseFilterDtos?.map((item, index) =>
-            viewMode === "list" ? (
-              <CourseCard
-                key={index}
-                title={item.title}
-                img={item.tumbImageAddress}
-                describe={item.describe}
-                teacherName={item.teacherName}
-                statusName={item.statusName}
-                student={item.commandCount}
-                cost={item.cost}
-                likeCount={item.likeCount}
-                dissLikeCount={item.dissLikeCount}
-              />
-            ) : (
-              <GridCourseCard
-                key={index}
-                title={item.title}
-                img={item.tumbImageAddress}
-                describe={item.describe}
-                teacherName={item.teacherName}
-                statusName={item.statusName}
-                student={item.commandCount}
-                cost={item.cost}
-                likeCount={item.likeCount}
-                dissLikeCount={item.dissLikeCount}
-              />
-            )
-          )}
-        </div>
+        <CoursesNavbar
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+        />
+        <IsLoadingComponent isLoading={isLoading} viewMode={viewMode} />
+        <ViewMoodComponent data={data} viewMode={viewMode} />
         <PaginationSection
           totalCount={data?.totalCount}
           pageNum={pageNum}
@@ -103,6 +85,12 @@ const CoursesSection = () => {
           setSearchQuery={setSearchQuery}
           setSelectedType={setSelectedType}
           setSelectedLevel={setSelectedLevel}
+          setSelectedTeacher={setSelectedTeacher}
+          setSelectedTech={setSelectedTech}
+          selectedPriceMin={selectedPriceMin}
+          setSelectedPriceMin={setSelectedPriceMin}
+          selectedPriceMax={selectedPriceMax}
+          setSelectedPriceMax={setSelectedPriceMax}
         />
       </div>
     </div>

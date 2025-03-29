@@ -58,7 +58,9 @@ const CourseCard = ({
         </div>
         <div className="flex flex-none justify-between my-3">
           <div className="space-x-2 flex justify-center items-center">
-            <span className="text-lg font-bold">{cost}</span>
+            <span className="text-lg font-bold">
+              {new Intl.NumberFormat("fa-IR").format(cost)}
+            </span>
             <span className="text-blue-400 text-md line-clamp-1">تومان</span>
           </div>
           <div className="flex gap-2">

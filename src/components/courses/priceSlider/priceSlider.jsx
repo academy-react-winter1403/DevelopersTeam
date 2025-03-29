@@ -1,34 +1,50 @@
 import { Slider } from "antd";
 import React, { useState } from "react";
+import { PiMoneyWavyLight } from "react-icons/pi";
 
-const PriceSlider = ({ icon, inputLabel,courseList }) => {
-
-  const [min, setMin] = useState();
-  const [max, setMax] = useState();
-
-  
-
-
-
+const PriceSlider = ({
+  selectedPriceMin,
+  setSelectedPriceMin,
+  selectedPriceMax,
+  setSelectedPriceMax,
+}) => {
+  const [priceRange, setPriceRange] = useState({
+    min: 100,
+    max: 50000000,
+  });
 
   const onChange = (value) => {
-    console.log("onChange: ", value);
+    setSelectedPriceMin(value[0]);
+    setSelectedPriceMax(value[1]);
   };
-  const onChangeComplete = (value) => {
-    console.log("onChangeComplete: ", value);
+
+  const onChangeComplete = (value) => {};
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("fa-IR").format(price) + " تومان";
   };
+
   return (
     <div className="flex flex-col px-4">
       <div className="text-xs sm:text-sm flex items-center gap-2 ">
-        {icon}
-        {inputLabel}
+        <PiMoneyWavyLight className="text-2xl" />
+        قیمت
+      </div>
+      <div className="flex justify-between text-sm">
+        <span>حداکثر: {formatPrice(selectedPriceMax)}</span>
+        <span>حداقل: {formatPrice(selectedPriceMin)}</span>
       </div>
       <Slider
         range
-        step={10}
-        defaultValue={[20, 50]}
+        min={priceRange.min}
+        max={priceRange.max}
+        step={10000}
+        defaultValue={[priceRange.min, priceRange.max]}
+        value={[selectedPriceMin, selectedPriceMax]}
         onChange={onChange}
-        onChangeComplete={onChangeComplete}
+        tooltip={{
+          formatter: (value) => formatPrice(value),
+        }}
       />
     </div>
   );

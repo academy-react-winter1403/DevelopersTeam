@@ -24,7 +24,6 @@ const CourseType = ({ setSelectedType }) => {
     label: item.typeName,
     value: item.id,
   }));
-  console.log(options);
 
   return (
     <div className="flex flex-col space-y-1 px-4">
@@ -33,7 +32,6 @@ const CourseType = ({ setSelectedType }) => {
         نحوه برگزاری
       </div>
       <Select
-        mode="tags"
         style={{
           width: "100%",
           fontFamily: "yekan",
