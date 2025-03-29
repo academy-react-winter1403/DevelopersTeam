@@ -15,14 +15,17 @@ import GridCarsSkeleton from "../../common/gridCarsSkeleton/gridCarsSkeleton";
 const CoursesSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState(null);
-
+  const [selectedSort, setSelectedSort] = React.useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(9);
 
   const { data, isLoading, isError, refetch } = useQueryGet(
-    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}${selectedType ? `&selectedType=${selectedType}`:""}
-    ${selectedLevel ? `&courseLevelId=${selectedLevel}`:""}`,
+    `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&SortType=Active&RowsOfPage=${itemPerPage}${selectedType ? `&selectedType=${selectedType}`:""}
+    ${selectedLevel ? `&courseLevelId=${selectedLevel}`:""}
+    ${selectedSort ? `&SortingCol=${selectedSort.id}`:""}
+    
+    `,
     "courses",
     [pageNum, itemPerPage, searchQuery, selectedType,selectedLevel]
   );
@@ -35,7 +38,7 @@ const CoursesSection = () => {
   useEffect(() => {
     refetch();
     console.log(selectedType);
-  }, [pageNum, itemPerPage, searchQuery, selectedType, refetch,selectedLevel]);
+  }, [pageNum, itemPerPage, searchQuery, selectedType, refetch,selectedLevel,selectedSort]);
 
   // if (isLoading) return <div>Loading...</div>;
   // if (isError) return <div>Error fetching data</div>;
@@ -46,7 +49,7 @@ const CoursesSection = () => {
   return (
     <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray rounded-4xl">
       <div className="col-span-4 lg:col-span-3 w-full ">
-        <CoursesNavbar viewMode={viewMode} setViewMode={setViewMode} />{" "}
+        <CoursesNavbar selectedSort={selectedSort} setSelectedSort={setSelectedSort} viewMode={viewMode} setViewMode={setViewMode} />{" "}
         <div className="flex flex-wrap justify-evenly space-y-5 p-2 ">
           {isLoading &&
             Array.from({ length: 9 }).map((_, index) =>
