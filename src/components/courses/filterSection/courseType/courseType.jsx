@@ -22,7 +22,7 @@ const CourseType = ({ setSelectedType }) => {
 
   const options = data?.map((item) => ({
     label: item.typeName,
-    value: item.typeName,
+    value: item.id,
   }));
 
   return (
@@ -32,7 +32,6 @@ const CourseType = ({ setSelectedType }) => {
         نحوه برگزاری
       </div>
       <Select
-        mode="tags"
         style={{
           width: "100%",
           fontFamily: "yekan",
