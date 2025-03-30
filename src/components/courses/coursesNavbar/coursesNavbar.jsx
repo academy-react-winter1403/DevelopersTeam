@@ -5,34 +5,34 @@ import { CiGrid2H } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosSearch } from "react-icons/io";
 import DrawerFilterSection from "../drawerFilterSection/drawerFilterSection";
+import GridListButton from "./grid-list-button/gridListButton";
+import SortCustomButton from "./sortCustomButton/sortCustomButton";
 
-const CoursesNavbar = ({ setViewMode, viewMode }) => {
+const CoursesNavbar = ({
+  setViewMode,
+  viewMode,
+  setSelectedSort,
+  selectedSort,
+}) => {
   return (
     <div className="flex w-full h-24 p-5 space-x-5">
-      <div className="hidden lg:flex items-center w-auto h-10 pl-3 text-3xl text-gray border-l space-x-2">
-        <CiGrid41
-          onClick={() => setViewMode("list")}
-          className={`hover:text-navyBlue ${
-            viewMode === "list" ? "text-navyBlue" : ""
-          }`}
-        />
-        <CiGrid2H
-          onClick={() => setViewMode("grid")}
-          className={`hover:text-navyBlue ${
-            viewMode === "grid" ? "text-navyBlue" : ""
-          }`}
-        />
-      </div>
+      <GridListButton setViewMode={setViewMode} viewMode={viewMode} />
       <div className="hidden lg:flex items-center w-auto h-10 pl-3 border-l text-gray space-x-3 ">
-        <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
-          پرطرفدار ترین
-        </Button>
-        <Button shape="round" style={{ fontFamily: "yekan" }}>
-          محبوب ‌ترین
-        </Button>
-        <Button shape="round" style={{ fontFamily: "yekan" }}>
-          پرامتیاز ترین
-        </Button>
+        <SortCustomButton
+          data={{ text: "پرطرفدار ترین", id: "Cost" }}
+          selected={selectedSort}
+          setSelected={setSelectedSort}
+        />
+        <SortCustomButton
+          data={{ text: "محبوب ‌ترین", id: "StatusName" }}
+          selected={selectedSort}
+          setSelected={setSelectedSort}
+        />
+        <SortCustomButton
+          data={{ text: "پرامتیاز ترین", id: "LastUpdate" }}
+          selected={selectedSort}
+          setSelected={setSelectedSort}
+        />
       </div>
       <div className="hidden lg:flex items-center w-auto h-10">
         <Button
@@ -40,6 +40,7 @@ const CoursesNavbar = ({ setViewMode, viewMode }) => {
           icon={<RxCross2 className="text-lg" />}
           style={{ fontFamily: "yekan" }}
           danger
+          onClick={() => setSelectedSort("")}
         >
           حذف
         </Button>
@@ -51,4 +52,5 @@ const CoursesNavbar = ({ setViewMode, viewMode }) => {
     </div>
   );
 };
+
 export default CoursesNavbar;
