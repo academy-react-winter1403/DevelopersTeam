@@ -20,7 +20,7 @@ const GridCourseCard = ({
   dissLikeCount,
   miniDescribe,
   addUserFullName,
-  lastUpdate,
+  lastUpdate,id
 }) => {
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
@@ -33,7 +33,7 @@ const GridCourseCard = ({
 
   return (
     <div className="w-full h-72 bg-lightGray  grid grid-cols-5 overflow-hidden rounded-3xl mr-3">
-      <div className="col-span-2 bg-red-400 rounded-3xl hidden sm:block">
+      <div onClick={handleNavigate} className="col-span-2 bg-red-400 rounded-3xl hidden sm:block">
         <img
           src={img == null ? defaultImg : img}
           alt="not set"
@@ -45,7 +45,7 @@ const GridCourseCard = ({
 
       <div className="col-span-3 m-6 space-y-5">
         <div className="w-full max-w-[300px] overflow-hidden space-y-2">
-          <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 ">
+          <h2 onClick={handleNavigate} className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 ">
             {title}
           </h2>
           <h2 className="text-[#787878] text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">
