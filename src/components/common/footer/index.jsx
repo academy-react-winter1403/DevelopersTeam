@@ -22,7 +22,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex ml-5 space-x-12 md:space-x-12 order-2 md:order-3">
+      <div className="flex lg:mt-2 ml-5 space-x-12 md:space-x-12 order-2 md:order-3">
         <div>
           <h1 className="text-gray-600 leading-14 mr-6">صفحات</h1>
           <Link>
