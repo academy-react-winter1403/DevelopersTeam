@@ -23,7 +23,7 @@ const CoursesSection = () => {
 
   const { data, isLoading, isError, refetch } = useQueryGet(
     `/Home/GetCoursesWithPagination?PageNumber=${pageNum}&SortType=Active&RowsOfPage=${itemPerPage}
-    ${searchQuery ? `&Query=${searchQuery}` : ""}
+
     ${selectedType ? `&selectedType=${selectedType}` : ""}
     ${selectedLevel ? `&courseLevelId=${selectedLevel}` : ""}
     ${selectedTeacher ? `&TeacherId=${selectedTeacher}` : ""}
@@ -31,6 +31,7 @@ const CoursesSection = () => {
     ${selectedPriceMin ? `&CostDown=${selectedPriceMin}` : ""}
     ${selectedPriceMax ? `&CostUp=${selectedPriceMax}` : ""}
     ${selectedSort ? `&SortingCol=${selectedSort.id}` : ""}
+        ${searchQuery ? `&Query=${searchQuery}` : ""}
     `,
     "courses",
     [

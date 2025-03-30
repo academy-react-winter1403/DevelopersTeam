@@ -26,7 +26,7 @@ const Header = () => {
       <div className=" w-3/5 lg:flex justify-center items-center gap-10 hidden">
         <NavLink
           to="/"
-          className={({ isActive }) => `${isActive ? "text-navyBlue" : ""}`}
+          className={({ isActive }) => `${isActive ? "text-navyBlue " : ""}`}
         >
           <span className="leading-12">خانه</span>
         </NavLink>

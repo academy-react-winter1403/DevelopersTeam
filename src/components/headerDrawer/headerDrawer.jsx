@@ -6,6 +6,7 @@ import { RiHome9Line } from "react-icons/ri";
 import { BiBookAlt } from "react-icons/bi";
 import { PiNewspaper } from "react-icons/pi";
 import { RiCellphoneLine } from "react-icons/ri";
+import { NavLink } from "react-router-dom";
 
 const HeaderDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -42,26 +43,32 @@ const HeaderDrawer = () => {
         <div className="">
           <div className="flex flex-col space-y-5">
             <div className=" flex justify-between text-base font-semibold">
-              <span className="flex justify-center items-center gap-2">
-                <RiHome9Line />
-                خانه
-              </span>
+              <NavLink to="/">
+                <span className="flex justify-center items-center gap-2 text-black">
+                  <RiHome9Line />
+                  خانه
+                </span>
+              </NavLink>
               <span className="text-gray text-sm">صفحه اصلی</span>
             </div>
             <div className=" flex justify-between text-base font-semibold">
-              <span className="flex justify-center items-center gap-2">
-                <BiBookAlt />
-                دوره ها
-              </span>
+              <NavLink to="/courses">
+                <span className="flex justify-center items-center gap-2 text-black">
+                  <BiBookAlt />
+                  دوره ها
+                </span>
+              </NavLink>
               <span className="text-gray text-sm">
                 تمامی دوره های برگزارشده
               </span>
             </div>
             <div className=" flex justify-between text-base font-semibold">
-              <span className="flex justify-center items-center gap-2">
-                <PiNewspaper />
-                اخبار و مقالات
-              </span>
+              <NavLink to="/news">
+                <span className="flex justify-center items-center gap-2 text-black">
+                  <PiNewspaper />
+                  اخبار و مقالات
+                </span>
+              </NavLink>
               <span className="text-gray text-sm">خبر های پژوهشگاه</span>
             </div>
             <div className=" flex justify-between text-base font-semibold">
