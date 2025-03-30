@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="w-11/12 h-auto md:h-52 bg-lightGray rounded-4xl mx-auto mb-10 space-y-7 flex flex-col md:flex-row lg:space-x-10">
+    <div className="w-11/12 h-auto md:h-52 bg-lightGray rounded-4xl mx-auto mb-10 space-y-7 flex flex-col md:flex-row lg:space-x-20">
       <div className="p-4 order-1 md:order-1">
         <div>
           <img src={Academi} alt="not set" className="size-20" />
@@ -22,7 +22,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex ml-5 space-x-12 md:space-x-2  order-2 md:order-3">
+      <div className="flex ml-5 space-x-12 md:space-x-12 order-2 md:order-3">
         <div>
           <h1 className="text-gray-600 leading-14 mr-6">صفحات</h1>
           <Link>
