@@ -5,6 +5,7 @@ import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg"
 import ThumbUp from "./../../../assets/images/thumbs-up-stroke-rounded 1.svg";
 import thumbDown from "./../../../assets/images/thumb-down.svg";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
+import ImageError from "../handle-img-error/handleImgError";
 
 const CourseCard = ({
   title,
@@ -18,20 +19,19 @@ const CourseCard = ({
   dissLikeCount,
 }) => {
   const addDefaultImg = (e) => {
-    e.target.src = StudentIcon;
+    e.target.src = defaultImg;
   };
 
   return (
     <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl">
       <div className="w-full h-[200px] rounded-3xl">
         <img
-          src={defaultImg}
+          src={img == null ? defaultImg : img}
           alt="not set"
           className="w-fit h-[200px] object-cover rounded-3xl blur-[#54545417] shadow-md"
           onError={addDefaultImg}
-        />
+        />        
       </div>
-
       <div className=" w-full h-full px-3 flex flex-col  mt-3 ">
         <div className="grow ">
           <h2 className="text-lg font-semibold text-gray- line-clamp-1">

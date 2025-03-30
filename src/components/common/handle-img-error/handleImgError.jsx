@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import img from './../../../assets/images/courses/courseimg.svg'
 
-const ImageWithFallback = ({ src, alt, className }) => {
-  const [imgSrc, setImgSrc] = useState(src); // تنظیم تصویر اولیه با مقدار props.src
 
-  const handleImageError = () => {
-    setImgSrc('default-image.jpg'); // مسیر تصویر پیش‌فرض در صورت خطای بارگذاری
-  };
-
+const ImageError = ({src}) => {
   return (
-    <img 
-      src={imgSrc} 
-      onError={handleImageError} 
-      alt={alt} 
-      className={className} // ارسال کلاس‌های CSS به صورت prop
+    <img
+      className=""
+      onError={({ currentTarget }) => {
+        currentTarget.onerror = null;
+        currentTarget.src = {img};
+      }}
+      src={src}
+      alt=""
     />
   );
-}
+};
 
-export default ImageWithFallback;
+export default ImageError;
