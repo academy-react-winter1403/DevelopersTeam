@@ -1,10 +1,10 @@
 import React from 'react'
-import CourseDetail from '../../components/courseDetail'
+import DetailHolder from '../../components/courseDetail/detailHolder'
 
 const CourseDetailPage = () => {
   return (
     <div>
-        <CourseDetail/>
+        <DetailHolder/>
     </div>
   )
 }
