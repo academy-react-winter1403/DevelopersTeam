@@ -6,7 +6,7 @@ const GetNewsDetailList = () => {
   const [detail, setDetail] = useState([]);
   const {id} = useParams();
 
-  console.log(detail)
+  console.log("detail",id)
   const getDetail = async () => {
     const res = await http.get(
       `/News/${id}`
