@@ -3,14 +3,16 @@ import http from "../../core/services/interceptor";
 import { useParams } from "react-router-dom";
 
 const GetNewsDetailList = () => {
-  const [detail, setDetail] = useState(null);
+  const [detail, setDetail] = useState([]);
   const {id} = useParams();
 
+  console.log(detail)
   const getDetail = async () => {
     const res = await http.get(
       `/News/${id}`
     );
-    setDetail(res.data);
+    setDetail(res.detailsNewsDto);
+    
   };
 
   useEffect(() => {
