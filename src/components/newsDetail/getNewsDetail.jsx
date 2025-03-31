@@ -7,6 +7,8 @@ import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineStars } from "react-icons/md";
+import DateComponent from "../../components/common/date/dateComponent";
+
 
 const GetNewsDetailList = () => {
   const [detail, setDetail] = useState([]);
@@ -29,7 +31,10 @@ const GetNewsDetailList = () => {
 
         <div className="flex gap-2 mt-28 space-x-2 space-y-5">
           <HiOutlineCalendarDateRange className="w-6 h-6 mr-2" />
-          <div>{detail?.insertDate}</div>
+          {/* <div>{detail?.insertDate}</div> */}
+          <span>
+              <DateComponent insertDate={detail?.lastUpdate} />
+            </span>
         </div>
 
         <div className="flex gap-2 items-center ">

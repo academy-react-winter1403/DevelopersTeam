@@ -6,13 +6,16 @@ import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineDateRange } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
+import DateComponent from "../../components/common/date/dateComponent";
+
 
 const NewsItemCard = ({
   addUserProfileImage,
   title,
   miniDescribe,
   addUserFullName,
-  insertDate,
+  lastUpdate,
+  // insertDate,
   currentDissLikeCount,
   currentLikeCount,
   id,
@@ -69,8 +72,11 @@ const NewsItemCard = ({
           </div>
           <div className="flex items-center gap-2 mt-5">
             <MdOutlineDateRange className="md:h-5 md:w-5 w-4 h-4" />
-            <span className="text-sm  font-bold text-[#272727]">
+            {/* <span className="text-sm  font-bold text-[#272727]">
               {insertDate}
+            </span> */}
+            <span>
+              <DateComponent insertDate={lastUpdate} />
             </span>
           </div>
           <div className="flex justify-between items-center mt-6 gap-4 ml-1 sm:mb-2">
