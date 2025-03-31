@@ -7,6 +7,7 @@ import thumbDown from "./../../../assets/images/thumb-down.svg";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import { useNavigate } from "react-router-dom";
 import DateComponent from "../date/dateComponent";
+import Tags from "./tags/tags";
 
 const CourseCard = ({
   title,
@@ -31,6 +32,7 @@ const CourseCard = ({
   };
   return (
     <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl">
+      <Tags color="magenta" text="ddd" />
       <div className="w-full h-[200px] rounded-3xl">
         <img
           src={img == null ? defaultImg : img}
