@@ -1,7 +1,6 @@
 import React from "react";
 import QuillWrite from "./../../assets/images/quill-write-02-stroke-rounded 2.svg";
 import ViewStroke from "./../../assets/images/view-stroke-rounded (1) 1.svg";
-import ThumbUp from "./../../assets/images/thumbs-up-stroke-rounded 1.svg";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineDateRange } from "react-icons/md";
