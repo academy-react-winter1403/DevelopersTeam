@@ -5,7 +5,9 @@ import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg"
 import ThumbUp from "./../../../assets/images/thumbs-up-stroke-rounded 1.svg";
 import thumbDown from "./../../../assets/images/thumb-down.svg";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
-import ImageError from "../handle-img-error/handleImgError";
+import { useNavigate } from "react-router-dom";
+import DateComponent from "../date/dateComponent";
+import Tags from "./tags/tags";
 
 const CourseCard = ({
   title,
@@ -17,20 +19,28 @@ const CourseCard = ({
   cost,
   likeCount,
   dissLikeCount,
+  id,
+  lastUpdate,
 }) => {
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
 
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/courses/coursedetail/${id}`);
+  };
   return (
     <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl">
+      <Tags color="magenta" text="ddd" />
       <div className="w-full h-[200px] rounded-3xl">
         <img
           src={img == null ? defaultImg : img}
           alt="not set"
-          className="w-fit h-[200px] object-cover rounded-3xl blur-[#54545417] shadow-md"
+          className="w-[310px] h-[200px] object-cover rounded-3xl blur-[#54545417] shadow-md"
           onError={addDefaultImg}
-        />        
+          onClick={handleNavigate}
+        />
       </div>
       <div className=" w-full h-full px-3 flex flex-col  mt-3 ">
         <div className="grow ">
@@ -45,15 +55,15 @@ const CourseCard = ({
             <span>{teacherName}</span>
           </div>
           <div className="flex items-center gap-3 mt-2 text-sm">
-            <img src={CalenderIcon} alt="" className="h-5 w-5" />
-            <span>{statusName}</span>
-          </div>
-          <div className="flex items-center gap-3 mt-2 text-sm">
             <img src={StudentIcon} alt="" className="h-5 w-5" />
             <span className="text-md space-x-2">
               <span>{student}</span>
               <span>دانشجو</span>
             </span>
+          </div>
+          <div className="flex items-center gap-3 mt-2 text-sm">
+            <img src={CalenderIcon} alt="" className="h-5 w-5" />
+            <DateComponent insertDate={lastUpdate} />
           </div>
         </div>
         <div className="flex flex-none justify-between my-3">

@@ -1,7 +1,7 @@
 import React from "react";
 import http from "../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
-import ax from '../../assets/images/3d-glassy-abstract-spiral-band-blue 1.svg';
+import ax from "../../assets/images/3d-glassy-abstract-spiral-band-blue 1.svg";
 
 const GoodTeacher = () => {
   const getGoodTeacher = async () => {
@@ -16,7 +16,6 @@ const GoodTeacher = () => {
 
   return (
     <div>
-      
       <h2 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl">
         برترین اساتید هفته
       </h2>
@@ -28,7 +27,7 @@ const GoodTeacher = () => {
         {data?.slice(0, 3).map((item, index) => (
           <React.Fragment key={item.id}>
             <div
-              className={`border-[#E4E4E4] rounded-2xl border-2 xl:w-1/4 w-4/5 sm:w-3/5 md:w-[30%] mx-auto mt-12 relative h-[300px] ${
+              className={`border-[#E4E4E4] rounded-[36px] border-2 xl:w-1/4 w-4/5 sm:w-3/5 md:w-[30%] mx-auto mt-12 relative h-[300px] ${
                 index === 1 && "xl:h-80 sm:!h-72 !mt-[-10px]"
               }`}
             >

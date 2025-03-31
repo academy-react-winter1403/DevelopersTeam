@@ -13,6 +13,15 @@ const CoursesNavbar = ({
   viewMode,
   setSelectedSort,
   selectedSort,
+  setSearchQuery,
+  setSelectedType,
+  setSelectedLevel,
+  setSelectedTeacher,
+  setSelectedTech,
+  selectedPriceMin,
+  setSelectedPriceMin,
+  selectedPriceMax,
+  setSelectedPriceMax,
 }) => {
   return (
     <div className="flex w-full h-24 p-5 space-x-5">
@@ -47,7 +56,17 @@ const CoursesNavbar = ({
       </div>
       <div className="flex items-center justify-between h-10 w-full lg:hidden">
         <IoIosSearch className="text-3xl" />
-        <DrawerFilterSection />
+        <DrawerFilterSection
+          setSearchQuery={setSearchQuery}
+          setSelectedType={setSelectedType}
+          setSelectedLevel={setSelectedLevel}
+          setSelectedTeacher={setSelectedTeacher}
+          setSelectedTech={setSelectedTech}
+          selectedPriceMin={selectedPriceMin}
+          setSelectedPriceMin={setSelectedPriceMin}
+          selectedPriceMax={selectedPriceMax}
+          setSelectedPriceMax={setSelectedPriceMax}
+        />
       </div>
     </div>
   );
