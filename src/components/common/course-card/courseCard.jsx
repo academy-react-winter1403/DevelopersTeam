@@ -21,6 +21,7 @@ const CourseCard = ({
   dissLikeCount,
   id,
   lastUpdate,
+  levelName,
 }) => {
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
@@ -31,8 +32,11 @@ const CourseCard = ({
     navigate(`/courses/coursedetail/${id}`);
   };
   return (
-    <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl">
-      <Tags color="magenta" text="ddd" />
+    <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl relative">
+      <div className=" absolute top-2 right-2 flex space-x-2">
+        <Tags color="#5A7EFF" text={statusName} />
+        <Tags color="#DE59FF" text={levelName} />
+      </div>
       <div className="w-full h-[200px] rounded-3xl">
         <img
           src={img == null ? defaultImg : img}
