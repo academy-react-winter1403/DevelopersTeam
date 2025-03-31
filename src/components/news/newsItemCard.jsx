@@ -15,7 +15,7 @@ const NewsItemCard = ({
   miniDescribe,
   addUserFullName,
   lastUpdate,
-  // insertDate,
+  insertDate,
   currentDissLikeCount,
   currentLikeCount,
   id,
@@ -76,7 +76,7 @@ const NewsItemCard = ({
               {insertDate}
             </span> */}
             <span>
-              <DateComponent insertDate={lastUpdate} />
+              <DateComponent insertDate={insertDate} />
             </span>
           </div>
           <div className="flex justify-between items-center mt-6 gap-4 ml-1 sm:mb-2">
