@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import { Button, Drawer } from "antd";
 import { FiSearch } from "react-icons/fi";
-import SelectDropdown from "../selectDropdown/selectDropdown";
-import { GrShareOption } from "react-icons/gr";
-import { IoLayersOutline } from "react-icons/io5";
-import { LiaChalkboardTeacherSolid } from "react-icons/lia";
-import PriceSlider from "../priceSlider/priceSlider";
-import { PiMoneyWavyLight } from "react-icons/pi";
 import DateInput from "../dateInput/dateInput";
 import { IoCalendarOutline } from "react-icons/io5";
 import { IoIosClose } from "react-icons/io";
+import FilterSearchInput from "../filterSearchInput/filterSearchInput";
+import CourseType from "../filterSection/courseType/courseType";
+import CourseLevel from "../filterSection/courseLevel/courseLevel";
+import TeacherName from "../filterSection/teacherName/teacherName";
+import CourseTech from "../filterSection/courseTech/courseTech";
+import PriceSlider from "../priceSlider/priceSlider";
+import { RxCross2 } from "react-icons/rx";
+import FilterSection from "../filterSection";
 
-const DrawerFilterSection = () => {
+const DrawerFilterSection = ({
+  setSearchQuery,
+  setSelectedType,
+  setSelectedLevel,
+  setSelectedTeacher,
+  setSelectedTech,
+  selectedPriceMin,
+  setSelectedPriceMin,
+  selectedPriceMax,
+  setSelectedPriceMax,
+}) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const showLoading = () => {
@@ -21,6 +33,7 @@ const DrawerFilterSection = () => {
       setLoading(false);
     }, 1000);
   };
+
   const title = (
     <div className="flex justify-between items-center w-full absolute top-5 left-0 px-10">
       <p>ترتیب و فیلتر</p>
@@ -55,31 +68,17 @@ const DrawerFilterSection = () => {
         open={open}
         loading={loading}
       >
-        <div className="space-y-5">
-          <SelectDropdown
-            icon={<GrShareOption className="text-2xl" />}
-            inputLabel={"دسته‌بندی"}
-            placeholder="انتخاب کنید"
-          />
-          <SelectDropdown
-            icon={<IoLayersOutline className="text-2xl" />}
-            inputLabel={"سطح آموزشی"}
-            placeholder="انتخاب کنید"
-          />
-          <SelectDropdown
-            icon={<LiaChalkboardTeacherSolid className="text-2xl" />}
-            inputLabel={"اساتید"}
-            placeholder="انتخاب کنید"
-          />
-          <PriceSlider
-            icon={<PiMoneyWavyLight className="text-2xl" />}
-            inputLabel={"قیمت"}
-          />
-          <DateInput
-            icon={<IoCalendarOutline className="text-2xl" />}
-            inputLabel={"تاریخ برگزاری"}
-          />
-        </div>
+        <FilterSection
+          setSearchQuery={setSearchQuery}
+          setSelectedType={setSelectedType}
+          setSelectedLevel={setSelectedLevel}
+          setSelectedTeacher={setSelectedTeacher}
+          setSelectedTech={setSelectedTech}
+          selectedPriceMin={selectedPriceMin}
+          setSelectedPriceMin={setSelectedPriceMin}
+          selectedPriceMax={selectedPriceMax}
+          setSelectedPriceMax={setSelectedPriceMax}
+        />
       </Drawer>
     </>
   );

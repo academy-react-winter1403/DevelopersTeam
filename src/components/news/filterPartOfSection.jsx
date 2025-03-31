@@ -5,27 +5,34 @@ import { IoCalendarOutline } from "react-icons/io5";
 import SelectDropdown from "../courses/selectDropdown/selectDropdown";
 import DateInput from "../courses/dateInput/dateInput";
 import FilterSearchInput from "../courses/filterSearchInput/filterSearchInput";
+import NewsCategory from "./newsCategory";
+import { RxCross2 } from "react-icons/rx";
+import { Button } from "antd";
 
-
-const FilterPartOfNews = () => {
+const FilterPartOfNews = ({ setSelectedCategory, data, setSearchQuery,searchQuery }) => {
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedCategory("");
+  };
   return (
     <div className="w-full h-[250px] bg-lightGray rounded-3xl pt-4 space-y-4">
       <FilterSearchInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}
-        name={name}
         placeholder={"جست جو کنید ..."}
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
       />
-      <SelectDropdown
-        icon={<GrShareOption className="text-2xl" />}
-        inputLabel={"دسته‌بندی"}
-        name={name}
-        placeholder="انتخاب کنید"
-      />
-       <DateInput
-        icon={<IoCalendarOutline className="text-2xl" />}
-        inputLabel={"تاریخ انتشار"}
-      />
+      <NewsCategory setSelectedCategory={setSelectedCategory} data={data} />{" "}
+      <Button
+        shape="round"
+        icon={<RxCross2 className="text-lg" />}
+        style={{ fontFamily: "yekan", marginRight: "17px" }}
+        danger
+        onClick={handleReset}
+      >
+        حذف
+      </Button>
     </div>
   );
 };

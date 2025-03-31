@@ -12,32 +12,32 @@ const GridCourseCard = ({
   title,
   img,
   teacherName,
-  statusName,
   describe,
   student,
   cost,
   likeCount,
   dissLikeCount,
-  miniDescribe,
-  addUserFullName,
-  lastUpdate,id
+  lastUpdate,
+  id,
 }) => {
-  const addDefaultImg = (e) => {
-    e.target.src = defaultImg;
-  };
-
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate(`/courses/coursedetail/${id}`);
   };
+  const addDefaultImg = (e) => {
+    e.target.src = defaultImg;
+  };
 
   return (
     <div className="w-full h-72 bg-lightGray  grid grid-cols-5 overflow-hidden rounded-3xl mr-3">
-      <div onClick={handleNavigate} className="col-span-2 bg-red-400 rounded-3xl hidden sm:block">
+      <div
+        onClick={handleNavigate}
+        className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden"
+      >
         <img
           src={img == null ? defaultImg : img}
           alt="not set"
-          className="w-full h-full object-cover rounded-3xl blur-[#54545417] shadow-md"
+          className="w-full h-full object-cover rounded-3xl"
           onError={addDefaultImg}
           onClick={handleNavigate}
         />
@@ -45,7 +45,10 @@ const GridCourseCard = ({
 
       <div className="col-span-3 m-6 space-y-5">
         <div className="w-full max-w-[300px] overflow-hidden space-y-2">
-          <h2 onClick={handleNavigate} className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 ">
+          <h2
+            onClick={handleNavigate}
+            className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 "
+          >
             {title}
           </h2>
           <h2 className="text-[#787878] text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">

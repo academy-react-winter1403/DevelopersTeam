@@ -5,12 +5,11 @@ const FilterSearchInput = ({
   icon,
   inputLabel,
   placeholder,
-  setSearchQuery,
+  setSearchQuery,searchQuery
 }) => {
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    console.log(query);
   };
 
   return (
@@ -24,6 +23,7 @@ const FilterSearchInput = ({
         className="w-full h-8 outline-none rounded-xl p-5 pr-3 placeholder:text-xs border border-lightGray bg-inputBg focus:border-navyBlue transition-all duration-300"
         placeholder={placeholder}
         onChange={handleSearch}
+        value={searchQuery}
       />
     </div>
   );

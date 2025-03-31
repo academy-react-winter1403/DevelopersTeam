@@ -8,11 +8,13 @@ import ViewMoodComponent from "./viewMoodComponent/viewMoodComponent";
 
 const CoursesSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedType, setSelectedType] = useState(null);
+
   const [selectedSort, setSelectedSort] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [selectedTech, setSelectedTech] = useState(null);
+
   const [selectedPriceMin, setSelectedPriceMin] = useState(100);
   const [selectedPriceMax, setSelectedPriceMax] = useState(50000000);
 
@@ -71,6 +73,15 @@ const CoursesSection = () => {
           setSelectedSort={setSelectedSort}
           viewMode={viewMode}
           setViewMode={setViewMode}
+          setSearchQuery={setSearchQuery}
+          setSelectedType={setSelectedType}
+          setSelectedLevel={setSelectedLevel}
+          setSelectedTeacher={setSelectedTeacher}
+          setSelectedTech={setSelectedTech}
+          selectedPriceMin={selectedPriceMin}
+          setSelectedPriceMin={setSelectedPriceMin}
+          selectedPriceMax={selectedPriceMax}
+          setSelectedPriceMax={setSelectedPriceMax}
         />
         <IsLoadingComponent isLoading={isLoading} viewMode={viewMode} />
         <ViewMoodComponent data={data} viewMode={viewMode} />
@@ -83,6 +94,7 @@ const CoursesSection = () => {
       </div>
       <div className="hidden lg:block p-8 xl:py-8 xl:px-3">
         <FilterSection
+        searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           setSelectedType={setSelectedType}
           setSelectedLevel={setSelectedLevel}
