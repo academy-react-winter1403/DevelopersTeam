@@ -13,7 +13,7 @@ const TopCourses = () => {
     queryFn: getTopCourses,
   });
 
-  data && console.log(data);
+  // data && console.log(data);
 
   return (
     <div className="w-full mt-20 h-auto">
@@ -24,10 +24,10 @@ const TopCourses = () => {
         دوره هایی که بین دانشجویان محبوبیت بالایی داشتند
       </h6>
       <div className="my-4 flex justify-center gap-4 flex-wrap">
-        {data?.map((item) => {
+        {data?.map((item, index) => {
           return (
             <CourseCard
-              key={item.id}
+              key={index}
               title={item.title}
               img={item.tumbImageAddress}
               describe={item.describe}
@@ -39,6 +39,11 @@ const TopCourses = () => {
               dissLikeCount={item.dissLikeCount}
               id={item.courseId}
               levelName={item.levelName}
+              lastUpdate={item.lastUpdate}
+              userIsLiked={item.userIsLiked}
+              userLikedId={item.userLikedId}
+              currentUserDissLike={item.currentUserDissLike}
+              keyMutate="topCourses"
             />
           );
         })}

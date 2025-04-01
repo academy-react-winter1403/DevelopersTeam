@@ -24,6 +24,7 @@ const ViewMoodComponent = ({ data, viewMode }) => {
             userIsLiked={item.userIsLiked}
             userLikedId={item.userLikedId}
             currentUserDissLike={item.currentUserDissLike}
+            keyMutate="courses"
           />
         ) : (
           <GridCourseCard
