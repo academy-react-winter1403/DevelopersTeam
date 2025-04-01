@@ -8,6 +8,10 @@ import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import { useNavigate } from "react-router-dom";
 import DateComponent from "../date/dateComponent";
 import Tags from "./tags/tags";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import http from "../../../core/services/interceptor";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineDislike } from "react-icons/ai";
 
 const CourseCard = ({
   title,
@@ -22,7 +26,11 @@ const CourseCard = ({
   id,
   lastUpdate,
   levelName,
+  userIsLiked,
+  userLikedId,
+  currentUserDissLike,
 }) => {
+  const queryClient = useQueryClient();
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
@@ -31,6 +39,43 @@ const CourseCard = ({
   const handleNavigate = () => {
     navigate(`/courses/coursedetail/${id}`);
   };
+
+  const handleLike = async () => {
+    const res = await http.post(`/Course/AddCourseLike?CourseId=${id}`);
+    // console.log(res);
+  };
+  const { mutate } = useMutation({
+    mutationFn: handleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courses");
+    },
+  });
+
+  const handleDelete = async () => {
+    const myData = new FormData();
+    myData.append("CourseLikeId", userLikedId);
+
+    const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
+    console.log(res);
+  };
+  const { mutate: mutateDeleteLike } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courses");
+    },
+  });
+
+  const handleDisLike = async () => {
+    const res = await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
+  };
+
+  const { mutate: mutateDisLike } = useMutation({
+    mutationFn: handleDisLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courses");
+    },
+  });
+
   return (
     <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl relative">
       <div className=" absolute top-2 right-2 flex space-x-2">
@@ -78,14 +123,34 @@ const CourseCard = ({
             <span className="text-blue-400 text-md line-clamp-1">تومان</span>
           </div>
           <div className="flex gap-2">
-            <div className="flex items-center gap-1">
-              <img src={ThumbUp} alt="" className="w-4 h-4" />
-              <span>{likeCount}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <img src={thumbDown} alt="" className="w-3 h-4" />
-              <span>{dissLikeCount}</span>
-            </div>
+            {userIsLiked ? (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateDeleteLike()}
+              >
+                <AiOutlineLike className="w-5 h-5 text-red-500"/>
+                <span>{likeCount}</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1" onClick={() => mutate()}>
+                <AiOutlineLike className="w-5 h-5"/>
+                <span>{likeCount}</span>
+              </div>
+            )}
+            {currentUserDissLike ? (
+              <div className="flex items-center gap-1">
+                <AiOutlineDislike  className="w-5 h-5 text-red-500"/>
+                <span>{dissLikeCount}</span>
+              </div>
+            ) : (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateDisLike()}
+              >
+                <AiOutlineDislike  className="w-5 h-5"/>
+                <span>{dissLikeCount}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
