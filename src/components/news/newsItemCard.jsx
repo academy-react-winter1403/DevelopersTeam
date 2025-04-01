@@ -7,6 +7,8 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../components/common/date/dateComponent";
+import http from "../../core/services/interceptor";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewsItemCard = ({
   addUserProfileImage,
@@ -17,7 +19,12 @@ const NewsItemCard = ({
   currentDissLikeCount,
   currentLikeCount,
   id,
+  currentUserIsLike,
+  currentUserIsDissLike,
+  likeId
 }) => {
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
 
   const handleNavigation = () => {
@@ -27,6 +34,47 @@ const NewsItemCard = ({
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
+
+  const handleLike = async () => {
+    const res = await http.post(`/News/NewsLike/${id}`);
+    // return res
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: handleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("news-list");
+    },
+  });
+
+  const handleDelete = async () => {
+    const myData = new FormData();
+    console.log(myData)
+    myData.append("deleteEntityId",'9ea9270f-ea0e-f011-b6ff-dc24f8ada7d9');
+
+    const res = await http.delete("/News/DeleteLikeNews", { data: myData });
+    console.log(res);
+  };
+  const { mutate: mutateDeleteLike } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      queryClient.invalidateQueries("news-list");
+    },
+    // onError:(error) => {
+    //   console.log(error)
+    // }
+  });
+
+  const handleDisLike = async () => {
+    const res = await http.post(`/News/NewsDissLike/${id}`);
+  };
+
+  const { mutate: mutateDisLike } = useMutation({
+    mutationFn: handleDisLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("news-list");
+    },
+  });
 
   return (
     <div className="hidden sm:block my-5 rounded-2xl 2xl:h-72 bg-lightGray  w-full ">
@@ -76,18 +124,46 @@ const NewsItemCard = ({
           </div>
           <div className="flex justify-between items-center mt-6 gap-4 ml-1 sm:mb-2">
             <div className=" flex justify-around gap-10">
-              <div className="flex items-center justify-between gap-1  ">
-                <AiOutlineLike className="md:h-5 md:w-5 w-4 h-4" />
-                <span className="text-sm font-bold text-[#272727]">
-                  {currentLikeCount}
-                </span>
-              </div>
-              <div className="flex  gap-1">
+
+              {currentUserIsLike ? (
+                <div className="flex items-center justify-between gap-1  ">
+                  <AiOutlineLike
+                    className="md:h-5 md:w-5 w-4 h-4 text-red-400"
+                    onClick={() => mutateDeleteLike()}
+                  />
+                  <span className="text-sm font-bold text-[#272727]">
+                    {currentLikeCount}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between gap-1  ">
+                  <AiOutlineLike
+                    className="md:h-5 md:w-5 w-4 h-4"
+                    onClick={mutate}
+                  />
+                  <span className="text-sm font-bold text-[#272727]">
+                    {currentLikeCount}
+                  </span>
+                </div>
+              )}
+
+              {currentUserIsDissLike ? (
+                 <div className="flex  gap-1">
+                 <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4 text-red-400" />
+                 <span className="text-sm font-bold text-[#272727]">
+                   {currentDissLikeCount}
+                 </span>
+               </div>
+              ) : (<div className="flex  gap-1"
+                onClick={() => mutateDisLike()}
+              >
                 <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4" />
                 <span className="text-sm font-bold text-[#272727]">
                   {currentDissLikeCount}
                 </span>
-              </div>
+              </div>)}
+
+              
             </div>
 
             <div className="md:px-2">

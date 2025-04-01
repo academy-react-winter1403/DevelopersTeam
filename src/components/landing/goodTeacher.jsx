@@ -2,6 +2,7 @@ import React from "react";
 import http from "../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import ax from "../../assets/images/3d-glassy-abstract-spiral-band-blue 1.svg";
+import { Link } from "react-router-dom";
 
 const GoodTeacher = () => {
   const getGoodTeacher = async () => {
@@ -60,7 +61,7 @@ const GoodTeacher = () => {
                   index === 1 && "mt-8"
                 }`}
               >
-                {item.linkdinProfileLink || "linkedin.com"}
+                <Link to={item.linkdinProfileLink}>ورود به لینکدین</Link>
               </div>
             </div>
           </React.Fragment>
