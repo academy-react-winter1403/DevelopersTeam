@@ -25,7 +25,7 @@ const GetNewsDetailList = () => {
 
   return (
     <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">
-      <div className="border-4 w-[538px] h-[428px]  border-[#E4E4E4] rounded-4xl">
+      <div className="border-4 w-[538px] h-[428px]  border-[#E4E4E4] rounded-4xl sticky top-5">
         <h2 className="text-3xl font-bold p-4  ">{detail?.title}</h2>
 
         <div className="flex gap-2 mt-28 space-x-2 space-y-5">
