@@ -37,6 +37,8 @@ const TopCourses = () => {
               cost={item.cost}
               likeCount={item.likeCount}
               dissLikeCount={item.dissLikeCount}
+              id={item.courseId}
+              levelName={item.levelName}
             />
           );
         })}
