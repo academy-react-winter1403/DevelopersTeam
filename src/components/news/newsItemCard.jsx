@@ -59,10 +59,7 @@ const NewsItemCard = ({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries("news-list");
-    },
-    // onError:(error) => {
-    //   console.log(error)
-    // }
+    }
   });
 
   const handleDisLike = async () => {

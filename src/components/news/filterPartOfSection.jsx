@@ -15,7 +15,7 @@ const FilterPartOfNews = ({ setSelectedCategory, data, setSearchQuery,searchQuer
     setSelectedCategory("");
   };
   return (
-    <div className="w-full h-[250px] bg-lightGray rounded-3xl pt-4 space-y-4">
+    <div className="w-full h-[250px] bg-lightGray rounded-3xl pt-4 space-y-4 sticky top-5">
       <FilterSearchInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}
