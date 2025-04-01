@@ -59,6 +59,7 @@ const NewsList = () => {
                 title={item.title}
                 miniDescribe={item.miniDescribe}
                 addUserFullName={item.addUserFullName}
+                lastUpdate={item.lastUpdate}
                 insertDate={item.insertDate}
                 currentDissLikeCount={item.currentDissLikeCount}
                 currentLikeCount={item.currentLikeCount}

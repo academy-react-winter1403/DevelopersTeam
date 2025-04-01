@@ -7,6 +7,7 @@ import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineStars } from "react-icons/md";
+import DateComponent from "../../components/common/date/dateComponent";
 
 const GetNewsDetailList = () => {
   const [detail, setDetail] = useState([]);
@@ -23,13 +24,15 @@ const GetNewsDetailList = () => {
   }, []);
 
   return (
-    <div className="mt-10 h-[2000px] flex justify-around ">
+    <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">
       <div className="border-4 w-[538px] h-[428px]  border-[#E4E4E4] rounded-4xl">
         <h2 className="text-3xl font-bold p-4  ">{detail?.title}</h2>
 
         <div className="flex gap-2 mt-28 space-x-2 space-y-5">
           <HiOutlineCalendarDateRange className="w-6 h-6 mr-2" />
-          <div>{detail?.insertDate}</div>
+          <span>
+            <DateComponent insertDate={detail?.insertDate} />
+          </span>
         </div>
 
         <div className="flex gap-2 items-center ">
@@ -64,12 +67,12 @@ const GetNewsDetailList = () => {
         </div>
       </div>
 
-      <div className="w-[750px] border border-red-400 h-[1800px]">
+      <div className="w-[750px] border border-red-400 h-auto">
         <div className="w-[738px] h-[428px] border border-[#E4E4E4] rounded-4xl">
           <img src={detail?.addUserProfileImage} alt="" />
         </div>
 
-        <div className="w-[738px] border-2 border-blue-500">
+        <div className="w-[738px] border-2 border-blue-500 h-auto ">
           <h2 className="mt-5 p-5">
             {detail?.miniDescribe} لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
             از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
@@ -84,10 +87,17 @@ const GetNewsDetailList = () => {
             دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
           </h2>
         </div>
-        <div className="border w-[738px] h-10 flex items-center gap-1 p-4">
-          <MdOutlineStars className="text-[#3772FF]"/>
+        <div className="border w-[738px] h-10 flex items-center gap-1 p-4 mt-20">
+          <MdOutlineStars className="text-[#3772FF]" />
           <h2>امتیاز بدید:</h2>
           <div>{detail?.currentRate}</div>
+        </div>
+
+        <div className="border w-[750px] h-auto mt-20">
+          <h2 className="font-bol text-3xl p-4">نظرات</h2>
+          <div className="border border-[#E4E4E4] w-[738px] h-96 rounded-4xl">
+
+          </div>
         </div>
       </div>
     </div>
