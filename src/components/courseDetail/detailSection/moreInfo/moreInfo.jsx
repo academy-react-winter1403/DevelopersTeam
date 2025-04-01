@@ -9,51 +9,51 @@ import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { CiBookmarkPlus } from "react-icons/ci";
 
-const MoreInfo = ({ courseDetail }) => {
+const MoreInfo = ({ data }) => {
   return (
     <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 md:m-0">
       <div className=" bg-[#FFD1CB] w-30 md:w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
         <div className="w-2 h-2 rounded-full bg-[#FF5454]"></div>
         <h1 className="text-xs md:text-sm text-[#FF5454]">
-          {courseDetail?.courseStatusName}
+          {data?.courseStatusName}
         </h1>
       </div>
       <div className="w-96 space-y-5">
         <div className="flex">
           <h1 className="text-2xl md:text-4xl font-semibold truncate">
-            {courseDetail?.title}
+            {data?.title}
           </h1>
-          ({courseDetail?.currentRate}
+          ({data?.currentUserRateNumber}
           <CiStar className="text-[#FAFF16]" />)
         </div>
         <div className="w-28">
-          <Tags color="#5A7EFF" text={courseDetail?.courseLevelName} />
+          <Tags color="#5A7EFF" text={data?.courseLevelName} />
         </div>
         <div className="mt-3 flex-none space-y-4">
           <div className="flex items-center gap-3 md:text-xl ">
             <img src={StudentIcon} alt="" className="h-6 w-6" />
             <span className="font-semibold">
-              {courseDetail?.currentRegistrants} / {courseDetail?.capacity}
+              {data?.currentRegistrants} / {data?.capacity}
             </span>
             <span className="font-semibold">دانشجو</span>
           </div>
           <div className="flex items-center gap-3 mt-2 md:text-xl ">
             <img src={CalenderIcon} alt="" className="h-6 w-6" />
             <span>
-              <DateComponent insertDate={courseDetail?.startTime} />
+              <DateComponent insertDate={data?.startTime} />
             </span>
             <span className="font-semibold text-gray text-sm">(شروع)</span>
           </div>
           <div className="flex items-center gap-3 mt-2 md:text-xl ">
             <img src={CalenderIcon} alt="" className="h-6 w-6" />
             <span>
-              <DateComponent insertDate={courseDetail?.endTime} />
+              <DateComponent insertDate={data?.endTime} />
             </span>
             <span className="font-semibold text-gray text-sm">(پایان)</span>
           </div>
           <div className="space-x-2 flex mt-5">
             <span className="text-2xl font-bold">
-              {new Intl.NumberFormat("fa-IR").format(courseDetail?.cost)}
+              {new Intl.NumberFormat("fa-IR").format(data?.cost)}
             </span>
             <span className="text-[#3772FF] text-sm font-semibold mt-2">
               تومان

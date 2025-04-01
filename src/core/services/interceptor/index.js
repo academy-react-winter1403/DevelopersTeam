@@ -1,27 +1,49 @@
 import axios from "axios";
+import { getData } from "../../localStorage/localStorage";
+// import { getItem } from "../common/storage.services";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
 
-const http = axios.create({
-  baseURL: baseURL,
+
+
+const baseURL = import.meta.env.VITE_BASE_URL
+
+const instance = axios.create({
+    baseURL: baseURL,
 });
 
 const onSuccess = (response) => {
-  return response.data;
-};
+    return response.data
+}
 
 const onError = (err) => {
-  return Promise.reject(err);
-};
+    // console.log(err);
 
-http.interceptors.response.use(onSuccess, onError);
+    // if(err.response.status === 401){
+    //     // clearStorage()
+    //     removeItem('token');
+    //     window.location.pathname = '/' // or '/login'
+    // }
+
+    // if(err.response.status >= 400 && err.response.status < 500){
+    //     // alert("Client request error: " + err.response.status);
+    // }
+
+    return Promise.reject(err);
+}
+
+instance.interceptors.response.use(onSuccess, onError);
+
+instance.interceptors.request.use(opt => {
+
+    //const user = useSelector(state => state.user)
+
+    const token = getData("authToken") ? getData("authToken") : null;
 
 
-// http.interceptors.request.use((opt)=>{
-//   const token = getData('login')
-//   opt.headers.Authorization = 'Bearer ' + token 
-//   return opt 
-// }) 
+    //  opt.headers['MessageTest'] = "Hello World"; 
+    //  opt.headers['Content-Type'] = "application/json";
+    if (token) opt.headers.Authorization = 'Bearer ' + token;
+    return opt
+})
 
-
-export default http;
+export default instance;
