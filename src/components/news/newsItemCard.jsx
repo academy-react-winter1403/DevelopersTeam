@@ -8,13 +8,11 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../components/common/date/dateComponent";
 
-
 const NewsItemCard = ({
   addUserProfileImage,
   title,
   miniDescribe,
   addUserFullName,
-  lastUpdate,
   insertDate,
   currentDissLikeCount,
   currentLikeCount,
@@ -72,9 +70,6 @@ const NewsItemCard = ({
           </div>
           <div className="flex items-center gap-2 mt-5">
             <MdOutlineDateRange className="md:h-5 md:w-5 w-4 h-4" />
-            {/* <span className="text-sm  font-bold text-[#272727]">
-              {insertDate}
-            </span> */}
             <span>
               <DateComponent insertDate={insertDate} />
             </span>
