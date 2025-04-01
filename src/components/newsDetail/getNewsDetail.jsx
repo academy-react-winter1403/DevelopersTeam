@@ -6,28 +6,29 @@ import { IoEyeOutline } from "react-icons/io5";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
-import { MdOutlineStars } from "react-icons/md";
 import DateComponent from "../../components/common/date/dateComponent";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Rate } from "antd";
 import star from "./../../assets/images/courseDetail/star.svg";
 
 
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
-  const [detail, setDetail] = useState([]);
   const { id } = useParams();
 
-  console.log("detail", id);
   const getDetail = async () => {
     const res = await http.get(`/News/${id}`);
-    setDetail(res.detailsNewsDto);
+    return res;
   };
+
+  const {data} = useQuery({
+    queryKey: "newsDetail",
+    queryFn: getDetail,
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getDetail();
   }, []);
 
   const addDefaultImg = (e) => {
@@ -36,7 +37,7 @@ const GetNewsDetailList = () => {
 
   const handleRate = async (rateValue) => {
     const res = await http.post(
-      `/News/NewsRate?NewsId=<uuid>&RateNumber=<double>${detail?.NewsId}&RateNumber=${rateValue}`
+      `/News/NewsRate?NewsId=<uuid>&RateNumber=<double>${data?.NewsId}&RateNumber=${rateValue}`
     );
     return res;
   };
@@ -44,19 +45,19 @@ const GetNewsDetailList = () => {
   const { mutate } = useMutation({
     mutationFn: handleRate,
     onSuccess: () => {
-      queryClient.invalidateQueries("news-list");
+      queryClient.invalidateQueries("newsDetail");
     },
   });
 
   return (
     <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">
       <div className="border-4 w-[538px] h-[428px]  border-[#E4E4E4] rounded-4xl sticky top-5">
-        <h2 className="text-3xl font-bold p-4  ">{detail?.title}</h2>
+        <h2 className="text-3xl font-bold p-4  ">{data?.title}</h2>
 
         <div className="flex gap-2 mt-28 space-x-2 space-y-5">
           <HiOutlineCalendarDateRange className="w-6 h-6 mr-2" />
           <span>
-            <DateComponent insertDate={detail?.insertDate} />
+            <DateComponent insertDate={data?.insertDate} />
           </span>
         </div>
 
@@ -71,16 +72,16 @@ const GetNewsDetailList = () => {
           <div className="gap-2 flex items-center">
             <img
               src={
-                detail?.addUserProfileImage == null
+                data?.addUserProfileImage == null
                   ? defaultImg
-                  : detail?.addUserProfileImage
+                  : data?.addUserProfileImage
               }
               alt="not set"
               className="border border-[#E4E4E4] rounded-full w-14 h-14"
               onError={addDefaultImg}
             />
             <span className="font-semibold text-lg">
-              {detail?.addUserFullName}
+              {data?.addUserFullName}
             </span>
           </div>
           <div className="flex  justify-evenly gap-2 ">
@@ -101,9 +102,9 @@ const GetNewsDetailList = () => {
         <div className="w-[738px] h-[428px] border border-[#E4E4E4] rounded-4xl">
           <img
             src={
-              detail?.addUserProfileImage == null
+              data?.addUserProfileImage == null
                 ? defaultImg
-                : detail?.addUserProfileImage
+                : data?.addUserProfileImage
             }
             alt="not set"
             className="w-full"
@@ -113,7 +114,7 @@ const GetNewsDetailList = () => {
 
         <div className="w-[738px] border-2 border-blue-500 h-auto ">
           <h2 className="mt-5 p-5">
-            {detail?.miniDescribe} لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+            {data?.miniDescribe} لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
             از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
             روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
             تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
@@ -130,10 +131,10 @@ const GetNewsDetailList = () => {
         <div className="p-2 mt-10 space-x-4 flex items-center">
           <img src={star} alt="" />
           <span>امتیاز بدید</span>
-          {detail?.currentRate}
+          {data?.currentRate}
           <Rate
             allowHalf
-            value={detail?.currentRate}
+            value={data?.currentRate}
             onChange={(rateValue) => mutate(rateValue)}
           />
         </div>
