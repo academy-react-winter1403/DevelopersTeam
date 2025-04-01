@@ -7,6 +7,7 @@ import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg"
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import DateComponent from "../../common/date/dateComponent";
+import Tags from "../../common/course-card/tags/tags";
 
 const GridCourseCard = ({
   title,
@@ -18,7 +19,8 @@ const GridCourseCard = ({
   likeCount,
   dissLikeCount,
   lastUpdate,
-  id,
+  id,statusName,
+  levelName
 }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -29,7 +31,11 @@ const GridCourseCard = ({
   };
 
   return (
-    <div className="w-full h-72 bg-lightGray  grid grid-cols-5 overflow-hidden rounded-3xl mr-3">
+    <div className="w-full h-72 bg-lightGray  grid grid-cols-5 overflow-hidden rounded-3xl mr-3 relative">
+      <div className=" absolute top-2 right-2 sm:flex space-x-2 hidden">
+        <Tags color="#5A7EFF" text={statusName} />
+        <Tags color="#DE59FF" text={levelName} />
+      </div>
       <div
         onClick={handleNavigate}
         className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden"

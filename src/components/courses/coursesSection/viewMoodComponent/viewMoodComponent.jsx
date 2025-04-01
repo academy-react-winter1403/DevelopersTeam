@@ -20,6 +20,7 @@ const ViewMoodComponent = ({ data, viewMode }) => {
             dissLikeCount={item.dissLikeCount}
             lastUpdate={item.lastUpdate}
             id={item.courseId}
+            levelName={item.levelName}
           />
         ) : (
           <GridCourseCard
@@ -35,6 +36,7 @@ const ViewMoodComponent = ({ data, viewMode }) => {
             dissLikeCount={item.dissLikeCount}
             id={item.courseId}
             lastUpdate={item.lastUpdate}
+            levelName={item.levelName}
           />
         )
       )}
