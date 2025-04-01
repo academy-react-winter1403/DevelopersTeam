@@ -4,6 +4,7 @@ import arrowUpLeft from "./../../assets/images/arrow-up-left-01.svg";
 import arrowUpLeftStoke from "./../../assets/images/arrow-up-left-01-stroke-rounded 1.svg";
 import Group from "./../../assets/images/Group 143.svg";
 import AxPanel from "./../../assets/images/AxPanel.png";
+import { Marquee } from "./marquee";
 
 const FirstPartOfLanding = () => {
   return (
@@ -61,20 +62,21 @@ const FirstPartOfLanding = () => {
             <img
               src={arrowUpLeftStoke}
               alt=""
-              className="  rounded-full bg-[#3772FF] absolute top-2 left-2 w-8 h-8 p-1 object-contain fill-white"
+              className="rounded-full bg-[#3772FF] absolute top-2 left-2 w-8 h-8 p-1 object-contain fill-white"
             />
           </Link>
         </div>
       </div>
 
-      <div className="bg-[#3772FF] h-10 w-full mt-15 flex flex-row gap-7 text-white text-[15px]  -rotate-x-15 rotate-y-15">
+      {/* <div className="bg-[#3772FF] h-10 w-full mt-15 flex flex-row gap-7 text-white text-[15px]  -rotate-x-15 rotate-y-15">
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
         <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-      </div>
+      </div> */}
+      <Marquee />
     </>
   );
 };
