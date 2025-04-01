@@ -64,6 +64,9 @@ const NewsList = () => {
                 currentDissLikeCount={item.currentDissLikeCount}
                 currentLikeCount={item.currentLikeCount}
                 id={item.id}
+                currentUserIsLike={item.currentUserIsLike}
+                currentUserIsDissLike={item.currentUserIsDissLike}
+                likeId={item.likeId}
               />
             );
           })}
