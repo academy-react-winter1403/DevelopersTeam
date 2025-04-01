@@ -1,9 +1,88 @@
-import React from 'react'
+import React from "react";
+import Tags from "../../../common/course-card/tags/tags";
+import { CiStar } from "react-icons/ci";
+import CalenderIcon from "./../../../../assets/images/calendar-03-stroke-rounded 1.svg";
+import DateComponent from "../../../common/date/dateComponent";
+import StudentIcon from "./../../../../assets/images/students-stroke-rounded 1.svg";
+import { Button } from "antd";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineDislike } from "react-icons/ai";
+import { CiBookmarkPlus } from "react-icons/ci";
 
-const MoreInfo = () => {
+const MoreInfo = ({ courseDetail }) => {
   return (
-    <div></div>
-  )
-}
+    <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 md:m-0">
+      <div className=" bg-[#FFD1CB] w-30 md:w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
+        <div className="w-2 h-2 rounded-full bg-[#FF5454]"></div>
+        <h1 className="text-xs md:text-sm text-[#FF5454]">
+          {courseDetail?.courseStatusName}
+        </h1>
+      </div>
+      <div className="w-96 space-y-5">
+        <div className="flex">
+          <h1 className="text-2xl md:text-4xl font-semibold truncate">
+            {courseDetail?.title}
+          </h1>
+          ({courseDetail?.currentRate}
+          <CiStar className="text-[#FAFF16]" />)
+        </div>
+        <div className="w-28">
+          <Tags color="#5A7EFF" text={courseDetail?.courseLevelName} />
+        </div>
+        <div className="mt-3 flex-none space-y-4">
+          <div className="flex items-center gap-3 md:text-xl ">
+            <img src={StudentIcon} alt="" className="h-6 w-6" />
+            <span className="font-semibold">
+              {courseDetail?.currentRegistrants} / {courseDetail?.capacity}
+            </span>
+            <span className="font-semibold">دانشجو</span>
+          </div>
+          <div className="flex items-center gap-3 mt-2 md:text-xl ">
+            <img src={CalenderIcon} alt="" className="h-6 w-6" />
+            <span>
+              <DateComponent insertDate={courseDetail?.startTime} />
+            </span>
+            <span className="font-semibold text-gray text-sm">(شروع)</span>
+          </div>
+          <div className="flex items-center gap-3 mt-2 md:text-xl ">
+            <img src={CalenderIcon} alt="" className="h-6 w-6" />
+            <span>
+              <DateComponent insertDate={courseDetail?.endTime} />
+            </span>
+            <span className="font-semibold text-gray text-sm">(پایان)</span>
+          </div>
+          <div className="space-x-2 flex mt-5">
+            <span className="text-2xl font-bold">
+              {new Intl.NumberFormat("fa-IR").format(courseDetail?.cost)}
+            </span>
+            <span className="text-[#3772FF] text-sm font-semibold mt-2">
+              تومان
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className=" md:w-[500px] flex justify-between items-center space-x-2">
+        <Button
+          shape="round"
+          type="primary"
+          style={{ fontFamily: "yekan", width: "200px", height: "42px" }}
+        >
+          رزرو دوره
+        </Button>
+        <div className="flex space-x-3">
+          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+            <CiBookmarkPlus className="size-6 hover:text-navyBlue" />
+          </div>
+          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+            <AiOutlineLike className="size-6 hover:text-navyBlue" />
+          </div>
+          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+            <AiOutlineDislike className="size-6 hover:text-navyBlue" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default MoreInfo
+export default MoreInfo;
