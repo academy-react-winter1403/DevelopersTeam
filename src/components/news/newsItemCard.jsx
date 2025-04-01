@@ -50,7 +50,7 @@ const NewsItemCard = ({
   const handleDelete = async () => {
     const myData = new FormData();
     console.log(myData)
-    myData.append("deleteEntityId",'9ea9270f-ea0e-f011-b6ff-dc24f8ada7d9');
+    myData.append("deleteEntityId",likeId);
 
     const res = await http.delete("/News/DeleteLikeNews", { data: myData });
     console.log(res);

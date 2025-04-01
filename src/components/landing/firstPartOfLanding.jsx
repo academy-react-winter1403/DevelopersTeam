@@ -4,7 +4,7 @@ import arrowUpLeft from "./../../assets/images/arrow-up-left-01.svg";
 import arrowUpLeftStoke from "./../../assets/images/arrow-up-left-01-stroke-rounded 1.svg";
 import Group from "./../../assets/images/Group 143.svg";
 import AxPanel from "./../../assets/images/AxPanel.png";
-import { Marquee } from "./marquee";
+// import { Marquee } from "./marquee";
 
 const FirstPartOfLanding = () => {
   return (
@@ -68,15 +68,8 @@ const FirstPartOfLanding = () => {
         </div>
       </div>
 
-      {/* <div className="bg-[#3772FF] h-10 w-full mt-15 flex flex-row gap-7 text-white text-[15px]  -rotate-x-15 rotate-y-15">
-        <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-        <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-        <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-        <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-        <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-        <ul className="mt-1">خدماتی که ما به شما ارائه می دهیم</ul>
-      </div> */}
-      <Marquee />
+   
+      {/* <Marquee /> */}
     </>
   );
 };

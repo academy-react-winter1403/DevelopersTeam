@@ -8,8 +8,14 @@ import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineStars } from "react-icons/md";
 import DateComponent from "../../components/common/date/dateComponent";
+import defaultImg from "./../../assets/images/courses/courseimg.svg";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Rate } from "antd";
+import star from "./../../assets/images/courseDetail/star.svg";
+
 
 const GetNewsDetailList = () => {
+  const queryClient = useQueryClient();
   const [detail, setDetail] = useState([]);
   const { id } = useParams();
 
@@ -24,6 +30,23 @@ const GetNewsDetailList = () => {
     getDetail();
   }, []);
 
+  const addDefaultImg = (e) => {
+    e.target.src = defaultImg;
+  };
+
+  const handleRate = async (rateValue) => {
+    const res = await http.post(
+      `/News/NewsRate?NewsId=<uuid>&RateNumber=<double>${detail?.NewsId}&RateNumber=${rateValue}`
+    );
+    return res;
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: handleRate,
+    onSuccess: () => {
+      queryClient.invalidateQueries("news-list");
+    },
+  });
 
   return (
     <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">
@@ -47,9 +70,14 @@ const GetNewsDetailList = () => {
         <div className="flex items-center justify-between gap-2 p-2 ">
           <div className="gap-2 flex items-center">
             <img
-              src={detail?.addUserProfileImage}
-              alt=""
+              src={
+                detail?.addUserProfileImage == null
+                  ? defaultImg
+                  : detail?.addUserProfileImage
+              }
+              alt="not set"
               className="border border-[#E4E4E4] rounded-full w-14 h-14"
+              onError={addDefaultImg}
             />
             <span className="font-semibold text-lg">
               {detail?.addUserFullName}
@@ -71,7 +99,16 @@ const GetNewsDetailList = () => {
 
       <div className="w-[750px] border border-red-400 h-auto">
         <div className="w-[738px] h-[428px] border border-[#E4E4E4] rounded-4xl">
-          <img src={detail?.addUserProfileImage} alt="" />
+          <img
+            src={
+              detail?.addUserProfileImage == null
+                ? defaultImg
+                : detail?.addUserProfileImage
+            }
+            alt="not set"
+            className="w-full"
+            onError={addDefaultImg}
+          />
         </div>
 
         <div className="w-[738px] border-2 border-blue-500 h-auto ">
@@ -89,17 +126,21 @@ const GetNewsDetailList = () => {
             دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
           </h2>
         </div>
-        <div className="border w-[738px] h-10 flex items-center gap-1 p-4 mt-20">
-          <MdOutlineStars className="text-[#3772FF]" />
-          <h2>امتیاز بدید:</h2>
-          <div>{detail?.currentRate}</div>
+
+        <div className="p-2 mt-10 space-x-4 flex items-center">
+          <img src={star} alt="" />
+          <span>امتیاز بدید</span>
+          {detail?.currentRate}
+          <Rate
+            allowHalf
+            value={detail?.currentRate}
+            onChange={(rateValue) => mutate(rateValue)}
+          />
         </div>
 
         <div className="border w-[750px] h-auto mt-20">
           <h2 className="font-bol text-3xl p-4">نظرات</h2>
-          <div className="border border-[#E4E4E4] w-[738px] h-96 rounded-4xl">
-
-          </div>
+          <div className="border border-[#E4E4E4] w-[738px] h-96 rounded-4xl"></div>
         </div>
       </div>
     </div>
