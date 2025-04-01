@@ -28,12 +28,12 @@ const DetailContainer = ({ data }) => {
   });
 
   return (
-    <div className="lg:w-[719px] h-[1000px]  m-4 md:m-0 ">
-      <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden ">
+    <div className="lg:w-[719px] h-[1000px]  m-4 lg:m-0 ">
+      <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden">
         <img
           src={data?.imageAddress == null ? defaultImg : data?.imageAddress}
           alt="not set"
-          className="w-full h-full "
+          className="w-full h-full"
           onError={addDefaultImg}
         />
       </div>

@@ -10,22 +10,22 @@ const DetailSection = () => {
   const [courseDetail, setCourseDetail] = useState([]);
   const getCourseDetail = async () => {
     const res = await http.get(`/Home/GetCourseDetails?CourseId=${id}`);
-    return res
-    // setCourseDetail(res);
+    return res;
   };
-  // useEffect(() => {
-  //   getCourseDetail();
-  // }, []);
 
-const {data} = useQuery({
-  queryKey: "courseDetail",
-  queryFn: getCourseDetail,
-})
+  const { data } = useQuery({
+    queryKey: "courseDetail",
+    queryFn: getCourseDetail,
+  });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row  justify-evenly h-auto mt-10  ">
       <MoreInfo data={data} />
-      <DetailContainer data={data}   />
+      <DetailContainer data={data} />
     </div>
   );
 };

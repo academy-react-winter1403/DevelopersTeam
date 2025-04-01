@@ -20,8 +20,10 @@ const GetNewsDetailList = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getDetail();
   }, []);
+
 
   return (
     <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">

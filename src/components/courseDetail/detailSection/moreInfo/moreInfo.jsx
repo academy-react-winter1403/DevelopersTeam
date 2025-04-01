@@ -8,10 +8,36 @@ import { Button } from "antd";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { CiBookmarkPlus } from "react-icons/ci";
+import http from "./../../../../core/services/interceptor";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const MoreInfo = ({ data }) => {
+  const queryClient = useQueryClient();
+
+  const handleReserve = async () => {
+    const res = await http.post(`/CourseReserve/ReserveAdd`, {
+      courseId: data?.courseId,
+    });
+    console.log(res,"dddddddddd");
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: handleReserve,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+      toast.success("دوره با موفقیت رزرو شد")
+    },
+    onError: () => {
+      if(data?.isCourseReseve == 1){
+        toast.error("این دوره رزرو شده است");
+      }
+      else(toast.error("دوباره امتحان کنید"))
+    },
+  });
+
   return (
-    <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 md:m-0">
+    <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0">
       <div className=" bg-[#FFD1CB] w-30 md:w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
         <div className="w-2 h-2 rounded-full bg-[#FF5454]"></div>
         <h1 className="text-xs md:text-sm text-[#FF5454]">
@@ -61,11 +87,12 @@ const MoreInfo = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className=" md:w-[500px] flex justify-between items-center space-x-2">
+      <div className=" lg:w-[500px] flex justify-between items-center space-x-2">
         <Button
           shape="round"
           type="primary"
           style={{ fontFamily: "yekan", width: "200px", height: "42px" }}
+          onClick={() => mutate()}
         >
           رزرو دوره
         </Button>

@@ -2,8 +2,6 @@ import React from "react";
 import TeacherIcon from "./../../../assets/images/teacher-stroke-rounded 1.svg";
 import CalenderIcon from "./../../../assets/images/calendar-03-stroke-rounded 1.svg";
 import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg";
-import ThumbUp from "./../../../assets/images/thumbs-up-stroke-rounded 1.svg";
-import thumbDown from "./../../../assets/images/thumb-down.svg";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import { useNavigate } from "react-router-dom";
 import DateComponent from "../date/dateComponent";
@@ -53,6 +51,7 @@ const CourseCard = ({
 
   const handleDelete = async () => {
     const myData = new FormData();
+
     myData.append("CourseLikeId", userLikedId);
 
     const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
@@ -128,18 +127,18 @@ const CourseCard = ({
                 className="flex items-center gap-1"
                 onClick={() => mutateDeleteLike()}
               >
-                <AiOutlineLike className="w-5 h-5 text-red-500"/>
+                <AiOutlineLike className="w-5 h-5 text-red-500" />
                 <span>{likeCount}</span>
               </div>
             ) : (
               <div className="flex items-center gap-1" onClick={() => mutate()}>
-                <AiOutlineLike className="w-5 h-5"/>
+                <AiOutlineLike className="w-5 h-5" />
                 <span>{likeCount}</span>
               </div>
             )}
             {currentUserDissLike ? (
               <div className="flex items-center gap-1">
-                <AiOutlineDislike  className="w-5 h-5 text-red-500"/>
+                <AiOutlineDislike className="w-5 h-5 text-red-500" />
                 <span>{dissLikeCount}</span>
               </div>
             ) : (
@@ -147,7 +146,7 @@ const CourseCard = ({
                 className="flex items-center gap-1"
                 onClick={() => mutateDisLike()}
               >
-                <AiOutlineDislike  className="w-5 h-5"/>
+                <AiOutlineDislike className="w-5 h-5" />
                 <span>{dissLikeCount}</span>
               </div>
             )}
