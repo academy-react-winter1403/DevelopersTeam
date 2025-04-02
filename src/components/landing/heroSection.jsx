@@ -17,7 +17,7 @@ const HeroSection = () => {
       </h5>
       <Link
         to="/courses"
-        className="mx-auto m-2 w-[25%] text-sm h-8 leading-8 xs:w-[20%] sm:w-[17%] md:w-[14%] xl:w-[8%] xl:p-2 xl:leading-4 text-center rounded-full bg-[#3772FF] hover:opacity-85 text-white "
+        className="mx-auto m-2 w-[35%] text-sm h-8 leading-8 xs:w-[20%] sm:w-[17%] md:w-[14%] xl:w-[8%] xl:p-2 xl:leading-4 text-center rounded-full bg-[#3772FF] hover:opacity-85 text-white "
       >
         شروع یادگیری
       </Link>

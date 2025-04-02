@@ -58,8 +58,9 @@ const Header = () => {
             <Button
               type="primary"
               shape="round"
-              icon={<FiUser className="w-5 h-5 mt-1" />}
-              style={{ fontFamily: "yekan", marginRight: "4px" }}
+              icon={<FiUser className="w-4 h-4 mt-1" />}
+              style={{ fontFamily: "yekan", marginRight: "4px" , fontSize:'12px' }}
+              
             >
               پنل دانشجویی
             </Button>
