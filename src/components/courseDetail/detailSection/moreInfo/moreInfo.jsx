@@ -1,5 +1,5 @@
 import React from "react";
-import Tags from "../../../common/course-card/tags/tags";
+import { TagsA } from "../../../common/course-card/tags/tags";
 import { CiStar } from "react-icons/ci";
 import CalenderIcon from "./../../../../assets/images/calendar-03-stroke-rounded 1.svg";
 import DateComponent from "../../../common/date/dateComponent";
@@ -11,6 +11,7 @@ import { CiBookmarkPlus } from "react-icons/ci";
 import http from "./../../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { MdFavoriteBorder } from "react-icons/md";
 
 const MoreInfo = ({ data }) => {
   const queryClient = useQueryClient();
@@ -19,20 +20,95 @@ const MoreInfo = ({ data }) => {
     const res = await http.post(`/CourseReserve/ReserveAdd`, {
       courseId: data?.courseId,
     });
-    console.log(res,"dddddddddd");
+    // console.log(res, "dddddddddd");
   };
-
-  const { mutate } = useMutation({
+  const { mutate: mutateReserve } = useMutation({
     mutationFn: handleReserve,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
-      toast.success("دوره با موفقیت رزرو شد")
+      toast.success("دوره با موفقیت رزرو شد");
     },
     onError: () => {
-      if(data?.isCourseReseve == 1){
+      if (data?.isCourseReseve == 1) {
         toast.error("این دوره رزرو شده است");
-      }
-      else(toast.error("دوباره امتحان کنید"))
+      } else toast.error("دوباره امتحان کنید");
+    },
+  });
+
+  const handleLike = async () => {
+    const res = await http.post(
+      `/Course/AddCourseLike?CourseId=${data?.courseId}`
+    );
+    // console.log(res);
+  };
+  const { mutate: mutateLike } = useMutation({
+    mutationFn: handleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+    },
+  });
+
+  const handleDelete = async () => {
+    const myData = new FormData();
+    myData.append("CourseLikeId", data?.userLikeId);
+    const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
+    // console.log(res);
+  };
+  const { mutate: mutateDeleteLike } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+    },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
+    },
+  });
+
+  const handleDisLike = async () => {
+    const res = await http.post(
+      `/Course/AddCourseDissLike?CourseId=${data?.courseId}`
+    );
+  };
+  const { mutate: mutateDisLike } = useMutation({
+    mutationFn: handleDisLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+    },
+  });
+
+  const handleFavorite = async () => {
+    const res = await http.post(`/Course/AddCourseFavorite`, {
+      courseId: data?.courseId,
+    });
+  };
+  const { mutate: mutateFavorite } = useMutation({
+    mutationFn: handleFavorite,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+      toast.success("دوره با موفقیت به علاقه مندی ها اضافه شد");
+    },
+    onError: () => {
+      if (data?.isUserFavorite == true) {
+        toast.error("این دوره در لیست علاقه مندی های شما موجود میباشد");
+      } else toast.error("دوباره امتحان کنید");
+    },
+  });
+
+  const handleDeleteFav = async () => {
+    const myData = new FormData();
+    myData.append("CourseFavoriteId", data?.userFavoriteId);
+    const res = await http.delete("/Course/DeleteCourseFavorite", {
+      data: myData,
+    });
+    // console.log(res);
+  };
+  const { mutate: mutateDeleteFav } = useMutation({
+    mutationFn: handleDeleteFav,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+    },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
     },
   });
 
@@ -53,7 +129,7 @@ const MoreInfo = ({ data }) => {
           <CiStar className="text-[#FAFF16]" />)
         </div>
         <div className="w-28">
-          <Tags color="#5A7EFF" text={data?.courseLevelName} />
+          <TagsA text={data?.courseLevelName} />
         </div>
         <div className="mt-3 flex-none space-y-4">
           <div className="flex items-center gap-3 md:text-xl ">
@@ -92,19 +168,57 @@ const MoreInfo = ({ data }) => {
           shape="round"
           type="primary"
           style={{ fontFamily: "yekan", width: "200px", height: "42px" }}
-          onClick={() => mutate()}
+          onClick={() => mutateReserve()}
         >
           رزرو دوره
         </Button>
         <div className="flex space-x-3">
+          {data?.isUserFavorite ? (
+            <div
+              onClick={() => mutateDeleteFav()}
+              className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
+            >
+              <MdFavoriteBorder className="size-6 text-red-500 " />
+            </div>
+          ) : (
+            <div
+              onClick={() => mutateFavorite()}
+              className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
+            >
+              <MdFavoriteBorder className="size-6 hover:text-navyBlue" />
+            </div>
+          )}
+
           <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
-            <CiBookmarkPlus className="size-6 hover:text-navyBlue" />
+            {data?.currentUserLike ? (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateDeleteLike()}
+              >
+                <AiOutlineLike className="size-6 hover:text-navyBlue text-red-500" />
+              </div>
+            ) : (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateLike()}
+              >
+                <AiOutlineLike className="w-5 h-5 " />
+              </div>
+            )}
           </div>
           <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
-            <AiOutlineLike className="size-6 hover:text-navyBlue" />
-          </div>
-          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
-            <AiOutlineDislike className="size-6 hover:text-navyBlue" />
+            {data?.currentUserDissLike ? (
+              <div className="flex items-center gap-1">
+                <AiOutlineDislike className="size-6 text-red-500" />
+              </div>
+            ) : (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateDisLike()}
+              >
+                <AiOutlineDislike className="w-5 h-5" />
+              </div>
+            )}
           </div>
         </div>
       </div>

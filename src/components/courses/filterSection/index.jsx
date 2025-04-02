@@ -34,7 +34,7 @@ const FilterSection = ({
   };
 
   return (
-    <div className="w-full 2xl:w-[337px] h-[650px] bg-lightGray rounded-3xl pt-4 space-y-4 sticky top-5">
+    <div className="w-full 2xl:w-[337px] h-[550px] bg-lightGray rounded-3xl pt-4 space-y-4 sticky top-5">
       <FilterSearchInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}
@@ -53,10 +53,10 @@ const FilterSection = ({
         selectedPriceMax={selectedPriceMax}
         setSelectedPriceMax={setSelectedPriceMax}
       />
-      <DateInput
+      {/* <DateInput
         icon={<IoCalendarOutline className="text-2xl" />}
         inputLabel={"تاریخ برگزاری"}
-      />
+      /> */}
       <Button
         shape="round"
         icon={<RxCross2 className="text-lg" />}

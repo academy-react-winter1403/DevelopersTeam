@@ -5,7 +5,7 @@ import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg"
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import DateComponent from "../date/dateComponent";
-import Tags from "./tags/tags";
+import { TagsA, TagsB } from "./tags/tags";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
 import { AiOutlineLike } from "react-icons/ai";
@@ -27,9 +27,10 @@ const CourseCard = ({
   userIsLiked,
   userLikedId,
   currentUserDissLike,
-  keyMutate
+  keyMutate,
 }) => {
   const queryClient = useQueryClient();
+
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
@@ -47,23 +48,23 @@ const CourseCard = ({
 
   const handleDelete = async () => {
     const myData = new FormData();
-
     myData.append("CourseLikeId", userLikedId);
-
     const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
-    console.log(res);
+    // console.log(res);
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries(keyMutate);
     },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
+    },
   });
 
   const handleDisLike = async () => {
     const res = await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
   };
-
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
@@ -74,8 +75,8 @@ const CourseCard = ({
   return (
     <div className="w-[310px] h-[450px] bg-lightGray flex flex-col overflow-hidden rounded-3xl relative">
       <div className=" absolute top-2 right-2 flex space-x-2">
-        <Tags color="#5A7EFF" text={statusName} />
-        <Tags color="#DE59FF" text={levelName} />
+        <TagsA text={statusName} />
+        <TagsB text={levelName} />
       </div>
       <div className="w-full h-[200px] rounded-3xl">
         <NavLink to={`/courses/coursedetail/${id}`}>

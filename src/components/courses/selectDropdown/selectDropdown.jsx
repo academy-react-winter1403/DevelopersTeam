@@ -4,7 +4,7 @@ import { UserAddOutlined } from "@ant-design/icons";
 
 const SelectDropdown = ({ icon, inputLabel, name, placeholder, data , type }) => {
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const courseTypeOptions =
