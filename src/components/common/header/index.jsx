@@ -51,7 +51,7 @@ const Header = () => {
       </div>
       <div className="flex w-1/5  justify-center items-center space-x-3">
         <div className="border-2 border-gray-200 w-9 h-9 lg:flex justify-center items-center rounded-full hidden">
-          <IoMoonOutline className="text-2xl" />
+          <IoMoonOutline className="size-5" />
         </div>
         <div className="flex items-center justify-center">
           {token ? (
