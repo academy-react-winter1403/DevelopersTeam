@@ -19,7 +19,6 @@ const DetailContainer = ({ data }) => {
     );
     return res;
   };
-
   const { mutate } = useMutation({
     mutationFn: handleRate,
     onSuccess: () => {
@@ -64,10 +63,15 @@ const DetailContainer = ({ data }) => {
       <div className="p-2 mt-10 space-x-4 flex items-center">
         <img src={star} alt="" />
         <span>امتیاز بدید</span>
-        {data?.currentUserRateNumber}
+        <span>({data?.currentUserRateNumber})</span>
+
         <Rate
           allowHalf
-          value={data?.currentUserRateNumber}
+          value={
+            data?.currentUserSetRate
+              ? data?.currentUserRateNumber
+              : data?.currentRate
+          }
           onChange={(rateValue) => mutate(rateValue)}
         />
       </div>

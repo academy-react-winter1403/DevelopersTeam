@@ -39,7 +39,7 @@ const CourseCard = ({
     const res = await http.post(`/Course/AddCourseLike?CourseId=${id}`);
     // console.log(res);
   };
-  const { mutate } = useMutation({
+  const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
       queryClient.invalidateQueries(keyMutate);
@@ -122,34 +122,34 @@ const CourseCard = ({
             <span className="text-blue-400 text-md line-clamp-1">تومان</span>
           </div>
           <div className="flex gap-2">
-            {userIsLiked ? (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateDeleteLike()}
-              >
-                <AiOutlineLike className="w-5 h-5 text-red-500" />
-                <span>{likeCount}</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-1" onClick={() => mutate()}>
-                <AiOutlineLike className="w-5 h-5" />
-                <span>{likeCount}</span>
-              </div>
-            )}
-            {currentUserDissLike ? (
-              <div className="flex items-center gap-1">
-                <AiOutlineDislike className="w-5 h-5 text-red-500" />
-                <span>{dissLikeCount}</span>
-              </div>
-            ) : (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateDisLike()}
-              >
-                <AiOutlineDislike className="w-5 h-5" />
-                <span>{dissLikeCount}</span>
-              </div>
-            )}
+            <div
+              className="flex items-center gap-1"
+              onClick={() => (userIsLiked ? mutateDeleteLike() : mutateLike())}
+            >
+              <AiOutlineLike
+                className={
+                  userIsLiked
+                    ? "w-5 h-5 text-navyBlue"
+                    : "w-5 h-5 hover:text-navyBlue"
+                }
+              />
+              <span>{likeCount}</span>
+            </div>
+            <div
+              className="flex items-center gap-1"
+              onClick={() =>
+                currentUserDissLike ? mutateDisLike() : mutateDisLike()
+              }
+            >
+              <AiOutlineDislike
+                className={
+                  currentUserDissLike
+                    ? "w-5 h-5 text-navyBlue"
+                    : "w-5 h-5 hover:text-navyBlue"
+                }
+              />
+              <span>{dissLikeCount}</span>
+            </div>
           </div>
         </div>
       </div>

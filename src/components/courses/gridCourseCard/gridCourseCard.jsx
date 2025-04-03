@@ -118,37 +118,34 @@ const GridCourseCard = ({
         </div>
         <div className="flex justify-between items-center mt-12 gap-4 ml-1 sm:mb-2">
           <div className=" flex justify-around items-center gap-10">
-            {userIsLiked ? (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateDeleteLike()}
-              >
-                <AiOutlineLike className="w-5 h-5 text-red-500" />
-                <span>{likeCount}</span>
-              </div>
-            ) : (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateLike()}
-              >
-                <AiOutlineLike className="w-5 h-5" />
-                <span>{likeCount}</span>
-              </div>
-            )}
-            {currentUserDissLike ? (
-              <div className="flex items-center gap-1">
-                <AiOutlineDislike className="w-5 h-5 text-red-500" />
-                <span>{dissLikeCount}</span>
-              </div>
-            ) : (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateDisLike()}
-              >
-                <AiOutlineDislike className="w-5 h-5" />
-                <span>{dissLikeCount}</span>
-              </div>
-            )}
+            <div
+              className="flex items-center gap-1"
+              onClick={() => (userIsLiked ? mutateDeleteLike() : mutateLike())}
+            >
+              <AiOutlineLike
+                className={
+                  userIsLiked
+                    ? "w-5 h-5 text-navyBlue"
+                    : "w-5 h-5 hover:text-navyBlue"
+                }
+              />
+              <span>{likeCount}</span>
+            </div>
+            <div
+              className="flex items-center gap-1"
+              onClick={() =>
+                currentUserDissLike ? mutateDisLike() : mutateDisLike()
+              }
+            >
+              <AiOutlineDislike
+                className={
+                  currentUserDissLike
+                    ? "w-5 h-5 text-navyBlue"
+                    : "w-5 h-5 hover:text-navyBlue"
+                }
+              />
+              <span>{dissLikeCount}</span>
+            </div>
           </div>
           <div className="space-x-2 flex justify-center items-center">
             <span className="text-lg font-bold">

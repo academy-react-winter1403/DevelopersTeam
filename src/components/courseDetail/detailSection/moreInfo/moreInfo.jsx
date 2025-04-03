@@ -12,6 +12,7 @@ import http from "./../../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 
 const MoreInfo = ({ data }) => {
   const queryClient = useQueryClient();
@@ -181,13 +182,11 @@ const MoreInfo = ({ data }) => {
             }}
             className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
           >
-            <MdFavoriteBorder
-              className={
-                !data?.isUserFavorite
-                  ? "size-6 hover:text-navyBlue"
-                  : "size-6 text-red-500 "
-              }
-            />
+            {data?.isUserFavorite ? (
+              <MdFavorite className="w-5 h-5 text-navyBlue" />
+            ) : (
+              <MdFavoriteBorder className="w-5 h-5 hover:text-navyBlue" />
+            )}
           </div>
           <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
             <div
