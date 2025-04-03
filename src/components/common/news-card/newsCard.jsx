@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../core/services/interceptor";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
+import { TagsA, TagsB } from "../course-card/tags/tags";
 
 const NewsCard = ({
   addUserProfileImage,
@@ -18,12 +19,12 @@ const NewsCard = ({
   id,
   currentUserDissLike,
   likeId,
+  keyword,
 }) => {
   const queryClient = useQueryClient();
 
   const handleLike = async () => {
     const res = await http.post(`/News/NewsLike/${id}`);
-    // return res
   };
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
@@ -56,7 +57,12 @@ const NewsCard = ({
 
   return (
     <div className="flex flex-col border-2 border-gray-50 rounded-2xl bg-lightGray p-4 w-full  sm:max-w-[300px] md:max-w-[300px] mx-auto">
-      <div className="h-40 w-full rounded-2xl overflow-hidden">
+      <div className="h-40 w-full rounded-2xl overflow-hidden relative">
+        <div className=" absolute top-2 right-2 flex space-x-2 ">
+          <TagsA text={keyword} />
+          {/* <TagsB text={levelName} /> */}
+        </div>
+
         <NavLink to={`/news/newsdetail/${id}`}>
           <img
             src={addUserProfileImage}
@@ -83,55 +89,50 @@ const NewsCard = ({
         <img src={ViewStroke} alt="View Stroke" className="h-4 w-5" />
         <span className="text-[12px] text-[#272727]">225</span>
       </div>
-
-      {/*button card*/}
       <div className="flex justify-between items-center  gap-6  ">
-       <div className="flex  justify-baseline mr-[-10px]">
-       <div
-          className="flex justify-center items-center m-2 gap-1 "
-          onClick={() =>
-            currentUserIsLike ? mutateDeleteLike() : mutateLike()
-          }
-        >
-          <AiOutlineLike
-            className= {
-              currentUserIsLike
-                ? "w-6 h-6 text-navyBlue"
-                : "w-6 h-6 hover:text-navyBlue"
+        <div className="flex  justify-baseline mr-[-10px]">
+          <div
+            className="flex justify-center items-center m-2 gap-1 "
+            onClick={() =>
+              currentUserIsLike ? mutateDeleteLike() : mutateLike()
             }
-          />
-          <span className="text-sm  text-[#272727]">
-            {currentLikeCount}
-          </span>
-        </div>
+          >
+            <AiOutlineLike
+              className={
+                currentUserIsLike
+                  ? "w-6 h-6 text-navyBlue"
+                  : "w-6 h-6 hover:text-navyBlue"
+              }
+            />
+            <span className="text-sm  text-[#272727]">{currentLikeCount}</span>
+          </div>
 
-        <div
-          className="flex items-center gap-1 "
-          onClick={() =>
-            currentUserDissLike ? mutateDisLike() : mutateDisLike()
-          }
-        >
-          <AiOutlineDislike
-            className={
-              currentUserIsDissLike
-                ? "w-6 h-6 text-navyBlue"
-                : "w-6 h-6 hover:text-navyBlue"
+          <div
+            className="flex items-center gap-1 "
+            onClick={() =>
+              currentUserDissLike ? mutateDisLike() : mutateDisLike()
             }
-          />
-          <span className="text-sm  text-[#272727]">
-            {currentDissLikeCount}
-          </span>
+          >
+            <AiOutlineDislike
+              className={
+                currentUserIsDissLike
+                  ? "w-6 h-6 text-navyBlue"
+                  : "w-6 h-6 hover:text-navyBlue"
+              }
+            />
+            <span className="text-sm  text-[#272727]">
+              {currentDissLikeCount}
+            </span>
+          </div>
         </div>
-       </div>
 
         <div className="">
-          <NavLink>
-            <h2 className="bg-blue-500 text-white rounded-2xl  px-2 py-1 text-[10px] lg:text-sm text-center cursor-pointer">
+          <NavLink to={`/news/newsdetail/${id}`}>
+            <h2 className="bg-blue-500 text-white rounded-2xl  px-2 py-1 text-[10px] lg:text-[12px] text-center cursor-pointer">
               بیشتر بخوانید
             </h2>
           </NavLink>
         </div>
-
       </div>
     </div>
   );

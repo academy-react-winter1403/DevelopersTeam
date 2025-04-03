@@ -22,6 +22,7 @@ const NewsItemCard = ({
   currentUserIsLike,
   currentUserIsDissLike,
   likeId,
+  
 }) => {
   const queryClient = useQueryClient();
 
