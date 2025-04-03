@@ -55,7 +55,7 @@ const NewsCard = ({
   });
 
   return (
-    <div className="flex flex-col border-2 border-gray-50 rounded-2xl bg-gray-50 p-4 w-full  sm:max-w-[300px] md:max-w-[300px] mx-auto">
+    <div className="flex flex-col border-2 border-gray-50 rounded-2xl bg-lightGray p-4 w-full  sm:max-w-[300px] md:max-w-[300px] mx-auto">
       <div className="h-40 w-full rounded-2xl overflow-hidden">
         <NavLink to={`/news/newsdetail/${id}`}>
           <img
@@ -85,27 +85,28 @@ const NewsCard = ({
       </div>
 
       {/*button card*/}
-      <div className="flex justify-between items-center m-2 gap-4 border-2">
-        <div
-          className="flex justify-between items-center m-2 gap-4"
+      <div className="flex justify-between items-center  gap-6  ">
+       <div className="flex  justify-baseline mr-[-10px]">
+       <div
+          className="flex justify-center items-center m-2 gap-1 "
           onClick={() =>
             currentUserIsLike ? mutateDeleteLike() : mutateLike()
           }
         >
           <AiOutlineLike
-            className={
+            className= {
               currentUserIsLike
                 ? "w-6 h-6 text-navyBlue"
                 : "w-6 h-6 hover:text-navyBlue"
             }
           />
-          <span className="text-sm font-bold text-[#272727]">
+          <span className="text-sm  text-[#272727]">
             {currentLikeCount}
           </span>
         </div>
 
         <div
-          className="flex items-center gap-1"
+          className="flex items-center gap-1 "
           onClick={() =>
             currentUserDissLike ? mutateDisLike() : mutateDisLike()
           }
@@ -117,18 +118,20 @@ const NewsCard = ({
                 : "w-6 h-6 hover:text-navyBlue"
             }
           />
-          <span className="text-sm font-bold text-[#272727]">
+          <span className="text-sm  text-[#272727]">
             {currentDissLikeCount}
           </span>
         </div>
+       </div>
 
-        <div>
+        <div className="">
           <NavLink>
-            <h2 className="bg-blue-500 text-white rounded-full px-4 py-1 text-sm text-center cursor-pointer">
+            <h2 className="bg-blue-500 text-white rounded-2xl  px-2 py-1 text-[10px] lg:text-sm text-center cursor-pointer">
               بیشتر بخوانید
             </h2>
           </NavLink>
         </div>
+
       </div>
     </div>
   );
