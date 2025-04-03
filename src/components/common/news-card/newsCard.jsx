@@ -97,50 +97,49 @@ const NewsCard = ({
           <span className="text-[12px] text-[#272727]">22</span>
         </div> */}
 
-        <div
-          className="flex justify-between items-center m-2 gap-4"
-          onClick={() =>
-            data?.currentUserIsLike ? mutateDeleteLike() : mutateLike()
+      <div
+        className="flex justify-between items-center m-2 gap-4"
+        onClick={() =>
+          data?.currentUserIsLike ? mutateDeleteLike() : mutateLike()
+        }
+      >
+        <AiOutlineLike
+          className={
+            data?.currentUserIsLike
+              ? "w-6 h-6 text-navyBlue"
+              : "w-6 h-6 hover:text-navyBlue"
           }
-        >
-          <AiOutlineLike
-            className={
-              data?.currentUserIsLike
-                ? "w-6 h-6 text-navyBlue"
-                : "w-6 h-6 hover:text-navyBlue"
-            }
-          />
-        </div>
+        />
+      </div>
 
-        {/* <div className="flex items-center gap-1">
+      {/* <div className="flex items-center gap-1">
           <img src={thumbDown} alt="Thumb Down" className="h-5 w-5" />
           <span className="text-[12px] text-[#272727]">1</span>
         </div> */}
 
-          <div
-            className="flex items-center gap-1"
-            onClick={() =>
-              data?.currentUserDissLike ? mutateDisLike() : mutateDisLike()
-               }
-           >
-            <AiOutlineDislike
-              className={
-                data?.currentUserIsDissLike
-                  ? "w-6 h-6 text-navyBlue"
-                  : "w-6 h-6 hover:text-navyBlue"
-                    }
-            />
-            </div>
-
-        <div>
-          <Link>
-            <h2 className="bg-blue-500 text-white rounded-full px-4 py-1 text-sm text-center cursor-pointer">
-              بیشتر بخوانید
-            </h2>
-          </Link>
-        </div>
+      <div
+        className="flex items-center gap-1"
+        onClick={() =>
+          data?.currentUserDissLike ? mutateDisLike() : mutateDisLike()
+        }
+      >
+        <AiOutlineDislike
+          className={
+            data?.currentUserIsDissLike
+              ? "w-6 h-6 text-navyBlue"
+              : "w-6 h-6 hover:text-navyBlue"
+          }
+        />
       </div>
-    
+
+      <div>
+        <NavLink>
+          <h2 className="bg-blue-500 text-white rounded-full px-4 py-1 text-sm text-center cursor-pointer">
+            بیشتر بخوانید
+          </h2>
+        </NavLink>
+      </div>
+    </div>
   );
 };
 
