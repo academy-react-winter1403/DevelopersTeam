@@ -11,6 +11,7 @@ import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Rate } from "antd";
 import star from "./../../assets/images/courseDetail/star.svg";
+import CommentComp from "../common/commentsComponent/commentComp";
 
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
@@ -129,7 +130,7 @@ const GetNewsDetailList = () => {
 
         <h2 className="mt-20 sm:mt-12 px-2 sm:px-4  text-[#787878]  font-semibold">منتشر کننده</h2>
 
-        <div className="flex items-center justify-between gap-2 p-2 ">
+        <div className="flex items-center justify-between gap-4 px-2">
           <div className="gap-2 flex items-center">
             <img
               src={
@@ -163,7 +164,7 @@ const GetNewsDetailList = () => {
               />
             </div>
 
-            <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+            <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center  cursor-pointer">
               <div
                 className="flex items-center gap-1"
                 onClick={() =>
@@ -246,7 +247,9 @@ const GetNewsDetailList = () => {
 
         <div className="w-full h-auto p-2 space-y-3">
           <h2 className="font-bol text-3xl p-4">نظرات</h2>
-          <div className="border border-[#E4E4E4] w-full h-96 p-2 space-y-3 rounded-4xl"></div>
+          <div className="border border-[#E4E4E4] w-full h-96 p-2 space-y-3 rounded-4xl">
+            <CommentComp/>
+          </div>
         </div>
       </div>
     </div>
