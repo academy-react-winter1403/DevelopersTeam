@@ -1,10 +1,8 @@
 import React from "react";
 import QuillWrite from "./../../../assets/images/quill-write-02-stroke-rounded 2.svg";
 import ViewStroke from "./../../../assets/images/view-stroke-rounded (1) 1.svg";
-import ThumbUp from "./../../../assets/images/thumbs-up-stroke-rounded 1.svg";
-import thumbDown from "./../../../assets/images/thumb-down.svg";
-import { Link, NavLink, useParams } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { NavLink } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../core/services/interceptor";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
@@ -14,22 +12,14 @@ const NewsCard = ({
   miniDescribe,
   addUserFullName,
   currentUserIsLike,
-  mutate,
   currentLikeCount,
   currentUserIsDissLike,
   currentDissLikeCount,
+  id,
+  currentUserDissLike,
+  likeId,
 }) => {
   const queryClient = useQueryClient();
-  const { id } = useParams();
-
-  const getDetail = async () => {
-    const res = await http.get(`/News/${id}`);
-    return res?.detailsNewsDto;
-  };
-  const { data } = useQuery({
-    queryKey: "newsDetail",
-    queryFn: getDetail,
-  });
 
   const handleLike = async () => {
     const res = await http.post(`/News/NewsLike/${id}`);
@@ -38,20 +28,19 @@ const NewsCard = ({
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries("topNews");
     },
   });
 
   const handleDelete = async () => {
     const res = await http.delete("/News/DeleteLikeNews", {
-      data: { deleteEntityId: data?.likeId },
+      data: { deleteEntityId: likeId },
     });
-    console.log(res);
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries("topNews");
     },
   });
 
@@ -61,7 +50,7 @@ const NewsCard = ({
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries("topNews");
     },
   });
 
@@ -100,12 +89,12 @@ const NewsCard = ({
         <div
           className="flex justify-between items-center m-2 gap-4"
           onClick={() =>
-            data?.currentUserIsLike ? mutateDeleteLike() : mutateLike()
+            currentUserIsLike ? mutateDeleteLike() : mutateLike()
           }
         >
           <AiOutlineLike
             className={
-              data?.currentUserIsLike
+              currentUserIsLike
                 ? "w-6 h-6 text-navyBlue"
                 : "w-6 h-6 hover:text-navyBlue"
             }
@@ -118,12 +107,12 @@ const NewsCard = ({
         <div
           className="flex items-center gap-1"
           onClick={() =>
-            data?.currentUserDissLike ? mutateDisLike() : mutateDisLike()
+            currentUserDissLike ? mutateDisLike() : mutateDisLike()
           }
         >
           <AiOutlineDislike
             className={
-              data?.currentUserIsDissLike
+              currentUserIsDissLike
                 ? "w-6 h-6 text-navyBlue"
                 : "w-6 h-6 hover:text-navyBlue"
             }

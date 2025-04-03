@@ -34,8 +34,6 @@
 
 // export default TopNews;
 
-
-
 import React from "react";
 import http from "../../core/services/interceptor";
 import NewsCard from "../common/news-card/newsCard";
@@ -70,6 +68,12 @@ const TopNews = () => {
             title={item.title}
             miniDescribe={item.miniDescribe}
             addUserFullName={item.addUserFullName}
+            id={item.id}
+            currentLikeCount={item.currentLikeCount}
+            currentDissLikeCount={item.currentDissLikeCount}
+            currentUserIsLike={item.currentUserIsLike}
+            currentUserIsDissLike={item.currentUserIsDissLike}
+            likeId={item.likeId}
           />
         ))}
       </div>
