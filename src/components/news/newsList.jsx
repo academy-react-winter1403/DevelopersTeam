@@ -67,6 +67,7 @@ const NewsList = () => {
                 currentUserIsLike={item.currentUserIsLike}
                 currentUserIsDissLike={item.currentUserIsDissLike}
                 likeId={item.likeId}
+                mutate={item.mutate}
               />
             );
           })}

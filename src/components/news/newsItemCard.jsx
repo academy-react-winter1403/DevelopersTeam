@@ -120,7 +120,7 @@ const NewsItemCard = ({
               {currentUserIsLike ? (
                 <div className="flex items-center justify-between gap-1  ">
                   <AiOutlineLike
-                    className="md:h-5 md:w-5 w-4 h-4 text-red-400"
+                    className="md:h-5 md:w-5 w-4 h-4 text-navyBlue"
                     onClick={() => mutateDeleteLike()}
                   />
                   <span className="text-sm font-bold text-[#272727]">
@@ -141,7 +141,7 @@ const NewsItemCard = ({
 
               {currentUserIsDissLike ? (
                 <div className="flex  gap-1">
-                  <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4 text-red-400" />
+                  <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4 text-navyBlue" />
                   <span className="text-sm font-bold text-[#272727]">
                     {currentDissLikeCount}
                   </span>
