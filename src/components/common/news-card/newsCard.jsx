@@ -140,7 +140,7 @@ const NewsCard = ({
           </Link>
         </div>
       </div>
-    </div>
+    
   );
 };
 
