@@ -159,7 +159,7 @@ const NewsItemCard = ({
             <div className="md:px-2">
               <h2
                 onClick={handleNavigation}
-                className="bg-navyBlue rounded-xl text-white lg:h-9 md:rounded-full md:px-4 py-1 text-sm px-1 line-clamp-1 text-center cursor-pointer"
+                className="bg-navyBlue rounded-xl text-white lg:h-9 md:rounded-full md:px-4 py-1 text-sm px-1 leading-6 line-clamp-1 text-center cursor-pointer"
               >
                 بیشتر بخوانید
               </h2>
