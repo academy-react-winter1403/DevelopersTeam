@@ -49,11 +49,11 @@ const NewsItemCard = ({
 
   const handleDelete = async () => {
     const myData = new FormData();
-    console.log(myData)
+    // console.log(myData)
     myData.append("deleteEntityId",likeId);
 
     const res = await http.delete("/News/DeleteLikeNews", { data: myData });
-    console.log(res);
+    // console.log(res);
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,

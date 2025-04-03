@@ -51,15 +51,16 @@ const Header = () => {
       </div>
       <div className="flex w-1/5  justify-center items-center space-x-3">
         <div className="border-2 border-gray-200 w-9 h-9 lg:flex justify-center items-center rounded-full hidden">
-          <IoMoonOutline className="text-2xl" />
+          <IoMoonOutline className="size-5" />
         </div>
         <div className="flex items-center justify-center">
           {token ? (
             <Button
               type="primary"
               shape="round"
-              icon={<FiUser className="w-5 h-5 mt-1" />}
-              style={{ fontFamily: "yekan", marginRight: "4px" }}
+              icon={<FiUser className="w-4 h-4 mt-1" />}
+              style={{ fontFamily: "yekan", marginRight: "4px" , fontSize:'12px' }}
+              
             >
               پنل دانشجویی
             </Button>

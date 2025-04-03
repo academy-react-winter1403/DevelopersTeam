@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import TeacherIcon from "./../../../assets/images/teacher-stroke-rounded 1.svg";
 import CalenderIcon from "./../../../assets/images/calendar-03-stroke-rounded 1.svg";
@@ -7,7 +7,9 @@ import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg"
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import DateComponent from "../../common/date/dateComponent";
-import Tags from "../../common/course-card/tags/tags";
+import { TagsA, TagsB } from "../../common/course-card/tags/tags";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import http from "../../../core/services/interceptor";
 
 const GridCourseCard = ({
   title,
@@ -19,44 +21,78 @@ const GridCourseCard = ({
   likeCount,
   dissLikeCount,
   lastUpdate,
-  id,statusName,
-  levelName
+  id,
+  statusName,
+  levelName,
+  userIsLiked,
+  userLikedId,
+  currentUserDissLike,
+  keyMutate,
 }) => {
-  const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate(`/courses/coursedetail/${id}`);
-  };
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
+  const queryClient = useQueryClient();
+
+  const handleLike = async () => {
+    const res = await http.post(`/Course/AddCourseLike?CourseId=${id}`);
+    // console.log(res);
+  };
+  const { mutate: mutateLike } = useMutation({
+    mutationFn: handleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries(keyMutate);
+    },
+  });
+  const handleDelete = async () => {
+    const myData = new FormData();
+    myData.append("CourseLikeId", userLikedId);
+    const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
+    // console.log(res);
+  };
+  const { mutate: mutateDeleteLike } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      queryClient.invalidateQueries(keyMutate);
+    },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
+    },
+  });
+  const handleDisLike = async () => {
+    const res = await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
+  };
+  const { mutate: mutateDisLike } = useMutation({
+    mutationFn: handleDisLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries(keyMutate);
+    },
+  });
 
   return (
     <div className="w-full h-72 bg-lightGray  grid grid-cols-5 overflow-hidden rounded-3xl mr-3 relative">
       <div className=" absolute top-2 right-2 sm:flex space-x-2 hidden">
-        <Tags color="#5A7EFF" text={statusName} />
-        <Tags color="#DE59FF" text={levelName} />
+        <TagsA text={statusName} />
+        <TagsB text={levelName} />
       </div>
-      <div
-        onClick={handleNavigate}
-        className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden"
-      >
-        <img
-          src={img == null ? defaultImg : img}
-          alt="not set"
-          className="w-full h-full object-cover rounded-3xl"
-          onError={addDefaultImg}
-          onClick={handleNavigate}
-        />
+      <div className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden h-72">
+        <NavLink to={`/courses/coursedetail/${id}`}>
+          <img
+            src={img == null ? defaultImg : img}
+            alt="not set"
+            className="w-full h-full object-cover rounded-3xl"
+            onError={addDefaultImg}
+          />
+        </NavLink>
       </div>
 
       <div className="col-span-3 m-6 space-y-5">
         <div className="w-full max-w-[300px] overflow-hidden space-y-2">
-          <h2
-            onClick={handleNavigate}
-            className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 "
-          >
-            {title}
-          </h2>
+          <NavLink to={`/courses/coursedetail/${id}`}>
+            <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 hover:text-navyBlue ">
+              {title}
+            </h2>
+          </NavLink>
           <h2 className="text-[#787878] text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">
             {describe}
           </h2>
@@ -80,20 +116,39 @@ const GridCourseCard = ({
             </span>
           </div>
         </div>
-        <div className="flex justify-between items-center mt-6 gap-4 ml-1 sm:mb-2">
+        <div className="flex justify-between items-center mt-12 gap-4 ml-1 sm:mb-2">
           <div className=" flex justify-around items-center gap-10">
-            <div className="flex items-center justify-center space-x-3">
-              <AiOutlineLike className="size-5" />
-              <span className="text-sm font-bold text-[#272727]">
-                {likeCount}
-              </span>
-            </div>
-            <div className="flex items-center justify-center space-x-3">
-              <AiOutlineDislike className="size-5" />
-              <span className="text-sm font-bold text-[#272727]">
-                {dissLikeCount}
-              </span>
-            </div>
+            {userIsLiked ? (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateDeleteLike()}
+              >
+                <AiOutlineLike className="w-5 h-5 text-red-500" />
+                <span>{likeCount}</span>
+              </div>
+            ) : (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateLike()}
+              >
+                <AiOutlineLike className="w-5 h-5" />
+                <span>{likeCount}</span>
+              </div>
+            )}
+            {currentUserDissLike ? (
+              <div className="flex items-center gap-1">
+                <AiOutlineDislike className="w-5 h-5 text-red-500" />
+                <span>{dissLikeCount}</span>
+              </div>
+            ) : (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => mutateDisLike()}
+              >
+                <AiOutlineDislike className="w-5 h-5" />
+                <span>{dissLikeCount}</span>
+              </div>
+            )}
           </div>
           <div className="space-x-2 flex justify-center items-center">
             <span className="text-lg font-bold">

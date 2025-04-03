@@ -16,7 +16,7 @@ const CourseStatus = () => {
   });
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const options =data?.slice(1, 5).map((item) =>({ label: item.levelName, value: item.levelName }));

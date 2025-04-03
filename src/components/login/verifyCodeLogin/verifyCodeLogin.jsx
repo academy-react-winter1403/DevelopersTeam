@@ -8,10 +8,10 @@ import { Input } from "antd";
 const VerifyCodeLogin = ({ text, nextStep, prevStep }) => {
   const [otp, setOtp] = useState("");
   const onChange = (text) => {
-    console.log("onChange:", text);
+    // console.log("onChange:", text);
   };
   const onInput = (value) => {
-    console.log("onInput:", value);
+    // console.log("onInput:", value);
   };
   const sharedProps = {
     onChange,

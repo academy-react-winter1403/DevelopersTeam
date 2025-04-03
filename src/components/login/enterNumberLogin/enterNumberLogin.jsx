@@ -19,7 +19,7 @@ const EnterNumberLogin = ({ nextStep, text }) => {
   const handleMutation = async (values) => {
     try {
       const response = await mutateAsync(values);
-      console.log('Login response:', response);      
+      // console.log('Login response:', response);      
       if (response) {
         setData('authToken', response.token); 
         setData('userData', response.user);       
