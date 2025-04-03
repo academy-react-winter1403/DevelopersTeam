@@ -3,7 +3,7 @@ import http from "../../core/services/interceptor";
 import { useParams } from "react-router-dom";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import { IoEyeOutline } from "react-icons/io5";
-import { MdOutlineBookmarkAdd } from "react-icons/md";
+import { MdFavoriteBorder, MdOutlineBookmarkAdd } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import DateComponent from "../../components/common/date/dateComponent";
@@ -12,43 +12,104 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Rate } from "antd";
 import star from "./../../assets/images/courseDetail/star.svg";
 
-
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
   const { id } = useParams();
 
   const getDetail = async () => {
     const res = await http.get(`/News/${id}`);
-    return res;
+    return res?.detailsNewsDto;
   };
-
-  const {data} = useQuery({
+  const { data } = useQuery({
     queryKey: "newsDetail",
     queryFn: getDetail,
-  })
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const addDefaultImg = (e) => {
-    e.target.src = defaultImg;
-  };
+  });
 
   const handleRate = async (rateValue) => {
     const res = await http.post(
-      `/News/NewsRate?NewsId=<uuid>&RateNumber=<double>${data?.NewsId}&RateNumber=${rateValue}`
+      `/News/NewsRate?NewsId=${id}&RateNumber=${rateValue}`
     );
     return res;
   };
-
-  const { mutate } = useMutation({
+  const { mutate: mutateRate } = useMutation({
     mutationFn: handleRate,
     onSuccess: () => {
       queryClient.invalidateQueries("newsDetail");
     },
   });
 
+  const handleLike = async () => {
+    const res = await http.post(`/News/NewsLike/${id}`);
+    // return res
+  };
+  const { mutate: mutateLike } = useMutation({
+    mutationFn: handleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("newsDetail");
+    },
+  });
+
+  const handleDelete = async () => {
+    const res = await http.delete("/News/DeleteLikeNews", {
+      data: { deleteEntityId: data?.likeId },
+    });
+    console.log(res);
+  };
+  const { mutate: mutateDeleteLike } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      queryClient.invalidateQueries("newsDetail");
+    },
+  });
+
+  const handleDisLike = async () => {
+    const res = await http.post(`/News/NewsDissLike/${id}`);
+  };
+  const { mutate: mutateDisLike } = useMutation({
+    mutationFn: handleDisLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("newsDetail");
+    },
+  });
+
+  const handleFavorite = async () => {
+    const res = await http.post(`/News/AddFavoriteNews?NewsId=${id}`);
+  };
+  const { mutate: mutateFavorite } = useMutation({
+    mutationFn: handleFavorite,
+    onSuccess: () => {
+      queryClient.invalidateQueries("newsDetail");
+      toast.success("دوره با موفقیت به علاقه مندی ها اضافه شد");
+    },
+    onError: () => {
+      if (data?.isUserFavorite == true) {
+        toast.error("این دوره در لیست علاقه مندی های شما موجود میباشد");
+      } else toast.error("دوباره امتحان کنید");
+    },
+  });
+
+  const handleDeleteFav = async () => {
+    const res = await http.delete("/News/DeleteFavoriteNews", {
+      data: { deleteEntityId: data?.currentUserFavoriteId },
+    });
+    // console.log(res);
+  };
+  const { mutate: mutateDeleteFav } = useMutation({
+    mutationFn: handleDeleteFav,
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+    },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
+    },
+  });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const addDefaultImg = (e) => {
+    e.target.src = defaultImg;
+  };
   return (
     <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">
       <div className="border-4 w-[538px] h-[428px]  border-[#E4E4E4] rounded-4xl sticky top-5">
@@ -85,14 +146,54 @@ const GetNewsDetailList = () => {
             </span>
           </div>
           <div className="flex  justify-evenly gap-2 ">
-            <div className="flex items-center justify-center border border-[#E4E4E4] rounded-full w-14 h-14">
-              <MdOutlineBookmarkAdd className=" w-6 h-6 " />
+            <div
+              onClick={() => {
+                data?.isCurrentUserFavorite
+                  ? mutateDeleteFav()
+                  : mutateFavorite();
+              }}
+              className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
+            >
+              <MdFavoriteBorder
+                className={
+                  data?.isCurrentUserFavorite
+                    ? "size-6 text-navyBlue"
+                    : "size-6 hover:text-navyBlue"
+                }
+              />
             </div>
-            <div className="flex items-center justify-center border border-[#E4E4E4] rounded-full w-14 h-14">
-              <AiOutlineLike className=" w-6 h-6" />
+
+            <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+              <div
+                className="flex items-center gap-1"
+                onClick={() =>
+                  data?.currentUserIsLike ? mutateDeleteLike() : mutateLike()
+                }
+              >
+                <AiOutlineLike
+                  className={
+                    data?.currentUserIsLike
+                      ? "w-6 h-6 text-navyBlue"
+                      : "w-6 h-6 hover:text-navyBlue"
+                  }
+                />
+              </div>
             </div>
-            <div className="flex items-center justify-center border border-[#E4E4E4] rounded-full w-14 h-14">
-              <AiOutlineDislike className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+              <div
+                className="flex items-center gap-1"
+                onClick={() =>
+                  data?.currentUserDissLike ? mutateDisLike() : mutateDisLike()
+                }
+              >
+                <AiOutlineDislike
+                  className={
+                    data?.currentUserIsDissLike
+                      ? "w-6 h-6 text-navyBlue"
+                      : "w-6 h-6 hover:text-navyBlue"
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -128,14 +229,18 @@ const GetNewsDetailList = () => {
           </h2>
         </div>
 
-        <div className="p-2 mt-10 space-x-4 flex items-center">
+        <div className="p-2 mt-10 space-x-4 flex items-center ">
           <img src={star} alt="" />
           <span>امتیاز بدید</span>
-          {data?.currentRate}
+          <span>({data?.currentRate})</span>{" "}
           <Rate
             allowHalf
-            value={data?.currentRate}
-            onChange={(rateValue) => mutate(rateValue)}
+            value={
+              !data?.currentUserSetRate
+                ? data?.currentRate
+                : data?.currentUserRateNumber
+            }
+            onChange={(rateValue) => mutateRate(rateValue)}
           />
         </div>
 

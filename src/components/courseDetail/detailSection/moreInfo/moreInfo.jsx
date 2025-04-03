@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TagsA } from "../../../common/course-card/tags/tags";
 import { CiStar } from "react-icons/ci";
 import CalenderIcon from "./../../../../assets/images/calendar-03-stroke-rounded 1.svg";
@@ -111,7 +111,9 @@ const MoreInfo = ({ data }) => {
       console.error("Error deleting like:", error);
     },
   });
-
+  useEffect(() => {
+    console.log(data?.currentUserLike);
+  }, [data]);
   return (
     <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0">
       <div className=" bg-[#FFD1CB] w-30 md:w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
@@ -173,52 +175,53 @@ const MoreInfo = ({ data }) => {
           رزرو دوره
         </Button>
         <div className="flex space-x-3">
-          {data?.isUserFavorite ? (
-            <div
-              onClick={() => mutateDeleteFav()}
-              className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
-            >
-              <MdFavoriteBorder className="size-6 text-red-500 " />
-            </div>
-          ) : (
-            <div
-              onClick={() => mutateFavorite()}
-              className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
-            >
-              <MdFavoriteBorder className="size-6 hover:text-navyBlue" />
-            </div>
-          )}
-
-          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
-            {data?.currentUserLike ? (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateDeleteLike()}
-              >
-                <AiOutlineLike className="size-6 hover:text-navyBlue text-red-500" />
-              </div>
-            ) : (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateLike()}
-              >
-                <AiOutlineLike className="w-5 h-5 " />
-              </div>
-            )}
+          <div
+            onClick={() => {
+              data?.isUserFavorite ? mutateDeleteFav() : mutateFavorite();
+            }}
+            className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
+          >
+            <MdFavoriteBorder
+              className={
+                !data?.isUserFavorite
+                  ? "size-6 hover:text-navyBlue"
+                  : "size-6 text-red-500 "
+              }
+            />
           </div>
           <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
-            {data?.currentUserDissLike ? (
-              <div className="flex items-center gap-1">
-                <AiOutlineDislike className="size-6 text-red-500" />
-              </div>
-            ) : (
-              <div
-                className="flex items-center gap-1"
-                onClick={() => mutateDisLike()}
-              >
-                <AiOutlineDislike className="w-5 h-5" />
-              </div>
-            )}
+            <div
+              className="flex items-center gap-1"
+              onClick={() =>
+                data?.currentUserLike == "1" ? mutateDeleteLike() : mutateLike()
+              }
+            >
+              <AiOutlineLike
+                className={
+                  data?.currentUserLike == "1"
+                    ? "w-6 h-6 text-navyBlue "
+                    : "w-6 h-6 hover:text-navyBlue"
+                }
+              />
+            </div>
+          </div>
+          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+            <div
+              className="flex items-center gap-1"
+              onClick={() =>
+                data?.currentUserDissLike == "1"
+                  ? mutateDisLike()
+                  : mutateDisLike()
+              }
+            >
+              <AiOutlineDislike
+                className={
+                  data?.currentUserDissLike == "1"
+                    ? "w-6 h-6 text-navyBlue"
+                    : "w-6 h-6 hover:text-navyBlue"
+                }
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ const NewsItemCard = ({
   id,
   currentUserIsLike,
   currentUserIsDissLike,
-  likeId
+  likeId,
 }) => {
   const queryClient = useQueryClient();
 
@@ -39,7 +39,6 @@ const NewsItemCard = ({
     const res = await http.post(`/News/NewsLike/${id}`);
     // return res
   };
-
   const { mutate } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
@@ -48,24 +47,21 @@ const NewsItemCard = ({
   });
 
   const handleDelete = async () => {
-    const myData = new FormData();
-    // console.log(myData)
-    myData.append("deleteEntityId",likeId);
-
-    const res = await http.delete("/News/DeleteLikeNews", { data: myData });
-    // console.log(res);
+    const res = await http.delete("/News/DeleteLikeNews", {
+      data: { deleteEntityId: likeId },
+    });
+    console.log(res);
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries("news-list");
-    }
+    },
   });
 
   const handleDisLike = async () => {
     const res = await http.post(`/News/NewsDissLike/${id}`);
   };
-
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
@@ -121,7 +117,6 @@ const NewsItemCard = ({
           </div>
           <div className="flex justify-between items-center mt-6 gap-4 ml-1 sm:mb-2">
             <div className=" flex justify-around gap-10">
-
               {currentUserIsLike ? (
                 <div className="flex items-center justify-between gap-1  ">
                   <AiOutlineLike
@@ -145,22 +140,20 @@ const NewsItemCard = ({
               )}
 
               {currentUserIsDissLike ? (
-                 <div className="flex  gap-1">
-                 <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4 text-red-400" />
-                 <span className="text-sm font-bold text-[#272727]">
-                   {currentDissLikeCount}
-                 </span>
-               </div>
-              ) : (<div className="flex  gap-1"
-                onClick={() => mutateDisLike()}
-              >
-                <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4" />
-                <span className="text-sm font-bold text-[#272727]">
-                  {currentDissLikeCount}
-                </span>
-              </div>)}
-
-              
+                <div className="flex  gap-1">
+                  <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4 text-red-400" />
+                  <span className="text-sm font-bold text-[#272727]">
+                    {currentDissLikeCount}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex  gap-1" onClick={() => mutateDisLike()}>
+                  <AiOutlineDislike className="md:h-5 md:w-5 w-4 h-4" />
+                  <span className="text-sm font-bold text-[#272727]">
+                    {currentDissLikeCount}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="md:px-2">

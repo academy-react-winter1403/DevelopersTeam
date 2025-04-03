@@ -41,8 +41,8 @@ const TopCourses = () => {
               levelName={item.levelName}
               lastUpdate={item.lastUpdate}
               userIsLiked={item.userIsLiked}
-              userLikedId={item.userLikedId}
-              currentUserDissLike={item.currentUserDissLike}
+              userLikedId={item.userLikeId}
+              currentUserDissLike={item.userIsDissLiked}
               keyMutate="topCourses"
             />
           );
