@@ -111,23 +111,23 @@ const GetNewsDetailList = () => {
     e.target.src = defaultImg;
   };
   return (
-    <div className="my-14 h-auto flex flex-col 2xl:flex-row justify-around ">
-      <div className="border-4 w-[538px] h-[428px]  border-[#E4E4E4] rounded-4xl sticky top-5">
-        <h2 className="text-3xl font-bold p-4  ">{data?.title}</h2>
+    <div className="my-14 h-auto flex flex-col lg:flex-row justify-around ">
+      <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0">
+        <h2 className="text-lg sm:text-3xl  font-bold sm:p-4  ">{data?.title}</h2>
 
-        <div className="flex gap-2 mt-28 space-x-2 space-y-5">
+        <div className="flex gap-2 mt-32 sm:mt-24 lg:mt-18 2xl:mt-24 space-x-2 sm:space-y-2">
           <HiOutlineCalendarDateRange className="w-6 h-6 mr-2" />
           <span>
             <DateComponent insertDate={data?.insertDate} />
           </span>
         </div>
 
-        <div className="flex gap-2 items-center ">
+        <div className="flex gap-2 items-center mt-8 sm:mt-1">
           <IoEyeOutline className="w-6 h-6 mr-2" />
           <span>225</span>
         </div>
 
-        <h2 className="mt-12 text-[#787878] p-4 font-semibold">منتشر کننده</h2>
+        <h2 className="mt-20 sm:mt-12 px-2 sm:px-4  text-[#787878]  font-semibold">منتشر کننده</h2>
 
         <div className="flex items-center justify-between gap-2 p-2 ">
           <div className="gap-2 flex items-center">
@@ -138,10 +138,10 @@ const GetNewsDetailList = () => {
                   : data?.addUserProfileImage
               }
               alt="not set"
-              className="border border-[#E4E4E4] rounded-full w-14 h-14"
+              className="border border-[#E4E4E4] rounded-full w-14 h-14 hidden sm:block"
               onError={addDefaultImg}
             />
-            <span className="font-semibold text-lg">
+            <span className="font-semibold text-md sm:text-lg">
               {data?.addUserFullName}
             </span>
           </div>
@@ -199,8 +199,8 @@ const GetNewsDetailList = () => {
         </div>
       </div>
 
-      <div className="w-[750px] border border-red-400 h-auto">
-        <div className="w-[738px] h-[428px] border border-[#E4E4E4] rounded-4xl">
+      <div className="lg:w-[719px] h-auto  m-4 lg:m-0 ">
+        <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden">
           <img
             src={
               data?.addUserProfileImage == null
@@ -208,12 +208,12 @@ const GetNewsDetailList = () => {
                 : data?.addUserProfileImage
             }
             alt="not set"
-            className="w-full"
+            className="w-full h-full"
             onError={addDefaultImg}
           />
         </div>
 
-        <div className="w-[738px] border-2 border-blue-500 h-auto ">
+        <div className="w-full h-auto p-2 space-y-3 ">
           <h2 className="mt-5 p-5">
             {data?.miniDescribe} لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
             از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
@@ -229,7 +229,7 @@ const GetNewsDetailList = () => {
           </h2>
         </div>
 
-        <div className="p-2 mt-10 space-x-4 flex items-center ">
+        <div className="p-2 mt-10 space-x-4 flex items-center">
           <img src={star} alt="" />
           <span>امتیاز بدید</span>
           <span>({data?.currentRate})</span>{" "}
@@ -244,9 +244,9 @@ const GetNewsDetailList = () => {
           />
         </div>
 
-        <div className="border w-[750px] h-auto mt-20">
+        <div className="w-full h-auto p-2 space-y-3">
           <h2 className="font-bol text-3xl p-4">نظرات</h2>
-          <div className="border border-[#E4E4E4] w-[738px] h-96 rounded-4xl"></div>
+          <div className="border border-[#E4E4E4] w-full h-96 p-2 space-y-3 rounded-4xl"></div>
         </div>
       </div>
     </div>
