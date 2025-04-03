@@ -4,7 +4,8 @@ import http from "./../../../../core/services/interceptor";
 import defaultImg from "./../../../../assets/images/courses/courseimg.svg";
 import { Rate } from "antd";
 import star from "./../../../../assets/images/courseDetail/star.svg";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import teacherImg from "./../../../../assets/images/courseDetail/teacherDefault.svg";
 
 const DetailContainer = ({ data }) => {
   const queryClient = useQueryClient();
@@ -26,6 +27,18 @@ const DetailContainer = ({ data }) => {
     },
   });
 
+  const getTeacherInfo = async () => {
+    const res = await http.get(
+      `/Home/GetTeacherDetails?TeacherId=${data?.teacherId}`
+    );
+    return res;
+  };
+
+  const { data: teacherData } = useQuery({
+    queryKey: ["teacherPic"],
+    queryFn: getTeacherInfo,
+  });
+
   return (
     <div className="lg:w-[719px] h-[1000px]  m-4 lg:m-0 ">
       <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden">
@@ -39,7 +52,13 @@ const DetailContainer = ({ data }) => {
       <div className=" w-full p-2 space-y-5 mt-5">
         <h1 className="text-gray">مدرس</h1>
         <div className="flex space-x-3 items-center">
-          <div className="w-14 h-14 bg-gray rounded-full "></div>
+          <div className="w-14 h-14 rounded-full overflow-hidden">
+            <img
+              src={teacherData?.pictureAddress || teacherImg}
+              alt=""
+              className="w-14 h-14"
+            />
+          </div>
           <div>
             <h1 className="font-semibold">{data?.teacherName}</h1>
             <h1 className="text-sm text-gray">سنیور فرانت اند</h1>
@@ -64,7 +83,6 @@ const DetailContainer = ({ data }) => {
         <img src={star} alt="" />
         <span>امتیاز بدید</span>
         <span>({data?.currentUserRateNumber})</span>
-
         <Rate
           allowHalf
           value={

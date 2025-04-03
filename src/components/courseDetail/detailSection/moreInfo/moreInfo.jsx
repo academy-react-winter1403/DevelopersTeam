@@ -117,7 +117,7 @@ const MoreInfo = ({ data }) => {
   }, [data]);
   return (
     <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0">
-      <div className=" bg-[#FFD1CB] w-30 md:w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
+      <div className=" bg-[#FFD1CB] w-30 md:max-w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
         <div className="w-2 h-2 rounded-full bg-[#FF5454]"></div>
         <h1 className="text-xs md:text-sm text-[#FF5454]">
           {data?.courseStatusName}
