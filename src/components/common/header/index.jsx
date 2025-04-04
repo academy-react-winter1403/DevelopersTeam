@@ -55,15 +55,20 @@ const Header = () => {
         </div>
         <div className="flex items-center justify-center">
           {token ? (
-            <Button
-              type="primary"
-              shape="round"
-              icon={<FiUser className="w-4 h-4 mt-1" />}
-              style={{ fontFamily: "yekan", marginRight: "4px" , fontSize:'12px' }}
-              
-            >
-              پنل دانشجویی
-            </Button>
+            <NavLink to="/panel">
+              <Button
+                type="primary"
+                shape="round"
+                icon={<FiUser className="w-4 h-4 mt-1" />}
+                style={{
+                  fontFamily: "yekan",
+                  marginRight: "4px",
+                  fontSize: "12px",
+                }}
+              >
+                پنل دانشجویی
+              </Button>
+            </NavLink>
           ) : (
             <Button
               type="primary"

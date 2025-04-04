@@ -11,6 +11,13 @@ import ForgetPasswordPage from "../../screens/forgetPasswordPage";
 import NotFoundPage from "../../screens/notFound";
 import EnterEmail from "../../components/forgetPassword/enterEmail/enterEmail";
 import NewPassword from "../../components/forgetPassword/newPassword/newPassword";
+import PanelLayout from "../../app/panelLayout";
+import DashboardPage from "../../screens/dashboardPage";
+import MyCoursePage from "../../screens/myCoursePage";
+import MyReserveCoursePage from "../../screens/myReserveCoursePage";
+import FavCoursePage from "../../screens/favCoursePage";
+import ProfilePage from "../../screens/profilePage";
+import FavNewPage from "../../screens/favNewPage";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +77,33 @@ export const router = createBrowserRouter([
       {
         path: "/forgetpass/setpassword/:id",
         element: <NewPassword />,
+      },
+    ],
+  },
+  {
+    path: "/panel",
+    element: <PanelLayout />,
+    children: [
+      { path: "/panel", element: <DashboardPage /> },
+      {
+        path: "/panel/mycourse",
+        element: <MyCoursePage />,
+      },
+      {
+        path: "/panel/myreservecourse",
+        element: <MyReserveCoursePage />,
+      },
+      {
+        path: "/panel/favcourse",
+        element: <FavCoursePage />,
+      },
+      {
+        path: "/panel/favnew",
+        element: <FavNewPage />,
+      },
+      {
+        path: "/panel/profile",
+        element: <ProfilePage />,
       },
     ],
   },
