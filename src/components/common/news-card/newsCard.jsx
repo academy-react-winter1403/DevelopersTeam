@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../core/services/interceptor";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
-import { TagsA, TagsB } from "../course-card/tags/tags";
+import { TagsA } from "../course-card/tags/tags";
 
 const NewsCard = ({
   addUserProfileImage,
@@ -60,7 +60,6 @@ const NewsCard = ({
       <div className="h-40 w-full rounded-2xl overflow-hidden relative">
         <div className=" absolute top-2 right-2 flex space-x-2 ">
           <TagsA text={keyword} />
-          {/* <TagsB text={levelName} /> */}
         </div>
 
         <NavLink to={`/news/newsdetail/${id}`}>

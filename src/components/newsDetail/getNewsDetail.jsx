@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Rate } from "antd";
 import star from "./../../assets/images/courseDetail/star.svg";
 import CommentComp from "../common/commentsComponent/commentComp";
+import { TagsA } from "../common/course-card/tags/tags";
 
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
@@ -116,19 +117,23 @@ const GetNewsDetailList = () => {
       <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0">
         <h2 className="text-lg sm:text-3xl  font-bold sm:p-4  ">{data?.title}</h2>
 
-        <div className="flex gap-2 mt-32 sm:mt-24 lg:mt-18 2xl:mt-24 space-x-2 sm:space-y-2">
+        <div className="w-36 mt-5 lg:mt-[-8px] mr-2">
+          <TagsA text={data?.keyword} />
+        </div>
+
+        <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2">
           <HiOutlineCalendarDateRange className="w-6 h-6 mr-2" />
           <span>
             <DateComponent insertDate={data?.insertDate} />
           </span>
         </div>
 
-        <div className="flex gap-2 items-center mt-8 sm:mt-1">
+        <div className="flex gap-2 items-center mt-6 sm:mt-1 2xl:mt-[-4px]">
           <IoEyeOutline className="w-6 h-6 mr-2" />
           <span>225</span>
         </div>
 
-        <h2 className="mt-20 sm:mt-12 px-2 sm:px-4  text-[#787878]  font-semibold">منتشر کننده</h2>
+        <h2 className="mt-20 sm:mt-12 2xl:mt-16 px-2 sm:px-4  text-[#787878]  font-semibold">منتشر کننده</h2>
 
         <div className="flex items-center justify-between gap-4 px-2">
           <div className="gap-2 flex items-center">

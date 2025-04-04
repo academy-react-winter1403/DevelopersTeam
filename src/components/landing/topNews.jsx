@@ -38,6 +38,8 @@ const TopNews = () => {
             currentUserIsLike={item.currentUserIsLike}
             currentUserIsDissLike={item.currentUserIsDissLike}
             likeId={item.likeId}
+            keyword={item.keyword}
+
           />
         ))}
       </div>
