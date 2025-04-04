@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { TagsA } from "../../../common/course-card/tags/tags";
 import { CiStar } from "react-icons/ci";
 import CalenderIcon from "./../../../../assets/images/calendar-03-stroke-rounded 1.svg";
@@ -13,21 +13,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
+import ReserveModal from "../../reserveModal/reserveModal";
 
 const MoreInfo = ({ data }) => {
   const queryClient = useQueryClient();
+  const [isReserveModalOpen, setIsReserveModalOpen] = useState(false);
 
   const handleReserve = async () => {
     const res = await http.post(`/CourseReserve/ReserveAdd`, {
       courseId: data?.courseId,
     });
-    // console.log(res, "dddddddddd");
   };
   const { mutate: mutateReserve } = useMutation({
     mutationFn: handleReserve,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
-      toast.success("دوره با موفقیت رزرو شد");
+      setIsReserveModalOpen(true);
+      // toast.success("دوره با موفقیت رزرو شد");
     },
     onError: () => {
       if (data?.isCourseReseve == 1) {
@@ -115,9 +117,10 @@ const MoreInfo = ({ data }) => {
   useEffect(() => {
     console.log(data?.currentUserLike);
   }, [data]);
+
   return (
     <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0">
-      <div className=" bg-[#FFD1CB] w-30 md:max-w-40 h-6 rounded-xl flex justify-center items-center space-x-2">
+      <div className=" bg-[#FFD1CB] w-30 md:min-w-32 h-6 rounded-xl flex justify-center items-center space-x-2">
         <div className="w-2 h-2 rounded-full bg-[#FF5454]"></div>
         <h1 className="text-xs md:text-sm text-[#FF5454]">
           {data?.courseStatusName}
@@ -175,6 +178,10 @@ const MoreInfo = ({ data }) => {
         >
           رزرو دوره
         </Button>
+        <ReserveModal
+          isModalOpen={isReserveModalOpen}
+          setIsModalOpen={setIsReserveModalOpen}
+        />
         <div className="flex space-x-3">
           <div
             onClick={() => {
