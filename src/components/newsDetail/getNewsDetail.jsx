@@ -252,7 +252,7 @@ const GetNewsDetailList = () => {
 
         <div className="w-full h-auto p-2 space-y-3">
           <h2 className="font-bol text-3xl p-4">نظرات</h2>
-          <div className="border border-[#E4E4E4] w-full h-96 p-2 space-y-3 rounded-4xl">
+          <div className="border border-[#E4E4E4] w-full h-auto p-2 space-y-3 rounded-4xl">
             <CommentComp/>
           </div>
         </div>
