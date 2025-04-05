@@ -9,6 +9,7 @@ import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../components/common/date/dateComponent";
 import http from "../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TagsA } from "./../common/course-card/tags/tags";
 
 const NewsItemCard = ({
   addUserProfileImage,
@@ -22,7 +23,7 @@ const NewsItemCard = ({
   currentUserIsLike,
   currentUserIsDissLike,
   likeId,
-  
+  keyword,
 }) => {
   const queryClient = useQueryClient();
 
@@ -71,15 +72,18 @@ const NewsItemCard = ({
   });
 
   return (
-    <div className="hidden sm:block my-5 rounded-2xl 2xl:h-72 bg-lightGray  w-full ">
+    <div className=" my-5 rounded-2xl 2xl:h-72 bg-lightGray  w-full ">
       <div className="flex 2xl:gap-5 justify-between">
-        <div className="flex-shrink-0" onClick={handleNavigation}>
+        <div className="flex-shrink-0 relative" onClick={handleNavigation}>
           <img
             src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
             alt="Profile"
-            className="2xl:w-[430px] w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl"
+            className="2xl:w-[430px] w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl hidden sm:block"
             onError={addDefaultImg}
           />
+        </div>
+        <div className=" absolute top-157 right-8  space-x-2 hidden md:block">
+          <TagsA text={keyword} />
         </div>
         <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3">
           <div className=" sm:mt-2 w-full max-w-[300px] overflow-hidden">
