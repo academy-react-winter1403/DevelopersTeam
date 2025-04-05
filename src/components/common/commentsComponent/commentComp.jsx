@@ -18,26 +18,26 @@ const CommentComp = () => {
     return res;
   };
 
-  const CommentsSection = () => {
-    const [newCommentTitle, setNewCommentTitle] = useState("");
-    const [newCommentText, setNewCommentText] = useState("");
-    const queryClient = useQueryClient();
+  // const CommentsSection = () => {
+  //   const [newCommentTitle, setNewCommentTitle] = useState("");
+  //   const [newCommentText, setNewCommentText] = useState("");
+  //   const queryClient = useQueryClient();
 
-    const { data } = useQuery(["comments"], getComment);
+  //   const { data } = useQuery(["comments"], getComment);
 
-    const mutation = useMutation(addComment, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["comments"]);
-        setNewCommentTitle("");
-        setNewCommentText("");
-      },
-    });
+  //   const mutation = useMutation(addComment, {
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries(["comments"]);
+  //       setNewCommentTitle("");
+  //       setNewCommentText("");
+  //     },
+  //   });
 
-    const handleAddComment = () => {
-      if (!newCommentTitle || !newCommentText) {
-        alert("لطفاً عنوان و متن را وارد کنید.");
-        return;
-      }
+  //   const handleAddComment = () => {
+  //     if (!newCommentTitle || !newCommentText) {
+  //       alert("لطفاً عنوان و متن را وارد کنید.");
+  //       return;
+  //     }
 
       //   const newComment = {
       //     title: newCommentTitle,
@@ -120,7 +120,7 @@ const CommentComp = () => {
         </div>
       );
     };
-  };
-};
+  // };
+// };
 
 export default CommentComp;
