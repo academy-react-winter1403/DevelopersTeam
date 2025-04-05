@@ -99,13 +99,20 @@ const CommentComp = () => {
 
                 <div className="mx-auto w-9/12 ">
                   <input
+                    type="text"
+                    //  value={newCommentTitle}
+                    //  onChange={(e) => setNewCommentTitle(e.target.value)}
                     placeholder="عنوان نظر خود را بنویسید"
                     className="border-b-2 mt-3 h-auto border-b-lightGray mx-auto w-11/12 "
                   ></input>
                   <input
+                    type="text"
+                    //  value={newCommentText}
+                    //  onChange={(e) => setNewCommentText(e.target.value)}
                     placeholder="متن نظر خود را بنویسید"
                     className=" h-auto my-3 mx-auto w-11/12 "
                   ></input>
+                  
                 </div>
               </div>
             </div>
