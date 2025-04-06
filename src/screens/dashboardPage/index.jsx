@@ -1,8 +1,8 @@
 import React from "react";
-import Dashboard from "../../components/panel/dashboard/dashboard";
+import DashboardHolder from "../../components/panel/dashboard/dashboardHolder";
 
 const DashboardPage = () => {
-  return <Dashboard />;
+  return <DashboardHolder />;
 };
 
 export default DashboardPage;
