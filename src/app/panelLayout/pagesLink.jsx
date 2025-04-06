@@ -8,15 +8,15 @@ import { RiFileMarkedLine } from "react-icons/ri";
 import { LiaUserEditSolid } from "react-icons/lia";
 const PagesLink = () => {
   return (
-    <div className="mt-3 space-y-5">
+    <div className="mt-3 space-y-5 hidden lg:block">
       <NavLink
         to="/panel"
         end
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
-              : "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
           }`
         }
       >
@@ -28,8 +28,8 @@ const PagesLink = () => {
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
-              : "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
           }`
         }
       >
@@ -41,8 +41,8 @@ const PagesLink = () => {
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
-              : "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
           }`
         }
       >
@@ -54,8 +54,8 @@ const PagesLink = () => {
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
-              : "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
           }`
         }
       >
@@ -67,8 +67,8 @@ const PagesLink = () => {
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
-              : "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
           }`
         }
       >
@@ -80,8 +80,8 @@ const PagesLink = () => {
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
-              : "w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
           }`
         }
       >
