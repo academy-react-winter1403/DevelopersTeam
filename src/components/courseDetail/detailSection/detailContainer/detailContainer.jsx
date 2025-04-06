@@ -6,6 +6,7 @@ import { Rate } from "antd";
 import star from "./../../../../assets/images/courseDetail/star.svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import teacherImg from "./../../../../assets/images/courseDetail/teacherDefault.svg";
+import CommentSection from "../../commentSection/commentSection";
 
 const DetailContainer = ({ data }) => {
   const queryClient = useQueryClient();
@@ -40,7 +41,7 @@ const DetailContainer = ({ data }) => {
   });
 
   return (
-    <div className="lg:w-[719px] h-[1000px]  m-4 lg:m-0 ">
+    <div className="lg:w-[719px] h-auto  m-4 lg:m-0 ">
       <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden">
         <img
           src={data?.imageAddress == null ? defaultImg : data?.imageAddress}
@@ -93,6 +94,8 @@ const DetailContainer = ({ data }) => {
           onChange={(rateValue) => mutate(rateValue)}
         />
       </div>
+      <CommentSection />
+
     </div>
   );
 };
