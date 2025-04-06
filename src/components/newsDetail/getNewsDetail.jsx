@@ -113,12 +113,12 @@ const GetNewsDetailList = () => {
     e.target.src = defaultImg;
   };
   return (
-    <div className="my-14 h-auto flex flex-col lg:flex-row justify-around ">
-      <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0">
+    <div className="my-14 h-auto flex flex-col lg:flex-row flex-wrap justify-around ">
+      <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0 line-clamp-1 overflow-hidden truncate">
         <h2 className="text-lg sm:text-3xl  font-bold sm:p-4  ">{data?.title}</h2>
 
-        <div className="w-36 mt-5 lg:mt-[-8px] mr-2">
-          <TagsA text={data?.keyword} />
+        <div className="w-50 mt-5 lg:mt-[-8px] mr-2">
+          <TagsA text={data?.keyword}  />
         </div>
 
         <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2">
@@ -253,7 +253,7 @@ const GetNewsDetailList = () => {
         <div className="w-full h-auto p-2 space-y-3">
           <h2 className="font-bol text-3xl p-4">نظرات</h2>
           <div className="border border-[#E4E4E4] w-full h-auto p-2 space-y-3 rounded-4xl">
-            <CommentComp/>
+            <CommentComp id={id}/>
           </div>
         </div>
       </div>

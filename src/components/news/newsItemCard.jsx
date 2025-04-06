@@ -25,6 +25,7 @@ const NewsItemCard = ({
   likeId,
   keyword,
 }) => {
+  console.log(keyword);
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -72,19 +73,23 @@ const NewsItemCard = ({
   });
 
   return (
-    <div className=" my-5 rounded-2xl 2xl:h-72 bg-lightGray  w-full ">
-      <div className="flex 2xl:gap-5 justify-between">
-        <div className="flex-shrink-0 relative" onClick={handleNavigation}>
+    <div className=" my-5 rounded-2xl relative 2xl:h-72 bg-lightGray  w-full ">
+      <div className="absolute z-30 text-white bg-[#5A7EFF] px-3 py-1 rounded-4xl top-4 right-3 hidden md:block">{keyword }</div>
+      <div className="flex 2xl:gap-5 relative justify-between">
+        
+        <div className="fle x-shrink-0 relative " onClick={handleNavigation}>
           <img
             src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
             alt="Profile"
-            className="2xl:w-[430px] w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl hidden sm:block"
+            className="2xl:w-[430px] hidden  w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl  sm:block"
             onError={addDefaultImg}
           />
         </div>
-        <div className=" absolute top-157 right-8  space-x-2 hidden md:block">
-          <TagsA text={keyword} />
-        </div>
+        
+        {/* <div className=""> */}
+          {/* <TagsA text={keyword} /> */}
+
+        {/* </div> */}
         <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3">
           <div className=" sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 ">
