@@ -6,7 +6,7 @@ import Item from "./Item";
 const CommentComp = ({ id }) => {
   const [data, setData] = useState([]);
   const getComment = async () => {
-    const res = await http.get("/News/GetNewsComments?NewsId=" + id);
+    const res = await http.get(`/News/GetNewsComments?NewsId=${id}`);
     setData(res);
   };
   useEffect(() => {

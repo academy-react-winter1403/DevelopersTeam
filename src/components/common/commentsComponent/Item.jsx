@@ -5,6 +5,9 @@ import { RiTelegram2Line } from "react-icons/ri";
 import Provider from "./Provider";
 import { Field, Form, Formik } from "formik";
 import instance from "../../../core/services/interceptor";
+import DateComp2 from "../date/dateComp2";
+import defaultImg from "./../../../assets/images/courses/courseimg.svg";
+import CommentLikeDislike from "./commentLikeDislike";
 
 const Item = ({ data }) => {
   //   console.log(data);
@@ -18,25 +21,40 @@ const Item = ({ data }) => {
     return res.data;
   };
 
+  const addDefaultImg = (e) => {
+    e.target.src = defaultImg;
+  };
+
   return (
     <div className="border-r-6  border-navyBlue w-full h-auto my-5 ">
       <div className="flex gap-2 p-4 ">
-        <img src="" alt="" className="border rounded-full w-15 h-15" />
+        <img
+          src={data.pictureAddress == null ? defaultImg : data.pictureAddress}
+          alt="Profile"
+          className="border rounded-full w-15 h-15"
+          onError={addDefaultImg}
+        />
         <div>
-          <h2>{data.autor}</h2>
-          <h2>{data.inserDate}</h2>
+          <h2 className="mb-4">{data.autor}</h2>
+          <DateComp2 inserDate={data.inserDate} />
         </div>
       </div>
 
-      <h2 className="px-4">{data.id}</h2>
+      <h2 className="px-4">{data.describe}</h2>
 
-      <div className="flex  p-4  gap-5">
-        <div className="flex  gap-10  w-2/12">
+      <div className="flex  p-4  gap-5 border-2 border-red-500">
+        {/* <div className="flex  gap-10  w-2/12">
           <AiOutlineLike className="w-6 h-6" />
           <AiOutlineDislike className="w-6 h-6" />
-        </div>
+        </div> */}
+        <CommentLikeDislike data={data} />
 
-        <div onClick={() => setOpen((e) => !e)} className="border-b text-[13px] text-center w-32 h-5 leading-6">مشاهده جواب ها </div>
+        <div
+          onClick={() => setOpen((e) => !e)}
+          className="border-b text-[13px] text-center w-32 h-5 leading-6"
+        >
+          مشاهده جواب ها
+        </div>
         {!openAnser ? (
           <button
             onClick={() => setOpenAnser((e) => !e)}
@@ -46,12 +64,13 @@ const Item = ({ data }) => {
           </button>
         ) : (
           <div className="w-10/12 h-auto rounded-3xl text-md  border border-navyBlue leading-8 p-2 flex gap-2 ">
-            <div className="border border-navyBlue bg-navyBlue w-13 h-13 rounded-full flex justify-center items-center">
-              <RiTelegram2Line className="w-6 h-6" />
+            <div className="border border-navyBlue bg-navyBlue w-10 h-8 rounded-full flex justify-center items-center">
+              <button onClick={handleCommentAdd} type="submit"></button>
+              <RiTelegram2Line className="w-4 h-4" />
             </div>
 
-            <div className="border border-[#F1F1F1] w-13 h-13 rounded-full flex justify-center items-center">
-              <CiFaceSmile className="w-6 h-6 text-navyBlue" />
+            <div className="border border-[#F1F1F1] w-10 h-8 rounded-full flex justify-center items-center">
+              <CiFaceSmile className="w-4 h-4 text-navyBlue" />
             </div>
 
             <div>
@@ -68,7 +87,7 @@ const Item = ({ data }) => {
                 <Form>
                   <Field name="title" placeholder="عنوان نظر خود را بنویسید" />
                   <Field name="describe" placeholder="متن نظر خود را بنویسید" />
-                  <button type="submit">ثبت</button>
+                  {/* <button type="submit">ثبت</button> */}
                 </Form>
               </Formik>
             </div>

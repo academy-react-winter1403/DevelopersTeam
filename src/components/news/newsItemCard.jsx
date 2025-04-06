@@ -4,12 +4,11 @@ import ViewStroke from "./../../assets/images/view-stroke-rounded (1) 1.svg";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineDateRange } from "react-icons/md";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../components/common/date/dateComponent";
 import http from "../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { TagsA } from "./../common/course-card/tags/tags";
 
 const NewsItemCard = ({
   addUserProfileImage,
@@ -74,9 +73,10 @@ const NewsItemCard = ({
 
   return (
     <div className=" my-5 rounded-2xl relative 2xl:h-72 bg-lightGray  w-full ">
-      <div className="absolute z-30 text-white bg-[#5A7EFF] px-3 py-1 rounded-4xl top-4 right-3 hidden md:block">{keyword }</div>
+      <div className="absolute z-30 text-white bg-[#5A7EFF] px-3 py-1 rounded-4xl top-4 right-3 hidden md:block">
+        {keyword}
+      </div>
       <div className="flex 2xl:gap-5 relative justify-between">
-        
         <div className="fle x-shrink-0 relative " onClick={handleNavigation}>
           <img
             src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
@@ -85,11 +85,7 @@ const NewsItemCard = ({
             onError={addDefaultImg}
           />
         </div>
-        
-        {/* <div className=""> */}
-          {/* <TagsA text={keyword} /> */}
 
-        {/* </div> */}
         <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3">
           <div className=" sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 ">
