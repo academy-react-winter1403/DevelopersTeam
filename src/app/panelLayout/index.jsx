@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
 import { RxDashboard } from "react-icons/rx";
@@ -8,26 +8,36 @@ import { LuPencilLine } from "react-icons/lu";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
+import { GoSidebarCollapse } from "react-icons/go";
+import PagesLinkRes from "./pagesLinkRes";
+import MobileModeLayout from "./mobileModeLayout";
 
 const PanelLayout = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="w-full grid grid-cols-5 bg-[#F0F0F0]">
-      <div className="col-span-1 w-[276px] h- auto mx-auto bg-[#FEFDFF] my-4 rounded-2xl p-5 ">
+    <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
+      <div className="hidden lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
         <div className="flex justify-center items-center ">
           <img src={logo} alt="not set" className="w-14 h-16" />
-          <img src={logoText} alt="not set" className="w-44 h-10 mt-1" />
+          <img
+            src={logoText}
+            alt="not set"
+            className="w-44 h-10 mt-1 hidden lg:block"
+          />
         </div>
-        <div className="mt-10">
-          <h1 className="text-gray">عمومی</h1>
+        <div className="mt-4">
           <PagesLink />
+          <PagesLinkRes />
         </div>
-        <div className="w-56 h-14 text-[#FF5454] mt-28 border-2 border-borderGray rounded-4xl flex items-center font-semibold space-x-4 pr-6">
+        <div className="lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-28 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6">
           <MdOutlineLogout className="w-6 h-6" />
-          <span>خروج از حساب</span>
+          <span className="hidden lg:block">خروج از حساب</span>
         </div>
       </div>
-      <div className="col-span-4 p-5">
-        <div className="w-full h-20 bg-[#FEFDFF] rounded-3xl flex items-center justify-between px-3">
+
+      <div className="w-5/5 lg:w-4/5 p-5">
+        <div className=" w-full h-20 bg-[#FEFDFF] rounded-3xl flex items-center justify-between px-3">
           <div className="flex space-x-3 relative">
             <div className="w-14 h-14 bg-pink-600 rounded-full">
               <img src="" alt="" />
@@ -53,6 +63,9 @@ const PanelLayout = () => {
         <div>
           <Outlet />
         </div>
+      </div>
+      <div>
+        <MobileModeLayout />
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { RiFileMarkedLine } from "react-icons/ri";
 import { LiaUserEditSolid } from "react-icons/lia";
 const PagesLinkRes = () => {
   return (
-    <div className="mt-3 space-y-5 flex flex-col items-center justify-center ">
+    <div className="mt-3 space-y-5 sm:flex flex-col items-center justify-center hidden lg:hidden ">
       <NavLink
         to="/panel"
         end
