@@ -9,16 +9,16 @@ import DateComp2 from "../date/dateComp2";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import CommentLikeDislike from "./commentLikeDislike";
 
-const Item = ({ data }) => {
-  //   console.log(data);
+const Item = ({ commentObj }) => {
+    // console.log(commentObj);
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
 
   const handleCommentAdd = async (values) => {
     console.log(values);
     const res = await instance.post("/News/CreateNewsReplyComment", values);
-    console.log(res);
-    return res.data;
+    // console.log(res);
+    return res.commentObj;
   };
 
   const addDefaultImg = (e) => {
@@ -29,25 +29,25 @@ const Item = ({ data }) => {
     <div className="border-r-6  border-navyBlue w-full h-auto my-5 ">
       <div className="flex gap-2 p-4 ">
         <img
-          src={data.pictureAddress == null ? defaultImg : data.pictureAddress}
+          src={commentObj.pictureAddress == null ? defaultImg : commentObj.pictureAddress}
           alt="Profile"
           className="border rounded-full w-15 h-15"
           onError={addDefaultImg}
         />
         <div>
-          <h2 className="mb-4">{data.autor}</h2>
-          <DateComp2 inserDate={data.inserDate} />
+          <h2 className="mb-4">{commentObj.autor}</h2>
+          <DateComp2 inserDate={commentObj.inserDate} />
         </div>
       </div>
 
-      <h2 className="px-4">{data.describe}</h2>
+      <h2 className="px-4">{commentObj.describe}</h2>
 
       <div className="flex  p-4  gap-5 border-2 border-red-500">
         {/* <div className="flex  gap-10  w-2/12">
           <AiOutlineLike className="w-6 h-6" />
           <AiOutlineDislike className="w-6 h-6" />
         </div> */}
-        <CommentLikeDislike data={data} />
+        <CommentLikeDislike commentObj={commentObj} />
 
         <div
           onClick={() => setOpen((e) => !e)}
@@ -79,7 +79,7 @@ const Item = ({ data }) => {
                 initialValues={{
                   title: "",
                   describe: "",
-                  newsId: data.newsId,
+                  newsId: commentObj.newsId,
                   userId: 40516,
                   userIpAddress: "1.1.1.1",
                 }}
@@ -94,7 +94,7 @@ const Item = ({ data }) => {
           </div>
         )}
       </div>
-      {open && <Provider commentId={data.id} newsId={data.newsId} />}
+      {open && <Provider commentId={commentObj.id} newsId={commentObj.newsId} />}
     </div>
   );
 };
