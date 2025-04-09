@@ -7,45 +7,95 @@ import { CiFaceSmile } from "react-icons/ci";
 import { IoIosArrowUp } from "react-icons/io";
 import { RiTelegram2Line } from "react-icons/ri";
 import DateComponent from "../../../common/date/dateComponent";
+import defaultImg from "./../../../../assets/images/courses/defImgComment.jpg";
+import Provider from "../provider/provider";
+import { useParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import http from "./../../../../core/services/interceptor";
+import toast from "react-hot-toast";
 
-const CommentCard = ({commentsData}) => {
+const CommentCard = ({
+  author,
+  insertDate,
+  title,
+  describe,
+  pictureAddress,
+  courseId,
+  commentId,
+  likeCount,
+  disslikeCount,
+}) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [openAnswer, setOpenAnswer] = useState(false);
+
+  const addDefaultImg = (e) => {
+    e.target.src = defaultImg;
+  };
+
+  const handleLike = async () => {
+    const res = await http.post(
+      `/Course/AddCourseCommentLike?CourseCommandId=${commentId}`
+    );
+  };
+  const { mutate: mutateLike } = useMutation({
+    mutationFn: handleLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("comments");
+    },
+  });
+
+  const handleDisLike = async () => {
+    const res = await http.post(
+      `/Course/AddCourseCommentDissLike?CourseCommandId=${commentId}`
+    );
+  };
+  const { mutate: mutateDisLike } = useMutation({
+    mutationFn: handleDisLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("comments");
+    },
+  });
 
   return (
     <div className="w-full">
       <div className="mt-5 ">
         <div className="flex gap-2 py-4 ">
-          <img src="" alt="" className="border rounded-full w-15 h-15" />
+          <img
+            src={pictureAddress == null ? defaultImg : pictureAddress}
+            onError={addDefaultImg}
+            alt=""
+            className=" rounded-full w-15 h-15 border border-borderGray"
+          />
           <div>
-            <h2 className="font-semibold"> {commentsData?.author}</h2>
-            <h2 className="text-gray"> <DateComponent insertDate={commentsData?.insertDate} /> </h2>
+            <h2 className="font-semibold"> {author}</h2>
+            <h2 className="text-gray">
+              <DateComponent insertDate={insertDate} />
+            </h2>
           </div>
         </div>
       </div>
       <div className="space-y-2">
-        <h1 className="font-semibold">دوره خیلی خوبی بود</h1>
-        <p>
-          هم استادش و هم کلاس ها منظم برگزار شدن و اصلا از مباحث عقب نموندم و
-          تونستم به مقدهم استادش و هم کلاس ها منظم برگزار شدن و اصلا از مباحث
-          عقب نموندم و تونستم به مقد
-        </p>
+        <h1 className="font-semibold">{title}</h1>
+        <p>{describe}</p>
       </div>
-      <div className="flex space-x-10 mt-5 items-center">
+      <div className="flex space-x-5 sm:space-x-10 mt-5 items-center">
         <div className="flex space-x-5">
-          <AiOutlineLike className="w-6 h-6" />
-          <AiOutlineDislike className="w-6 h-6" />
+          <AiOutlineLike onClick={() => mutateLike()} className="w-6 h-6" />
+          <span>{likeCount}</span>
+          <AiOutlineDislike onClick={()=>handleDisLike()} className="w-6 h-6" />
+          <span> {disslikeCount} </span>
         </div>
         <div>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full h-10 rounded-full text-md text-navyBlue text-center border px-3 "
+            className="w-full h-10 rounded-full text-xs sm:text-base whitespace-nowrap text-navyBlue text-center border px-3 "
           >
             {isOpen ? "جواب دادن" : "بستن"}
           </button>
         </div>
         <div
-          // onClick={}
-          className="text-[13px] text-center w-32 h-5 leading-6 flex items-center space-x-2"
+          onClick={() => setOpenAnswer((e) => !e)}
+          className="text-[13px] text-center w-32 h-5 leading-6 flex items-center space-x-2 cursor-pointer"
         >
           <span className="underline">مشاهده جواب ها</span>
           <IoIosArrowUp />
@@ -102,6 +152,7 @@ const CommentCard = ({commentsData}) => {
           </div>
         </div>
       )}
+      {openAnswer && <Provider courseId={courseId} commentId={commentId} />}
     </div>
   );
 };

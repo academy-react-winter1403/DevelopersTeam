@@ -25,7 +25,7 @@ const DetailSection = () => {
   return (
     <div className="flex flex-col lg:flex-row  justify-evenly h-auto mt-10  ">
       <MoreInfo data={data} />
-      <DetailContainer data={data} />
+      <DetailContainer data={data} id={id}  />
     </div>
   );
 };

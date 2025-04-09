@@ -1,6 +1,7 @@
 import React from "react";
 import profilepic from "./../../../assets/images/panel/profilepic.svg";
 import { LuImagePlus } from "react-icons/lu";
+import ProfileTabs from "./tabs/profileTabs";
 
 const Profile = () => {
   return (
@@ -15,6 +16,7 @@ const Profile = () => {
           <h2 className="font-bold text-2xl mt-6 border flex items-center gap-1 w-96 "> پارسا آقایی<span className="text-sm text-gray"> (ادمین،دانشجو) </span></h2>
         </div>
       </div>
+      <ProfileTabs />
     </div>
   );
 };
