@@ -8,9 +8,12 @@ import instance from "../../../core/services/interceptor";
 import DateComp2 from "../date/dateComp2";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import CommentLikeDislike from "./commentLikeDislike";
+import { Input } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import { data } from "react-router-dom";
 
 const Item = ({ commentObj }) => {
-    // console.log(commentObj);
+  // console.log(commentObj);
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
 
@@ -26,10 +29,14 @@ const Item = ({ commentObj }) => {
   };
 
   return (
-    <div className="border-r-6  border-navyBlue w-full h-auto my-5 ">
+    <div className="border-r-6  border-navyBlue w-full h-auto my-5 cursor-pointer">
       <div className="flex gap-2 p-4 ">
         <img
-          src={commentObj.pictureAddress == null ? defaultImg : commentObj.pictureAddress}
+          src={
+            commentObj.pictureAddress == null
+              ? defaultImg
+              : commentObj.pictureAddress
+          }
           alt="Profile"
           className="border rounded-full w-15 h-15"
           onError={addDefaultImg}
@@ -42,12 +49,14 @@ const Item = ({ commentObj }) => {
 
       <h2 className="px-4">{commentObj.describe}</h2>
 
-      <div className="flex  p-4  gap-5 border-2 border-red-500">
-        {/* <div className="flex  gap-10  w-2/12">
-          <AiOutlineLike className="w-6 h-6" />
-          <AiOutlineDislike className="w-6 h-6" />
-        </div> */}
+      <div className="flex  p-4  gap-2">
         <CommentLikeDislike commentObj={commentObj} />
+        <button
+          onClick={() => setOpenAnser((e) => !e)}
+          className="w-1/3 sm:w-2/12 h-10 whitespace-nowrap rounded-full text-xs sm:text-base text-navyBlue text-center border leading-8 "
+        >
+          {!openAnser ? "جواب دادن" : "بستن"}
+        </button>
 
         <div
           onClick={() => setOpen((e) => !e)}
@@ -55,46 +64,62 @@ const Item = ({ commentObj }) => {
         >
           مشاهده جواب ها
         </div>
-        {!openAnser ? (
-          <button
-            onClick={() => setOpenAnser((e) => !e)}
-            className="w-2/12 h-10 rounded-full text-md text-navyBlue text-center border leading-8 "
-          >
-            جواب دادن
-          </button>
-        ) : (
-          <div className="w-10/12 h-auto rounded-3xl text-md  border border-navyBlue leading-8 p-2 flex gap-2 ">
-            <div className="border border-navyBlue bg-navyBlue w-10 h-8 rounded-full flex justify-center items-center">
-              <button onClick={handleCommentAdd} type="submit"></button>
-              <RiTelegram2Line className="w-4 h-4" />
+      </div>
+      <div>
+        {openAnser && (
+          <div className=" mt-4 h-auto rounded-3xl text-md border border-navyBlue leading-8 p-6 flex gap-2">
+            <div className="border border-navyBlue bg-navyBlue w-10 h-10 rounded-full flex justify-center items-center">
+              <RiTelegram2Line className="w-4 h-4 text-white" />
             </div>
 
-            <div className="border border-[#F1F1F1] w-10 h-8 rounded-full flex justify-center items-center">
+            <div className="border border-[#F1F1F1] w-10 h-10 rounded-full flex justify-center items-center">
               <CiFaceSmile className="w-4 h-4 text-navyBlue" />
             </div>
 
-            <div>
+            <div className="flex-1">
               <Formik
                 onSubmit={handleCommentAdd}
                 initialValues={{
                   title: "",
                   describe: "",
-                  newsId: commentObj.newsId,
+                  newsId: data.newsId,
                   userId: 40516,
                   userIpAddress: "1.1.1.1",
                 }}
               >
-                <Form>
-                  <Field name="title" placeholder="عنوان نظر خود را بنویسید" />
-                  <Field name="describe" placeholder="متن نظر خود را بنویسید" />
-                  {/* <button type="submit">ثبت</button> */}
+                <Form className="space-y-2">
+                  {/* <Field
+                  name="title"
+                  placeholder="عنوان نظر خود را بنویسید"
+                  className="w-full p-2 border rounded"
+                />
+                
+                <Field
+                  name="describe"
+                  placeholder="متن نظر خود را بنویسید"
+                  className="w-full p-2 border rounded"
+                /> */}
+                  <Input
+                    showCount
+                    name="title"
+                    maxLength={20}
+                    placeholder="عنوان نظر خود را بنویسید"
+                  />
+                  <TextArea
+                    showCount
+                    name="describe"
+                    maxLength={100}
+                    placeholder="نظر خود را بنویسید"
+                  />
                 </Form>
               </Formik>
             </div>
           </div>
         )}
       </div>
-      {open && <Provider commentId={commentObj.id} newsId={commentObj.newsId} />}
+      {open && (
+        <Provider commentId={commentObj.id} newsId={commentObj.newsId} />
+      )}
     </div>
   );
 };

@@ -17,7 +17,7 @@ const CommentLikeDislike = ({ commentObj }) => {
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleCommentLike,
     onSuccess: () => {
-      // queryClient.invalidateQueries("commentLike");
+      queryClient.invalidateQueries("commentLike");
       console.log("done");
     },
   });
@@ -25,11 +25,11 @@ const CommentLikeDislike = ({ commentObj }) => {
   // console.log(commentObj?.currentUserIsLike)
   return (
     <div>
-      <div className="flex  gap-10  border-green-400">
+      <div className="flex  gap-10  ">
         {commentObj.currentUserIsLike === false ? (
-          <AiOutlineLike onClick={handleCommentLike} />
+          <AiOutlineLike className="w-6 h-6" onClick={handleCommentLike} />
         ) : (
-          <AiOutlineLike className="bg-red-400" />
+          <AiOutlineLike className="w-6 h-6" />
         )}
         <AiOutlineDislike className="w-6 h-6 " />
       </div>
