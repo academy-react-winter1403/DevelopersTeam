@@ -94,8 +94,7 @@ const DetailContainer = ({ data }) => {
           onChange={(rateValue) => mutate(rateValue)}
         />
       </div>
-      <CommentSection />
-
+      <CommentSection data={data} />
     </div>
   );
 };

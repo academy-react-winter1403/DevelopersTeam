@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const DetailSection = () => {
   const { id } = useParams();
-  const [courseDetail, setCourseDetail] = useState([]);
+
   const getCourseDetail = async () => {
     const res = await http.get(`/Home/GetCourseDetails?CourseId=${id}`);
     return res;
