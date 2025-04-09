@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import http from "../../core/services/interceptor";
 import { useParams } from "react-router-dom";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import { IoEyeOutline } from "react-icons/io5";
-import { MdFavoriteBorder, MdOutlineBookmarkAdd } from "react-icons/md";
+import { MdFavoriteBorder } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import DateComponent from "../../components/common/date/dateComponent";
@@ -42,7 +42,6 @@ const GetNewsDetailList = () => {
 
   const handleLike = async () => {
     const res = await http.post(`/News/NewsLike/${id}`);
-    // return res
   };
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
@@ -94,7 +93,6 @@ const GetNewsDetailList = () => {
     const res = await http.delete("/News/DeleteFavoriteNews", {
       data: { deleteEntityId: data?.currentUserFavoriteId },
     });
-    // console.log(res);
   };
   const { mutate: mutateDeleteFav } = useMutation({
     mutationFn: handleDeleteFav,
@@ -121,19 +119,19 @@ const GetNewsDetailList = () => {
           <TagsA text={data?.keyword}  />
         </div>
 
-        <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2">
-          <HiOutlineCalendarDateRange className="w-6 h-6 mr-2" />
+        <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2 font-semibold md:text-xl">
+          <HiOutlineCalendarDateRange className="w-6 h-6 mr-2 font-semibold" />
           <span>
             <DateComponent insertDate={data?.insertDate} />
           </span>
         </div>
 
-        <div className="flex gap-2 items-center mt-6 sm:mt-1 2xl:mt-[-4px]">
-          <IoEyeOutline className="w-6 h-6 mr-2" />
+        <div className="flex gap-2 items-center mt-6 sm:mt-1 2xl:mt-[-4px]  font-semibold md:text-xl">
+          <IoEyeOutline className="w-6 h-6 mr-2 font-semibold" />
           <span>225</span>
         </div>
 
-        <h2 className="mt-20 sm:mt-12 2xl:mt-16 px-2 sm:px-4  text-[#787878]  font-semibold">منتشر کننده</h2>
+        <h2 className="mt-20 sm:mt-12 2xl:mt-12 px-2 sm:px-4  text-[#787878]  font-semibold md:text-xl">منتشر کننده</h2>
 
         <div className="flex items-center justify-between gap-4 px-2">
           <div className="gap-2 flex items-center">

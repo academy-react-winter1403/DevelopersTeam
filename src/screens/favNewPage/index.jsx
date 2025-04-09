@@ -1,8 +1,11 @@
 import React from 'react'
+import FavNew from '../../components/panel/favNew/favNew'
 
 const FavNewPage = () => {
   return (
-    <div>FavNewPage</div>
+    <div>
+      <FavNew/>
+    </div>
   )
 }
 
