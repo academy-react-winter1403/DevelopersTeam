@@ -7,7 +7,7 @@ import { CiFaceSmile } from "react-icons/ci";
 import { IoIosArrowUp } from "react-icons/io";
 import { RiTelegram2Line } from "react-icons/ri";
 
-const ReplyCard = () => {
+const ReplyCard = ({ replyData }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
