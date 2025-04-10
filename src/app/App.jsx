@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={client}>
+        
         <RouterProvider router={router} />
       </QueryClientProvider>
     </>

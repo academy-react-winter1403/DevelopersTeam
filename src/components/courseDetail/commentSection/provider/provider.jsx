@@ -20,7 +20,7 @@ const Provider = ({ courseId, commentId }) => {
   return (
     <div>
       {data?.map((item) => (
-        <CommentCard data={item} />
+        <ReplyCard data={item} />
       ))}
     </div>
   );
