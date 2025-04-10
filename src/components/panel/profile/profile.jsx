@@ -47,7 +47,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-1/2 ">
-          <h2 className="text-gray text-md font-bold">درباره من</h2>
+          <h2 className="text-gray text-md font-semibold">درباره من</h2>
           <p>
             {" "}
             من پارسا آقایی دانشجوی نوب سگ هستم که اخیرا دارم یاد میگیرم برنامه
