@@ -4,7 +4,7 @@ import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { CiFaceSmile } from "react-icons/ci";
-import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RiTelegram2Line } from "react-icons/ri";
 import DateComponent from "../../../common/date/dateComponent";
 import defaultImg from "./../../../../assets/images/courses/defImgComment.jpg";
@@ -24,6 +24,7 @@ const CommentCard = ({
   commentId,
   likeCount,
   disslikeCount,
+  currentUserEmotion,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [openAnswer, setOpenAnswer] = useState(false);
@@ -56,6 +57,18 @@ const CommentCard = ({
     },
   });
 
+  const handleDeleteLike = async () => {
+    const res = await http.post(
+      `/Course/DeleteCourseCommentLike?CourseCommandId=${commentId}`
+    );
+  };
+  const { mutate: mutateDeleteLike } = useMutation({
+    mutationFn: handleDeleteLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries("comments");
+    },
+  });
+
   return (
     <div className="w-full">
       <div className="mt-5 ">
@@ -74,15 +87,27 @@ const CommentCard = ({
           </div>
         </div>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 overflow-hidden">
         <h1 className="font-semibold">{title}</h1>
         <p>{describe}</p>
       </div>
       <div className="flex space-x-5 sm:space-x-10 mt-5 items-center">
         <div className="flex space-x-5">
-          <AiOutlineLike onClick={() => mutateLike()} className="w-6 h-6" />
+          <AiOutlineLike
+            onClick={() =>
+              currentUserEmotion === "LIKED" ? mutateDeleteLike() : mutateLike()
+            }
+            className={
+              currentUserEmotion === "LIKED"
+                ? "w-6 h-6 text-navyBlue"
+                : "w-6 h-6"
+            }
+          />
           <span>{likeCount}</span>
-          <AiOutlineDislike onClick={()=>handleDisLike()} className="w-6 h-6" />
+          <AiOutlineDislike
+            onClick={() => handleDisLike()}
+            className={currentUserEmotion === "" ? "w-6 h-6 text-navyBlue" : "w-6 h-6"}
+          />
           <span> {disslikeCount} </span>
         </div>
         <div>
@@ -98,7 +123,7 @@ const CommentCard = ({
           className="text-[13px] text-center w-32 h-5 leading-6 flex items-center space-x-2 cursor-pointer"
         >
           <span className="underline">مشاهده جواب ها</span>
-          <IoIosArrowUp />
+          {openAnswer ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </div>
       </div>
 

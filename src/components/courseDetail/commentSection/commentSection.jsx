@@ -43,6 +43,7 @@ const CommentSection = ({ id }) => {
               commentId={item?.id}
               likeCount={item?.likeCount}
               disslikeCount={item?.disslikeCount}
+              currentUserEmotion={item?.currentUserEmotion}
             />
           );
         })
