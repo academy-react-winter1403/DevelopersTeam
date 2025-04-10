@@ -4,6 +4,7 @@ import UserProfioleImage from "../userProfioleImage/userProfioleImage";
 import UserAddress from "../userAddress/userAddress";
 import { Links } from "react-router-dom";
 import { Tabs } from "antd";
+import "./ProfileTabs.css";
 
 const ProfileTabs = () => {
   const items = [
@@ -25,14 +26,15 @@ const ProfileTabs = () => {
     {
       key: "4",
       label: "لینک ها",
-      children: <Links/>,
+      children: <Links />,
     },
   ];
   return (
-    <div className="mt-40 mr-5 ">
+    <div className="mt-10 mr-5 border custom-tabs">
       <Tabs defaultActiveKey="1" items={items} />
     </div>
   );
 };
 
 export default ProfileTabs;
+

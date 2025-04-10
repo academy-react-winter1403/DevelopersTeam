@@ -1,0 +1,10 @@
+/* تنظیم فاصله بین آیتم‌های تب */
+.custom-tabs .ant-tabs-nav .ant-tabs-tab {
+    margin-left: 20px; /* فاصله سمت چپ هر تب */
+  }
+  
+  .custom-tabs .ant-tabs-nav {
+    display: flex;
+    align-items: center;
+  }
+  

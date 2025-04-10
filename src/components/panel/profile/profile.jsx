@@ -8,7 +8,7 @@ import { TfiPencil } from "react-icons/tfi";
 
 const Profile = () => {
   return (
-    <div className="w-full h-[1000px] border bg-white rounded-2xl mt-5">
+    <div className="w-full h-auto border bg-white rounded-2xl mt-5">
       <div className="w-full h-28 bg-[#3772FF] rounded-t-2xl"></div>
       <div className="border-6 border-white rounded-full w-32 h-32 bg-[#3772FF] mt-[-60px] mr-10">
         <img src={profilepic} alt="" className="mx-auto" />
@@ -56,7 +56,7 @@ const Profile = () => {
           </p>
         </div>
       </div>
-      <div className="flex gap-5 justify-evenly">
+      <div className="">
         <ProfileTabs />
       </div>
     </div>
