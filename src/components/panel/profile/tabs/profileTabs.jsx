@@ -5,6 +5,7 @@ import UserAddress from "../userAddress/userAddress";
 import { Links } from "react-router-dom";
 import { Tabs } from "antd";
 import LinksTab from "../links/links";
+import "./ProfileTabs.css";
 
 const ProfileTabs = () => {
   const items = [
@@ -30,19 +31,11 @@ const ProfileTabs = () => {
     },
   ];
   return (
-    <div>
-      <Tabs
-        defaultActiveKey="1"
-        items={items}
-        size="large"
-        tabBarGutter={32}
-        style={{
-          fontFamily: "yekan",
-          fontSize: "20px",
-        }}
-      />
+    <div className="mt-10 mr-5  custom-tabs ">
+      <Tabs defaultActiveKey="1" items={items} />
     </div>
   );
 };
 
 export default ProfileTabs;
+
