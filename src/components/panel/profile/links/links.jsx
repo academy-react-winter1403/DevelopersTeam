@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Links = () => {
+const LinksTab = () => {
   return (
     <div>Links</div>
   )
 }
 
-export default Links
+export default LinksTab
