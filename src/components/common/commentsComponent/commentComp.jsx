@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { BiCommentDetail } from "react-icons/bi";
-import http from '../../../core/services/interceptor'
+import http from "../../../core/services/interceptor";
 import Item from "./Item";
 import { useQuery } from "@tanstack/react-query";
 
 const CommentComp = ({ id }) => {
+  const [count, setCount] = useState(4);
   const getNewsComment = async () => {
     const res = await http.get(`/News/GetNewsComments?NewsId=${id}`);
-    console.log(res)
-    return res
+    console.log(res);
+    return res;
   };
 
-
-  const {data} = useQuery({
-    queryKey:'newsComment',
-    queryFn:getNewsComment
-  })
+  const { data } = useQuery({
+    queryKey: "newsComment",
+    queryFn: getNewsComment,
+  });
 
   // data && console.log(data)
   return (
@@ -25,9 +25,8 @@ const CommentComp = ({ id }) => {
         نظرات شما
       </h2>
 
-      {data?.map((item) => (
-        <Item commentObj={item} />
-      ))}
+      {data?.map((item, index) => index < count && <Item commentObj={item} />)}
+      <button onClick={()=>setCount(e=>e+4)}>more</button>
     </div>
   );
 };

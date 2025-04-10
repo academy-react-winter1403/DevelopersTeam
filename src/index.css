@@ -1,5 +1,9 @@
 @import "tailwindcss";
-
+thead{
+  background-color: #0000009c;
+  border-radius: 10px;
+  overflow: hidden;
+}
 @theme {
   --color-lightGray: #f4f4f4;
   --color-navyBlue: #3772ff;
