@@ -17,7 +17,7 @@ const PanelLayout = () => {
 
   return (
     <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
-      <div className="hidden lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
+      <div className="hidden h-[700px] sticky top-0 lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
         <div className="flex justify-center items-center ">
           <img src={logo} alt="not set" className="w-14 h-16" />
           <img
@@ -30,7 +30,7 @@ const PanelLayout = () => {
           <PagesLink />
           <PagesLinkRes />
         </div>
-        <div className="lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-28 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6">
+        <div className="lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-16 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6">
           <MdOutlineLogout className="w-6 h-6" />
           <span className="hidden lg:block">خروج از حساب</span>
         </div>
