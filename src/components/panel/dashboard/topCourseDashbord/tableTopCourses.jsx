@@ -10,14 +10,14 @@ const columns = [
   },
   {
     title: 'درباره دوره',
-    dataIndex: 'age',
-    key: 'age',
-    width: 300,
+    dataIndex: 'desc',
+    key: 'desc',
+    width: 250,
   },
   {
     title: 'اساتید دوره',
-    dataIndex: 'address',
-    key: 'address 1',
+    dataIndex: 'teacher',
+    key: 'teacher',
     ellipsis: {
       showTitle: false,
     },
@@ -25,8 +25,8 @@ const columns = [
   },
   {
     title: 'تاریخ برگزاری',
-    dataIndex: 'address',
-    key: 'address 2',
+    dataIndex: 'date',
+    key: 'date',
     ellipsis: {
       showTitle: false,
     },
@@ -34,8 +34,8 @@ const columns = [
   },
   {
     title: 'قیمت دوره',
-    dataIndex: 'address',
-    key: 'address 3',
+    dataIndex: 'price',
+    key: 'price',
     ellipsis: {
       showTitle: false,
     },
@@ -43,8 +43,8 @@ const columns = [
   },
   {
     title: ' ',
-    dataIndex: 'address',
-    key: 'address 4',
+    dataIndex: 'eye',
+    key: 'eye',
     ellipsis: {
       showTitle: false,
     },
@@ -73,5 +73,5 @@ const data = [
     address: 'Sydney No. 1 Lake Park, Sydney No. 1 Lake Park',
   },
 ];
-const App = () => <Table columns={columns} dataSource={data} />;
+const App = ({data}) => <Table columns={columns} dataSource={data} style={{color:'#000'}} />;
 export default App;

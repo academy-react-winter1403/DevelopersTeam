@@ -16,7 +16,7 @@ const MainDashboard = () => {
     queryFn:getUserInfo
   })
 
-  data && console.log(data)
+  // data && console.log(data)
   return (
     <div className="md:grid md:grid-cols-7 mt-3 gap-5">
       <YourComments />
