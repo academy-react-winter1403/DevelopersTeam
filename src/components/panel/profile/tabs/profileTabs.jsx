@@ -29,7 +29,7 @@ const ProfileTabs = () => {
     },
   ];
   return (
-    <div>
+    <div className="mt-40 mr-5 ">
       <Tabs defaultActiveKey="1" items={items} />
     </div>
   );
