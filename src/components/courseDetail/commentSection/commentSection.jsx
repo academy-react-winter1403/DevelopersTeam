@@ -34,6 +34,7 @@ const CommentSection = ({ id }) => {
         commentsData?.map((item, index) => {
           return (
             <CommentCard
+            
               author={item?.author}
               insertDate={item?.insertDate}
               title={item?.title}

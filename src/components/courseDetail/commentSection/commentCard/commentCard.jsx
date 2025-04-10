@@ -89,7 +89,7 @@ const CommentCard = ({
       </div>
       <div className="space-y-2 overflow-hidden">
         <h1 className="font-semibold">{title}</h1>
-        <p>{describe}</p>
+        <p>{commentId}</p>
       </div>
       <div className="flex space-x-5 sm:space-x-10 mt-5 items-center">
         <div className="flex space-x-5">
