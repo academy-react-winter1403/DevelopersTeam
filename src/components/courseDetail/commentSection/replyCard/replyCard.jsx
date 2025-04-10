@@ -6,10 +6,14 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { CiFaceSmile } from "react-icons/ci";
 import { IoIosArrowUp } from "react-icons/io";
 import { RiTelegram2Line } from "react-icons/ri";
+import DateComponent from "../../../common/date/dateComponent";
+import defaultImg from "./../../../../assets/images/courses/defImgComment.jpg";
 
-const ReplyCard = ({ replyData }) => {
+const ReplyCard = ({ data }) => {
   const [isOpen, setIsOpen] = useState(true);
-
+  const addDefaultImg = (e) => {
+    e.target.src = defaultImg;
+  };
   return (
     <div className="w-full mt-5 flex space-x-3">
       <div className="w-2 h-auto bg-navyBlue rounded-sm mr-4"></div>
@@ -17,25 +21,31 @@ const ReplyCard = ({ replyData }) => {
       <div className="flex-1">
         <div className="mt-5 ">
           <div className="flex gap-2 py-4 ">
-            <img src="" alt="" className="border rounded-full w-15 h-15" />
+            <img
+              src={data?.pictureAddress == null ? defaultImg : data?.pictureAddress}
+              onError={addDefaultImg}
+              alt=""
+              className="border rounded-full w-15 h-15"
+            />
             <div>
-              <h2 className="font-semibold"> مهرداد علیزاده </h2>
-              <h2 className="text-gray"> تاریخ </h2>
+              <h2 className="font-semibold"> {data?.author}</h2>
+              <h2 className="text-gray">
+                {" "}
+                <DateComponent insertDate={data?.insertDate} />{" "}
+              </h2>
             </div>
           </div>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold">دوره خیلی خوبی بود</h1>
-          <p>
-            هم استادش و هم کلاس ها منظم برگزار شدن و اصلا از مباحث عقب نموندم و
-            تونستم به مقدهم استادش و هم کلاس ها منظم برگزار شدن و اصلا از مباحث
-            عقب نموندم و تونستم به مقد
-          </p>
+          <h1 className="font-semibold">{data?.title}</h1>
+          <p>{data?.describe}</p>
         </div>
         <div className="flex space-x-10 mt-5 items-center">
           <div className="flex space-x-5">
             <AiOutlineLike className="w-6 h-6" />
+            <span>{data?.likeCount}</span>
             <AiOutlineDislike className="w-6 h-6" />
+            <span>{data?.disslikeCount}</span>
           </div>
           <div>
             <button

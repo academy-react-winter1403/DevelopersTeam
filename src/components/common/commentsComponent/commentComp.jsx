@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { RiH1 } from "react-icons/ri";
 
 const CommentComp = ({ id }) => {
+  const [count, setCount] = useState(4);
   const getNewsComment = async () => {
     const res = await http.get(`/News/GetNewsComments?NewsId=${id}`);
     console.log(res);
@@ -24,12 +25,14 @@ const CommentComp = ({ id }) => {
         <BiCommentDetail />
         نظرات شما
       </h2>
-
+{/* 
       {data == "" ? (
         <h1 className="mx-auto text-gray my-5">نظری ثبت نشده </h1>
       ) : (
         data?.map((item) => <Item commentObj={item} />)
-      )}
+      )} */}
+      {data?.map((item, index) => index < count && <Item commentObj={item} />)}
+      <button onClick={()=>setCount(e=>e+4)}>more</button>
     </div>
   );
 };

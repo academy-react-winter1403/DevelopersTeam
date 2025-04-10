@@ -34,6 +34,7 @@ const CommentSection = ({ id }) => {
         commentsData?.map((item, index) => {
           return (
             <CommentCard
+            
               author={item?.author}
               insertDate={item?.insertDate}
               title={item?.title}
@@ -43,6 +44,7 @@ const CommentSection = ({ id }) => {
               commentId={item?.id}
               likeCount={item?.likeCount}
               disslikeCount={item?.disslikeCount}
+              currentUserEmotion={item?.currentUserEmotion}
             />
           );
         })
