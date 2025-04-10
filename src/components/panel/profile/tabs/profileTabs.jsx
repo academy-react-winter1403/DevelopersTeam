@@ -4,6 +4,7 @@ import UserProfioleImage from "../userProfioleImage/userProfioleImage";
 import UserAddress from "../userAddress/userAddress";
 import { Links } from "react-router-dom";
 import { Tabs } from "antd";
+import LinksTab from "../links/links";
 import "./ProfileTabs.css";
 
 const ProfileTabs = () => {
@@ -26,7 +27,7 @@ const ProfileTabs = () => {
     {
       key: "4",
       label: "لینک ها",
-      children: <Links />,
+      children: <LinksTab />,
     },
   ];
   return (
@@ -37,4 +38,3 @@ const ProfileTabs = () => {
 };
 
 export default ProfileTabs;
-

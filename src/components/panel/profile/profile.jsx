@@ -8,7 +8,7 @@ import { TfiPencil } from "react-icons/tfi";
 
 const Profile = () => {
   return (
-    <div className="w-full h-auto border bg-white rounded-2xl mt-5">
+    <div className="w-full h-auto bg-white rounded-2xl mt-5">
       <div className="w-full h-28 bg-[#3772FF] rounded-t-2xl"></div>
       <div className="border-6 border-white rounded-full w-32 h-32 bg-[#3772FF] mt-[-60px] mr-10">
         <img src={profilepic} alt="" className="mx-auto" />
@@ -16,15 +16,13 @@ const Profile = () => {
           <LuImagePlus className=" w-4 h-4 mx-auto" />
         </div>
       </div>
-      <div className=" w-full mt-5  flex px-4">
+      <div className=" w-full mt-5 flex px-4">
         <div className="flex flex-col w-1/2 ">
           <div className=" ">
             <h2 className="font-bold text-3xl   ">
-              {" "}
               پارسا آقایی
               <span className="text-sm text-gray leading-8 ">
-                {" "}
-                (ادمین،دانشجو){" "}
+                (ادمین،دانشجو)
               </span>
             </h2>
           </div>
@@ -42,17 +40,16 @@ const Profile = () => {
               mohseni@gmail.com
             </div>
             <div className="flex">
-            <TfiPencil className="text-navyBlue w-6 h-6" />
+              <TfiPencil className="text-navyBlue w-6 h-6" />
             </div>
           </div>
         </div>
-        <div className="w-1/2 ">
+        <div className="w-1/2 space-y-3">
           <h2 className="text-gray text-md font-bold">درباره من</h2>
           <p>
-            {" "}
             من پارسا آقایی دانشجوی نوب سگ هستم که اخیرا دارم یاد میگیرم برنامه
             نویسی رو و امیدوارم از نوبیت دربیام و بتونم یه کاری پیدا کنم تو
-            دنیای دیجیتال ، ممنون از همه 😊{" "}
+            دنیای دیجیتال ، ممنون از همه 😊
           </p>
         </div>
       </div>
