@@ -26,7 +26,7 @@ const Profile = () => {
               </span>
             </h2>
           </div>
-          <div className="mt-4 sm:mt-8  text-gray flex items-center gap-5  h-auto flex-col  xl:flex-row ">
+          <div className="mt-4 sm:mt-8  text-gray flex items-start gap-5  h-auto flex-col  xl:flex-row justify-baseline">
             <div className="flex items-center gap-1">
               <HiOutlineDevicePhoneMobile className="w-6 h-6 " />
               09117868753
@@ -45,7 +45,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-1/2 space-y-3">
-          <h2 className="text-gray text-md font-bold">درباره من</h2>
+          <h2 className="text-gray text-md font-bold mt-5">درباره من</h2>
           <p>
             من پارسا آقایی دانشجوی نوب سگ هستم که اخیرا دارم یاد میگیرم برنامه
             نویسی رو و امیدوارم از نوبیت دربیام و بتونم یه کاری پیدا کنم تو

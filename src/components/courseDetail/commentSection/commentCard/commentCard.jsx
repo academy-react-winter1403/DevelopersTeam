@@ -149,17 +149,7 @@ const CommentCard = ({
               }}
             >
               <Form className="space-y-2">
-                {/* <Field
-                  name="title"
-                  placeholder="عنوان نظر خود را بنویسید"
-                  className="w-full p-2 border rounded"
-                />
                 
-                <Field
-                  name="describe"
-                  placeholder="متن نظر خود را بنویسید"
-                  className="w-full p-2 border rounded"
-                /> */}
                 <Input
                   showCount
                   name="title"

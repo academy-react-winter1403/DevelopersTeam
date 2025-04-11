@@ -11,6 +11,7 @@ import CommentLikeDislike from "./commentLikeDislike";
 import { Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { data } from "react-router-dom";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const Item = ({ commentObj }) => {
   // console.log(commentObj);
@@ -60,9 +61,10 @@ const Item = ({ commentObj }) => {
 
         <div
           onClick={() => setOpen((e) => !e)}
-          className="border-b text-[13px] text-center w-32 h-5 leading-6"
+          className=" text-[13px] text-center w-32 h-5 leading-6 flex items-center space-x-2 cursor-pointer"
         >
-          مشاهده جواب ها
+          <span className="underline">مشاهده جواب ها</span>
+          {open ? <IoIosArrowUp className="" /> : <IoIosArrowDown />}
         </div>
       </div>
       <div>
@@ -88,17 +90,6 @@ const Item = ({ commentObj }) => {
                 }}
               >
                 <Form className="space-y-2">
-                  {/* <Field
-                  name="title"
-                  placeholder="عنوان نظر خود را بنویسید"
-                  className="w-full p-2 border rounded"
-                />
-                
-                <Field
-                  name="describe"
-                  placeholder="متن نظر خود را بنویسید"
-                  className="w-full p-2 border rounded"
-                /> */}
                   <Input
                     showCount
                     name="title"
