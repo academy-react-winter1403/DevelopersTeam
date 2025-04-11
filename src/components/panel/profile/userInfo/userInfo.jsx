@@ -123,28 +123,10 @@ const UserInfo = ({ data }) => {
                 <div className="w-full flex md:flex-row flex-col   md:space-x-8 space-y-5">
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3 ">
                     <span>تاریخ تولد</span>
-                    {/* <Field
+                    <Field
                       name="birthday"
                       className="h-9 outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
                       placeholder="تاریخ تولد خود را وارد کنید"
-                    /> */}
-                    <PersianCalendar
-                      name="birthday"
-                      value={new Date(data?.birthDay).toLocaleDateString(
-                        "fa-IR"
-                      )}
-                      darkMode={false}
-                      responsive={true}
-                      onChange={(date) => console.log(date)}
-                      animate={true}
-                      mode="single"
-                      theme="default"
-                      showHolidays={true}
-                      inputStyle={{
-                        backgroundColor: "#f4f4f4",
-                        border: "none",
-                        borderRadius: "12px",
-                      }}
                     />
                   </div>
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3 ">
