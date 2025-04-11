@@ -1,5 +1,6 @@
 import React from "react";
 import FavBottomCourse from "./favBottomCourse";
+import TableFaveCourseHandle from "./tableFavCourse/tableFaveCourseHandle";
 
 const FavCourse = () => {
   return (
@@ -10,6 +11,7 @@ const FavCourse = () => {
         </h2>
       </div>
       <FavBottomCourse/>
+      <TableFaveCourseHandle/>
     </div>
   );
 };
