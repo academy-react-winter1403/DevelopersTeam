@@ -1,6 +1,7 @@
 import React from "react";
 import FavBottomCourse from "../favCourse/favBottomCourse";
 import SortMyReserve from "./sortMyReserve";
+import TableMyReserveCoursesHolder from "./tableMyReserveCourses/tableMyReserveCoursesHolder";
 
 const MyReserveCourse = () => {
   return (
@@ -16,6 +17,7 @@ const MyReserveCourse = () => {
           <SortMyReserve />
         </div>
       </div>
+      <TableMyReserveCoursesHolder/>
     </div>
   );
 };
