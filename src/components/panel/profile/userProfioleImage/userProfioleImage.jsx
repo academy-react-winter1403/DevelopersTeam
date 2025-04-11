@@ -2,20 +2,21 @@ import React from "react";
 import { BiImageAdd } from "react-icons/bi";
 import img from "./../../../../assets/images/panel/img.svg";
 import { CgMoreVertical } from "react-icons/cg";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import { Dropdown, Menu, Tooltip, Upload } from "antd";
 
-const UserProfioleImage = () => {
-  const getProfile = async () => {
-    const res = await http.get(`/SharePanel/GetProfileInfo`);
-    return res;
-  };
-  const { data } = useQuery({
-    queryKey: ["profile"],
-    queryFn: getProfile,
-  });
-
+const UserProfioleImage = ({ data }) => {
+  // const getProfile = async () => {
+  //   const res = await http.get(`/SharePanel/GetProfileInfo`);
+  //   return res;
+  // };
+  // const { data } = useQuery({
+  //   queryKey: ["profile"],
+  //   queryFn: getProfile,
+  // });
+  const queryClient = useQueryClient();
+  
   const selectProfile = async () => {
     const myData = new FormData();
     myData.append("ImageId", userImage.id);

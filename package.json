@@ -23,6 +23,7 @@
     "formik": "^2.4.6",
     "framer-motion": "^12.6.5",
     "heroui-cli": "^1.2.2",
+    "persian-calender": "^1.2.10",
     "react": "^19.1.0",
     "react-circle-progress-bar": "^0.1.4",
     "react-dom": "^19.1.0",
