@@ -45,7 +45,7 @@ const Profile = () => {
               </span>
             </h2>
           </div>
-          <div className="mt-4 sm:mt-8  text-gray flex items-center gap-5  h-auto flex-col  xl:flex-row ">
+          <div className="mt-4 sm:mt-8  text-gray flex items-start gap-5  h-auto flex-col  xl:flex-row justify-baseline">
             <div className="flex items-center gap-1">
               <HiOutlineDevicePhoneMobile className="w-6 h-6 " />
               {data?.phoneNumber}
