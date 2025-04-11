@@ -64,17 +64,8 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-1/2 space-y-3">
-<<<<<<< HEAD
-          <h2 className="text-gray text-md font-bold mt-5">درباره من</h2>
-          <p>
-            من پارسا آقایی دانشجوی نوب سگ هستم که اخیرا دارم یاد میگیرم برنامه
-            نویسی رو و امیدوارم از نوبیت دربیام و بتونم یه کاری پیدا کنم تو
-            دنیای دیجیتال ، ممنون از همه 😊
-          </p>
-=======
           <h2 className="text-gray text-md font-bold">درباره من</h2>
           <p>{data?.userAbout}</p>
->>>>>>> 924b9da1b6a524e983e6ee6685ea0f7b613b1e89
         </div>
       </div>
       <div className="">
