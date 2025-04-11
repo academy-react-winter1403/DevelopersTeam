@@ -2,7 +2,7 @@ import { Radio } from "antd";
 import { Field } from "formik";
 import React from "react";
 
-const InfoFields = () => {
+const InfoFields = ({data}) => {
   return (
     <div className="space-y-5 mb-10 ">
       <div className="w-full flex md:flex-row flex-col   md:space-x-8 space-y-5">

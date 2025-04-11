@@ -16,11 +16,11 @@ import { removeData } from "../../core/localStorage/localStorage";
 const PanelLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navigate = useNavigate()
-  const handleLogOut = () =>{
-    removeData('authToken');
-    navigate('/')
-  }
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    removeData("authToken");
+    navigate("/");
+  };
 
   return (
     <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
@@ -37,7 +37,10 @@ const PanelLayout = () => {
           <PagesLink />
           <PagesLinkRes />
         </div>
-        <div onClick={handleLogOut} className="cursor-pointer lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-16 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6">
+        <div
+          onClick={handleLogOut}
+          className="cursor-pointer lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-16 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6"
+        >
           <MdOutlineLogout className="w-6 h-6" />
           <span className="hidden lg:block">خروج از حساب</span>
         </div>
