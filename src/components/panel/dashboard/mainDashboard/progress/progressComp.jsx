@@ -2,7 +2,7 @@ import React from "react";
 import Progress from "react-circle-progress-bar";
 import { LuPencilLine } from "react-icons/lu";
 
-const ProgressComp = () => {
+const ProgressComp = ({ userData }) => {
   return (
     <div className="col-span-2 flex flex-col justify-c enter items-center bg-[#FEFDFF] rounded-2xl">
       <div className="flex justify-between w-full px-5 mt-5">
@@ -12,10 +12,14 @@ const ProgressComp = () => {
         </span>
       </div>
       <div className="mt-2">
-        <Progress progress={75} />
+        <Progress progress={userData?.profileCompletionPercentage} />
       </div>
       <div>
-        <h1 className="text-navyBlue">اطلاعات حساب‌کابری شما تکمیل است</h1>
+        {userData?.profileCompletionPercentage == 100 ? (
+          <span className="text-navyBlue">اطلاعات حساب‌کابری شما تکمیل است</span>
+        ) : (
+          <span className="text-navyBlue">اطلاعات حساب‌کابری شما تکمیل نیست</span>
+        )}
       </div>
     </div>
   );

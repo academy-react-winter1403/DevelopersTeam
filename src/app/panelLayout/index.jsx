@@ -12,6 +12,7 @@ import { GoSidebarCollapse } from "react-icons/go";
 import PagesLinkRes from "./pagesLinkRes";
 import MobileModeLayout from "./mobileModeLayout";
 import { removeData } from "../../core/localStorage/localStorage";
+import { useQuery } from "@tanstack/react-query";
 
 const PanelLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,15 @@ const PanelLayout = () => {
     removeData("authToken");
     navigate("/");
   };
+
+  const getProfile = async () => {
+    const res = await http.get(`/SharePanel/GetProfileInfo`);
+    return res;
+  };
+  const { data:userData } = useQuery({
+    queryKey: ["profile"],
+    queryFn: getProfile,
+  });
 
   return (
     <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
@@ -54,7 +64,7 @@ const PanelLayout = () => {
               <LuPencilLine className="absolute top-9 bg-navyBlue text-white p-1 w-6 h-6 rounded-full" />
             </div>
             <div className="flex flex-col justify-center">
-              <h1 className="font-semibold">پارسا آقایی</h1>
+              <h1 className="font-semibold">{userData?.fName} {userData?.lName}</h1>
               <h1 className="text-gray">role</h1>
             </div>
           </div>

@@ -19,7 +19,7 @@ const DashboardHolder = () => {
   return (
     <div>
         <HeaderDashboard userData={userData} />
-        <MainDashboard/>
+        <MainDashboard userData={userData}/>
         <TopCourseDashbord/>
     </div>
   )
