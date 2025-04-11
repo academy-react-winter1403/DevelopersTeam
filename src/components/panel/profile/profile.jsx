@@ -16,8 +16,8 @@ const Profile = () => {
           <LuImagePlus className=" w-4 h-4 mx-auto" />
         </div>
       </div>
-      <div className=" w-full mt-5 flex px-4">
-        <div className="flex flex-col w-1/2 ">
+      <div className=" w-full mt-5 flex flex-col sm:flex-row px-4 ">
+        <div className="flex flex-col w-full sm:w-1/2 ">
           <div className=" ">
             <h2 className="font-bold text-3xl   ">
               پارسا آقایی
@@ -26,7 +26,7 @@ const Profile = () => {
               </span>
             </h2>
           </div>
-          <div className="mt-8 text-gray flex items-center gap-5 ">
+          <div className="mt-4 sm:mt-8  text-gray flex items-center gap-5  h-auto flex-col  xl:flex-row ">
             <div className="flex items-center gap-1">
               <HiOutlineDevicePhoneMobile className="w-6 h-6 " />
               09117868753

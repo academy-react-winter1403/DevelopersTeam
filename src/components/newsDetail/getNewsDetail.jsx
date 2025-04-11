@@ -107,6 +107,7 @@ const GetNewsDetailList = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };

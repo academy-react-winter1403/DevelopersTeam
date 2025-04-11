@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "antd";
+
 const columns = [
   {
     title: " ",
@@ -16,7 +17,15 @@ const columns = [
   },
 
   {
-    title: "اساتید دوره",
+    title: " درباره مقاله",
+    dataIndex: "desc",
+    key: "desc",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
+  {
+    title: "منتشر کننده",
     dataIndex: "teacher",
     key: "teacher",
     ellipsis: {
@@ -24,17 +33,9 @@ const columns = [
     },
   },
   {
-    title: " شروع دوره",
+    title: " تاریخ انتشار",
     dataIndex: "date",
     key: "date",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
-  {
-    title: "قیمت دوره",
-    dataIndex: "price",
-    key: "price",
     ellipsis: {
       showTitle: false,
     },
@@ -51,7 +52,9 @@ const columns = [
   },
 ];
 
-const TableBody = ({ data }) => (
+const BodyTableNews = ({ data }) => (
   <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
 );
-export default TableBody;
+export default BodyTableNews;
+
+

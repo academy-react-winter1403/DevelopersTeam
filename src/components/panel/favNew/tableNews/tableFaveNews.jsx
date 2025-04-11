@@ -3,15 +3,14 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import http from "./../../.././../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import DateComponent from "../../../common/date/dateComponent";
-import TableBody from "./tableBody";
 import { IoMdClose } from "react-icons/io";
+import BodyTableNews from "./bodyTableNews";
 
-const TableFaveCourseHandle = () => {
+const TableFaveNews = () => {
   const [convertedData, setCovertedData] = useState([]);
 
-  const getFavCourses = async () => {
-    const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
+  const getFavNews = async () => {
+    const res = await http.get(`/SharePanel/GetMyFavoriteNews`);
     return res;
   };
   const icons = <div className="flex gap-5">
@@ -20,18 +19,18 @@ const TableFaveCourseHandle = () => {
   </div>
 
   const { data, isSuccess } = useQuery({
-    queryKey: "favCoursesPanel",
-    queryFn: getFavCourses,
+    queryKey: "favNewsPanel",
+    queryFn: getFavNews,
   });
   useEffect(() => {
     if (isSuccess) {
-      const i = data.favoriteCourseDto.map((el) => {
+      const i = data.myFavoriteNews.map((el) => {
         let newData = {};
-        newData["img"] = el.tumbImageAddress;
-        newData["name"] = el.courseTitle;
-        newData["teacher"] = el.teacheName;
-        newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
-        newData["price"] = "15000000";
+        newData["img"] = el.currentImageAddressTumb;
+        newData["name"] = el.title;
+        newData["desc"] = 'آموزش صفر تا صد کتابخانه پرطرفدار جی‌اس یعنی ری‌اکت همراه تسک های مفید برای یادگیری بهتر';
+        newData["teacher"] = 'محسن اسفندیاری';
+        newData["date"] = "25 اردیبهشت 1403";
         newData["eye"] = (icons);
         return newData;
       });
@@ -44,7 +43,7 @@ const TableFaveCourseHandle = () => {
       <div className="bg-white w-full h-auto rounded-2xl mt-5">
         <div className=" w-full h-70">
           <Suspense fallback={<h1>loading...</h1>}>
-            {isSuccess && <TableBody data={convertedData} />}
+            {isSuccess && <BodyTableNews data={convertedData} />}
           </Suspense>
         </div>
       </div>
@@ -52,4 +51,4 @@ const TableFaveCourseHandle = () => {
   );
 };
 
-export default TableFaveCourseHandle;
+export default TableFaveNews;
