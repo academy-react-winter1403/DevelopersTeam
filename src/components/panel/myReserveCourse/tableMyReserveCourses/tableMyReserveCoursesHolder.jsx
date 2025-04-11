@@ -12,15 +12,15 @@ import defImg from "./../../../../assets/images/courses/courseimg.svg";
 const TableMyReserveCoursesHolder = () => {
   const [convertedData, setCovertedData] = useState([]);
 
-  const getMyCourses = async () => {
+  const getMyReserveCourses = async () => {
     const res = await http.get(
       `/SharePanel/GetMyCoursesReserve`
     );
     return res;
   };
   const { data, isSuccess } = useQuery({
-    queryKey: "myCoursesPanel",
-    queryFn: getMyCourses,
+    queryKey: "myReserveCoursesPanel",
+    queryFn: getMyReserveCourses,
   });
   const icons = (
     <div className="flex gap-5">

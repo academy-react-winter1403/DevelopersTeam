@@ -8,7 +8,6 @@ import TextArea from "antd/es/input/TextArea";
 import http from "./../../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import PersianCalendar from "persian-calender";
 
 const UserInfo = ({ data }) => {
   const queryClient = useQueryClient();
@@ -61,7 +60,7 @@ const UserInfo = ({ data }) => {
           enableReinitialize
         >
           {({ handleSubmit }) => (
-            <Form onSubmit={handleSubmit} className="px-6 mb-10">
+            <Form onSubmit={handleSubmit} className=" px-6 mb-10">
               <div className="space-y-5 mb-10 ">
                 <div className="w-full flex md:flex-row flex-col   md:space-x-8 space-y-5">
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3 ">
@@ -180,7 +179,7 @@ const UserInfo = ({ data }) => {
           )}
         </Formik>
       </div>
-      <div className="col-span-4 order-1 md:order-2 flex justify-center md:justify-end ml-16 mt-6">
+      <div className="col-span-4 order-1 md:order-2 flex justify-center md:justify-end md:ml-16 mt-6">
         <div className="md:border-2 md:border-borderGray w-72 h-72 rounded-2xl flex items-center justify-center">
           <ProgressProfile
             profileCompletionPercentage={data?.profileCompletionPercentage}
