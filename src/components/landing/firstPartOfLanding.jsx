@@ -11,12 +11,12 @@ const FirstPartOfLanding = () => {
   return (
     <>
       <div className=" mt-16 mx-auto gap-4 md:flex  md:flex-row  md:justify-center  md:w-10/12 ">
-        <div className="overflow-hidden text-right indent-2  w-[300px] h-[45%] mx-auto md:mx-0 mb-6 border-[#E4E4E4] border-4 rounded-4xl relative xl:w-4/12 md:h-64">
-          <h1 className="font-bold mt-4 text-[20px] ">پنل اختصاصی دانشجو</h1>
-          <h6 className=" text-[12px] indent-2 mt-4 ">
+        <div className="overflow-hidden text-right indent-2  w-[300px] h-[45%] mx-auto md:mx-0 mb-6 border-[#E4E4E4] dark:border-gray-700 border-4 rounded-4xl relative xl:w-4/12 md:h-64 dark:bg-gray-800">
+          <h1 className="font-bold mt-4 text-[20px] dark:text-white">پنل اختصاصی دانشجو</h1>
+          <h6 className=" text-[12px] indent-2 mt-4 dark:text-gray-300">
             پنل های اختصاصی دانشجویی
           </h6>
-          <h6 className=" text-[12px]  mt-2 indent-4 ">
+          <h6 className=" text-[12px]  mt-2 indent-4 dark:text-gray-300">
             برای مدیریت دوره ها و تمرین ها
           </h6>
           <img
@@ -46,18 +46,18 @@ const FirstPartOfLanding = () => {
           />
         </div>
 
-        <div className="w-[300px] indent-2 mx-auto md:mx-0 h-[45%] mt-4 md:h-64 md:mt-0 border-[#E4E4E4] border-4 rounded-4xl relative xl:w-2/12">
+        <div className="w-[300px] indent-2 mx-auto md:mx-0 h-[45%] mt-4 md:h-64 md:mt-0 border-[#E4E4E4] dark:border-gray-700 border-4 rounded-4xl relative xl:w-2/12 dark:bg-gray-800">
           <div>
-            <h3 className="mt-3 mr-2 font-semibold">درباره ما</h3>
-            <h4 className=" mr-2 font-semibold">بیشتر بخوانید</h4>
+            <h3 className="mt-3 mr-2 font-semibold dark:text-white">درباره ما</h3>
+            <h4 className=" mr-2 font-semibold dark:text-white">بیشتر بخوانید</h4>
           </div>
           <div className="mt-10 mr-2">
-            <h1 className="font-semibold text-2xl">+1000</h1>
-            <h6 className="text-[10px] text-gray-500">دانشجو آنلاین در دوره</h6>
+            <h1 className="font-semibold text-2xl dark:text-white">+1000</h1>
+            <h6 className="text-[10px] text-gray-500 dark:text-gray-400">دانشجو آنلاین در دوره</h6>
           </div>
           <div className="mt-7 mr-2">
-            <h1 className="font-semibold text-2xl">+13</h1>
-            <h6 className="text-[10px] text-gray-500 mb-4">سال سابقه آموزشی</h6>
+            <h1 className="font-semibold text-2xl dark:text-white">+13</h1>
+            <h6 className="text-[10px] text-gray-500 dark:text-gray-400 mb-4">سال سابقه آموزشی</h6>
           </div>
           <Link>
             <img

@@ -10,9 +10,11 @@ import { NavLink } from "react-router-dom";
 import logo from "./../../assets/images/landing/logoDrawer.svg";
 import { PiInstagramLogoLight } from "react-icons/pi";
 import { PiTelegramLogoLight } from "react-icons/pi";
+import { useDarkMode } from "../../context/theme/themeContext";
 
 const HeaderDrawer = () => {
   const [open, setOpen] = useState(false);
+  const { darkMode } = useDarkMode();
 
   const showDrawer = () => {
     setOpen(true);
@@ -21,9 +23,9 @@ const HeaderDrawer = () => {
     setOpen(false);
   };
   return (
-    <div className=" lg:hidden ml-10">
+    <div className="lg:hidden ml-10">
       <Button variant="text" color="default" onClick={showDrawer}>
-        <AlignLeftOutlined />
+        <AlignLeftOutlined className="dark:text-white" />
       </Button>
 
       <Drawer
@@ -34,51 +36,57 @@ const HeaderDrawer = () => {
         placement="bottom"
         open={open}
         headerStyle={{ display: "none" }}
-        bodyStyle={{ padding: "24px" }}
-        style={{ borderRadius: "24px 24px 0 0" }}
+        bodyStyle={{ 
+          padding: "24px",
+          backgroundColor: darkMode ? "#1f2937" : "#fff"
+        }}
+        style={{ 
+          borderRadius: "24px 24px 0 0",
+          color: darkMode ? "white" : "inherit"
+        }}
       >
         <div className="">
           <div className="flex flex-col space-y-5">
-            <div className=" flex justify-between text-base font-semibold">
+            <div className="flex justify-between text-base font-semibold">
               <NavLink to="/">
-                <span className="flex justify-center items-center gap-2 text-black">
+                <span className="flex justify-center items-center gap-2 dark:text-white">
                   <RiHome9Line />
                   خانه
                 </span>
               </NavLink>
-              <span className="text-gray text-sm">صفحه اصلی</span>
+              <span className="text-gray-400 text-sm">صفحه اصلی</span>
             </div>
-            <div className=" flex justify-between text-base font-semibold">
+            <div className="flex justify-between text-base font-semibold">
               <NavLink to="/courses">
-                <span className="flex justify-center items-center gap-2 text-black">
+                <span className="flex justify-center items-center gap-2 dark:text-white">
                   <BiBookAlt />
                   دوره ها
                 </span>
               </NavLink>
-              <span className="text-gray text-sm">
+              <span className="text-gray-400 text-sm">
                 تمامی دوره های برگزارشده
               </span>
             </div>
-            <div className=" flex justify-between text-base font-semibold">
+            <div className="flex justify-between text-base font-semibold">
               <NavLink to="/news">
-                <span className="flex justify-center items-center gap-2 text-black">
+                <span className="flex justify-center items-center gap-2 dark:text-white">
                   <PiNewspaper />
                   اخبار و مقالات
                 </span>
               </NavLink>
-              <span className="text-gray text-sm">خبر های پژوهشگاه</span>
+              <span className="text-gray-400 text-sm">خبر های پژوهشگاه</span>
             </div>
-            <div className=" flex justify-between text-base font-semibold">
-              <span className="flex justify-center items-center gap-2">
+            <div className="flex justify-between text-base font-semibold">
+              <span className="flex justify-center items-center gap-2 dark:text-white">
                 <RiCellphoneLine />
                 ارتباط باما
               </span>
             </div>
           </div>
-          <Divider />
-          <div className=" flex justify-between">
+          <Divider className="dark:bg-gray-600" />
+          <div className="flex justify-between">
             <div>
-              <img src={logo} alt="not set" className=" w-40" />
+              <img src={logo} alt="not set" className="w-40 dark:invert" />
             </div>
             <div className="flex space-x-4">
               <PiTelegramLogoLight className="w-8 h-8 text-[#3772FF]" />

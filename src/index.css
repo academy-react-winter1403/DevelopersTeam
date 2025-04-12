@@ -26,6 +26,11 @@ thead{
 body {
   font-family: "yekan";
   direction: rtl;
+  @apply bg-white text-[#272727] transition-colors duration-200;
+}
+
+.dark body {
+  @apply bg-gray-900 text-gray-100;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));

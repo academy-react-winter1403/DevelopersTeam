@@ -17,7 +17,7 @@ const CommentLikeDislike = ({ commentObj }) => {
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleCommentLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("commentLike");
+      queryClient.invalidateQueries(["commentLike"]);
       console.log("done");
     },
   });

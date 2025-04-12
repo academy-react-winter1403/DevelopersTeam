@@ -56,9 +56,9 @@ const NewsCard = ({
   });
 
   return (
-    <div className="flex flex-col border-2 border-gray-50 rounded-2xl bg-lightGray p-4 w-full  sm:max-w-[300px] md:max-w-[300px] mx-auto">
+    <div className="flex flex-col border-2 border-gray-50 dark:border-gray-700 rounded-2xl bg-lightGray dark:bg-gray-800 p-4 w-full sm:max-w-[300px] md:max-w-[300px] mx-auto">
       <div className="h-40 w-full rounded-2xl overflow-hidden relative">
-        <div className=" absolute top-2 right-2 flex space-x-2 ">
+        <div className="absolute top-2 right-2 flex space-x-2">
           <TagsA text={keyword} />
         </div>
 
@@ -66,32 +66,32 @@ const NewsCard = ({
           <img
             src={addUserProfileImage}
             alt=""
-            className="h-full w-full object-cover mx-auto "
+            className="h-full w-full object-cover mx-auto"
           />
         </NavLink>
       </div>
       <div className="mt-4">
-        <h2 className="text-[16px] font-bold text-[#272727] overflow-hidden text-ellipsis whitespace-nowrap">
+        <h2 className="text-[16px] font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis whitespace-nowrap">
           {title}
         </h2>
       </div>
       <div className="mt-2">
-        <h2 className="text-[#787878] text-[10px] overflow-hidden text-ellipsis whitespace-nowrap">
+        <h2 className="text-[#787878] dark:text-gray-400 text-[10px] overflow-hidden text-ellipsis whitespace-nowrap">
           {miniDescribe}
         </h2>
       </div>
       <div className="flex items-center gap-2 mt-4">
-        <img src={QuillWrite} alt="Quill Write" className="h-4 w-5" />
-        <span className="text-[12px] text-[#272727]">{addUserFullName}</span>
+        <img src={QuillWrite} alt="Quill Write" className="h-4 w-5 dark:invert" />
+        <span className="text-[12px] text-[#272727] dark:text-gray-300">{addUserFullName}</span>
       </div>
       <div className="flex items-center gap-2 mt-2">
-        <img src={ViewStroke} alt="View Stroke" className="h-4 w-5" />
-        <span className="text-[12px] text-[#272727]">225</span>
+        <img src={ViewStroke} alt="View Stroke" className="h-4 w-5 dark:invert" />
+        <span className="text-[12px] text-[#272727] dark:text-gray-300">225</span>
       </div>
-      <div className="flex justify-between items-center  gap-6  ">
-        <div className="flex  justify-baseline mr-[-10px]">
+      <div className="flex justify-between items-center gap-6">
+        <div className="flex justify-baseline mr-[-10px]">
           <div
-            className="flex justify-center items-center m-2 gap-1 "
+            className="flex justify-center items-center m-2 gap-1"
             onClick={() =>
               currentUserIsLike ? mutateDeleteLike() : mutateLike()
             }
@@ -99,15 +99,15 @@ const NewsCard = ({
             <AiOutlineLike
               className={
                 currentUserIsLike
-                  ? "w-6 h-6 text-navyBlue"
-                  : "w-6 h-6 hover:text-navyBlue"
+                  ? "w-6 h-6 text-navyBlue dark:text-blue-400"
+                  : "w-6 h-6 hover:text-navyBlue dark:hover:text-blue-400"
               }
             />
-            <span className="text-sm  text-[#272727]">{currentLikeCount}</span>
+            <span className="text-sm text-[#272727] dark:text-gray-300">{currentLikeCount}</span>
           </div>
 
           <div
-            className="flex items-center gap-1 "
+            className="flex items-center gap-1"
             onClick={() =>
               currentUserDissLike ? mutateDisLike() : mutateDisLike()
             }
@@ -115,11 +115,11 @@ const NewsCard = ({
             <AiOutlineDislike
               className={
                 currentUserIsDissLike
-                  ? "w-6 h-6 text-navyBlue"
-                  : "w-6 h-6 hover:text-navyBlue"
+                  ? "w-6 h-6 text-navyBlue dark:text-blue-400"
+                  : "w-6 h-6 hover:text-navyBlue dark:hover:text-blue-400"
               }
             />
-            <span className="text-sm  text-[#272727]">
+            <span className="text-sm text-[#272727] dark:text-gray-300">
               {currentDissLikeCount}
             </span>
           </div>
@@ -127,7 +127,7 @@ const NewsCard = ({
 
         <div className="">
           <NavLink to={`/news/newsdetail/${id}`}>
-            <h2 className="bg-blue-500 text-white rounded-2xl  px-2 py-1 text-[10px] lg:text-[12px] text-center cursor-pointer">
+            <h2 className="bg-blue-500 text-white rounded-2xl px-2 py-1 text-[10px] lg:text-[12px] text-center cursor-pointer">
               بیشتر بخوانید
             </h2>
           </NavLink>

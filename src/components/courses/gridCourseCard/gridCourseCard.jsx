@@ -36,7 +36,6 @@ const GridCourseCard = ({
 
   const handleLike = async () => {
     const res = await http.post(`/Course/AddCourseLike?CourseId=${id}`);
-    // console.log(res);
   };
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
@@ -48,7 +47,6 @@ const GridCourseCard = ({
     const myData = new FormData();
     myData.append("CourseLikeId", userLikedId);
     const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
-    // console.log(res);
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
@@ -70,8 +68,8 @@ const GridCourseCard = ({
   });
 
   return (
-    <div className="w-full h-72 bg-lightGray  grid grid-cols-5 overflow-hidden rounded-3xl mr-3 relative">
-      <div className=" absolute top-2 right-2 sm:flex space-x-2 hidden">
+    <div className="w-full h-72 bg-lightGray dark:bg-gray-800 grid grid-cols-5 overflow-hidden rounded-3xl mr-3 relative">
+      <div className="absolute top-2 right-2 sm:flex space-x-2 hidden">
         <TagsA text={statusName} />
         <TagsB text={levelName} />
       </div>
@@ -89,35 +87,35 @@ const GridCourseCard = ({
       <div className="col-span-3 m-6 space-y-5">
         <div className="w-full max-w-[300px] overflow-hidden space-y-2">
           <NavLink to={`/courses/coursedetail/${id}`}>
-            <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 hover:text-navyBlue ">
+            <h2 className="text-lg font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 hover:text-navyBlue dark:hover:text-blue-400">
               {title}
             </h2>
           </NavLink>
-          <h2 className="text-[#787878] text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">
+          <h2 className="text-[#787878] dark:text-gray-400 text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">
             {describe}
           </h2>
         </div>
         <div className="space-y-3">
-          <div className="flex items-center gap-3  text-base">
-            <img src={TeacherIcon} alt="" className="h-5 w-5" />
+          <div className="flex items-center gap-3 text-base dark:text-gray-300">
+            <img src={TeacherIcon} alt="" className="h-5 w-5 dark:invert" />
             <span>{teacherName}</span>
           </div>
-          <div className="flex items-center gap-3 mt-2 text-base">
-            <img src={StudentIcon} alt="" className="h-5 w-5" />
+          <div className="flex items-center gap-3 mt-2 text-base dark:text-gray-300">
+            <img src={StudentIcon} alt="" className="h-5 w-5 dark:invert" />
             <span className="text-md space-x-2">
               <span>{student}</span>
               <span>دانشجو</span>
             </span>
           </div>
-          <div className="flex items-center gap-3 mt-2 text-base">
-            <img src={CalenderIcon} alt="" className="h-5 w-5" />
+          <div className="flex items-center gap-3 mt-2 text-base dark:text-gray-300">
+            <img src={CalenderIcon} alt="" className="h-5 w-5 dark:invert" />
             <span>
               <DateComponent insertDate={lastUpdate} />
             </span>
           </div>
         </div>
         <div className="flex justify-between items-center mt-12 gap-4 ml-1 sm:mb-2">
-          <div className=" flex justify-around items-center gap-10">
+          <div className="flex justify-around items-center gap-10">
             <div
               className="flex items-center gap-1"
               onClick={() => (userIsLiked ? mutateDeleteLike() : mutateLike())}
@@ -125,11 +123,11 @@ const GridCourseCard = ({
               <AiOutlineLike
                 className={
                   userIsLiked
-                    ? "w-5 h-5 text-navyBlue"
-                    : "w-5 h-5 hover:text-navyBlue"
+                    ? "w-5 h-5 text-navyBlue dark:text-blue-400"
+                    : "w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
-              <span>{likeCount}</span>
+              <span className="dark:text-gray-300">{likeCount}</span>
             </div>
             <div
               className="flex items-center gap-1"
@@ -140,15 +138,15 @@ const GridCourseCard = ({
               <AiOutlineDislike
                 className={
                   currentUserDissLike
-                    ? "w-5 h-5 text-navyBlue"
-                    : "w-5 h-5 hover:text-navyBlue"
+                    ? "w-5 h-5 text-navyBlue dark:text-blue-400"
+                    : "w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
-              <span>{dissLikeCount}</span>
+              <span className="dark:text-gray-300">{dissLikeCount}</span>
             </div>
           </div>
           <div className="space-x-2 flex justify-center items-center">
-            <span className="text-lg font-bold">
+            <span className="text-lg font-bold dark:text-white">
               {new Intl.NumberFormat("fa-IR").format(cost)}
             </span>
             <span className="text-blue-400 text-md line-clamp-1">تومان</span>

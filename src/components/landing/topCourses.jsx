@@ -13,14 +13,12 @@ const TopCourses = () => {
     queryFn: getTopCourses,
   });
 
-  // data && console.log(data);
-
   return (
     <div className="w-full mt-20 h-auto">
-      <h1 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl">
+      <h1 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl dark:text-white">
         محبوب ترین دوره ها
       </h1>
-      <h6 className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] xl:text-[15px]">
+      <h6 className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] dark:text-gray-400 xl:text-[15px]">
         دوره هایی که بین دانشجویان محبوبیت بالایی داشتند
       </h6>
       <div className="my-4 flex justify-center gap-4 flex-wrap">
