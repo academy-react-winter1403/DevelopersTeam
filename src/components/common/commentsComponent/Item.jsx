@@ -30,8 +30,8 @@ const Item = ({ commentObj }) => {
   };
 
   return (
-    <div className="border-r-6  border-navyBlue w-full h-auto my-5 cursor-pointer">
-      <div className="flex gap-2 p-4 ">
+    <div className="border-r-6 border-navyBlue dark:border-blue-600 w-full h-auto my-5 cursor-pointer">
+      <div className="flex gap-2 p-4">
         <img
           src={
             commentObj.pictureAddress == null
@@ -39,29 +39,29 @@ const Item = ({ commentObj }) => {
               : commentObj.pictureAddress
           }
           alt="Profile"
-          className="border rounded-full w-15 h-15"
+          className="border rounded-full w-15 h-15 dark:border-gray-600"
           onError={addDefaultImg}
         />
         <div>
-          <h2 className="mb-4">{commentObj.autor}</h2>
+          <h2 className="mb-4 dark:text-white">{commentObj.autor}</h2>
           <DateComp2 inserDate={commentObj.inserDate} />
         </div>
       </div>
 
-      <h2 className="px-4">{commentObj.describe}</h2>
+      <h2 className="px-4 dark:text-gray-300">{commentObj.describe}</h2>
 
-      <div className="flex  p-4  gap-2">
+      <div className="flex p-4 gap-2">
         <CommentLikeDislike commentObj={commentObj} />
         <button
           onClick={() => setOpenAnser((e) => !e)}
-          className="w-1/3 sm:w-2/12 h-10 whitespace-nowrap rounded-full text-xs sm:text-base text-navyBlue text-center border leading-8 "
+          className="w-1/3 sm:w-2/12 h-10 whitespace-nowrap rounded-full text-xs sm:text-base text-navyBlue dark:text-blue-400 text-center border border-navyBlue dark:border-blue-400 leading-8"
         >
           {!openAnser ? "جواب دادن" : "بستن"}
         </button>
 
         <div
           onClick={() => setOpen((e) => !e)}
-          className=" text-[13px] text-center w-32 h-5 leading-6 flex items-center space-x-2 cursor-pointer"
+          className="text-[13px] text-center w-32 h-5 leading-6 flex items-center space-x-2 cursor-pointer dark:text-gray-400"
         >
           <span className="underline">مشاهده جواب ها</span>
           {open ? <IoIosArrowUp className="" /> : <IoIosArrowDown />}
@@ -69,13 +69,13 @@ const Item = ({ commentObj }) => {
       </div>
       <div>
         {openAnser && (
-          <div className=" mt-4 h-auto rounded-3xl text-md border border-navyBlue leading-8 p-6 flex gap-2">
-            <div className="border border-navyBlue bg-navyBlue w-10 h-10 rounded-full flex justify-center items-center">
+          <div className="mt-4 h-auto rounded-3xl text-md border border-navyBlue dark:border-blue-600 leading-8 p-6 flex gap-2 dark:bg-gray-700">
+            <div className="border border-navyBlue dark:border-blue-600 bg-navyBlue dark:bg-blue-600 w-10 h-10 rounded-full flex justify-center items-center">
               <RiTelegram2Line className="w-4 h-4 text-white" />
             </div>
 
-            <div className="border border-[#F1F1F1] w-10 h-10 rounded-full flex justify-center items-center">
-              <CiFaceSmile className="w-4 h-4 text-navyBlue" />
+            <div className="border border-[#F1F1F1] dark:border-gray-600 w-10 h-10 rounded-full flex justify-center items-center">
+              <CiFaceSmile className="w-4 h-4 text-navyBlue dark:text-blue-400" />
             </div>
 
             <div className="flex-1">
@@ -95,12 +95,14 @@ const Item = ({ commentObj }) => {
                     name="title"
                     maxLength={20}
                     placeholder="عنوان نظر خود را بنویسید"
+                    className="dark:bg-gray-800 dark:text-white dark:border-gray-600"
                   />
                   <TextArea
                     showCount
                     name="describe"
                     maxLength={100}
                     placeholder="نظر خود را بنویسید"
+                    className="dark:bg-gray-800 dark:text-white dark:border-gray-600"
                   />
                 </Form>
               </Formik>

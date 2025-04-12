@@ -126,16 +126,16 @@ const MoreInfo = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0">
-      <div className=" bg-[#FFD1CB] w-30 md:min-w-32 h-6 rounded-xl flex justify-center items-center space-x-2">
-        <div className="w-2 h-2 rounded-full bg-[#FF5454]"></div>
-        <h1 className="text-xs md:text-sm text-[#FF5454]">
+    <div className="w-auto h-[430px] border-4 border-borderGray dark:border-gray-700 rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0 dark:bg-gray-800">
+      <div className="bg-[#FFD1CB] dark:bg-red-900/30 w-30 md:min-w-32 h-6 rounded-xl flex justify-center items-center space-x-2">
+        <div className="w-2 h-2 rounded-full bg-[#FF5454] dark:bg-red-400"></div>
+        <h1 className="text-xs md:text-sm text-[#FF5454] dark:text-red-300">
           {data?.courseStatusName}
         </h1>
       </div>
       <div className="w-96 space-y-5">
         <div className="flex">
-          <h1 className="text-2xl md:text-4xl font-semibold truncate">
+          <h1 className="text-2xl md:text-4xl font-semibold truncate dark:text-white">
             {data?.title}
           </h1>
           ({data?.currentUserRateNumber}
@@ -145,38 +145,42 @@ const MoreInfo = ({ data }) => {
           <TagsA text={data?.courseLevelName} />
         </div>
         <div className="mt-3 flex-none space-y-4">
-          <div className="flex items-center gap-3 md:text-xl ">
-            <img src={StudentIcon} alt="" className="h-6 w-6" />
+          <div className="flex items-center gap-3 md:text-xl dark:text-gray-300">
+            <img src={StudentIcon} alt="" className="h-6 w-6 dark:invert" />
             <span className="font-semibold">
               {data?.currentRegistrants} / {data?.capacity}
             </span>
             <span className="font-semibold">دانشجو</span>
           </div>
-          <div className="flex items-center gap-3 mt-2 md:text-xl ">
-            <img src={CalenderIcon} alt="" className="h-6 w-6" />
+          <div className="flex items-center gap-3 mt-2 md:text-xl dark:text-gray-300">
+            <img src={CalenderIcon} alt="" className="h-6 w-6 dark:invert" />
             <span>
               <DateComponent insertDate={data?.startTime} />
             </span>
-            <span className="font-semibold text-gray text-sm">(شروع)</span>
+            <span className="font-semibold text-gray dark:text-gray-400 text-sm">
+              (شروع)
+            </span>
           </div>
-          <div className="flex items-center gap-3 mt-2 md:text-xl ">
-            <img src={CalenderIcon} alt="" className="h-6 w-6" />
+          <div className="flex items-center gap-3 mt-2 md:text-xl dark:text-gray-300">
+            <img src={CalenderIcon} alt="" className="h-6 w-6 dark:invert" />
             <span>
               <DateComponent insertDate={data?.endTime} />
             </span>
-            <span className="font-semibold text-gray text-sm">(پایان)</span>
+            <span className="font-semibold text-gray dark:text-gray-400 text-sm">
+              (پایان)
+            </span>
           </div>
           <div className="space-x-2 flex mt-5">
-            <span className="text-2xl font-bold">
+            <span className="text-2xl font-bold dark:text-white">
               {new Intl.NumberFormat("fa-IR").format(data?.cost)}
             </span>
-            <span className="text-[#3772FF] text-sm font-semibold mt-2">
+            <span className="text-[#3772FF] dark:text-blue-400 text-sm font-semibold mt-2">
               تومان
             </span>
           </div>
         </div>
       </div>
-      <div className=" lg:w-[500px] flex justify-between items-center space-x-2">
+      <div className="lg:w-[500px] flex justify-between items-center space-x-2">
         <Button
           shape="round"
           type="primary"
@@ -194,15 +198,15 @@ const MoreInfo = ({ data }) => {
             onClick={() => {
               data?.isUserFavorite ? mutateDeleteFav() : mutateFavorite();
             }}
-            className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
+            className="w-12 h-12 rounded-full border border-borderGray dark:border-gray-600 flex justify-center items-center cursor-pointer"
           >
             {data?.isUserFavorite ? (
-              <MdFavorite className="w-5 h-5 text-navyBlue" />
+              <MdFavorite className="w-5 h-5 text-navyBlue dark:text-blue-400" />
             ) : (
-              <MdFavoriteBorder className="w-5 h-5 hover:text-navyBlue" />
+              <MdFavoriteBorder className="w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400" />
             )}
           </div>
-          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+          <div className="w-12 h-12 rounded-full border border-borderGray dark:border-gray-600 flex justify-center items-center cursor-pointer">
             <div
               className="flex items-center gap-1"
               onClick={() =>
@@ -212,13 +216,13 @@ const MoreInfo = ({ data }) => {
               <AiOutlineLike
                 className={
                   data?.currentUserLike == "1"
-                    ? "w-6 h-6 text-navyBlue "
-                    : "w-6 h-6 hover:text-navyBlue"
+                    ? "w-6 h-6 text-navyBlue dark:text-blue-400"
+                    : "w-6 h-6 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
             </div>
           </div>
-          <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+          <div className="w-12 h-12 rounded-full border border-borderGray dark:border-gray-600 flex justify-center items-center cursor-pointer">
             <div
               className="flex items-center gap-1"
               onClick={() =>
@@ -230,8 +234,8 @@ const MoreInfo = ({ data }) => {
               <AiOutlineDislike
                 className={
                   data?.currentUserDissLike == "1"
-                    ? "w-6 h-6 text-navyBlue"
-                    : "w-6 h-6 hover:text-navyBlue"
+                    ? "w-6 h-6 text-navyBlue dark:text-blue-400"
+                    : "w-6 h-6 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
             </div>

@@ -82,9 +82,9 @@ const CommentCard = ({
     },
   });
 
-  return (
+ return (
     <div className={`w-full flex mt-2 ${isReplay && "space-x-3 "}`}>
-      {isReplay && <div className="w-2 h-52 bg-navyBlue rounded-sm"></div>}
+      {isReplay && <div className="w-2 h-52 bg-navyBlue dark:bg-blue-600 rounded-sm"></div>}
       <div className="w-full">
         <div className="mt-2">
           <div className="flex gap-2 py-4">
@@ -92,19 +92,19 @@ const CommentCard = ({
               src={pictureAddress || defaultImg}
               onError={(e) => addDefaultImg(e)}
               alt=""
-              className="rounded-full w-10 h-10 border border-borderGray"
+              className="rounded-full w-10 h-10 border border-borderGray dark:border-gray-600"
             />
             <div>
-              <h2 className="font-semibold text-sm sm:text-base"> {author}</h2>
-              <h2 className="text-gray text-xs sm:text-sm">
+              <h2 className="font-semibold text-sm sm:text-base dark:text-white"> {author}</h2>
+              <h2 className="text-gray dark:text-gray-400 text-xs sm:text-sm">
                 <DateComponent insertDate={insertDate} />
               </h2>
             </div>
           </div>
         </div>
         <div className="space-y-2 overflow-hidden">
-          <h1 className="font-semibold text-sm sm:text-base">{title}</h1>
-          <p className="text-xs sm:text-sm">{describe}</p>
+          <h1 className="font-semibold text-sm sm:text-base dark:text-white">{title}</h1>
+          <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>
         </div>
         <div className="flex flex-wrap gap-3 sm:space-x-5 mt-3 sm:mt-5 items-center">
           <div className="flex space-x-3 sm:space-x-5">
@@ -116,31 +116,31 @@ const CommentCard = ({
               }
               className={
                 currentUserEmotion === "LIKED"
-                  ? "w-5 h-5 sm:w-6 sm:h-6 text-navyBlue cursor-pointer"
-                  : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer"
+                  ? "w-5 h-5 sm:w-6 sm:h-6 text-navyBlue dark:text-blue-400 cursor-pointer"
+                  : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer dark:text-gray-400"
               }
             />
-            <span className="text-xs sm:text-sm">{likeCount}</span>
+            <span className="text-xs sm:text-sm dark:text-gray-300">{likeCount}</span>
             <AiOutlineDislike
               onClick={() => mutateDisLike()}
               className={
                 currentUserEmotion === "-"
-                  ? "w-5 h-5 sm:w-6 sm:h-6 text-navyBlue cursor-pointer"
-                  : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer"
+                  ? "w-5 h-5 sm:w-6 sm:h-6 text-navyBlue dark:text-blue-400 cursor-pointer"
+                  : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer dark:text-gray-400"
               }
             />
-            <span className="text-xs sm:text-sm">{disslikeCount}</span>
+            <span className="text-xs sm:text-sm dark:text-gray-300">{disslikeCount}</span>
           </div>
           <div className="flex space-x-3">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="h-8 sm:h-10 rounded-full text-xs px-2 sm:px-3 border border-navyBlue text-navyBlue"
+              className="h-8 sm:h-10 rounded-full text-xs px-2 sm:px-3 border border-navyBlue dark:border-blue-400 text-navyBlue dark:text-blue-400"
             >
               {isOpen ? "جواب دادن" : "بستن"}
             </button>
             <div
               onClick={() => setOpenAnswer((e) => !e)}
-              className="text-xs flex items-center space-x-1 cursor-pointer"
+              className="text-xs flex items-center space-x-1 cursor-pointer dark:text-gray-400"
             >
               <span className="underline">مشاهده جواب ها</span>
               {openAnswer ? (

@@ -46,8 +46,8 @@ const DetailContainer = ({ data, id }) => {
   });
 
   return (
-    <div className="lg:w-[719px] h-auto  m-4 lg:m-0 ">
-      <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden">
+    <div className="lg:w-[719px] h-auto m-4 lg:m-0 dark:text-white">
+      <div className="w-full md:h-[428px] rounded-3xl overflow-hidden">
         <img
           src={data?.imageAddress == null ? defaultImg : data?.imageAddress}
           alt="not set"
@@ -55,8 +55,8 @@ const DetailContainer = ({ data, id }) => {
           onError={addDefaultImg}
         />
       </div>
-      <div className=" w-full p-2 space-y-5 mt-5">
-        <h1 className="text-gray">مدرس</h1>
+      <div className="w-full p-2 space-y-5 mt-5">
+        <h1 className="text-gray dark:text-gray-400">مدرس</h1>
         <div className="flex space-x-3 items-center">
           <div className="w-14 h-14 rounded-full overflow-hidden">
             <img
@@ -66,27 +66,21 @@ const DetailContainer = ({ data, id }) => {
             />
           </div>
           <div>
-            <h1 className="font-semibold">{data?.teacherName}</h1>
-            {/* <h1 className="text-sm text-gray">سنیور فرانت اند</h1> */}
+            <h1 className="font-semibold dark:text-white">
+              {data?.teacherName}
+            </h1>
           </div>
         </div>
       </div>
-      <div className=" w-full h-auto p-2 space-y-3">
-        <h1 className="text-gray">توضیحات</h1>
+      <div className="w-full h-auto p-2 space-y-3">
+        <h1 className="text-gray dark:text-gray-400">توضیحات</h1>
         <div className="space-y-5">
-          <h1 className="font-bold text-xl">ری اکت چیست؟</h1>
-          <p className="">
-            {data?.describe}
-            <br />
-            {/* ری‌اکت (React) یک کتابخانه جاوا اسکریپت برای ساخت رابط‌های کاربری
-            (UI) است که توسط فیس‌بوک توسعه داده شده است. این کتابخانه به
-            توسعه‌دهندگان این امکان را می‌دهد که به‌راحتی و به‌صورت مؤثر،
-            کامپوننت‌های تعاملی و پیچیده بسازند.{" "} */}
-          </p>
+          <h1 className="font-bold text-xl dark:text-white">ری اکت چیست؟</h1>
+          <p className="dark:text-gray-300">{data?.describe}</p>
         </div>
       </div>
-      <div className="p-2 mt-10 space-x-4 flex items-center">
-        <img src={star} alt="" />
+      <div className="p-2 mt-10 space-x-4 flex items-center dark:text-white">
+        <img src={star} alt="" className="dark:invert" />
         <span>امتیاز بدید</span>
         <span>({data?.currentUserRateNumber})</span>
         <Rate
@@ -97,6 +91,7 @@ const DetailContainer = ({ data, id }) => {
               : data?.currentRate
           }
           onChange={(rateValue) => mutate(rateValue)}
+          className="dark:[&_.ant-rate-star]:text-yellow-400"
         />
       </div>
       <UserAddComment id={id} />

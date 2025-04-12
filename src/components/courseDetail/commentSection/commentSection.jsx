@@ -24,16 +24,17 @@ const CommentSection = ({ id }) => {
   };
 
   return (
-    <div className="h-auto border-2 border-borderGray rounded-3xl mt-10 flex flex-col items-center p-5 space-y-5">
-      <h2 className="w-full h-10 bg-[#3772FF] text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
+    <div className="h-auto border-2 border-borderGray dark:border-gray-700 rounded-3xl mt-10 flex flex-col items-center p-5 space-y-5 dark:bg-gray-800">
+      <h2 className="w-full h-10 bg-[#3772FF] dark:bg-blue-600 text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
         <BiCommentDetail />
         نظرات شما
       </h2>
-
       {isLoading ? (
         <Spin size="large" className="mt-20" />
       ) : commentsData?.length === 0 ? (
-        <h1 className="text-gray text-sm my-5">نظری ثبت نشده</h1>
+        <h1 className="text-gray dark:text-gray-400 text-sm my-5">
+          نظری ثبت نشده
+        </h1>
       ) : (
         commentsData
           ?.slice(0, visibleComments)
@@ -57,7 +58,7 @@ const CommentSection = ({ id }) => {
       {commentsData?.length > visibleComments && (
         <h2
           onClick={loadMoreComments}
-          className="w-full h-10 bg-[#E4E4E4] text-[#272727] rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2 mt-3"
+          className="w-full h-10 bg-[#E4E4E4] dark:bg-gray-700 text-[#272727] dark:text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2 mt-3"
         >
           <BiCommentAdd />
           نمایش بیشتر

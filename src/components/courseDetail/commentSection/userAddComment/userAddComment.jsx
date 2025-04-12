@@ -33,12 +33,12 @@ const UserAddComment = ({ id }) => {
   });
 
   return (
-    <div className="w-full h-auto border-2 border-borderGray rounded-3xl mt-10 p-6">
-      <h2 className="w-full h-10 bg-[#3772FF] text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
+    <div className="w-full h-auto border-2 border-borderGray dark:border-gray-700 rounded-3xl mt-10 p-6 dark:bg-gray-800">
+      <h2 className="w-full h-10 bg-[#3772FF] dark:bg-blue-600 text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
         <TfiWrite />
         نظر خود را ثبت کنید
       </h2>
-      <div className="mt-5 ">
+      <div className="mt-5">
         <Formik onSubmit={mutate} initialValues={{ Title: "", Describe: "" }}>
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit} className="space-y-5">
@@ -49,6 +49,7 @@ const UserAddComment = ({ id }) => {
                   placeholder="عنوان"
                   variant="filled"
                   size="large"
+                  className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
               </div>
               <div>
@@ -59,11 +60,12 @@ const UserAddComment = ({ id }) => {
                   placeholder="نظر خود را وارد کنید"
                   maxLength={100}
                   variant="filled"
+                  className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-[#3772FF] w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                className="bg-[#3772FF] dark:bg-blue-600 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
               >
                 ثبت
               </button>

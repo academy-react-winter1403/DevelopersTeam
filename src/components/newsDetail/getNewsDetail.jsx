@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import http from "../../core/services/interceptor";
 import { useParams } from "react-router-dom";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
@@ -107,32 +107,36 @@ const GetNewsDetailList = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
   return (
-    <div className="my-14 h-auto flex flex-col lg:flex-row flex-wrap justify-around ">
-      <div className="w-auto h-[430px] border-4 border-borderGray rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0 line-clamp-1 overflow-hidden truncate">
-        <h2 className="text-lg sm:text-3xl  font-bold sm:p-4  ">{data?.title}</h2>
+    <div className="my-14 h-auto flex flex-col lg:flex-row flex-wrap justify-around">
+      <div className="w-auto h-[430px] border-4 border-borderGray dark:border-gray-700 rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0 line-clamp-1 overflow-hidden truncate dark:bg-gray-800">
+        <h2 className="text-lg sm:text-3xl font-bold sm:p-4 dark:text-white">
+          {data?.title}
+        </h2>
 
         <div className="w-50 mt-5 lg:mt-[-8px] mr-2">
-          <TagsA text={data?.keyword}  />
+          <TagsA text={data?.keyword} />
         </div>
 
-        <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2 font-semibold md:text-xl">
-          <HiOutlineCalendarDateRange className="w-6 h-6 mr-2 font-semibold" />
+        <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2 font-semibold md:text-xl dark:text-gray-300">
+          <HiOutlineCalendarDateRange className="w-6 h-6 mr-2 font-semibold dark:text-gray-400" />
           <span>
             <DateComponent insertDate={data?.insertDate} />
           </span>
         </div>
 
-        <div className="flex gap-2 items-center mt-6 sm:mt-1 2xl:mt-[-4px]  font-semibold md:text-xl">
-          <IoEyeOutline className="w-6 h-6 mr-2 font-semibold" />
+        <div className="flex gap-2 items-center mt-6 sm:mt-1 2xl:mt-[-4px] font-semibold md:text-xl dark:text-gray-300">
+          <IoEyeOutline className="w-6 h-6 mr-2 font-semibold dark:text-gray-400" />
           <span>225</span>
         </div>
 
-        <h2 className="mt-20 sm:mt-12 2xl:mt-12 px-2 sm:px-4  text-[#787878]  font-semibold md:text-xl">منتشر کننده</h2>
+        <h2 className="mt-20 sm:mt-12 2xl:mt-12 px-2 sm:px-4 text-[#787878] dark:text-gray-400 font-semibold md:text-xl">
+          منتشر کننده
+        </h2>
 
         <div className="flex items-center justify-between gap-4 px-2">
           <div className="gap-2 flex items-center">
@@ -143,32 +147,32 @@ const GetNewsDetailList = () => {
                   : data?.addUserProfileImage
               }
               alt="not set"
-              className="border border-[#E4E4E4] rounded-full w-14 h-14 hidden sm:block"
+              className="border border-[#E4E4E4] dark:border-gray-600 rounded-full w-14 h-14 hidden sm:block"
               onError={addDefaultImg}
             />
-            <span className="font-semibold text-md sm:text-lg">
+            <span className="font-semibold text-md sm:text-lg dark:text-gray-300">
               {data?.addUserFullName}
             </span>
           </div>
-          <div className="flex  justify-evenly gap-2 ">
+          <div className="flex justify-evenly gap-2">
             <div
               onClick={() => {
                 data?.isCurrentUserFavorite
                   ? mutateDeleteFav()
                   : mutateFavorite();
               }}
-              className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer"
+              className="w-12 h-12 rounded-full border border-borderGray dark:border-gray-600 flex justify-center items-center cursor-pointer"
             >
               <MdFavoriteBorder
                 className={
                   data?.isCurrentUserFavorite
-                    ? "size-6 text-navyBlue"
-                    : "size-6 hover:text-navyBlue"
+                    ? "size-6 text-navyBlue dark:text-blue-400"
+                    : "size-6 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
             </div>
 
-            <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center  cursor-pointer">
+            <div className="w-12 h-12 rounded-full border border-borderGray dark:border-gray-600 flex justify-center items-center cursor-pointer">
               <div
                 className="flex items-center gap-1"
                 onClick={() =>
@@ -178,13 +182,13 @@ const GetNewsDetailList = () => {
                 <AiOutlineLike
                   className={
                     data?.currentUserIsLike
-                      ? "w-6 h-6 text-navyBlue"
-                      : "w-6 h-6 hover:text-navyBlue"
+                      ? "w-6 h-6 text-navyBlue dark:text-blue-400"
+                      : "w-6 h-6 hover:text-navyBlue dark:hover:text-blue-400"
                   }
                 />
               </div>
             </div>
-            <div className="w-12 h-12 rounded-full border border-borderGray flex justify-center items-center cursor-pointer">
+            <div className="w-12 h-12 rounded-full border border-borderGray dark:border-gray-600 flex justify-center items-center cursor-pointer">
               <div
                 className="flex items-center gap-1"
                 onClick={() =>
@@ -194,8 +198,8 @@ const GetNewsDetailList = () => {
                 <AiOutlineDislike
                   className={
                     data?.currentUserIsDissLike
-                      ? "w-6 h-6 text-navyBlue"
-                      : "w-6 h-6 hover:text-navyBlue"
+                      ? "w-6 h-6 text-navyBlue dark:text-blue-400"
+                      : "w-6 h-6 hover:text-navyBlue dark:hover:text-blue-400"
                   }
                 />
               </div>
@@ -204,8 +208,8 @@ const GetNewsDetailList = () => {
         </div>
       </div>
 
-      <div className="lg:w-[719px] h-auto  m-4 lg:m-0 ">
-        <div className="w-full  md:h-[428px] rounded-3xl overflow-hidden">
+      <div className="lg:w-[719px] h-auto m-4 lg:m-0 dark:text-white">
+        <div className="w-full md:h-[428px] rounded-3xl overflow-hidden">
           <img
             src={
               data?.addUserProfileImage == null
@@ -218,26 +222,14 @@ const GetNewsDetailList = () => {
           />
         </div>
 
-        <div className="w-full h-auto p-2 space-y-3 ">
-          <h2 className="mt-5 p-5">
-            {data?.miniDescribe} لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-            از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
-            روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-            تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
-            می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت
-            فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را
-            برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
-            فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
-            موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
-            نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
-            دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-          </h2>
+        <div className="w-full h-auto p-2 space-y-3">
+          <h2 className="mt-5 p-5 dark:text-gray-300">{data?.miniDescribe}</h2>
         </div>
 
-        <div className="p-2 mt-10 space-x-4 flex items-center">
-          <img src={star} alt="" />
+        <div className="p-2 mt-10 space-x-4 flex items-center dark:text-white">
+          <img src={star} alt="" className="dark:invert" />
           <span>امتیاز بدید</span>
-          <span>({data?.currentRate})</span>{" "}
+          <span>({data?.currentRate})</span>
           <Rate
             allowHalf
             value={
@@ -246,13 +238,14 @@ const GetNewsDetailList = () => {
                 : data?.currentUserRateNumber
             }
             onChange={(rateValue) => mutateRate(rateValue)}
+            className="dark:[&_.ant-rate-star]:text-yellow-400"
           />
         </div>
 
         <div className="w-full h-auto p-2 space-y-3">
-          <h2 className="font-bol text-3xl p-4">نظرات</h2>
-          <div className="border border-[#E4E4E4] w-full h-auto p-2 space-y-3 rounded-4xl">
-            <CommentComp id={id}/>
+          <h2 className="font-bol text-3xl p-4 dark:text-white">نظرات</h2>
+          <div className="border border-[#E4E4E4] dark:border-gray-700 w-full h-auto p-2 space-y-3 rounded-4xl dark:bg-gray-800">
+            <CommentComp id={id} />
           </div>
         </div>
       </div>
