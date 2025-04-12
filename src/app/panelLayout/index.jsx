@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./../../assets/images/logo.svg";
 import logoText from "./../../assets/images/logoText.svg";
 import { RxDashboard } from "react-icons/rx";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import PagesLink from "./pagesLink";
 import { LuPencilLine } from "react-icons/lu";
 import { IoMoonOutline } from "react-icons/io5";
@@ -11,9 +11,26 @@ import { MdOutlineLogout } from "react-icons/md";
 import { GoSidebarCollapse } from "react-icons/go";
 import PagesLinkRes from "./pagesLinkRes";
 import MobileModeLayout from "./mobileModeLayout";
+import { removeData } from "../../core/localStorage/localStorage";
+import { useQuery } from "@tanstack/react-query";
 
 const PanelLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    removeData("authToken");
+    navigate("/");
+  };
+
+  const getProfile = async () => {
+    const res = await http.get(`/SharePanel/GetProfileInfo`);
+    return res;
+  };
+  const { data:userData } = useQuery({
+    queryKey: ["profile"],
+    queryFn: getProfile,
+  });
 
   return (
     <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
@@ -30,7 +47,10 @@ const PanelLayout = () => {
           <PagesLink />
           <PagesLinkRes />
         </div>
-        <div className="lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-16 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6">
+        <div
+          onClick={handleLogOut}
+          className="cursor-pointer lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-16 border-2 border-borderGray lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 lg:pr-6"
+        >
           <MdOutlineLogout className="w-6 h-6" />
           <span className="hidden lg:block">خروج از حساب</span>
         </div>
@@ -44,7 +64,7 @@ const PanelLayout = () => {
               <LuPencilLine className="absolute top-9 bg-navyBlue text-white p-1 w-6 h-6 rounded-full" />
             </div>
             <div className="flex flex-col justify-center">
-              <h1 className="font-semibold">پارسا آقایی</h1>
+              <h1 className="font-semibold">{userData?.fName} {userData?.lName}</h1>
               <h1 className="text-gray">role</h1>
             </div>
           </div>

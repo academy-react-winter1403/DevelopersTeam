@@ -5,7 +5,7 @@ import ProgressComp from "./progress/progressComp";
 import http from '../../../../core/services/interceptor'
 import { useQuery } from "@tanstack/react-query";
 
-const MainDashboard = () => {
+const MainDashboard = ({userData}) => {
   const getUserInfo = async () =>{
     const res = await http.get('/SharePanel/GetProfileInfo')
     return res
@@ -16,12 +16,12 @@ const MainDashboard = () => {
     queryFn:getUserInfo
   })
 
-  data && console.log(data)
+  // data && console.log(data)
   return (
     <div className="md:grid md:grid-cols-7 mt-3 gap-5">
       <YourComments />
       <Calender />
-      <ProgressComp />
+      <ProgressComp userData={userData} />
     </div>
   );
 };

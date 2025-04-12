@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { Button, Drawer } from "antd";
-import { FiSearch } from "react-icons/fi";
-import DateInput from "../dateInput/dateInput";
-import { IoCalendarOutline } from "react-icons/io5";
 import { IoIosClose } from "react-icons/io";
-import FilterSearchInput from "../filterSearchInput/filterSearchInput";
-import CourseType from "../filterSection/courseType/courseType";
-import CourseLevel from "../filterSection/courseLevel/courseLevel";
-import TeacherName from "../filterSection/teacherName/teacherName";
-import CourseTech from "../filterSection/courseTech/courseTech";
-import PriceSlider from "../priceSlider/priceSlider";
-import { RxCross2 } from "react-icons/rx";
 import FilterSection from "../filterSection";
 
 const DrawerFilterSection = ({

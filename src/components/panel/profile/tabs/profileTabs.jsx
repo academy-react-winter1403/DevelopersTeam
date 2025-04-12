@@ -7,31 +7,32 @@ import { Tabs } from "antd";
 import LinksTab from "../links/links";
 import "./ProfileTabs.css";
 
-const ProfileTabs = () => {
+const ProfileTabs = ({data}) => {
+  
   const items = [
     {
       key: "1",
       label: "اطلاعات شخصی",
-      children: <UserInfo />,
+      children: <UserInfo data={data} />,
     },
     {
       key: "2",
       label: "عکس پروفایل",
-      children: <UserProfioleImage />,
+      children: <UserProfioleImage data={data} />,
     },
     {
       key: "3",
       label: "آدرس سکونت",
-      children: <UserAddress />,
+      children: <UserAddress data={data} />,
     },
     {
       key: "4",
       label: "لینک ها",
-      children: <LinksTab />,
+      children: <LinksTab data={data} />,
     },
   ];
   return (
-    <div className="mt-10 mr-5  custom-tabs ">
+    <div className="mt-10 md:mr-5  custom-tabs ">
       <Tabs defaultActiveKey="1" items={items} />
     </div>
   );

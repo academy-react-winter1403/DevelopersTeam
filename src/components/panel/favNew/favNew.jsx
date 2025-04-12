@@ -1,5 +1,6 @@
 import React from "react";
 import FavBottomCourse from "../favCourse/favBottomCourse";
+import TableFaveNews from "./tableNews/tableFaveNews";
 
 const FavNew = () => {
   return (
@@ -10,6 +11,7 @@ const FavNew = () => {
         </h2>
       </div>
      <FavBottomCourse/>
+     <TableFaveNews/>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const LinksTab = () => {
       <div className="flex flex-col space-y-3">
         <Formik>
           <Form>
-            <div>
+            <div className="">
               <span className="font-semibold text-xs sm:text-sm lg:text-base">
                 <h2 className="font-bold text-md">تلگرام</h2>
               </span>
@@ -24,7 +24,7 @@ const LinksTab = () => {
                 />
               </span>
             </div>
-            <div>
+            <div className="">
               <span className="font-semibold text-xs sm:text-sm lg:text-base">
                 <h2 className="font-bold text-md">لینکدین</h2>
               </span>
@@ -34,7 +34,7 @@ const LinksTab = () => {
                 </span>
                 <Field
                   name={name}
-                  className="w-7/11 h-9 outline-none rounded-xl p-5 pr-14 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
+                  className="w-7/11 h-9 outline-none rounded-xl py-5 pr-14 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
                   placeholder="لینک لینکدین خود را وارد کنید"
                 />
               </span>
@@ -42,7 +42,7 @@ const LinksTab = () => {
             <button
               type="submit"
               // onClick={nextStep}
-              className="bg-navyBlue w-32 h-10 rounded-full font-bold text-white hover:opacity-80 m-6"
+              className="bg-navyBlue w-32 h-10 rounded-full font-bold text-white hover:opacity-80 my-6"
             >
               اعمال تغییرات
             </button>
