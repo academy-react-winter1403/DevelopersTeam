@@ -6,6 +6,8 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
 import TableBody from "./tableBody";
 import { IoMdClose } from "react-icons/io";
+import defImg from "./../../../../assets/images/courses/courseimg.svg";
+
 
 const TableFaveCourseHandle = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -23,11 +25,19 @@ const TableFaveCourseHandle = () => {
     queryKey: "favCoursesPanel",
     queryFn: getFavCourses,
   });
+
+  const img = (
+    <img
+      src={data?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
+      alt=""
+    />
+  );
+  
   useEffect(() => {
     if (isSuccess) {
       const i = data.favoriteCourseDto.map((el) => {
         let newData = {};
-        newData["img"] = el.tumbImageAddress;
+        newData["img"] = img;
         newData["name"] = el.courseTitle;
         newData["teacher"] = el.teacheName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
