@@ -11,20 +11,28 @@ const MyCourse = () => {
 
   const getMyCourses = async () => {
     const res = await http.get(
-      `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate ${
-        searchQuery ? `&Query=${searchQuery}` : ""
-      }`
+      `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate`
     );
     return res;
   };
   const { data, isSuccess, refetch } = useQuery({
-    queryKey: ["myCoursesPanel", searchQuery],
+    queryKey: ["myCoursesPanel"],
     queryFn: getMyCourses,
   });
 
+  const [SearchList, setSearchList] = useState(null);
   useEffect(() => {
-    refetch();
-  }, [searchQuery]);
+    if (data) {
+      setSearchList(data);
+    }
+  }, [data]);
+  const handleSearch = (e) => {
+    const newArr = SearchList.filter((item) =>
+      data?.courseTitle.includes(e.target.value)
+    );
+    setSearchList(newArr);
+    console.log(e.target.value);
+  };
 
   return (
     <div>
@@ -34,6 +42,7 @@ const MyCourse = () => {
       <FavBottomCourse
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        handleSearch={handleSearch}
       />
       <TableMyCoursesHolder
         data={data}

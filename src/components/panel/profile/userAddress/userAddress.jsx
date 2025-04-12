@@ -1,14 +1,17 @@
-import React from 'react'
+import React from "react";
+import Map from "./map/map";
 
 const UserAddress = () => {
   return (
-    <div className='w-full mb-10'>
-      <h1 className='text-navyBlue'>داخل نقشه موقعیت مکانی محل سکونت خود را انتخاب کنید</h1>
-      <div className='bg-lightGray w- full h-96 ml-10 rounded-2xl mt-2'>
-
+    <div className="w-full mb-10">
+      <h1 className="text-navyBlue">
+        داخل نقشه موقعیت مکانی محل سکونت خود را انتخاب کنید
+      </h1>
+      <div className="ml-10 rounded-2xl mt-2">
+        <Map />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserAddress
+export default UserAddress;

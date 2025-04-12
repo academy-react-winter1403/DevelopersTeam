@@ -48,6 +48,10 @@ const MoreInfo = ({ data }) => {
     mutationFn: handleLike,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+      toast.success("لایک با موفقیت انجام شد");
+    },
+    onError: () => {
+      toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
 
@@ -77,6 +81,9 @@ const MoreInfo = ({ data }) => {
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
     },
+    onError: () => {
+      toast.error("ابتدا وارد حساب کاربری خود شوید");
+    },
   });
 
   const handleFavorite = async () => {
@@ -93,7 +100,7 @@ const MoreInfo = ({ data }) => {
     onError: () => {
       if (data?.isUserFavorite == true) {
         toast.error("این دوره در لیست علاقه مندی های شما موجود میباشد");
-      } else toast.error("دوباره امتحان کنید");
+      } else toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
 

@@ -16,30 +16,30 @@ const UserProfioleImage = ({ data }) => {
   //   queryFn: getProfile,
   // });
   const queryClient = useQueryClient();
-  
-  const selectProfile = async () => {
+
+  const selectProfile = async (id) => {
     const myData = new FormData();
-    myData.append("ImageId", userImage.id);
-    const res = await http.post("/SharePanel/SelectProfileImage", {
-      data: myData,
-    });
+    myData.append("ImageId", id);
+    const res = await http.post("/SharePanel/SelectProfileImage", myData);
+    return res;
   };
   const { mutate: mutateSelectProfile } = useMutation({
-    mutationFn: selectProfile,
+    mutationFn: (id) => selectProfile(id),
     onSuccess: () => {
       queryClient.invalidateQueries("profile");
     },
   });
 
-  const deleteProfileImg = async () => {
+  const deleteProfileImg = async (id) => {
     const myData = new FormData();
-    myData.append("DeleteEntityId", userImage.id);
-    const res = await http.post("/SharePanel/DeleteProfileImage", {
+    myData.append("DeleteEntityId", id);
+    const res = await http.delete("/SharePanel/DeleteProfileImage", {
       data: myData,
     });
+    return res;
   };
   const { mutate: mutateDeleteProfile } = useMutation({
-    mutationFn: deleteProfileImg,
+    mutationFn: (id) => deleteProfileImg(id),
     onSuccess: () => {
       queryClient.invalidateQueries("profile");
     },
@@ -48,9 +48,8 @@ const UserProfioleImage = ({ data }) => {
   const addProfile = async () => {
     const myData = new FormData();
     myData.append("formFile", userImage.puctureAddress);
-    const res = await http.post("/SharePanel/AddProfileImage", {
-      data: myData,
-    });
+    const res = await http.post("/SharePanel/AddProfileImage", myData);
+    return res;
   };
   const { mutate: mutateAddProfile } = useMutation({
     mutationFn: addProfile,
@@ -59,24 +58,9 @@ const UserProfioleImage = ({ data }) => {
     },
   });
 
-  const items = [
-    {
-      key: "1",
-      label: (
-        <span onClick={() => mutateSelectProfile()}>
-          قراردادن به عنوان پروفایل
-        </span>
-      ),
-    },
-    {
-      key: "2",
-      label: <span onClick={() => mutateDeleteProfile()}>حذف</span>,
-    },
-  ];
-
   return (
     <div className="h-auto mb-10 flex space-x-8">
-      <Upload>
+      <Upload onClick={mutateAddProfile}>
         <div className="w-60 h-60 border-4 ml-8 rounded-2xl border-borderGray flex flex-col justify-center items-center">
           <BiImageAdd className="text-navyBlue w-10 h-10" />
           <h1 className="font-semibold">اضافه کردن عکس</h1>
@@ -89,7 +73,30 @@ const UserProfioleImage = ({ data }) => {
             key={index}
             className="w-60 h-60  rounded-2xl flex flex-col justify-center items-center overflow-hidden relative"
           >
-            <Dropdown menu={{ items }} placement="topRight" arrow>
+            <Dropdown
+              menu={{
+                items: [
+                  {
+                    key: "1",
+                    label: (
+                      <span onClick={() => mutateSelectProfile(item.id)}>
+                        قراردادن به عنوان پروفایل
+                      </span>
+                    ),
+                  },
+                  {
+                    key: "2",
+                    label: (
+                      <span onClick={() => mutateDeleteProfile(item.id)}>
+                        حذف
+                      </span>
+                    ),
+                  },
+                ],
+              }}
+              placement="topRight"
+              arrow
+            >
               <CgMoreVertical className=" w-10 h-10 bg-white p-2 rounded-full absolute top-3 right-3 cursor-pointer" />
             </Dropdown>
             <img src={item.puctureAddress} alt="" className="w-60 h-60" />

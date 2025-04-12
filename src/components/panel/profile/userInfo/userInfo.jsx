@@ -81,12 +81,12 @@ const UserInfo = ({ data }) => {
                 <div className=" ">
                   <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3 ">
                     <span>درباره من</span>
-                    {/* <Field
-                    name="aboutMe"
+                    <Field
+                    name="aboutMe" as="textarea"
                     className="h-32 outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
                     placeholder="یک متن درباره خود را وارد کنید"
-                  /> */}
-                    <TextArea
+                  />
+                    {/* <TextArea
                       name="aboutMe"
                       placeholder="یک متن درباره خود را وارد کنید"
                       rows={4}
@@ -96,7 +96,7 @@ const UserInfo = ({ data }) => {
                         borderRadius: "12px",
                         padding: "10px",
                       }}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="w-full flex md:flex-row flex-col   md:space-x-8 space-y-5">

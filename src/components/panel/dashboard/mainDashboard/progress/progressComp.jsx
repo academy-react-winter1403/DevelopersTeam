@@ -16,9 +16,13 @@ const ProgressComp = ({ userData }) => {
       </div>
       <div>
         {userData?.profileCompletionPercentage == 100 ? (
-          <span className="text-navyBlue">اطلاعات حساب‌کابری شما تکمیل است</span>
+          <span className="text-navyBlue">
+            اطلاعات حساب‌کابری شما تکمیل است
+          </span>
         ) : (
-          <span className="text-navyBlue">اطلاعات حساب‌کابری شما تکمیل نیست</span>
+          <span className="text-navyBlue">
+            اطلاعات حساب‌کابری شما تکمیل نیست
+          </span>
         )}
       </div>
     </div>

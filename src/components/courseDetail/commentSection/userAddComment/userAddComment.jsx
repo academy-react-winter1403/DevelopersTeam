@@ -6,6 +6,8 @@ import { BiCommentDetail } from "react-icons/bi";
 import { TfiWrite } from "react-icons/tfi";
 import http from "./../../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getData } from "../../../../core/localStorage/localStorage";
+import toast from "react-hot-toast";
 
 const UserAddComment = ({ id }) => {
   const queryClient = useQueryClient();
@@ -23,13 +25,16 @@ const UserAddComment = ({ id }) => {
     mutationFn: addComment,
     onSuccess: () => {
       queryClient.invalidateQueries(["comments"]);
-      // if(){}
+      toast.success("نظرتان با موفقیت ثبت شد");
+    },
+    onError: () => {
+      toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
 
   return (
-    <div className="w-full h-auto border-2 border-borderGray rounded-2xl mt-10 p-6">
-      <h2 className="w-full h-10 bg-blue-500 text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
+    <div className="w-full h-auto border-2 border-borderGray rounded-3xl mt-10 p-6">
+      <h2 className="w-full h-10 bg-[#3772FF] text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
         <TfiWrite />
         نظر خود را ثبت کنید
       </h2>
@@ -58,7 +63,7 @@ const UserAddComment = ({ id }) => {
               </div>
               <button
                 type="submit"
-                className="bg-navyBlue w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                className="bg-[#3772FF] w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
               >
                 ثبت
               </button>

@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import teacherImg from "./../../../../assets/images/courseDetail/teacherDefault.svg";
 import CommentSection from "../../commentSection/commentSection";
 import UserAddComment from "../../commentSection/userAddComment/userAddComment";
+import toast from "react-hot-toast";
 
 const DetailContainer = ({ data, id }) => {
   const queryClient = useQueryClient();
@@ -26,6 +27,9 @@ const DetailContainer = ({ data, id }) => {
     mutationFn: handleRate,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+    },
+    onError: () => {
+      toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
 
@@ -63,7 +67,7 @@ const DetailContainer = ({ data, id }) => {
           </div>
           <div>
             <h1 className="font-semibold">{data?.teacherName}</h1>
-            <h1 className="text-sm text-gray">سنیور فرانت اند</h1>
+            {/* <h1 className="text-sm text-gray">سنیور فرانت اند</h1> */}
           </div>
         </div>
       </div>
@@ -74,10 +78,10 @@ const DetailContainer = ({ data, id }) => {
           <p className="">
             {data?.describe}
             <br />
-            ری‌اکت (React) یک کتابخانه جاوا اسکریپت برای ساخت رابط‌های کاربری
+            {/* ری‌اکت (React) یک کتابخانه جاوا اسکریپت برای ساخت رابط‌های کاربری
             (UI) است که توسط فیس‌بوک توسعه داده شده است. این کتابخانه به
             توسعه‌دهندگان این امکان را می‌دهد که به‌راحتی و به‌صورت مؤثر،
-            کامپوننت‌های تعاملی و پیچیده بسازند.{" "}
+            کامپوننت‌های تعاملی و پیچیده بسازند.{" "} */}
           </p>
         </div>
       </div>
@@ -95,7 +99,7 @@ const DetailContainer = ({ data, id }) => {
           onChange={(rateValue) => mutate(rateValue)}
         />
       </div>
-      <UserAddComment  id={id}/>
+      <UserAddComment id={id} />
       <CommentSection id={id} />
     </div>
   );

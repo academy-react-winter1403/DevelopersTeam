@@ -28,7 +28,7 @@ const Profile = () => {
               : data?.currentPictureAddress
           }
           alt=""
-          className="mx-auto"
+          className="mx-auto w-32 h-30 rounded-full"
         />
         <div className="bg-[#3772FF] border-6 border-white rounded-full w-8 h-8 flex items-center mt-[-15px]">
           <LuImagePlus className=" w-4 h-4 mx-auto" />

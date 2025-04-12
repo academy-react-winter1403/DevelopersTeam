@@ -12,6 +12,7 @@ const MyReserveCourse = () => {
     const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
     return res;
   };
+
   const { data, isSuccess } = useQuery({
     queryKey: "myReserveCoursesPanel",
     queryFn: getMyReserveCourses,

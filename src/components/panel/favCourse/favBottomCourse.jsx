@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import NewsNavbar from "../../news/newsNavbar";
 
-const FavBottomCourse = ({ searchQuery, setSearchQuery }) => {
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
+const FavBottomCourse = ({ handleSearch }) => {
   return (
     <div>
       <div className="w-full h-auto mt-5 flex items-center gap-5">
@@ -20,7 +17,6 @@ const FavBottomCourse = ({ searchQuery, setSearchQuery }) => {
             <input
               type="text"
               onChange={handleSearch}
-              value={searchQuery}
               placeholder="جستجو کنید..."
               className="bg-[#D9D9D9] text-[#787878] rounded-xl px-6 py-1 outline-none focus:outline-none h-12"
             />
