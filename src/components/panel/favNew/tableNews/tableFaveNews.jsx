@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import BodyTableNews from "./bodyTableNews";
+import defImg from "./../../../../assets/images/courses/courseimg.svg";
+
 
 const TableFaveNews = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -22,11 +24,19 @@ const TableFaveNews = () => {
     queryKey: "favNewsPanel",
     queryFn: getFavNews,
   });
+
+   const img = (
+      <img
+        src={data?.currentImageAddressTumb == null ? defImg : el.currentImageAddressTumb}
+        alt=""
+      />
+    );
+
   useEffect(() => {
     if (isSuccess) {
       const i = data.myFavoriteNews.map((el) => {
         let newData = {};
-        newData["img"] = el.currentImageAddressTumb;
+        newData["img"] = img;
         newData["name"] = el.title;
         newData["desc"] = 'آموزش صفر تا صد کتابخانه پرطرفدار جی‌اس یعنی ری‌اکت همراه تسک های مفید برای یادگیری بهتر';
         newData["teacher"] = 'محسن اسفندیاری';
