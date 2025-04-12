@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import FavBottomCourse from "../favCourse/favBottomCourse";
 import SortMyReserve from "./sortMyReserve";
 import TableMyReserveCoursesHolder from "./tableMyReserveCourses/tableMyReserveCoursesHolder";
+import { useQuery } from "@tanstack/react-query";
+import http from "./../../../core/services/interceptor";
 
 const MyReserveCourse = () => {
+  const [convertedData, setCovertedData] = useState([]);
+
+  const getMyReserveCourses = async () => {
+    const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
+    return res;
+  };
+  const { data, isSuccess } = useQuery({
+    queryKey: "myReserveCoursesPanel",
+    queryFn: getMyReserveCourses,
+  });
   return (
     <div>
       <div>
@@ -17,7 +29,12 @@ const MyReserveCourse = () => {
           <SortMyReserve />
         </div>
       </div>
-      <TableMyReserveCoursesHolder/>
+      <TableMyReserveCoursesHolder
+        convertedData={convertedData}
+        setCovertedData={setCovertedData}
+        data={data}
+        isSuccess={isSuccess}
+      />
     </div>
   );
 };

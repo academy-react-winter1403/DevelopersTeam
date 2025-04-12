@@ -17,11 +17,9 @@ const UserInfo = ({ data }) => {
     formData.append("FName", userData.fname);
     formData.append("LName", userData.lname);
     formData.append("UserAbout", userData.aboutMe);
-    // formData.append("Phone", userData.phone);
     formData.append("NationalCode", userData.code);
     formData.append("BirthDay", userData.birthday);
     formData.append("Gender", userData.gender);
-    // formData.append("Email", userData.email);
     formData.append("HomeAdderess", userData.address);
 
     const res = await http.put(`/SharePanel/UpdateProfileInfo`, formData);

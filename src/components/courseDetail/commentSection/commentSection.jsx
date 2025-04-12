@@ -9,7 +9,7 @@ import CommentCard from "./commentCard/commentCard";
 import ReplyCard from "./replyCard/replyCard";
 import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
-import { h1 } from "framer-motion/client";
+
 
 const CommentSection = ({ id }) => {
   const getCourseComments = async () => {
@@ -49,7 +49,7 @@ const CommentSection = ({ id }) => {
           );
         })
       )}
-      {/* <ReplyCard id={id} /> */}
+      
     </div>
   );
 };

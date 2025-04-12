@@ -9,19 +9,13 @@ import { Progress } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 
-const TableMyReserveCoursesHolder = () => {
-  const [convertedData, setCovertedData] = useState([]);
-
-  const getMyReserveCourses = async () => {
-    const res = await http.get(
-      `/SharePanel/GetMyCoursesReserve`
-    );
-    return res;
-  };
-  const { data, isSuccess } = useQuery({
-    queryKey: "myReserveCoursesPanel",
-    queryFn: getMyReserveCourses,
-  });
+const TableMyReserveCoursesHolder = ({
+  convertedData,
+  setCovertedData,
+  data,
+  isSuccess,
+}) => {
+  
   const icons = (
     <div className="flex gap-5">
       <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
@@ -35,10 +29,10 @@ const TableMyReserveCoursesHolder = () => {
   );
   useEffect(() => {
     if (isSuccess) {
-      const i = data.listOfMyCourses.map((el) => {
+      const i = data.map((el) => {
         let newData = {};
         newData["img"] = img;
-        newData["name"] = el.courseTitle;
+        newData["name"] = el.courseName;
         newData["teacher"] = el.fullName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = <PriceComponent cost={el.cost} />;
