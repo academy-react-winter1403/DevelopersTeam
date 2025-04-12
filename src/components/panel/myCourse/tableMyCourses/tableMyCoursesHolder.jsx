@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 const TableMyCourses = lazy(() => import("./tableMyCourses"));
-import http from "./../../.././../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
@@ -9,19 +8,12 @@ import { Progress } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 
-const TableMyCoursesHolder = () => {
-  const [convertedData, setCovertedData] = useState([]);
-
-  const getMyCourses = async () => {
-    const res = await http.get(
-      `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate&Query=`
-    );
-    return res;
-  };
-  const { data, isSuccess } = useQuery({
-    queryKey: "myCoursesPanel",
-    queryFn: getMyCourses,
-  });
+const TableMyCoursesHolder = ({
+  data,
+  convertedData,
+  setCovertedData,
+  isSuccess
+}) => {
   const icons = (
     <div className="flex gap-5">
       <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
