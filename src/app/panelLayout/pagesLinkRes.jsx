@@ -10,7 +10,7 @@ const PagesLinkRes = () => {
   return (
     <div className="mt-3 space-y-5 sm:flex flex-col items-center justify-center hidden lg:hidden ">
       <NavLink
-        to="/panel"
+        to="/panel/dashboard"
         end
         className={({ isActive }) =>
           `${

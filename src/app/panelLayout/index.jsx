@@ -8,11 +8,12 @@ import { LuPencilLine } from "react-icons/lu";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
-import { GoSidebarCollapse } from "react-icons/go";
+import { GoSidebarCollapse, GoSun } from "react-icons/go";
 import PagesLinkRes from "./pagesLinkRes";
 import MobileModeLayout from "./mobileModeLayout";
 import { removeData } from "../../core/localStorage/localStorage";
 import { useQuery } from "@tanstack/react-query";
+import { useDarkMode } from "../../context/theme/themeContext";
 
 const PanelLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,10 +28,12 @@ const PanelLayout = () => {
     const res = await http.get(`/SharePanel/GetProfileInfo`);
     return res;
   };
-  const { data:userData } = useQuery({
+  const { data: userData } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
   });
+
+  const { darkMode, setDarkMode } = useDarkMode();
 
   return (
     <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
@@ -57,26 +60,38 @@ const PanelLayout = () => {
       </div>
 
       <div className="w-5/5 lg:w-4/5 p-5">
-        <div className=" w-full h-20 bg-[#FEFDFF] rounded-3xl flex items-center justify-between px-3">
-          <div className="flex space-x-3 relative">
+        <div className=" w-full h-20 sm:bg-[#FEFDFF] rounded-3xl flex items-center justify-between px-3">
+          <div className="sm:flex space-x-3 relative hidden">
             <div className="w-14 h-14 bg-pink-600 rounded-full">
               <img src="" alt="" />
               <LuPencilLine className="absolute top-9 bg-navyBlue text-white p-1 w-6 h-6 rounded-full" />
             </div>
             <div className="flex flex-col justify-center">
-              <h1 className="font-semibold">{userData?.fName} {userData?.lName}</h1>
+              <h1 className="font-semibold">
+                {userData?.fName} {userData?.lName}
+              </h1>
               <h1 className="text-gray">role</h1>
             </div>
+          </div>
+          <div className="block sm:hidden">
+            <img src={logo} alt="" />
           </div>
           <div className="flex space-x-3">
             <NavLink
               to="/"
-              className="w-14 h-14 border-2 border-borderGray rounded-full flex justify-center items-center"
+              className="w-14 h-14 sm:border-2 sm:border-borderGray bg-[#FEFDFF] sm:bg-none rounded-full flex justify-center items-center"
             >
               <IoHomeOutline className="w-5 h-5" />
             </NavLink>
-            <div className="w-14 h-14 border-2 border-borderGray rounded-full flex justify-center items-center">
-              <IoMoonOutline className="w-5 h-5" />
+            <div
+              onClick={() => setDarkMode(!darkMode)}
+              className="w-14 h-14 sm:border-2 sm:border-borderGray rounded-full flex justify-center items-center bg-[#FEFDFF] sm:bg-none"
+            >
+              {darkMode ? (
+                <GoSun className="size-5 text-yellow-300 cursor-pointer" />
+              ) : (
+                <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
+              )}
             </div>
           </div>
         </div>

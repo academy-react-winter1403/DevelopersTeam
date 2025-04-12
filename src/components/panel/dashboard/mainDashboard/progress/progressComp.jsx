@@ -4,7 +4,7 @@ import { LuPencilLine } from "react-icons/lu";
 
 const ProgressComp = ({ userData }) => {
   return (
-    <div className="col-span-2 flex flex-col justify-c enter items-center bg-[#FEFDFF] rounded-2xl">
+    <div className="col-span-2 md:flex flex-col justify-c enter items-center bg-[#FEFDFF] rounded-2xl hidden md:order-3">
       <div className="flex justify-between w-full px-5 mt-5">
         <span className="font-semibold">وضعیت اطلاعات حساب</span>
         <span>

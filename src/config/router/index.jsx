@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
     path: "/panel",
     element: <PanelLayout />,
     children: [
-      { path: "/panel", element: <DashboardPage /> },
+      { path: "/panel/dashboard", element: <DashboardPage /> },
       {
         path: "/panel/mycourse",
         element: <MyCoursePage />,

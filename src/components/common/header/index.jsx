@@ -64,7 +64,7 @@ const Header = () => {
         </div>
         <div className="flex items-center justify-center">
           {token ? (
-            <NavLink to="/panel">
+            <NavLink to="/panel/dashboard">
               <Button
                 type="primary"
                 shape="round"

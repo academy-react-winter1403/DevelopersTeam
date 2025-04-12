@@ -18,9 +18,9 @@ const MainDashboard = ({userData}) => {
 
   // data && console.log(data)
   return (
-    <div className="md:grid md:grid-cols-7 mt-3 gap-5">
+    <div className="md:grid md:grid-cols-7 mt-3 gap-5 flex flex-col">
       <YourComments />
-      <Calender />
+      <Calender  />
       <ProgressComp userData={userData} />
     </div>
   );

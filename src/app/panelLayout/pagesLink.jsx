@@ -10,7 +10,7 @@ const PagesLink = () => {
   return (
     <div className="mt-3 space-y-5 hidden lg:block">
       <NavLink
-        to="/panel"
+        to="/panel/dashboard"
         end
         className={({ isActive }) =>
           `${
