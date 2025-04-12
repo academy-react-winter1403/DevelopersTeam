@@ -3,6 +3,7 @@ import FavBottomCourse from "../favCourse/favBottomCourse";
 import SortMyReserve from "./sortMyReserve";
 import TableMyReserveCoursesHolder from "./tableMyReserveCourses/tableMyReserveCoursesHolder";
 import { useQuery } from "@tanstack/react-query";
+import http from "./../../../core/services/interceptor";
 
 const MyReserveCourse = () => {
   const [convertedData, setCovertedData] = useState([]);

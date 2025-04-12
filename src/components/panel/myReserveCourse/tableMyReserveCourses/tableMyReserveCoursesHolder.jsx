@@ -29,10 +29,10 @@ const TableMyReserveCoursesHolder = ({
   );
   useEffect(() => {
     if (isSuccess) {
-      const i = data.listOfMyCourses.map((el) => {
+      const i = data.map((el) => {
         let newData = {};
         newData["img"] = img;
-        newData["name"] = el.courseTitle;
+        newData["name"] = el.courseName;
         newData["teacher"] = el.fullName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = <PriceComponent cost={el.cost} />;

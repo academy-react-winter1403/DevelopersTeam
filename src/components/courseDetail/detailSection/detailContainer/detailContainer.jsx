@@ -7,8 +7,9 @@ import star from "./../../../../assets/images/courseDetail/star.svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import teacherImg from "./../../../../assets/images/courseDetail/teacherDefault.svg";
 import CommentSection from "../../commentSection/commentSection";
+import UserAddComment from "../../commentSection/userAddComment/userAddComment";
 
-const DetailContainer = ({ data, id}) => {
+const DetailContainer = ({ data, id }) => {
   const queryClient = useQueryClient();
 
   const addDefaultImg = (e) => {
@@ -94,6 +95,7 @@ const DetailContainer = ({ data, id}) => {
           onChange={(rateValue) => mutate(rateValue)}
         />
       </div>
+      <UserAddComment  id={id}/>
       <CommentSection id={id} />
     </div>
   );
