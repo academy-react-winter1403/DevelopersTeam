@@ -5,8 +5,8 @@ import NewsNavbar from "../../news/newsNavbar";
 
 const FavBottomCourse = ({ handleSearch }) => {
   return (
-    <div>
-      <div className="w-full h-auto mt-5 flex items-center gap-5">
+    <div className="hidden sm:block">
+      <div className="w-full h-auto mt-5 flex items-center gap-5 ">
         <div className=" ">
           <div className="flex items-center gap-2">
             <CiSearch className="w-6 h-6" />

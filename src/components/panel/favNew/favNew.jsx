@@ -4,13 +4,13 @@ import TableFaveNews from "./tableNews/tableFaveNews";
 
 const FavNew = () => {
   return (
-    <div>
-      <div>
+    <div >
+      <div className="hidden sm:block">
         <h2 className="w-full h-10  mt-5 font-bold text-xl">
           علاقه مندی مقالات
         </h2>
       </div>
-     <FavBottomCourse/>
+     <FavBottomCourse />
      <TableFaveNews/>
     </div>
   );
