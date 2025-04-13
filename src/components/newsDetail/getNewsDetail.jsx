@@ -13,6 +13,7 @@ import { Rate } from "antd";
 import star from "./../../assets/images/courseDetail/star.svg";
 import CommentComp from "../common/commentsComponent/commentComp";
 import { TagsA } from "../common/course-card/tags/tags";
+import AddUserNewsComment from "../common/commentsComponent/addUserNewsComment";
 
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
@@ -241,9 +242,9 @@ const GetNewsDetailList = () => {
             className="dark:[&_.ant-rate-star]:text-yellow-400"
           />
         </div>
-
+        <AddUserNewsComment id={id} />
         <div className="w-full h-auto p-2 space-y-3">
-          <h2 className="font-bol text-3xl p-4 dark:text-white">نظرات</h2>
+          {/* <h2 className="font-bol text-3xl p-4 dark:text-white">نظرات</h2> */}
           <div className="border border-[#E4E4E4] dark:border-gray-700 w-full h-auto p-2 space-y-3 rounded-4xl dark:bg-gray-800">
             <CommentComp id={id} />
           </div>

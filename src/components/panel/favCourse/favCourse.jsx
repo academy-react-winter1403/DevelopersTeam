@@ -3,6 +3,7 @@ import FavBottomCourse from "./favBottomCourse";
 import TableFaveCourseHandle from "./tableFavCourse/tableFaveCourseHandle";
 
 const FavCourse = () => {
+  
   return (
     <div >
       <div className="hidden sm:block">

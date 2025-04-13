@@ -4,27 +4,22 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { BiCommentDetail } from "react-icons/bi";
 import { TfiWrite } from "react-icons/tfi";
-import http from "./../../../../core/services/interceptor";
+import http from "./../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getData } from "../../../../core/localStorage/localStorage";
 import toast from "react-hot-toast";
 
 const AddUserNewsComment = ({ id }) => {
   const queryClient = useQueryClient();
 
   const addComment = async (values) => {
-    // const formData = new FormData();
-    // formData.append("CourseId", id);
-    // formData.append("Title", values.Title);
-    // formData.append("Describe", values.Describe);
-    const res = await http.post(`/News/CreateNewsComment`);
+    const res = await http.post(`/News/CreateNewsComment`, values);
     return res;
   };
 
   const { mutate } = useMutation({
     mutationFn: addComment,
     onSuccess: () => {
-      queryClient.invalidateQueries(["comments"]);
+      queryClient.invalidateQueries(["newsComment"]);
       toast.success("نظرتان با موفقیت ثبت شد");
     },
     onError: () => {
@@ -39,13 +34,22 @@ const AddUserNewsComment = ({ id }) => {
         نظر خود را ثبت کنید
       </h2>
       <div className="mt-5 ">
-        <Formik onSubmit={mutate} initialValues={{ Title: "", Describe: "" }}>
+        <Formik
+          onSubmit={mutate}
+          initialValues={{
+            title: "",
+            describe: "",
+            userId: 40330,
+            newsId: id,
+            userIpAddress: "1.1.1.1",
+          }}
+        >
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <Field
                   as={Input}
-                  name="Title"
+                  name="title"
                   placeholder="عنوان"
                   variant="filled"
                   size="large"
@@ -54,7 +58,7 @@ const AddUserNewsComment = ({ id }) => {
               <div>
                 <Field
                   as={TextArea}
-                  name="Describe"
+                  name="describe"
                   rows={7}
                   placeholder="نظر خود را وارد کنید"
                   maxLength={100}

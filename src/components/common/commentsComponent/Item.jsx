@@ -30,7 +30,7 @@ const Item = ({ commentObj }) => {
   };
 
   return (
-    <div className="border-r-6 border-navyBlue dark:border-blue-600 w-full h-auto my-5 cursor-pointer">
+    <div className="   dark:border-blue-600 w-full h-auto my-5 cursor-pointer">
       <div className="flex gap-2 p-4">
         <img
           src={

@@ -1,12 +1,11 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
-// const TableBody = lazy(() => import("./tableTopCourses"));
+const BodyTableNews = lazy(() => import("./bodyTableNews"));
 import http from "./../../.././../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-import BodyTableNews from "./bodyTableNews";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
-// import ResponsivNews from "../responsivNews";
+import ResponsivNews from "../responsivNews";
 
 const TableFaveNews = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -64,7 +63,7 @@ const TableFaveNews = () => {
           </Suspense>
         </div>
       </div>
-      {/* <ResponsivNews data={data} /> */}
+      <ResponsivNews data={data} />
     </div>
   );
 };

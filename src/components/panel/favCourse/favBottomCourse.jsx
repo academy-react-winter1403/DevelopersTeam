@@ -56,12 +56,6 @@ const FavBottomCourse = ({ handleSearch }) => {
             />
           </div>
         </div>
-        {/* <FavBottomCourse
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          handleSearch={handleSearch}
-        /> */}
-        {/* <TableFaveCourseHandle/> */}
       </div>
     </div>
   );
