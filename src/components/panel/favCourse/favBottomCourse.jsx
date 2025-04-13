@@ -5,28 +5,28 @@ import NewsNavbar from "../../news/newsNavbar";
 import TableFaveCourseHandle from "./tableFavCourse/tableFaveCourseHandle";
 
 const FavBottomCourse = ({ handleSearch }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
 
-  const [convertedData, setCovertedData] = useState([]);
+  // const [convertedData, setCovertedData] = useState([]);
 
-  const [SearchList, setSearchList] = useState(null);
-  useEffect(() => {
-    if (data) {
-      setSearchList(data);
-    }
-  }, [data]);
-  const handleSearch = (e) => {
-    const newArr = SearchList.filter((item) =>
-      data?.courseTitle.includes(e.target.value)
-    );
-    setSearchList(newArr);
-    console.log(e.target.value);
-  };
+  // const [SearchList, setSearchList] = useState(null);
+  // useEffect(() => {
+  //   if (data) {
+  //     setSearchList(data);
+  //   }
+  // }, [data]);
+  // const handleSearch = (e) => {
+  //   const newArr = SearchList.filter((item) =>
+  //     data?.courseTitle.includes(e.target.value)
+  //   );
+  //   setSearchList(newArr);
+  //   console.log(e.target.value);
+  // };
 
   return (
     <div className="hidden sm:block">
       <div className="w-full h-auto mt-5 flex items-center gap-5 ">
-        {/* <div className=" ">
+        <div className=" ">
           <div className="flex items-center gap-2">
             <CiSearch className="w-6 h-6" />
             <h2>جستجو دوره</h2>
@@ -55,13 +55,13 @@ const FavBottomCourse = ({ handleSearch }) => {
               className="bg-[#D9D9D9] text-[#787878] text-sm text-left rounded-xl pr-10 pl-2 py-1 outline-none focus:outline-none h-12"
             />
           </div>
-        </div> */}
-        <FavBottomCourse
+        </div>
+        {/* <FavBottomCourse
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           handleSearch={handleSearch}
-        />
-        <TableFaveCourseHandle/>
+        /> */}
+        {/* <TableFaveCourseHandle/> */}
       </div>
     </div>
   );
