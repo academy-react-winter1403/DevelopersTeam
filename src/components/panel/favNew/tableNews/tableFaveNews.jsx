@@ -55,21 +55,16 @@ const TableFaveNews = () => {
     }
   }, [isSuccess]);
 
-  const isMobile = window.innerWidth <= 768; // بررسی سایز صفحه
-
   return (
     <div>
-      {isMobile ? (
-        <ResponsivNews />
-      ) : (
-        <div className="bg-white w-full h-auto rounded-2xl mt-5">
-          <div className=" w-full h-70">
-            <Suspense fallback={<h1>loading...</h1>}>
-              {isSuccess && <BodyTableNews data={convertedData} />}
-            </Suspense>
-          </div>
+      <div className="bg-white w-full h-auto rounded-2xl mt-5">
+        <div className=" w-full h-70  hidden sm:block">
+          <Suspense fallback={<h1>loading...</h1>}>
+            {isSuccess && <BodyTableNews data={convertedData} />}
+          </Suspense>
         </div>
-      )}
+      </div>
+      <ResponsivNews data={data} />
     </div>
   );
 };
