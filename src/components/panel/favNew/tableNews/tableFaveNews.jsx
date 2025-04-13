@@ -6,7 +6,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import BodyTableNews from "./bodyTableNews";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
-import ResponsivNews from "../responsivNews";
+// import ResponsivNews from "../responsivNews";
 
 const TableFaveNews = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -64,7 +64,7 @@ const TableFaveNews = () => {
           </Suspense>
         </div>
       </div>
-      <ResponsivNews data={data} />
+      {/* <ResponsivNews data={data} /> */}
     </div>
   );
 };

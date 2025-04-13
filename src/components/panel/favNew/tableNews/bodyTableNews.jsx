@@ -14,6 +14,9 @@ const columns = [
     key: "name",
     render: (text) => <a>{text}</a>,
     width: 150,
+    ellipsis: {
+      showTitle: false,
+    },
   },
 
   {
