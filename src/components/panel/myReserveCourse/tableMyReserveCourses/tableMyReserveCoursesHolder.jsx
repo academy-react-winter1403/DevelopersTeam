@@ -8,6 +8,7 @@ import { IoMdClose } from "react-icons/io";
 import { Progress } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
+import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
 
 const TableMyReserveCoursesHolder = ({
   convertedData,
@@ -47,12 +48,13 @@ const TableMyReserveCoursesHolder = ({
   return (
     <div>
       <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-70">
+        <div className=" w-full h-70 hidden sm:block">
           <Suspense fallback={<h1>loading...</h1>}>
             {isSuccess && <TableMyReserveCourses data={convertedData} />}
           </Suspense>
         </div>
       </div>
+      <ResponsiveReserveMyCourse data={data}/>
     </div>
   );
 };
