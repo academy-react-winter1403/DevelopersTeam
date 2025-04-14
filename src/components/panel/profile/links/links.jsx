@@ -10,14 +10,15 @@ const LinksTab = ({ data }) => {
   const queryClient = useQueryClient();
   const updateProfile = async (userData) => {
     const formData = new FormData();
+   
     formData.append("LinkdinProfile", userData.linkdinProfile);
     formData.append("TelegramLink", userData.telegramLink);
     formData.append("FName", userData.fname);
     formData.append("LName", userData.lname);
     formData.append("UserAbout", userData.aboutMe);
     formData.append("NationalCode", userData.code);
-    formData.append("BirthDay", userData.birthday);
-    formData.append("Gender", userData.gender);
+    formData.append("BirthDay", userData.birthday || "1987-01-01T00:00:00" );
+    formData.append("Gender", userData.gender || false);
     formData.append("HomeAdderess", userData.address);
     const res = await http.put(`/SharePanel/UpdateProfileInfo`, formData);
     console.log("dddd", userData.gender);

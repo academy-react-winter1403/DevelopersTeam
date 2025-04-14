@@ -15,6 +15,7 @@ const TableMyReserveCoursesHolder = ({
   setCovertedData,
   data,
   isSuccess,
+  moreData
 }) => {
   
   const icons = (
@@ -43,6 +44,7 @@ const TableMyReserveCoursesHolder = ({
       });
       setCovertedData(i);
     }
+    
   }, [isSuccess]);
 
   return (

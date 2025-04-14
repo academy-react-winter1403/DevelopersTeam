@@ -1,5 +1,5 @@
 @import "tailwindcss";
-thead{
+thead {
   background-color: #0000009c;
   border-radius: 10px;
   overflow: hidden;
@@ -11,7 +11,7 @@ thead{
   --color-gray: #787878;
   --color-lightBlue: #3772ff3b;
   --color-borderGray: #e4e4e4;
-  --color-inputBg: #E6E6E7;
+  --color-inputBg: #e6e6e7;
 }
 
 @theme {
@@ -26,6 +26,7 @@ thead{
 body {
   font-family: "yekan";
   direction: rtl;
+  overflow-x: hidden;
   @apply bg-white text-[#272727] transition-colors duration-200;
 }
 

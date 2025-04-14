@@ -17,6 +17,26 @@ const MyReserveCourse = () => {
     queryKey: "myReserveCoursesPanel",
     queryFn: getMyReserveCourses,
   });
+
+  const getMyReserveCoursesMore = async () => {
+    const res = await http.get(`/Home/GetCourseDetails?CourseId=${data?.courseId}`);
+    return res;
+  };
+
+  const { data: moreData } = useQuery({
+    queryKey: "myReserveCoursesPanelMore",
+    queryFn: getMyReserveCoursesMore,
+  });
+
+  // function convertData() {
+  //   for (let index = 0; index < array.length; index++) {
+  //     const element = moreData[index];
+  //     m
+  //   }
+  // }
+
+  // console.log("moreData",moreData);
+
   return (
     <div>
       <div className="hidden sm:block">
@@ -35,6 +55,7 @@ const MyReserveCourse = () => {
         setCovertedData={setCovertedData}
         data={data}
         isSuccess={isSuccess}
+        moreData={moreData}
       />
     </div>
   );

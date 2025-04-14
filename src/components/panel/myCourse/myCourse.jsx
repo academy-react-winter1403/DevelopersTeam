@@ -40,6 +40,7 @@ const MyCourse = () => {
         <h2 className="w-full h-10  mt-5 font-bold text-xl">دوره من</h2>
       </div>
       <FavBottomCourse
+        data={data}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         handleSearch={handleSearch}

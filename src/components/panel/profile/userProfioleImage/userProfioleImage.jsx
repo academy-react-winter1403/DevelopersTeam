@@ -1,10 +1,11 @@
 import React from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { CgMoreVertical } from "react-icons/cg";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, QueryClient, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import { Dropdown, Upload, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import toast from "react-hot-toast";
 
 const UserProfioleImage = ({ data }) => {
   const queryClient = useQueryClient();
@@ -17,35 +18,39 @@ const UserProfioleImage = ({ data }) => {
   };
   const { mutate: mutateSelectProfile } = useMutation({
     mutationFn: (id) => selectProfile(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries("profile");
-      message.success("تصویر پروفایل با موفقیت تغییر کرد");
+    onSuccess:()=>{
+
+queryClient.invalidateQueries({queryKey:["profile"]})
+  
+        // message.success("تصویر پروفایل با موفقیت تغییر کرد");
+     
     },
     onError: () => {
-      message.error("خطا در تغییر تصویر پروفایل");
+      toast.error("خطا در تغییر تصویر پروفایل");
     },
   });
 
   const deleteProfileImg = async (id) => {
     const myData = new FormData();
     myData.append("DeleteEntityId", id);
-    const res = await http.delete("/SharePanel/DeleteProfileImage", myData);
+    const res =  http.delete("/SharePanel/DeleteProfileImage", {data:myData});
     return res;
   };
   const { mutate: mutateDeleteProfile } = useMutation({
     mutationFn: (id) => deleteProfileImg(id),
     onSuccess: () => {
       queryClient.invalidateQueries("profile");
-      message.success("تصویر با موفقیت حذف شد");
+      toast.success("تصویر با موفقیت حذف شد");
     },
     onError: () => {
-      message.error("خطا در حذف تصویر");
+      toast.error("خطا در حذف تصویر");
     },
   });
 
   const uploadProfileImage = async (file) => {
     const formData = new FormData();
-    formData.append("formFile", file);
+    console.log(file.target);
+    formData.append("formFile", file.target.file);
     const res = await http.post("/SharePanel/AddProfileImage", formData);
     return res;
   };
@@ -69,6 +74,10 @@ const UserProfioleImage = ({ data }) => {
           <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
         </div>
       </Upload>
+      <div>
+        <input type="file" className="hidden " id="inp-1"/>
+        <label htmlFor="inp-1">d</label>
+      </div>
 
       {data?.userImage?.map((item, index) => (
         <div
