@@ -17,7 +17,7 @@ const Provider = ({ courseId, commentId }) => {
   });
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, [data]);
 
   if (isLoading) {

@@ -1,15 +1,9 @@
-import { Divider, Input } from "antd";
-import TextArea from "antd/es/input/TextArea";
-import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
-import { CiFaceSmile } from "react-icons/ci";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { RiTelegram2Line } from "react-icons/ri";
 import DateComponent from "../../../common/date/dateComponent";
 import defaultImg from "./../../../../assets/images/courses/defImgComment.jpg";
 import Provider from "../provider/provider";
-import { useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import toast from "react-hot-toast";
@@ -106,6 +100,7 @@ const CommentCard = ({
           <h1 className="font-semibold text-sm sm:text-base dark:text-white">{title}</h1>
           <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>
         </div>
+
         <div className="flex flex-wrap gap-3 sm:space-x-5 mt-3 sm:mt-5 items-center">
           <div className="flex space-x-3 sm:space-x-5">
             <AiOutlineLike
@@ -151,6 +146,7 @@ const CommentCard = ({
             </div>
           </div>
         </div>
+        
         <SendTextBox isOpen={isOpen} courseId={courseId} />
         {openAnswer && <Provider courseId={courseId} commentId={commentId} />}
       </div>

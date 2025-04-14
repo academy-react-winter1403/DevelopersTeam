@@ -24,9 +24,9 @@ const ResponsivNews = () => {
 
       {data?.myFavoriteNews.map((item) => {
         return (
-          <div className="bg-white w-full h-96 mt-5">
+          <div className="bg-white w-full h-auto mt-5">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3">
-              <div className="border w-1/3 h-2/3 my-5">
+              <div className=" w-1/3  my-5">
                 <img
                   src={
                     item.currentImageAddressTumb == null
@@ -37,9 +37,9 @@ const ResponsivNews = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <div className="text-xl font-bold">{item.title}</div>
-                {/* <div className='text-[#787878] font-semibold'>{item.title}</div>
-                        <div className='text-[#787878] font-semibold'>{item.title}</div> */}
+                <div className="text-xl font-bold line-clamp-1">{item.title}</div>
+                 {/* <div className='text-[#787878] font-semibold'>{item.محسن}</div> */}
+                        {/* <div className='text-[#787878] font-semibold'>{item.title}</div>  */}
               </div>
             </div>
           </div>
