@@ -7,7 +7,7 @@ import SortCustomButton from "../../courses/coursesNavbar/sortCustomButton/sortC
 
 const SortMyReserve = ({ setSelectedSort, selectedSort }) => {
   return (
-    <div>
+    <div className="hidden sm:block">
       <div className="flex w-full h-24 p-5 space-x-5 ">
         <h2 className="leading-14 text-[#787878]">ترتیب</h2>
         <div className="hidden lg:flex items-center w-auto h-14 pl-3 border-l text-gray space-x-3  ">

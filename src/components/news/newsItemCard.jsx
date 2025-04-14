@@ -74,6 +74,8 @@ const NewsItemCard = ({
   return (
     <div className="my-5 rounded-2xl relative 2xl:h-72 bg-lightGray dark:bg-gray-800 w-full">
       <div className="absolute z-30 text-white bg-[#5A7EFF] dark:bg-blue-600 px-3 py-1 rounded-4xl top-4 right-3 hidden md:block">
+    {/* <div className=" my-5 rounded-2xl relative 2xl:h-72 bg-lightGray  w-full px-4 sm:px-0">
+      <div className="absolute z-30 text-white bg-[#5A7EFF] px-3 py-1 rounded-4xl top-4 right-3 hidden md:block"> */}
         {keyword}
       </div>
       <div className="flex 2xl:gap-5 relative justify-between">
@@ -89,6 +91,9 @@ const NewsItemCard = ({
         <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3">
           <div className="sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2">
+        {/* <div className=" lg:mt-2 md:w-4/5 w-full mt-0 mt-3">
+          <div className=" sm:mt-2 w-full max-w-[300px] overflow-hidden">
+            <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 "> */}
               {title}
             </h2>
           </div>
@@ -162,7 +167,7 @@ const NewsItemCard = ({
               )}
             </div>
 
-            <div className="md:px-2">
+            <div className="md:px-2  mb-2 sm:mb-0">
               <h2
                 onClick={handleNavigation}
                 className="bg-navyBlue dark:bg-blue-600 rounded-xl text-white lg:h-9 md:rounded-full md:px-4 py-1 text-sm px-1 leading-6 line-clamp-1 text-center cursor-pointer"
