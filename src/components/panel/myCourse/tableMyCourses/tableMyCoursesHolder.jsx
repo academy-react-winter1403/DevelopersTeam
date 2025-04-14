@@ -25,7 +25,7 @@ const TableMyCoursesHolder = ({
   );
   useEffect(() => {
     if (isSuccess) {
-      const i = data.favoriteCourseDto.map((el) => {
+      const i = data.listOfMyCourses.map((el) => {
         let newData = {};
         newData["img"] = img;
         newData["name"] = el.courseTitle;

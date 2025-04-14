@@ -25,7 +25,7 @@ const ResponsiveMyCourse = () => {
         </h2>
       </div>
 
-      {data?.favoriteCourseDto.map((item) => {
+      {data?.listOfMyCourses.map((item) => {
         return (
           <div className="bg-white w-full ">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3">
@@ -47,7 +47,7 @@ const ResponsiveMyCourse = () => {
                   {item.fullName}
                 </div>
                 <div className="text-[#787878] text-sm font-semibold">
-                  <DateComponent insertDate={el.lastUpdate} />
+                  <DateComponent insertDate={item.lastUpdate} />
                 </div>
               </div>
             </div>
