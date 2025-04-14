@@ -1,49 +1,44 @@
 import axios from "axios";
 import { getData } from "../../localStorage/localStorage";
-// import { getItem } from "../common/storage.services";
+import toast from "react-hot-toast";
 
-
-
-
-const baseURL = import.meta.env.VITE_BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const instance = axios.create({
-    baseURL: baseURL,
+  baseURL: baseURL,
 });
 
 const onSuccess = (response) => {
-    return response.data
-}
+  return response.data;
+};
 
-const onError = (err) => {
-    // console.log(err);
+const onError = (error) => {
 
-    // if(err.response.status === 401){
-    //     // clearStorage()
-    //     removeItem('token');
-    //     window.location.pathname = '/' // or '/login'
-    // }
+  console.log(error);
 
-    // if(err.response.status >= 400 && err.response.status < 500){
-    //     // alert("Client request error: " + err.response.status);
-    // }
+  if (error?.response.status === 401) {
+    toast.error("ابتدا وارد حساب کاربری شوید");
+    window.location.pathname = "/login";
+  }
 
-    return Promise.reject(err);
-}
+  if (error?.response.status === 403) {
+    toast.error("شما به این بخش دسترسی ندارید");
+  }
+
+//   if (err?.response.status >= 400 && err.response.status < 500) {
+//     toast.error(err?.response.message);
+//     console.log("client error: " + err.response.status);
+//   }
+
+  return Promise.reject(err);
+};
 
 instance.interceptors.response.use(onSuccess, onError);
 
-instance.interceptors.request.use(opt => {
-
-    //const user = useSelector(state => state.user)
-
-    const token = getData("authToken") ? getData("authToken") : null;
-
-
-    //  opt.headers['MessageTest'] = "Hello World"; 
-    //  opt.headers['Content-Type'] = "application/json";
-    if (token) opt.headers.Authorization = 'Bearer ' + token;
-    return opt
-})
+instance.interceptors.request.use((opt) => {
+  const token = getData("authToken") ? getData("authToken") : null;
+  if (token) opt.headers.Authorization = "Bearer " + token;
+  return opt;
+});
 
 export default instance;

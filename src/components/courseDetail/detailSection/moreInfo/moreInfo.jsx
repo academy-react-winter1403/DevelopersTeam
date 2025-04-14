@@ -65,6 +65,7 @@ const MoreInfo = ({ data }) => {
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+      toast.success("ویرایش انجام شد");
     },
     onError: (error) => {
       console.error("Error deleting like:", error);
@@ -80,6 +81,7 @@ const MoreInfo = ({ data }) => {
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+      toast.error("دوره را دوست نداشتید");
     },
     onError: () => {
       toast.error("ابتدا وارد حساب کاربری خود شوید");
@@ -184,10 +186,10 @@ const MoreInfo = ({ data }) => {
         <Button
           shape="round"
           type="primary"
-          style={{ fontFamily: "yekan", width: "200px", height: "42px" }}
+          style={{ fontFamily: "yekan", width: "150px", height: "42px" }}
           onClick={() => mutateReserve()}
         >
-          رزرو دوره
+          {data?.isCourseReseve == 1 ? "رزرو شده" : "رزرو دوره"}
         </Button>
         <ReserveModal
           isModalOpen={isReserveModalOpen}

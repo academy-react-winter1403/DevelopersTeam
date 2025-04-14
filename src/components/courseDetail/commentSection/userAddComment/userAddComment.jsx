@@ -28,8 +28,8 @@ const UserAddComment = ({ id }) => {
       queryClient.invalidateQueries(["comments"]);
       toast.success("نظرتان با موفقیت ثبت شد");
     },
-    onError: () => {
-      toast.error("ابتدا وارد حساب کاربری خود شوید");
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
   const { darkMode, setDarkMode } = useDarkMode();

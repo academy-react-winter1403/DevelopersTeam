@@ -23,30 +23,58 @@ const Header = () => {
           alt="logo"
           className="w-10 h-10 object-contain xs:w-12 xs:h-14 dark:invert"
         />
-        <img src={logoText} alt="text" className="w-24 h-10 object-contain dark:invert" />
+        <img
+          src={logoText}
+          alt="text"
+          className="w-24 h-10 object-contain dark:invert"
+        />
       </div>
       <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden">
         <NavLink
           to="/"
-          className={({ isActive }) => `${isActive ? "text-navyBlue dark:text-blue-400" : "dark:text-gray-300"}`}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-navyBlue dark:text-blue-400"
+                : "dark:text-gray-300"
+            }`
+          }
         >
           <span className="leading-12">خانه</span>
         </NavLink>
         <NavLink
           to="/courses"
-          className={({ isActive }) => `${isActive ? "text-navyBlue dark:text-blue-400" : "dark:text-gray-300"}`}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-navyBlue dark:text-blue-400"
+                : "dark:text-gray-300"
+            }`
+          }
         >
           <span className="leading-12">دوره ها</span>
         </NavLink>
         <NavLink
           to="/news"
-          className={({ isActive }) => `${isActive ? "text-navyBlue dark:text-blue-400" : "dark:text-gray-300"}`}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-navyBlue dark:text-blue-400"
+                : "dark:text-gray-300"
+            }`
+          }
         >
           <span className="h-28 leading-12">اخبار و مقالات</span>
         </NavLink>
         <NavLink
           to="/about"
-          className={({ isActive }) => `${isActive ? "text-navyBlue dark:text-blue-400" : "dark:text-gray-300"}`}
+          className={({ isActive }) =>
+            `${
+              isActive
+                ? "text-navyBlue dark:text-blue-400"
+                : "dark:text-gray-300"
+            }`
+          }
         >
           <span className="h-28 leading-12">ارتباط با ما</span>
         </NavLink>
@@ -85,10 +113,7 @@ const Header = () => {
               style={{ fontFamily: "yekan" }}
             >
               <NavLink to="/login">
-                <span className="border-l pl-1 dark:text-white">ورود</span>
-              </NavLink>
-              <NavLink to="/register">
-                <span className="dark:text-white">ثبت نام</span>
+                <span className="dark:text-white">ورود یا ثبت نام</span>
               </NavLink>
             </Button>
           )}

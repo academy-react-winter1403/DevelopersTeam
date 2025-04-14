@@ -23,13 +23,15 @@ const DetailContainer = ({ data, id }) => {
     );
     return res;
   };
+
   const { mutate } = useMutation({
     mutationFn: handleRate,
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+      toast.success("امتیاز با موفقیت ثبت شد");
     },
-    onError: () => {
-      toast.error("ابتدا وارد حساب کاربری خود شوید");
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 

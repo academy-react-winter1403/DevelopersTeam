@@ -16,6 +16,7 @@
     "@tanstack/react-query": "^5.68.0",
     "antd": "^5.24.4",
     "axios": "^1.8.3",
+    "emoji-picker-react": "^4.12.2",
     "formik": "^2.4.6",
     "framer-motion": "^12.6.5",
     "heroui-cli": "^1.2.2",
