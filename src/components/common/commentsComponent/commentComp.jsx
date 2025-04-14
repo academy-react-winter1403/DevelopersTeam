@@ -19,20 +19,22 @@ const CommentComp = ({ id }) => {
   });
 
   return (
-    <div className="flex items-center flex-col">
-      <h2 className="w-11/12 mx-auto bg-blue-500 dark:bg-blue-600 text-white rounded-2xl px-2 py-1 text-[10px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
-        <BiCommentDetail />
+    <div className="flex items-center flex-col w-full">
+      <h2 className="w-full bg-blue-500 dark:bg-blue-600 text-white rounded-xl sm:rounded-2xl px-2 py-1 text-xs sm:text-sm lg:text-xl text-center cursor-pointer flex justify-center items-center gap-1 sm:gap-2">
+        <BiCommentDetail className="text-sm sm:text-base" />
         نظرات شما
       </h2>
 
-      {data?.map((item, index) => index < count && <Item commentObj={item} />)}
-      <button
-        onClick={() => setCount((e) => e + 4)}
-        className="flex items-center gap-2 w-11/12 bg-lightGray dark:bg-gray-700 rounded-2xl justify-center h-10 dark:text-white"
-      >
-        <MdOutlineComment />
-        نمایش بیشتر
-      </button>
+      {data?.map((item, index) => index < count && <Item key={item.id} commentObj={item} />)}
+      {data?.length > count && (
+        <button
+          onClick={() => setCount((e) => e + 4)}
+          className="flex items-center gap-1 sm:gap-2 w-full bg-lightGray dark:bg-gray-700 rounded-xl sm:rounded-2xl justify-center h-8 sm:h-10 dark:text-white text-xs sm:text-sm mt-2"
+        >
+          <MdOutlineComment className="text-sm sm:text-base" />
+          نمایش بیشتر
+        </button>
+      )}
     </div>
   );
 };

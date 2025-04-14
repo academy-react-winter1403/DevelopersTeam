@@ -11,15 +11,15 @@ const FilterPartOfNews = ({ setSelectedCategory, data, setSearchQuery,searchQuer
     setSelectedCategory("");
   };
   return (
-    <div className="w-full h-[250px] bg-lightGray rounded-3xl pt-4 space-y-4 sticky top-5">
+    <div className="w-full h-[250px] bg-lightGray dark:bg-gray-800 rounded-3xl pt-4 space-y-4 sticky top-5">
       <FilterSearchInput
-        icon={<FiSearch className="text-2xl" />}
+        icon={<FiSearch className="text-2xl dark:text-gray-400" />}
         inputLabel={"جست‌جو دوره"}
         placeholder={"جست جو کنید ..."}
         setSearchQuery={setSearchQuery}
         searchQuery={searchQuery}
       />
-      <NewsCategory setSelectedCategory={setSelectedCategory} data={data} />{" "}
+      <NewsCategory setSelectedCategory={setSelectedCategory} data={data} />
       <Button
         shape="round"
         icon={<RxCross2 className="text-lg" />}

@@ -1,27 +1,27 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Divider, Form, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { Field, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import React from "react";
 import { CiFaceSmile } from "react-icons/ci";
 import { RiTelegram2Line } from "react-icons/ri";
 import http from "./../../../../../core/services/interceptor";
 import toast from "react-hot-toast";
 
-const SendTextBox = ({ isOpen, courseId }) => {
+const SendTextBox = ({ isOpen, courseId ,commentId}) => {
   const queryClient = useQueryClient();
 
-  const addComment = async (values) => {
+  const addCommentReply = async (values) => {
     const formData = new FormData();
+    formData.append("CommentId", commentId);
     formData.append("CourseId", courseId);
     formData.append("Title", values.Title);
     formData.append("Describe", values.Describe);
-    const res = await http.post(`/Course/AddCommentCourse`, formData);
+    const res = await http.post(`/Course/AddReplyCourseComment`, formData);
     return res;
   };
 
   const { mutate } = useMutation({
-    mutationFn: addComment,
+    mutationFn: addCommentReply,
     onSuccess: () => {
       queryClient.invalidateQueries(["comments"]);
       toast.success("نظرتان با موفقیت ثبت شد");
@@ -41,8 +41,7 @@ const SendTextBox = ({ isOpen, courseId }) => {
               initialValues={{
                 Title: "",
                 Describe: "",
-                userId: 40330,
-                userIpAddress: "1.1.1.1",
+      
               }}
             >
               {({ handleSubmit }) => (
@@ -52,7 +51,7 @@ const SendTextBox = ({ isOpen, courseId }) => {
                 >
                   <div className="flex space-x-5">
                     <button
-                      type="onsubmit"
+                      type="submit"
                       className="border cursor-pointer border-navyBlue bg-navyBlue w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center"
                     >
                       <RiTelegram2Line className="w-3 h-3 sm:w-4 sm:h-4 text-white" />

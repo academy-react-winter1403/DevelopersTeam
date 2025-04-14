@@ -7,6 +7,7 @@ import { TfiWrite } from "react-icons/tfi";
 import http from "./../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useDarkMode } from "../../../context/theme/themeContext";
 
 const AddUserNewsComment = ({ id }) => {
   const queryClient = useQueryClient();
@@ -26,14 +27,15 @@ const AddUserNewsComment = ({ id }) => {
       toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
+  const { darkMode, setDarkMode } = useDarkMode();
 
   return (
-    <div className="w-full h-auto border-2 border-borderGray rounded-3xl mt-10 p-6">
-      <h2 className="w-full h-10 bg-[#3772FF] text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
-        <TfiWrite />
+    <div className="w-full h-auto border-2 dark:border-gray-700  border-borderGray rounded-2xl sm:rounded-3xl mt-6 sm:mt-10 p-4 sm:p-6">
+      <h2 className="w-full h-8 sm:h-10 bg-[#3772FF] text-white rounded-2xl px-2 py-1 text-xs sm:text-sm lg:text-xl text-center cursor-pointer flex justify-center items-center gap-1 sm:gap-2">
+        <TfiWrite className="text-sm sm:text-base" />
         نظر خود را ثبت کنید
       </h2>
-      <div className="mt-5 ">
+      <div className="mt-3 sm:mt-5">
         <Formik
           onSubmit={mutate}
           initialValues={{
@@ -45,29 +47,33 @@ const AddUserNewsComment = ({ id }) => {
           }}
         >
           {({ handleSubmit }) => (
-            <Form onSubmit={handleSubmit} className="space-y-5">
+            <Form onSubmit={handleSubmit} className="space-y-3 sm:space-y-5">
               <div>
                 <Field
                   as={Input}
                   name="title"
                   placeholder="عنوان"
-                  variant="filled"
-                  size="large"
+                  size="middle"
+                  variant={darkMode ? "" : "filled"}
+                  style={darkMode && { color: "#fff" }}
+                  className="text-sm sm:text-base dark:bg-gray-700 dark:text-white dark:border-gray-600 placeholder:text-white"
                 />
               </div>
               <div>
                 <Field
                   as={TextArea}
                   name="describe"
-                  rows={7}
+                  rows={4}
                   placeholder="نظر خود را وارد کنید"
                   maxLength={100}
-                  variant="filled"
+                  variant={darkMode ? "" : "filled"}
+                  style={darkMode && { color: "#fff" }}
+                  className="text-sm sm:text-base dark:bg-gray-700 dark:text-white dark:border-gray-600 placeholder:text-white"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-[#3772FF] w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                className="bg-[#3772FF] w-24 sm:w-32 h-8 sm:h-10 rounded-full text-white hover:opacity-80 font-medium sm:font-semibold text-sm sm:text-base"
               >
                 ثبت
               </button>

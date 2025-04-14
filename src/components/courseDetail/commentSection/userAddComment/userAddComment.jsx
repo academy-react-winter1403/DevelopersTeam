@@ -8,6 +8,7 @@ import http from "./../../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getData } from "../../../../core/localStorage/localStorage";
 import toast from "react-hot-toast";
+import { useDarkMode } from "../../../../context/theme/themeContext";
 
 const UserAddComment = ({ id }) => {
   const queryClient = useQueryClient();
@@ -31,6 +32,7 @@ const UserAddComment = ({ id }) => {
       toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
+  const { darkMode, setDarkMode } = useDarkMode();
 
   return (
     <div className="w-full h-auto border-2 border-borderGray dark:border-gray-700 rounded-3xl mt-10 p-6 dark:bg-gray-800">
@@ -47,9 +49,10 @@ const UserAddComment = ({ id }) => {
                   as={Input}
                   name="Title"
                   placeholder="عنوان"
-                  variant="filled"
+                  variant={darkMode ? "" : "filled"}
                   size="large"
-                  className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                  style={darkMode && { color: "#fff" }}
+                  className="dark:bg-gray-700 dark:text-white dark:border-gray-600 placeholder:text-white"
                 />
               </div>
               <div>
@@ -59,7 +62,8 @@ const UserAddComment = ({ id }) => {
                   rows={7}
                   placeholder="نظر خود را وارد کنید"
                   maxLength={100}
-                  variant="filled"
+                  variant={darkMode ? "" : "filled"}
+                  style={darkMode && { color: "#fff" }}
                   className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 />
               </div>

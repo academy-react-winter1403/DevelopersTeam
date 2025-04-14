@@ -13,7 +13,7 @@ const HeroSectionNews = () => {
         className="absolute sm:top-10  md:top-[45px] w-4 h-4 left-20 top-20 sm:left-52 md:left-16 xl:left-56 xl:top-10"
       />
       <h2 className="text-2xl xs:text-3xl md:text-4xl font-bold mb-7 ">
-        اخبار و مقالات آکادمی{" "}
+        اخبار و مقالات آکادمی
       </h2>
       <div className="text-[#787878] text-[14px] text-center mt-2 ">
         <p className="w-auto text-sm lg:text-lg text-gray text-center mb-4 ">

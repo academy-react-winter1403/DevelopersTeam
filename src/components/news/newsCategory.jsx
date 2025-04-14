@@ -15,11 +15,12 @@ const NewsCategory = ({ setSelectedCategory, data }) => {
 
   return (
     <div className="flex flex-col space-y-1 px-4">
-      <div className="text-xs sm:text-sm  flex items-center gap-2 ">
-        <GrShareOption className="text-2xl" />
+      <div className="text-xs sm:text-sm flex items-center gap-2 dark:text-gray-300">
+        <GrShareOption className="text-2xl dark:text-gray-400" />
         دسته بندی
       </div>
       <Select
+        className="dark:[&_.ant-select-selector]:bg-gray-700 dark:[&_.ant-select-selector]:text-white dark:[&_.ant-select-selection-placeholder]:text-gray-400"
         style={{
           width: "100%",
           fontFamily: "yekan",

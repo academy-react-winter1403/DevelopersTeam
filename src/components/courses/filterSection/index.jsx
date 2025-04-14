@@ -35,7 +35,7 @@ const FilterSection = ({
   };
 
   return (
-    <div className="w-full 2xl:w-[337px] h-[550px] bg-lightGray dark:bg-gray-700 rounded-3xl pt-4 space-y-4 sticky top-5">
+    <div className="w-full 2xl:w-[337px] h-[550px] bg-lightGray dark:bg-gray-800 rounded-3xl pt-4 space-y-4 sticky top-5">
       <FilterSearchInput
         icon={<FiSearch className="text-2xl" />}
         inputLabel={"جست‌جو دوره"}

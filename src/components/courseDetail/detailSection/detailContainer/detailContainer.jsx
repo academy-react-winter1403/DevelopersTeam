@@ -91,7 +91,7 @@ const DetailContainer = ({ data, id }) => {
               : data?.currentRate
           }
           onChange={(rateValue) => mutate(rateValue)}
-          className="dark:[&_.ant-rate-star]:text-yellow-400"
+          className="dark:[&_.ant-rate-star]:border"
         />
       </div>
       <UserAddComment id={id} />

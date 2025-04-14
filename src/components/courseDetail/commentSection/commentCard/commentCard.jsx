@@ -76,9 +76,13 @@ const CommentCard = ({
     },
   });
 
- return (
+
+
+  return (
     <div className={`w-full flex mt-2 ${isReplay && "space-x-3 "}`}>
-      {isReplay && <div className="w-2 h-52 bg-navyBlue dark:bg-blue-600 rounded-sm"></div>}
+      {isReplay && (
+        <div className="w-2 h-52 bg-navyBlue dark:bg-blue-600 rounded-sm"></div>
+      )}
       <div className="w-full">
         <div className="mt-2">
           <div className="flex gap-2 py-4">
@@ -89,7 +93,10 @@ const CommentCard = ({
               className="rounded-full w-10 h-10 border border-borderGray dark:border-gray-600"
             />
             <div>
-              <h2 className="font-semibold text-sm sm:text-base dark:text-white"> {author}</h2>
+              <h2 className="font-semibold text-sm sm:text-base dark:text-white">
+                {" "}
+                {author}
+              </h2>
               <h2 className="text-gray dark:text-gray-400 text-xs sm:text-sm">
                 <DateComponent insertDate={insertDate} />
               </h2>
@@ -97,7 +104,9 @@ const CommentCard = ({
           </div>
         </div>
         <div className="space-y-2 overflow-hidden">
-          <h1 className="font-semibold text-sm sm:text-base dark:text-white">{title}</h1>
+          <h1 className="font-semibold text-sm sm:text-base dark:text-white">
+            {title}
+          </h1>
           <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>
         </div>
 
@@ -115,7 +124,9 @@ const CommentCard = ({
                   : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer dark:text-gray-400"
               }
             />
-            <span className="text-xs sm:text-sm dark:text-gray-300">{likeCount}</span>
+            <span className="text-xs sm:text-sm dark:text-gray-300">
+              {likeCount}
+            </span>
             <AiOutlineDislike
               onClick={() => mutateDisLike()}
               className={
@@ -124,7 +135,9 @@ const CommentCard = ({
                   : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer dark:text-gray-400"
               }
             />
-            <span className="text-xs sm:text-sm dark:text-gray-300">{disslikeCount}</span>
+            <span className="text-xs sm:text-sm dark:text-gray-300">
+              {disslikeCount}
+            </span>
           </div>
           <div className="flex space-x-3">
             <button
@@ -146,8 +159,8 @@ const CommentCard = ({
             </div>
           </div>
         </div>
-        
-        <SendTextBox isOpen={isOpen} courseId={courseId} />
+
+        <SendTextBox isOpen={isOpen} courseId={courseId} commentId={commentId} />
         {openAnswer && <Provider courseId={courseId} commentId={commentId} />}
       </div>
     </div>
