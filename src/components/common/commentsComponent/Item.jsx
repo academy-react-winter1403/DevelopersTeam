@@ -19,12 +19,6 @@ const Item = ({ commentObj, isReplay }) => {
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
 
-  // const handleCommentAdd = async (values) => {
-  //   console.log(values);
-  //   const res = await instance.post("/News/CreateNewsReplyComment", values);
-  //   // console.log(res);
-  //   return res;
-  // };
 
   const addCommentReply = async (values) => {
     const res = await http.post(`/News/CreateNewsReplyComment`, values);
@@ -74,6 +68,9 @@ const Item = ({ commentObj, isReplay }) => {
           </div>
 
           <div className="space-y-1 sm:space-y-2 overflow-hidden">
+            <p className="text-xs sm:text-sm dark:text-gray-300">
+              {commentObj.title}
+            </p>
             <p className="text-xs sm:text-sm dark:text-gray-300">
               {commentObj.describe}
             </p>

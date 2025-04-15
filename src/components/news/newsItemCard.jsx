@@ -72,23 +72,21 @@ const NewsItemCard = ({
   });
 
   return (
-    <div className="my-5 rounded-2xl relative 2xl:h-72 bg-lightGray dark:bg-gray-800 w-full">
-      <div className="absolute z-30 text-white bg-[#5A7EFF] dark:bg-blue-600 px-3 py-1 rounded-4xl top-4 right-3 hidden md:block">
-    {/* <div className=" my-5 rounded-2xl relative 2xl:h-72 bg-lightGray  w-full px-4 sm:px-0">
-      <div className="absolute z-30 text-white bg-[#5A7EFF] px-3 py-1 rounded-4xl top-4 right-3 hidden md:block"> */}
+    <div className="my-5 rounded-2xl relative h-full bg-lightGray dark:bg-gray-800 w-full">
+      <div className="absolute z-30 text-white bg-[#5A7EFF] dark:bg-blue-600 px-3 py-1 rounded-4xl 2xl:top-4 md:top-8 right-3 hidden md:block">
         {keyword}
       </div>
-      <div className="flex 2xl:gap-5 relative justify-between">
-        <div className="fle x-shrink-0 relative" onClick={handleNavigation}>
+      <div className="flex flex-col sm:flex-row justify-center items-center 2xl:gap-5 relative sm:justify-between">
+        <div className="relative w-fit  sm:h-72 rounded-2xl border-2 bg-black" onClick={handleNavigation}>
           <img
             src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
             alt="Profile"
-            className="2xl:w-[430px] hidden w-4/5 h-full md:h-72 bg-black object-contain rounded-3xl sm:block"
+            className="  w-fit  h-full  object-contain rounded-2xl "
             onError={addDefaultImg}
           />
         </div>
 
-        <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3">
+        <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3 py-2 px-4 ">
           <div className="sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2">
         {/* <div className=" lg:mt-2 md:w-4/5 w-full mt-0 mt-3">
