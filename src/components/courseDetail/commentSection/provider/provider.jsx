@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import http from "./../../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import CommentCard from "../commentCard/commentCard";
+import { Spin } from "antd";
 
 const Provider = ({ courseId, commentId }) => {
   const getReplyComment = async () => {
@@ -21,7 +22,7 @@ const Provider = ({ courseId, commentId }) => {
   }, [data]);
 
   if (isLoading) {
-    return <p className="text-gray text-sm mt-5">در حال بارگذاری...</p>;
+    return <Spin />;
   }
 
   return (

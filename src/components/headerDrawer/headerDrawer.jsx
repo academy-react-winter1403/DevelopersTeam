@@ -34,15 +34,16 @@ const HeaderDrawer = () => {
         destroyOnClose
         closeIcon={null}
         placement="bottom"
+        height={250}
         open={open}
         headerStyle={{ display: "none" }}
-        bodyStyle={{ 
+        bodyStyle={{
           padding: "24px",
-          backgroundColor: darkMode ? "#1f2937" : "#fff"
+          backgroundColor: darkMode ? "#1f2937" : "#fff",
         }}
-        style={{ 
+        style={{
           borderRadius: "24px 24px 0 0",
-          color: darkMode ? "white" : "inherit"
+          color: darkMode ? "white" : "inherit",
         }}
       >
         <div className="">
@@ -75,12 +76,6 @@ const HeaderDrawer = () => {
                 </span>
               </NavLink>
               <span className="text-gray-400 text-sm">خبر های پژوهشگاه</span>
-            </div>
-            <div className="flex justify-between text-base font-semibold">
-              <span className="flex justify-center items-center gap-2 dark:text-white">
-                <RiCellphoneLine />
-                ارتباط باما
-              </span>
             </div>
           </div>
           <Divider className="dark:bg-gray-600" />

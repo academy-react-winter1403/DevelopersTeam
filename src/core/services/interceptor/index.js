@@ -13,24 +13,22 @@ const onSuccess = (response) => {
 };
 
 const onError = (error) => {
-
   console.log(error);
 
-  // if (error?.response.status === 401) {
-  //   toast.error("ابتدا وارد حساب کاربری شوید");
-  //   window.location.pathname = "/login";
+  if (error?.message === "Network Error") {
+    toast.error("ابتدا وارد حساب کاربری شوید");
+  }
+
+  if (error?.response.status === 403) {
+    toast.error("شما به این بخش دسترسی ندارید");
+  }
+
+  // if (err?.response.status >= 400 && err.response.status < 500) {
+  //   toast.error(err?.response.message);
+  //   console.log("client error: " + err.response.status);
   // }
 
-  // if (error?.response.status === 403) {
-  //   toast.error("شما به این بخش دسترسی ندارید");
-  // }
-
-//   if (err?.response.status >= 400 && err.response.status < 500) {
-//     toast.error(err?.response.message);
-//     console.log("client error: " + err.response.status);
-//   }
-
-  return Promise.reject(err);
+  return Promise.reject(error);
 };
 
 instance.interceptors.response.use(onSuccess, onError);

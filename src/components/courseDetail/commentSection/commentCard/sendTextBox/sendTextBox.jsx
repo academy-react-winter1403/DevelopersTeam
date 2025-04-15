@@ -11,7 +11,7 @@ const SendTextBox = ({ isOpen, courseId, commentId }) => {
   const queryClient = useQueryClient();
   const emojiPickerRef = useRef(null);
   const [showPicker, setShowPicker] = useState(false);
-  const [activeField, setActiveField] = useState(null); 
+  const [activeField, setActiveField] = useState(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -44,10 +44,7 @@ const SendTextBox = ({ isOpen, courseId, commentId }) => {
       toast.success("نظرتان با موفقیت ثبت شد");
     },
     onError: (error) => {
-      // console.log("dd", error);
-      // if (error?.response.data.ErrorMessage) {
-      // } else toast.error("ابتدا وارد شوید");
-      toast.error(error?.response.message);
+      toast.error(error?.response.data.ErrorMessage[0]);
     },
   });
 

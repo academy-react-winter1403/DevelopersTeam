@@ -33,7 +33,7 @@ const Calender = () => {
 
   return (
     <div>
-      <Calendar locale={localeForPersianCalendar} />
+      {/* <Calendar locale={localeForPersianCalendar} /> */}
     </div>
   );
 };

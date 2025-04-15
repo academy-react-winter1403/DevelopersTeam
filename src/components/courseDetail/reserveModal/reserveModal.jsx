@@ -3,8 +3,9 @@ import { Button, Modal } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
 import img from "./../../../assets/images/courseDetail/reserveModal.svg";
 import { LuCircleCheckBig } from "react-icons/lu";
+import { NavLink } from "react-router-dom";
 
-const ReserveModal = ({  isModalOpen, setIsModalOpen }) => {
+const ReserveModal = ({ isModalOpen, setIsModalOpen }) => {
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -21,8 +22,6 @@ const ReserveModal = ({  isModalOpen, setIsModalOpen }) => {
 
   return (
     <>
-   
-
       <Modal
         open={isModalOpen}
         onOk={handleOk}
@@ -50,13 +49,15 @@ const ReserveModal = ({  isModalOpen, setIsModalOpen }) => {
             اضافه خواهد شد
           </p>
           <div className="mt-5 flex justify-between">
-            <Button
-              type="primary"
-              shape="round"
-              style={{ fontFamily: "yekan", width: "275px", height: "36px" }}
-            >
-              لیست رزرو های من
-            </Button>
+            <NavLink to="/panel/myreservecourse">
+              <Button
+                type="primary"
+                shape="round"
+                style={{ fontFamily: "yekan", width: "275px", height: "36px" }}
+              >
+                لیست رزرو های من
+              </Button>
+            </NavLink>
             <Button
               shape="round"
               style={{ fontFamily: "yekan", width: "115px", height: "36px" }}

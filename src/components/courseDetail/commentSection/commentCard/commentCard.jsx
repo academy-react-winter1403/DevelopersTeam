@@ -4,7 +4,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import DateComponent from "../../../common/date/dateComponent";
 import defaultImg from "./../../../../assets/images/courses/defImgComment.jpg";
 import Provider from "../provider/provider";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import toast from "react-hot-toast";
 import SendTextBox from "./sendTextBox/sendTextBox";
@@ -21,10 +21,11 @@ const CommentCard = ({
   likeCount,
   disslikeCount,
   currentUserEmotion,
+  currentUserLikeId,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [openAnswer, setOpenAnswer] = useState(false);
-
+  const queryClient = useQueryClient();
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
     e.target.onerror = null;
@@ -43,7 +44,7 @@ const CommentCard = ({
       toast.success("نظرتان با موفقیت ثبت شد");
     },
     onError: () => {
-      toast.error("ابتدا وارد حساب کاربری خود شوید");
+      // toast.error("ابتدا وارد حساب کاربری خود شوید");
     },
   });
 
@@ -58,8 +59,8 @@ const CommentCard = ({
     onSuccess: () => {
       queryClient.invalidateQueries("comments");
     },
-    onError: () => {
-      toast.error("ابتدا وارد حساب کاربری خود شوید");
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
@@ -74,9 +75,10 @@ const CommentCard = ({
     onSuccess: () => {
       queryClient.invalidateQueries("comments");
     },
+    onError: (error) => {
+      console.log("diss", error);
+    },
   });
-
-
 
   return (
     <div className={`w-full flex mt-2 ${isReplay && "space-x-3 "}`}>
@@ -94,7 +96,6 @@ const CommentCard = ({
             />
             <div>
               <h2 className="font-semibold text-sm sm:text-base dark:text-white">
-                {" "}
                 {author}
               </h2>
               <h2 className="text-gray dark:text-gray-400 text-xs sm:text-sm">
@@ -130,7 +131,7 @@ const CommentCard = ({
             <AiOutlineDislike
               onClick={() => mutateDisLike()}
               className={
-                currentUserEmotion === "-"
+                currentUserEmotion === "DISSLIKED"
                   ? "w-5 h-5 sm:w-6 sm:h-6 text-navyBlue dark:text-blue-400 cursor-pointer"
                   : "w-5 h-5 sm:w-6 sm:h-6 cursor-pointer dark:text-gray-400"
               }
@@ -160,7 +161,11 @@ const CommentCard = ({
           </div>
         </div>
 
-        <SendTextBox isOpen={isOpen} courseId={courseId} commentId={commentId} />
+        <SendTextBox
+          isOpen={isOpen}
+          courseId={courseId}
+          commentId={commentId}
+        />
         {openAnswer && <Provider courseId={courseId} commentId={commentId} />}
       </div>
     </div>

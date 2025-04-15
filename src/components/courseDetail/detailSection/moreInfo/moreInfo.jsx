@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 import ReserveModal from "../../reserveModal/reserveModal";
+import { FaStar } from "react-icons/fa6";
 
 const MoreInfo = ({ data }) => {
   const queryClient = useQueryClient();
@@ -141,7 +142,7 @@ const MoreInfo = ({ data }) => {
             {data?.title}
           </h1>
           ({data?.currentUserRateNumber}
-          <CiStar className="text-[#FAFF16]" />)
+          <FaStar  className="text-yellow-200" />)
         </div>
         <div className="w-28">
           <TagsA text={data?.courseLevelName} />

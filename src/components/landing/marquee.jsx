@@ -29,7 +29,7 @@ const Marquee = () => {
             className=" w-full flex items-center gap-14 "
             initial={{ x: 0 }}
             animate={{ x: `-900%` }}
-            transition={{ ease: "linear", repeat: Infinity, duration: 120 }}
+            transition={{ ease: "linear", repeat: Infinity, duration: 300 }}
           >
             {...content}
           </motion.div>

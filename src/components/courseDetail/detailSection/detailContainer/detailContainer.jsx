@@ -9,6 +9,7 @@ import teacherImg from "./../../../../assets/images/courseDetail/teacherDefault.
 import CommentSection from "../../commentSection/commentSection";
 import UserAddComment from "../../commentSection/userAddComment/userAddComment";
 import toast from "react-hot-toast";
+import { useDarkMode } from "../../../../context/theme/themeContext";
 
 const DetailContainer = ({ data, id }) => {
   const queryClient = useQueryClient();
@@ -31,10 +32,7 @@ const DetailContainer = ({ data, id }) => {
       toast.success("امتیاز با موفقیت ثبت شد");
     },
     onError: (error) => {
-      const errorMessage = error.response?.data?.ErrorMessage || 
-      error.response?.data?.message || 
-      "خطایی در ثبت امتیاز رخ داده است";
-toast.error(errorMessage);
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
@@ -44,7 +42,6 @@ toast.error(errorMessage);
     );
     return res;
   };
-
   const { data: teacherData } = useQuery({
     queryKey: ["teacherPic"],
     queryFn: getTeacherInfo,
@@ -96,7 +93,6 @@ toast.error(errorMessage);
               : data?.currentRate
           }
           onChange={(rateValue) => mutate(rateValue)}
-          // className="dark:[&_.ant-rate-star]:border"
         />
       </div>
       <UserAddComment id={id} />

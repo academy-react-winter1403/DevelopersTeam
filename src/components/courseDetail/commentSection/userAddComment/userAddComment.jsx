@@ -36,7 +36,7 @@ const UserAddComment = ({ id }) => {
 
   return (
     <div className="w-full h-auto border-2 border-borderGray dark:border-gray-700 rounded-3xl mt-10 p-6 dark:bg-gray-800">
-      <h2 className="w-full h-10 bg-[#3772FF] dark:bg-blue-600 text-white rounded-3xl px-2 py-1 text-[12px] lg:text-xl text-center cursor-pointer flex justify-center items-center gap-2">
+      <h2 className="w-full h-10 bg-[#3772FF] dark:bg-blue-600 text-white rounded-3xl px-2 py-1 text-[12px] lg:text-lg text-center cursor-pointer flex justify-center items-center gap-2">
         <TfiWrite />
         نظر خود را ثبت کنید
       </h2>

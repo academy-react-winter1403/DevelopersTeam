@@ -66,18 +66,6 @@ const Header = () => {
         >
           <span className="h-28 leading-12">اخبار و مقالات</span>
         </NavLink>
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            `${
-              isActive
-                ? "text-navyBlue dark:text-blue-400"
-                : "dark:text-gray-300"
-            }`
-          }
-        >
-          <span className="h-28 leading-12">ارتباط با ما</span>
-        </NavLink>
       </div>
       <div className="flex w-1/5 justify-center items-center space-x-3">
         <div

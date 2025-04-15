@@ -9,7 +9,7 @@ const MoreCourses = () => {
       <h1 className="font-bold text-2xl sm:text-3xl mt-10 mr-14 mb-8 dark:text-white">
         دوره‌های مشابه
       </h1>
-      <div className="flex flex-wrap sm:flex-row sm:justify-evenly space-y-5 items-center justify-center">
+      <div className="flex gap-12 flex-wrap sm:flex-row sm:justify- evenly space-y-5 items-center justify-center">
         {data?.courseFilterDtos?.slice(1, 5).map((item, index) => {
           return (
             <CourseCard
