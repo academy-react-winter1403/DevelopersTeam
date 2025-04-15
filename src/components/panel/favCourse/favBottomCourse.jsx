@@ -19,9 +19,11 @@ const FavBottomCourse = ({ handleSearch }) => {
               type="text"
               onChange={handleSearch}
               placeholder="جستجو کنید..."
-              className="bg-[#D9D9D9] text-[#787878] rounded-xl px-6 py-1 outline-none focus:outline-none h-12"
+              className="bg-[#D9D9D9] w-72 text-[#787878] rounded-xl px-6 py-1 outline-none focus:outline-none h-12"
             />
-            <CiSearch className="w-10 h-12 rounded-xl bg-navyBlue absolute left-0 text-white " />
+            <div className="w-12 h-12 bg-navyBlue absolute left-0 rounded-xl flex items-center justify-center">
+              <CiSearch className="text-white w-8 h-8" />
+            </div>
           </div>
         </div>
         <div className=" ">

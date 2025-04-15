@@ -32,7 +32,7 @@ const MyCourse = () => {
     const query = e.target.value;
     setSearchQuery(query);
 
-    if (!data) return; 
+    if (!data) return;
     if (!query.trim()) {
       setFilteredData(data);
       return;
@@ -43,7 +43,7 @@ const MyCourse = () => {
     );
 
     setFilteredData({
-      ...data,  
+      ...data,
       listOfMyCourses: filteredCourses,
       totalCount: filteredCourses.length,
     });

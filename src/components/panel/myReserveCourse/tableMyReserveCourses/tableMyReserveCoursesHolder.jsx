@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
 import { IoMdClose } from "react-icons/io";
-import { Progress } from "antd";
+import { Progress, Spin } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
@@ -22,34 +22,39 @@ const TableMyReserveCoursesHolder = ({
       <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
     </div>
   );
-  const img = (
-    <img
-      src={data?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
-      alt=""
-    />
-  );
+
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data) {
       const i = data.map((el) => {
-        let newData = {};
-        newData["img"] = img;
-        newData["name"] = el.courseName;
-        newData["teacher"] = el.fullName;
-        newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
-        newData["price"] = <PriceComponent cost={el.cost} />;
-        newData["register"] = el.paymentStatus;
-        newData["eye"] = icons;
-        return newData;
+        return {
+          img: <img src={el.tumbImageAddress || defImg} alt="" />,
+          name: el.courseName,
+          teacher: el.fullName,
+          date: <DateComponent insertDate={el.lastUpdate} />,
+          price: <PriceComponent cost={el.cost} />,
+          register: el.paymentStatus,
+          eye: (
+            <div className="flex gap-5">
+              <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
+            </div>
+          ),
+        };
       });
       setCovertedData(i);
     }
-  }, [isSuccess]);
+  }, [isSuccess, data]);
 
   return (
     <div>
       <div className="bg-white w-full h-auto rounded-2xl mt-5">
         <div className=" w-full h-70 hidden sm:block">
-          <Suspense fallback={<h1>loading...</h1>}>
+          <Suspense
+            fallback={
+              <div className="w-full h-full flex items-center justify-center">
+                <Spin />
+              </div>
+            }
+          >
             {isSuccess && <TableMyReserveCourses data={convertedData} />}
           </Suspense>
         </div>

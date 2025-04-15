@@ -14,7 +14,7 @@ const ProgressComp = ({ userData }) => {
       <div className="mt-2">
         <Progress progress={userData?.profileCompletionPercentage} />
       </div>
-      <div>
+      <div className="mb-3">
         {userData?.profileCompletionPercentage == 100 ? (
           <span className="text-navyBlue">
             اطلاعات حساب‌کابری شما تکمیل است

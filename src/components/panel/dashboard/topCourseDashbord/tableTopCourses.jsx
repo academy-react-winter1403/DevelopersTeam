@@ -1,58 +1,56 @@
-import React from 'react';
-import { Table} from 'antd';
+import React from "react";
+import { Table } from "antd";
 const columns = [
   {
-    title: 'نام دوره',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
+    title: "نام دوره",
+    dataIndex: "name",
+    key: "name",
+    render: (text) => <a>{text}</a>,
     width: 150,
   },
   {
-    title: 'درباره دوره',
-    dataIndex: 'desc',
-    key: 'desc',
+    title: "درباره دوره",
+    dataIndex: "desc",
+    key: "desc",
     width: 250,
   },
   {
-    title: 'اساتید دوره',
-    dataIndex: 'teacher',
-    key: 'teacher',
+    title: "اساتید دوره",
+    dataIndex: "teacher",
+    key: "teacher",
     ellipsis: {
       showTitle: false,
     },
-
   },
   {
-    title: 'تاریخ برگزاری',
-    dataIndex: 'date',
-    key: 'date',
+    title: "تاریخ برگزاری",
+    dataIndex: "date",
+    key: "date",
     ellipsis: {
       showTitle: false,
     },
-
   },
   {
-    title: 'قیمت دوره',
-    dataIndex: 'price',
-    key: 'price',
+    title: "قیمت دوره",
+    dataIndex: "price",
+    key: "price",
     ellipsis: {
       showTitle: false,
     },
-
   },
   {
-    title: ' ',
-    dataIndex: 'eye',
-    key: 'eye',
+    title: " ",
+    dataIndex: "eye",
+    key: "eye",
     ellipsis: {
       showTitle: false,
     },
 
     width: 80,
-
   },
 ];
 
-const App = ({data}) => <Table columns={columns} dataSource={data} style={{color:'#000'}} />;
+const App = ({ data }) => (
+  <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
+);
 export default App;

@@ -22,6 +22,7 @@ const CommentCard = ({
   disslikeCount,
   currentUserEmotion,
   currentUserLikeId,
+  isMyComment,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [openAnswer, setOpenAnswer] = useState(false);
@@ -139,26 +140,28 @@ const CommentCard = ({
             <span className="text-xs sm:text-sm dark:text-gray-300">
               {disslikeCount}
             </span>
-          </div>
-          <div className="flex space-x-3">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="h-8 sm:h-10 rounded-full text-xs px-2 sm:px-3 border border-navyBlue dark:border-blue-400 text-navyBlue dark:text-blue-400"
-            >
-              {isOpen ? "جواب دادن" : "بستن"}
-            </button>
-            <div
-              onClick={() => setOpenAnswer((e) => !e)}
-              className="text-xs flex items-center space-x-1 cursor-pointer dark:text-gray-400"
-            >
-              <span className="underline">مشاهده جواب ها</span>
-              {openAnswer ? (
-                <IoIosArrowUp size={14} />
-              ) : (
-                <IoIosArrowDown size={14} />
-              )}
+          </div>{" "}
+          {!isMyComment && (
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="h-8 sm:h-10 rounded-full text-xs px-2 sm:px-3 border border-navyBlue dark:border-blue-400 text-navyBlue dark:text-blue-400"
+              >
+                {isOpen ? "جواب دادن" : "بستن"}
+              </button>
+              <div
+                onClick={() => setOpenAnswer((e) => !e)}
+                className="text-xs flex items-center space-x-1 cursor-pointer dark:text-gray-400"
+              >
+                <span className="underline">مشاهده جواب ها</span>
+                {openAnswer ? (
+                  <IoIosArrowUp size={14} />
+                ) : (
+                  <IoIosArrowDown size={14} />
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <SendTextBox

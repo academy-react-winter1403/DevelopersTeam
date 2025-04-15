@@ -25,7 +25,22 @@ const CommentComp = ({ id }) => {
         نظرات شما
       </h2>
 
-      {data?.map((item, index) => index < count && <Item key={item.id} commentObj={item} />)}
+      {data?.map(
+        (item, index) =>
+          index < count && (
+            <Item
+              key={item.id}
+              commentObj={item}
+              pictureAddress={item.pictureAddress}
+              autor={item.autor}
+              inserDate={item.inserDate}
+              title={item.title}
+              describe={item.describe}
+              newsId={item.newsId}
+              id={item.id}
+            />
+          )
+      )}
       {data?.length > count && (
         <button
           onClick={() => setCount((e) => e + 4)}

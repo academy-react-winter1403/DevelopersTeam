@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
-import { Divider } from "antd";
+import { Divider, Spin } from "antd";
 
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -31,7 +31,12 @@ const TopCourseDashbord = () => {
         newData["desc"] = el.describe;
         newData["teacher"] = el.fullName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
-        newData["price"] = <PriceComponent cost={el.cost} />;
+        newData["price"] = (
+          <div className="flex space-x-2">
+            <PriceComponent cost={el.cost} />
+            <span>تومان</span>
+          </div>
+        );
         newData["eye"] = (
           <MdOutlineRemoveRedEye className="w-5 h-5 text-gray" />
         );
@@ -52,7 +57,13 @@ const TopCourseDashbord = () => {
           </div>
         </div>
         <div className=" w-full h-70">
-          <Suspense fallback={<h1>loading...</h1>}>
+          <Suspense
+            fallback={
+              <div className="w-full h-full flex items-center justify-center">
+                <Spin />
+              </div>
+            }
+          >
             {isSuccess && <TableTopCourses data={convertedData} />}
           </Suspense>
         </div>

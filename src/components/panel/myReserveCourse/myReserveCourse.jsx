@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FavBottomCourse from "../favCourse/favBottomCourse";
 import SortMyReserve from "./sortMyReserve";
 import TableMyReserveCoursesHolder from "./tableMyReserveCourses/tableMyReserveCoursesHolder";
@@ -7,19 +7,46 @@ import http from "./../../../core/services/interceptor";
 
 const MyReserveCourse = () => {
   const [convertedData, setCovertedData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState(null);
 
   const getMyReserveCourses = async () => {
     const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
     return res;
   };
+
   const {
     data: reserveData,
     isSuccess,
     error: reserveDataError,
   } = useQuery({
-    queryKey: "myReserveCoursesPanel",
+    queryKey: ["myReserveCoursesPanel"],
     queryFn: getMyReserveCourses,
   });
+
+  useEffect(() => {
+    if (reserveData) {
+      setFilteredData(reserveData);
+    }
+  }, [reserveData]);
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (!reserveData) return;
+
+    if (!query.trim()) {
+      setFilteredData(reserveData);
+      return;
+    }
+
+    const filteredCourses = reserveData.filter((item) =>
+      item.courseName.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setFilteredData(filteredCourses);
+  };
 
   // const getMyReserveCoursesMore = async () => {
   //   const res = await http.get(
@@ -53,11 +80,11 @@ const MyReserveCourse = () => {
   return (
     <div>
       <div className="hidden sm:block">
-        <h2 className="w-full h-10  mt-5 font-bold text-xl">رزرو من</h2>
+        <h2 className="w-full h-10 mt-5 font-bold text-xl">رزرو من</h2>
       </div>
       <div className="flex items-center">
         <div>
-          <FavBottomCourse />
+          <FavBottomCourse handleSearch={handleSearch} />
         </div>
         <div className="pt-14">
           <SortMyReserve />
@@ -66,9 +93,8 @@ const MyReserveCourse = () => {
       <TableMyReserveCoursesHolder
         convertedData={convertedData}
         setCovertedData={setCovertedData}
-        data={reserveData}
+        data={filteredData || reserveData}
         isSuccess={isSuccess}
-        // moreData={moreData}
       />
     </div>
   );
