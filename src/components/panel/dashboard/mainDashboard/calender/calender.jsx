@@ -1,9 +1,42 @@
-import React from 'react'
+import React from 'react';
+import { Calendar } from 'react-modern-calendar-datepicker';
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 
 const Calender = () => {
-  return (
-    <div className='col-span-2 border order-1 md:order-2'>Calender</div>
-  )
-}
+  const localeForPersianCalendar = {
+    months: [
+      'فروردین',
+      'اردیبهشت',
+      'خرداد',
+      'تیر',
+      'مرداد',
+      'شهریور',
+      'مهر',
+      'آبان',
+      'آذر',
+      'دی',
+      'بهمن',
+      'اسفند',
+    ],
+    weekDays: [
+      { name: 'شنبه', short: 'ش' },
+      { name: 'یکشنبه', short: 'ی' },
+      { name: 'دوشنبه', short: 'د' },
+      { name: 'سه‌شنبه', short: 'س' },
+      { name: 'چهارشنبه', short: 'چ' },
+      { name: 'پنجشنبه', short: 'پ' },
+      { name: 'جمعه', short: 'ج' },
+    ],
+    weekStartingIndex: 6,
+    isRtl: true, // راست‌چین برای زبان فارسی
+  };
 
-export default Calender
+  return (
+    <div>
+      <Calendar locale={localeForPersianCalendar} />
+    </div>
+  );
+};
+
+export default Calender;
+
