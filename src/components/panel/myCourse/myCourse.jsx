@@ -5,9 +5,8 @@ import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 
 const MyCourse = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
   const [convertedData, setCovertedData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getMyCourses = async () => {
     const res = await http.get(
@@ -15,42 +14,59 @@ const MyCourse = () => {
     );
     return res;
   };
-  const { data, isSuccess, refetch } = useQuery({
+
+  const { data, isSuccess } = useQuery({
     queryKey: ["myCoursesPanel"],
     queryFn: getMyCourses,
   });
 
-  const [SearchList, setSearchList] = useState(null);
+  const [filteredData, setFilteredData] = useState(null);
+
+  // Initialize filteredData when data is loaded
   useEffect(() => {
     if (data) {
-      setSearchList(data);
+      setFilteredData(data);
     }
   }, [data]);
+
   const handleSearch = (e) => {
-    const newArr = SearchList.filter((item) =>
-      data?.courseTitle.includes(e.target.value)
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (!data) return; // Don't proceed if data isn't loaded yet
+
+    if (!query.trim()) {
+      // If search is empty, reset to original data
+      setFilteredData(data);
+      return;
+    }
+
+    // Filter courses while maintaining the original data structure
+    const filteredCourses = data.listOfMyCourses.filter((item) =>
+      item.courseTitle.toLowerCase().includes(query.toLowerCase())
     );
-    setSearchList(newArr);
-    console.log(e.target.value);
+
+    setFilteredData({
+      ...data, // Keep all original properties
+      listOfMyCourses: filteredCourses,
+      totalCount: filteredCourses.length,
+    });
   };
 
   return (
     <div>
       <div>
-        <h2 className="w-full h-10  mt-5 font-bold text-xl">دوره من</h2>
+        <h2 className="w-full h-10 mt-5 font-bold text-xl">دوره من</h2>
       </div>
-      <FavBottomCourse
-        data={data}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        handleSearch={handleSearch}
-      />
-      <TableMyCoursesHolder
-        data={data}
-        convertedData={convertedData}
-        setCovertedData={setCovertedData}
-        isSuccess={isSuccess}
-      />
+      <FavBottomCourse handleSearch={handleSearch} />
+      {filteredData && (
+        <TableMyCoursesHolder
+          data={filteredData}
+          convertedData={convertedData}
+          setCovertedData={setCovertedData}
+          isSuccess={isSuccess}
+        />
+      )}
     </div>
   );
 };

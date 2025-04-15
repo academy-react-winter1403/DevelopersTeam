@@ -4,27 +4,7 @@ import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import NewsNavbar from "../../news/newsNavbar";
 import TableFaveCourseHandle from "./tableFavCourse/tableFaveCourseHandle";
 
-const FavBottomCourse = ({ data }) => {
-  // const [searchQuery, setSearchQuery] = useState("");
-
-  // const [convertedData, setCovertedData] = useState([]);
-
-  const [SearchList, setSearchList] = useState(null);
-  useEffect(() => {
-    if (data) {
-      setSearchList(data);
-    }
-  }, [data]);
-  const handleSearch = (e) => {
-    // console.log(e.target,SearchList);
-
-    const newArr = data?.listOfMyCourses?.filter((item) =>
-      item?.courseTitle.includes(e.target.value)
-    );
-    console.log({ listOfMyCourses: newArr ||[], totalCount: newArr?.length ||0 });
-    setSearchList({ listOfMyCourses: newArr ||[], totalCount: newArr?.length ||0 });
-  };
-
+const FavBottomCourse = ({ handleSearch }) => {
   return (
     <div className="hidden sm:block">
       <div className="w-full h-auto mt-5 flex items-center gap-5 ">
