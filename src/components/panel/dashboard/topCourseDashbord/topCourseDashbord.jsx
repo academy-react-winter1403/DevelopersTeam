@@ -22,9 +22,9 @@ const TopCourseDashbord = () => {
     queryKey: "topCoursesPanel",
     queryFn: getTopCourses,
   });
+
   useEffect(() => {
     if (isSuccess) {
-      // console.log(data.listOfMyCourses)
       const i = data.listOfMyCourses.map((el) => {
         let newData = {};
         newData["name"] = el.courseTitle;
@@ -38,7 +38,7 @@ const TopCourseDashbord = () => {
           </div>
         );
         newData["eye"] = (
-          <MdOutlineRemoveRedEye className="w-5 h-5 text-gray" />
+          <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
         );
         return newData;
       });
@@ -48,15 +48,15 @@ const TopCourseDashbord = () => {
 
   return (
     <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5 hidden sm:block">
-        <div className=" w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
-          <h2>جدیدترین دوره ها</h2>
-          <div className="flex items-center text-navyBlue gap-1 ">
+      <div className="bg-white dark:bg-gray-800 w-full h-auto rounded-2xl mt-5 hidden sm:block">
+        <div className="w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
+          <h2 className="dark:text-white">جدیدترین دوره ها</h2>
+          <div className="flex items-center text-navyBlue dark:text-blue-400 gap-1">
             <h2>مشاهده همه</h2>
             <MdKeyboardArrowLeft />
           </div>
         </div>
-        <div className=" w-full h-70">
+        <div className="w-full h-70">
           <Suspense
             fallback={
               <div className="w-full h-full flex items-center justify-center">
@@ -68,30 +68,30 @@ const TopCourseDashbord = () => {
           </Suspense>
         </div>
       </div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5 sm:hidden">
-        <div className=" w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
-          <h2>جدیدترین دوره ها</h2>
-          <div className="flex items-center text-navyBlue gap-1 ">
+      <div className="bg-white dark:bg-gray-800 w-full h-auto rounded-2xl mt-5 sm:hidden">
+        <div className="w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
+          <h2 className="dark:text-white">جدیدترین دوره ها</h2>
+          <div className="flex items-center text-navyBlue dark:text-blue-400 gap-1">
             <h2>مشاهده همه</h2>
             <MdKeyboardArrowLeft />
           </div>
         </div>
         {data?.listOfMyCourses.map((item, index) => {
           return (
-            <div className=" w-full h-auto px-6 mt-5 ">
-              <div className=" flex justify-between ">
+            <div className="w-full h-auto px-6 mt-5" key={index}>
+              <div className="flex justify-between">
                 <div className="space-y-2">
-                  <h1 className="text-base">{item.courseTitle}</h1>
-                  <h1 className="text-base text-gray">{item.fullName}</h1>
-                  <span className=" text-gray">
+                  <h1 className="text-base dark:text-white">{item.courseTitle}</h1>
+                  <h1 className="text-base text-gray dark:text-gray-400">{item.fullName}</h1>
+                  <span className="text-gray dark:text-gray-400">
                     <DateComponent insertDate={item.lastUpdate} />
                   </span>
                 </div>
                 <div>
-                  <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
+                  <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
                 </div>
               </div>
-              <Divider />
+              <Divider className="dark:bg-gray-700" />
             </div>
           );
         })}

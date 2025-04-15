@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BsClock } from "react-icons/bs";
 import { IoCalendarOutline } from "react-icons/io5";
 
-// Import moment and required plugins
 import moment from "moment";
 import "moment-timezone";
 import "moment-jalaali";
@@ -19,7 +18,6 @@ function RealTimeClock() {
     return () => clearInterval(timer);
   }, []);
 
-  // Convert to Tehran time and Persian calendar
   const tehranTime = moment.tz(currentTime, "Asia/Tehran");
   const persianDate = moment(tehranTime).format("YYYY/MM/DD");
   const formattedTime = tehranTime.format("HH:mm:ss");
@@ -27,7 +25,7 @@ function RealTimeClock() {
   return (
     <div className="sm:w-1/2 flex space-x-5 sm:space-x-10 mt-3">
       <div className="flex space-x-3 items-center">
-        <div className="w-12 h-12 rounded-full overflow-hidden bg-white flex justify-center items-center">
+        <div className="w-12 h-12 rounded-full overflow-hidden bg-white dark:bg-[#1e2939] flex justify-center items-center">
           <BsClock className="w-6 h-6" />
         </div>
         <div>
@@ -36,7 +34,7 @@ function RealTimeClock() {
         </div>
       </div>
       <div className="flex space-x-3 items-center">
-        <div className="w-12 h-12 rounded-full overflow-hidden bg-white flex justify-center items-center">
+        <div className="w-12 h-12 rounded-full overflow-hidden bg-white dark:bg-[#1e2939] flex justify-center items-center">
           <IoCalendarOutline className="w-6 h-6" />
         </div>
         <div>

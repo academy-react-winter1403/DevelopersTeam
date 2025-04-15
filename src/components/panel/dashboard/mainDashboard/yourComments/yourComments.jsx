@@ -38,34 +38,35 @@ const YourComments = ({ userData }) => {
     !userData
   ) {
     return (
-      <div className="col-span-3 flex flex-col bg-[#FEFDFF] h-72 p-3 rounded-2xl order-2 md:order-1">
+      <div className="col-span-3 flex flex-col bg-[#FEFDFF] dark:bg-gray-800 h-72 p-3 rounded-2xl order-2 md:order-1">
         <div className="flex justify-between">
-          <span className="font-semibold">نظرات‌ شما</span>
-          <span className="flex items-center text-navyBlue space-x-2">
+          <span className="font-semibold dark:text-white">نظرات‌ شما</span>
+          <span className="flex items-center text-navyBlue dark:text-blue-400 space-x-2">
             <span>مشاهده همه</span>
             <FiChevronLeft />
           </span>
         </div>
-        <div className="relative">نظری ثبت نشده</div>
+        <div className="relative dark:text-gray-300">نظری ثبت نشده</div>
       </div>
     );
   }
+
   const firstComment = data?.myCommentsDtos[0];
   const firstCommentNews = newsData?.myNewsCommetDtos[0];
 
   return (
-    <div className="col-span-3 flex flex-col bg-[#FEFDFF] h-64 sm:h-72 p-3 rounded-2xl order-2 md:order-1">
+    <div className="col-span-3 flex flex-col bg-[#FEFDFF] dark:bg-gray-800 h-64 sm:h-72 p-3 rounded-2xl order-2 md:order-1">
       <div className="flex justify-between">
-        <span className="font-semibold">نظرات‌ شما</span>
-        <span className="flex items-center text-navyBlue space-x-2">
+        <span className="font-semibold dark:text-white">نظرات‌ شما</span>
+        <span className="flex items-center text-navyBlue dark:text-blue-400 space-x-2">
           <span>مشاهده همه</span>
           <FiChevronLeft />
         </span>
       </div>
       <div className="relative flex justify-evenly w-full space-x-5 mt-2">
-        <div className="w-2 h-full bg-navyBlue rounded-[5px]"></div>
+        <div className="w-2 h-full bg-navyBlue dark:bg-blue-500 rounded-[5px]"></div>
         <div className="w-1/2">
-          <h1 className="text-sm text-gray mt-3">دوره ها</h1>
+          <h1 className="text-sm text-gray dark:text-gray-400 mt-3">دوره ها</h1>
           <CommentCard
             isMyComment={true}
             likeCount={firstComment?.likeCount}
@@ -80,10 +81,9 @@ const YourComments = ({ userData }) => {
             commentId={"557037be-1a19-f011-b700-fdb9fe1399fafddddd"}
           />
         </div>
-        {/* <div className="border border-borderGray"></div> */}
-        <div className="w-2 h-full bg-navyBlue rounded-[5px]"></div>
-        <div className="w-1/2 ">
-          <h1 className="text-sm text-gray mt-3">اخبار و مقالات</h1>
+        <div className="w-2 h-full bg-navyBlue dark:bg-blue-500 rounded-[5px]"></div>
+        <div className="w-1/2">
+          <h1 className="text-sm text-gray dark:text-gray-400 mt-3">اخبار و مقالات</h1>
           <CommentCard
             isMyComment={true}
             likeCount={firstCommentNews?.likeCount}

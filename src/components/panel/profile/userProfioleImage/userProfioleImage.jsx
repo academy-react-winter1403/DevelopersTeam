@@ -1,11 +1,16 @@
 import React from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { CgMoreVertical } from "react-icons/cg";
-import { useMutation, QueryClient, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  QueryClient,
+  useQueryClient,
+} from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import { Dropdown, Upload, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
+import { TiTickOutline } from "react-icons/ti";
 
 const UserProfioleImage = ({ data }) => {
   const queryClient = useQueryClient();
@@ -18,12 +23,10 @@ const UserProfioleImage = ({ data }) => {
   };
   const { mutate: mutateSelectProfile } = useMutation({
     mutationFn: (id) => selectProfile(id),
-    onSuccess:()=>{
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
 
-queryClient.invalidateQueries({queryKey:["profile"]})
-  
-        // message.success("تصویر پروفایل با موفقیت تغییر کرد");
-     
+      // message.success("تصویر پروفایل با موفقیت تغییر کرد");
     },
     onError: () => {
       toast.error("خطا در تغییر تصویر پروفایل");
@@ -33,7 +36,7 @@ queryClient.invalidateQueries({queryKey:["profile"]})
   const deleteProfileImg = async (id) => {
     const myData = new FormData();
     myData.append("DeleteEntityId", id);
-    const res =  http.delete("/SharePanel/DeleteProfileImage", {data:myData});
+    const res = http.delete("/SharePanel/DeleteProfileImage", { data: myData });
     return res;
   };
   const { mutate: mutateDeleteProfile } = useMutation({
@@ -64,7 +67,6 @@ queryClient.invalidateQueries({queryKey:["profile"]})
       message.error("خطا در آپلود تصویر");
     },
   });
-
   return (
     <div className="h-auto mb-10 flex flex-wrap gap-4">
       <Upload onClick={mutateUploadProfile} name="formFile">
@@ -75,15 +77,17 @@ queryClient.invalidateQueries({queryKey:["profile"]})
         </div>
       </Upload>
       <div>
-        <input type="file" className="hidden " id="inp-1"/>
+        <input type="file" className="hidden " id="inp-1" />
         <label htmlFor="inp-1">d</label>
       </div>
 
-      {data?.userImage?.map((item, index) => (
+      {data?.userImage.map((item, index) => (
         <div
           key={index}
           className="w-60 h-60 rounded-2xl flex flex-col justify-center items-center overflow-hidden relative group"
         >
+          {console.log("gtttt", item?.puctureAddress)}
+          {console.log("cccc", item?.currentPictureAddress)}
           <Dropdown
             menu={{
               items: [
@@ -109,13 +113,25 @@ queryClient.invalidateQueries({queryKey:["profile"]})
             arrow
             trigger={["click"]}
           >
-            <CgMoreVertical className="w-10 h-10 bg-white p-2 rounded-full absolute top-3 right-3 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity shadow-md" />
+            <CgMoreVertical className="w-10 h-10 bg-white p-2 rounded-full absolute top-3 right-16 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity shadow-md" />
           </Dropdown>
           <img
             src={item.puctureAddress}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover border border-borderGray"
           />
+          {/* {data?.map((item) => {
+            return (
+              <div>
+                {item.currentPictureAddress ===
+                item.userImage.puctureAddress ? (
+                  <div className="w-10 h-10 absolute  top-3 right-3  bg-[#17C964] flex justify-center items-center rounded-full">
+                    <TiTickOutline className="text-white w-7 h-7 " />
+                  </div>
+                ) : null}
+              </div>
+            );
+          })} */}
         </div>
       ))}
     </div>

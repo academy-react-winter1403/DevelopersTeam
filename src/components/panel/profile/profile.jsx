@@ -18,9 +18,9 @@ const Profile = () => {
     queryFn: getProfile,
   });
   return (
-    <div className="w-full h-auto bg-white rounded-2xl mt-5">
-      <div className="w-full h-28 bg-[#3772FF] rounded-t-2xl"></div>
-      <div className="border-6 border-white rounded-full w-32 h-32 bg-[#3772FF] mt-[-60px] mr-10">
+    <div className="w-full h-auto bg-white dark:bg-gray-800 rounded-2xl mt-5">
+      <div className="w-full h-28 bg-[#3772FF] dark:bg-blue-800 rounded-t-2xl"></div>
+      <div className="border-6 border-white rounded-full w-32 h-32 bg-[#3772FF] dark:bg-blue-800 mt-[-60px] mr-10">
         <img
           src={
             data?.currentPictureAddress == "Not-set"
@@ -30,24 +30,24 @@ const Profile = () => {
           alt=""
           className="mx-auto w-32 h-30 rounded-full"
         />
-        <div className="bg-[#3772FF] border-6 border-white rounded-full w-8 h-8 flex items-center mt-[-15px]">
-          <LuImagePlus className=" w-4 h-4 mx-auto" />
+        <div className="bg-[#3772FF] dark:bg-blue-800 border-6 border-white rounded-full w-8 h-8 flex items-center mt-[-15px]">
+          <LuImagePlus className="w-4 h-4 mx-auto text-white" />
         </div>
       </div>
-      <div className=" w-full mt-5 flex flex-col sm:flex-row px-4 ">
-        <div className="flex flex-col w-full sm:w-1/2 ">
-          <div className=" ">
-            <h2 className="font-bold text-3xl space-x-2  ">
+      <div className="w-full mt-5 flex flex-col sm:flex-row px-4">
+        <div className="flex flex-col w-full sm:w-1/2">
+          <div>
+            <h2 className="font-bold text-3xl space-x-2 dark:text-white">
               <span>{data?.fName}</span>
               <span>{data?.lName}</span>
-              <span className="text-sm text-gray leading-8 ">
+              {/* <span className="text-sm text-gray dark:text-gray-300 leading-8">
                 (ادمین،دانشجو)
-              </span>
+              </span> */}
             </h2>
           </div>
-          <div className="mt-4 sm:mt-8  text-gray flex items-start gap-5  h-auto flex-col  xl:flex-row justify-baseline">
+          <div className="mt-4 sm:mt-8 text-gray dark:text-gray-300 flex items-start gap-5 h-auto flex-col xl:flex-row justify-baseline">
             <div className="flex items-center gap-1">
-              <HiOutlineDevicePhoneMobile className="w-6 h-6 " />
+              <HiOutlineDevicePhoneMobile className="w-6 h-6" />
               {data?.phoneNumber}
             </div>
             <div className="flex items-center gap-1">
@@ -59,16 +59,16 @@ const Profile = () => {
               {data?.email}
             </div>
             <div className="flex">
-              <TfiPencil className="text-navyBlue w-6 h-6" />
+              <TfiPencil className="text-navyBlue dark:text-blue-400 w-6 h-6" />
             </div>
           </div>
         </div>
         <div className="w-1/2 space-y-3">
-          <h2 className="text-gray text-md font-bold">درباره من</h2>
-          <p>{data?.userAbout}</p>
+          <h2 className="text-gray dark:text-gray-300 text-md font-bold">درباره من</h2>
+          <p className="dark:text-gray-200">{data?.userAbout}</p>
         </div>
       </div>
-      <div className="">
+      <div>
         <ProfileTabs data={data} />
       </div>
     </div>

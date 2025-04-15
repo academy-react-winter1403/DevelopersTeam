@@ -17,12 +17,6 @@ const TableMyReserveCoursesHolder = ({
   isSuccess,
   moreData,
 }) => {
-  const icons = (
-    <div className="flex gap-5">
-      <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
-    </div>
-  );
-
   useEffect(() => {
     if (isSuccess && data) {
       const i = data.map((el) => {
@@ -45,9 +39,9 @@ const TableMyReserveCoursesHolder = ({
   }, [isSuccess, data]);
 
   return (
-    <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-70 hidden sm:block">
+    <div className=" h- ">
+      <div className="bg-white w-full h- rounded-2xl mt-5">
+        <div className=" w-full h- hidden sm:block">
           <Suspense
             fallback={
               <div className="w-full h-full flex items-center justify-center">

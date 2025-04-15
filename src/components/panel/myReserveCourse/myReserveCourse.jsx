@@ -78,7 +78,7 @@ const MyReserveCourse = () => {
   // console.log("moreData",moreData);
 
   return (
-    <div>
+    <div className="">
       <div className="hidden sm:block">
         <h2 className="w-full h-10 mt-5 font-bold text-xl">رزرو من</h2>
       </div>

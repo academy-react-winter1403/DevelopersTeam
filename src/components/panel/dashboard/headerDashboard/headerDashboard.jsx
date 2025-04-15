@@ -7,8 +7,7 @@ const HeaderDashboard = ({ userData }) => {
   return (
     <div className="w-full mt-3 mb-3 h-24 flex flex-col md:flex-row md:items-center">
       <div className="sm:w-1/2">
-        <h1 className="font-bold text-xl sm:text-3xl whitespace-nowrap">
-          {" "}
+        <h1 className="font-bold text-xl sm:text-3xl whitespace-nowrap dark:text-white">
           سلام، صبح‌ بخیر {userData?.fName} 😍
         </h1>
       </div>
