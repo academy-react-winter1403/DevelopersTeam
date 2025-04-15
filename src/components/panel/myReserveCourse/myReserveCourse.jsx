@@ -12,21 +12,34 @@ const MyReserveCourse = () => {
     const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
     return res;
   };
-
-  const { data, isSuccess } = useQuery({
+  const {
+    data: reserveData,
+    isSuccess,
+    error: reserveDataError,
+  } = useQuery({
     queryKey: "myReserveCoursesPanel",
     queryFn: getMyReserveCourses,
   });
 
-  const getMyReserveCoursesMore = async () => {
-    const res = await http.get(`/Home/GetCourseDetails?CourseId=${data?.courseId}`);
-    return res;
-  };
+  // const getMyReserveCoursesMore = async () => {
+  //   const res = await http.get(
+  //     `/Home/GetCourseDetails?CourseId=${data?.courseId}`
+  //   );
+  //   return res;
+  // };
+  // const { data: moreData, error: moreDataError } = useQuery({
+  //   queryKey: "myReserveCoursesPanelMore",
+  //   queryFn: getMyReserveCoursesMore,
+  // });
 
-  const { data: moreData } = useQuery({
-    queryKey: "myReserveCoursesPanelMore",
-    queryFn: getMyReserveCoursesMore,
-  });
+  // const [combinedData, setCombinedData] = useState([]);
+
+  // if (reserveData && moreData) {
+  //   setCombinedData(...reserveData, ...moreData);
+  // }
+
+  // if (firstLoading || secondLoading) return <div>Loading...</div>;
+  // if (reserveDataError || moreDataError) return <div>Error loading data</div>;
 
   // function convertData() {
   //   for (let index = 0; index < array.length; index++) {
@@ -53,9 +66,9 @@ const MyReserveCourse = () => {
       <TableMyReserveCoursesHolder
         convertedData={convertedData}
         setCovertedData={setCovertedData}
-        data={data}
+        data={reserveData}
         isSuccess={isSuccess}
-        moreData={moreData}
+        // moreData={moreData}
       />
     </div>
   );

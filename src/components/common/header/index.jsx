@@ -85,7 +85,7 @@ const Header = () => {
           className="border-2 border-gray-200 dark:border-gray-600 w-9 h-9 lg:flex justify-center items-center rounded-full hidden"
         >
           {darkMode ? (
-            <GoSun className="size-5 text-yellow-300 cursor-pointer" />
+            <GoSun className="size-5 text-white cursor-pointer" />
           ) : (
             <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
           )}

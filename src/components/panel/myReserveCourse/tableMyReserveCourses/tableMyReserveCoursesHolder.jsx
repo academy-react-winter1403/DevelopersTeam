@@ -15,9 +15,8 @@ const TableMyReserveCoursesHolder = ({
   setCovertedData,
   data,
   isSuccess,
-  moreData
+  moreData,
 }) => {
-  
   const icons = (
     <div className="flex gap-5">
       <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
@@ -44,7 +43,6 @@ const TableMyReserveCoursesHolder = ({
       });
       setCovertedData(i);
     }
-    
   }, [isSuccess]);
 
   return (
@@ -56,7 +54,7 @@ const TableMyReserveCoursesHolder = ({
           </Suspense>
         </div>
       </div>
-      <ResponsiveReserveMyCourse data={data}/>
+      <ResponsiveReserveMyCourse data={data} />
     </div>
   );
 };

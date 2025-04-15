@@ -31,7 +31,9 @@ const DetailContainer = ({ data, id }) => {
       toast.success("امتیاز با موفقیت ثبت شد");
     },
     onError: (error) => {
-      toast.error(error?.response.data.ErrorMessage);
+      if (error?.response.status == 400) {
+        toast.error(error?.response.data.ErrorMessage);
+      }
     },
   });
 

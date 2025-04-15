@@ -117,7 +117,7 @@ const Item = ({ commentObj, isReplay }) => {
                     newsId: commentObj.newsId,
                     userId: 40330,
                     userIpAddress: "1.1.1.1",
-                    parentId: commentObj.parentId,
+                    parentId: commentObj.id,
                   }}
                 >
                   {({ handleSubmit }) => (
