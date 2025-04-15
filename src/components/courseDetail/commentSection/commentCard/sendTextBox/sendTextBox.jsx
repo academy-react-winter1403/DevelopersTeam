@@ -11,9 +11,7 @@ const SendTextBox = ({ isOpen, courseId, commentId }) => {
   const queryClient = useQueryClient();
   const emojiPickerRef = useRef(null);
   const [showPicker, setShowPicker] = useState(false);
-  const [activeField, setActiveField] = useState(null); // Track which field is active
-
-  // Close picker when clicking outside
+  const [activeField, setActiveField] = useState(null); 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
