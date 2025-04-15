@@ -1,24 +1,35 @@
 import React, { useState } from "react";
-import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { CiFaceSmile } from "react-icons/ci";
 import { RiTelegram2Line } from "react-icons/ri";
 import Provider from "./Provider";
 import { Field, Form, Formik } from "formik";
-import instance from "../../../core/services/interceptor";
 import DateComp2 from "../date/dateComp2";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import CommentLikeDislike from "./commentLikeDislike";
-import { Input } from "antd";
-import TextArea from "antd/es/input/TextArea";
-import { data } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useMutation } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
+import EmojiPicker from "emoji-picker-react";
 
 const Item = ({ commentObj, isReplay }) => {
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target)
+      ) {
+        setShowPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const addCommentReply = async (values) => {
     const res = await http.post(`/News/CreateNewsReplyComment`, values);
@@ -121,8 +132,36 @@ const Item = ({ commentObj, isReplay }) => {
                         >
                           <RiTelegram2Line className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                         </button>
-                        <div className="border border-[#F1F1F1] w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center">
+                        {/* <div className="border border-[#F1F1F1] w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center">
                           <CiFaceSmile className="w-3 h-3 sm:w-4 sm:h-4 text-navyBlue" />
+                        </div> */}
+                        <div className="relative">
+                          <div
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setShowPicker(!showPicker);
+                            }}
+                            className="border cursor-pointer border-[#F1F1F1] w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center"
+                          >
+                            <CiFaceSmile className="w-3 h-3 sm:w-4 sm:h-4 text-navyBlue" />
+                          </div>
+                          {showPicker && (
+                            <div
+                              ref={emojiPickerRef}
+                              className="absolute bottom-full left-0 z-50"
+                            >
+                              <EmojiPicker
+                                onEmojiClick={(emoji) =>
+                                  onEmojiClick(emoji, { setFieldValue, values })
+                                }
+                                width={300}
+                                height={400}
+                                theme="auto"
+                                skinTonesDisabled={true}
+                                searchDisabled={true}
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="w-full flex flex-col space-y-3">

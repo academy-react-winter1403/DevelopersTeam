@@ -9,7 +9,7 @@ import EmojiPicker from "emoji-picker-react";
 
 const SendTextBox = ({ isOpen, courseId, commentId }) => {
   const queryClient = useQueryClient();
-  const emojiPickerRef = useRef(null);
+  const  = useRef(null);
   const [showPicker, setShowPicker] = useState(false);
   const [activeField, setActiveField] = useState(null); 
   useEffect(() => {
@@ -95,7 +95,7 @@ const SendTextBox = ({ isOpen, courseId, commentId }) => {
                       >
                         <CiFaceSmile className="w-3 h-3 sm:w-4 sm:h-4 text-navyBlue" />
                       </div>
-                      {showPicker && (
+                      { && (
                         <div
                           ref={emojiPickerRef}
                           className="absolute bottom-full left-0 z-50"
