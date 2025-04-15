@@ -17,7 +17,7 @@ const Header = () => {
   const { darkMode, setDarkMode } = useDarkMode();
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      <NavLink to='/' className="flex w-1/5 justify-center items-center">
+      <NavLink to="/" className="flex w-1/5 justify-center items-center">
         <img
           src={logo}
           alt="logo"

@@ -16,14 +16,14 @@ const onError = (error) => {
 
   console.log(error);
 
-  if (error?.response.status === 401) {
-    toast.error("ابتدا وارد حساب کاربری شوید");
-    window.location.pathname = "/login";
-  }
+  // if (error?.response.status === 401) {
+  //   toast.error("ابتدا وارد حساب کاربری شوید");
+  //   window.location.pathname = "/login";
+  // }
 
-  if (error?.response.status === 403) {
-    toast.error("شما به این بخش دسترسی ندارید");
-  }
+  // if (error?.response.status === 403) {
+  //   toast.error("شما به این بخش دسترسی ندارید");
+  // }
 
 //   if (err?.response.status >= 400 && err.response.status < 500) {
 //     toast.error(err?.response.message);

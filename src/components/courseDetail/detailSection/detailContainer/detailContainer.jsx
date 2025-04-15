@@ -31,9 +31,10 @@ const DetailContainer = ({ data, id }) => {
       toast.success("امتیاز با موفقیت ثبت شد");
     },
     onError: (error) => {
-      if (error?.response.status == 400) {
-        toast.error(error?.response.data.ErrorMessage);
-      }
+      const errorMessage = error.response?.data?.ErrorMessage || 
+      error.response?.data?.message || 
+      "خطایی در ثبت امتیاز رخ داده است";
+toast.error(errorMessage);
     },
   });
 
@@ -95,7 +96,7 @@ const DetailContainer = ({ data, id }) => {
               : data?.currentRate
           }
           onChange={(rateValue) => mutate(rateValue)}
-          className="dark:[&_.ant-rate-star]:border"
+          // className="dark:[&_.ant-rate-star]:border"
         />
       </div>
       <UserAddComment id={id} />
