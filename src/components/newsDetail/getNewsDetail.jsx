@@ -14,6 +14,7 @@ import star from "./../../assets/images/courseDetail/star.svg";
 import CommentComp from "../common/commentsComponent/commentComp";
 import { TagsA } from "../common/course-card/tags/tags";
 import AddUserNewsComment from "../common/commentsComponent/addUserNewsComment";
+import toast from "react-hot-toast";
 
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
@@ -38,6 +39,10 @@ const GetNewsDetailList = () => {
     mutationFn: handleRate,
     onSuccess: () => {
       queryClient.invalidateQueries("newsDetail");
+      toast.success("امتیاز با موفقیت ثبت شد");
+    },
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
@@ -48,19 +53,24 @@ const GetNewsDetailList = () => {
     mutationFn: handleLike,
     onSuccess: () => {
       queryClient.invalidateQueries("newsDetail");
+      toast.success("لایک با موفقیت انجام شد");
+    },
+    onError: () => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
   const handleDelete = async () => {
     const res = await http.delete("/News/DeleteLikeNews", {
-      data: { deleteEntityId: data?.likeId },
-    });
-    console.log(res);
+      data: { deleteEntityId: data?.likeId },});
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries("newsDetail");
+    },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
     },
   });
 
@@ -71,6 +81,10 @@ const GetNewsDetailList = () => {
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries("newsDetail");
+      toast.error("دوره را دوست نداشتید");
+    },
+    onError: () => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
@@ -113,8 +127,8 @@ const GetNewsDetailList = () => {
     e.target.src = defaultImg;
   };
   return (
-    <div className="my-14 h-auto flex flex-col lg:flex-row flex-wrap justify-around">
-      <div className="w-auto h-[430px] border-4 border-borderGray dark:border-gray-700 rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0 line-clamp-1 overflow-hidden truncate dark:bg-gray-800">
+    <div className="my-14 h-auto flex flex-col lg:flex-row  sm:justify-around ">
+      <div className=" w-auto h-[350px] sm:h-[400px] border-4 border-borderGray dark:border-gray-700 rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0 line-clamp-1 overflow-hidden truncate dark:bg-gray-800">
         <h2 className="text-lg sm:text-3xl font-bold sm:p-4 dark:text-white">
           {data?.title}
         </h2>
@@ -123,7 +137,7 @@ const GetNewsDetailList = () => {
           <TagsA text={data?.keyword} />
         </div>
 
-        <div className="flex gap-2 mt-18 sm:mt-12 lg:mt-4 2xl:mt-14 space-x-2 sm:space-y-2 font-semibold md:text-xl dark:text-gray-300">
+        <div className="flex gap-2 mt-12 lg:mt-4 xl:mt-10 space-x-2 sm:space-y-2 font-semibold md:text-xl dark:text-gray-300">
           <HiOutlineCalendarDateRange className="w-6 h-6 mr-2 font-semibold dark:text-gray-400" />
           <span>
             <DateComponent insertDate={data?.insertDate} />
@@ -135,7 +149,7 @@ const GetNewsDetailList = () => {
           <span>225</span>
         </div>
 
-        <h2 className="mt-20 sm:mt-12 2xl:mt-12 px-2 sm:px-4 text-[#787878] dark:text-gray-400 font-semibold md:text-xl">
+        <h2 className="mt-10 sm:mt-6 xl:mt-10  px-2 sm:px-4 text-[#787878] dark:text-gray-400 font-semibold md:text-xl">
           منتشر کننده
         </h2>
 

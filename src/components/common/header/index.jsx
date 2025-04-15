@@ -17,7 +17,7 @@ const Header = () => {
   const { darkMode, setDarkMode } = useDarkMode();
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      <div className="flex w-1/5 justify-center items-center">
+      <NavLink to='/' className="flex w-1/5 justify-center items-center">
         <img
           src={logo}
           alt="logo"
@@ -28,7 +28,7 @@ const Header = () => {
           alt="text"
           className="w-24 h-10 object-contain dark:invert"
         />
-      </div>
+      </NavLink>
       <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden">
         <NavLink
           to="/"

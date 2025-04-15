@@ -38,14 +38,14 @@ const PanelLayout = () => {
   return (
     <div className="w-full flex flex-col sm:flex-row bg-[#F0F0F0] overflow-x-hidden">
       <div className="hidden h-[700px] sticky top-0 lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center ">
+        <NavLink to='/' className="flex justify-center items-center ">
           <img src={logo} alt="not set" className="w-14 h-16" />
           <img
             src={logoText}
             alt="not set"
             className="w-44 h-10 mt-1 hidden lg:block"
           />
-        </div>
+        </NavLink>
         <div className="mt-4">
           <PagesLink />
           <PagesLinkRes />
@@ -88,7 +88,7 @@ const PanelLayout = () => {
               className="w-14 h-14 sm:border-2 sm:border-borderGray rounded-full flex justify-center items-center bg-[#FEFDFF] sm:bg-none"
             >
               {darkMode ? (
-                <GoSun className="size-5 text-yellow-300 cursor-pointer" />
+                <GoSun  className="size-5 cursor-pointer " />
               ) : (
                 <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
               )}
