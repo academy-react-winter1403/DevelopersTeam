@@ -22,7 +22,6 @@ const MyCourse = () => {
 
   const [filteredData, setFilteredData] = useState(null);
 
-  // Initialize filteredData when data is loaded
   useEffect(() => {
     if (data) {
       setFilteredData(data);
@@ -33,21 +32,18 @@ const MyCourse = () => {
     const query = e.target.value;
     setSearchQuery(query);
 
-    if (!data) return; // Don't proceed if data isn't loaded yet
-
+    if (!data) return; 
     if (!query.trim()) {
-      // If search is empty, reset to original data
       setFilteredData(data);
       return;
     }
 
-    // Filter courses while maintaining the original data structure
     const filteredCourses = data.listOfMyCourses.filter((item) =>
       item.courseTitle.toLowerCase().includes(query.toLowerCase())
     );
 
     setFilteredData({
-      ...data, // Keep all original properties
+      ...data,  
       listOfMyCourses: filteredCourses,
       totalCount: filteredCourses.length,
     });
