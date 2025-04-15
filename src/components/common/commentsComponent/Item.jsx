@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiFaceSmile } from "react-icons/ci";
 import { RiTelegram2Line } from "react-icons/ri";
 import Provider from "./Provider";
@@ -15,7 +15,7 @@ const Item = ({ commentObj, isReplay }) => {
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
-
+  const emojiPickerRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
