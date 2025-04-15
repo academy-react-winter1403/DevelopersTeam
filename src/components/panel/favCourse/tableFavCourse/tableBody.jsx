@@ -1,11 +1,13 @@
 import React from "react";
 import { Table } from "antd";
+import "./table.css"; 
 const columns = [
   {
     title: " ",
     dataIndex: "img",
     key: "img",
     width: 150,
+    
   },
   {
     title: "نام دوره",
@@ -52,6 +54,6 @@ const columns = [
 ];
 
 const TableBody = ({ data }) => (
-  <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
+  <Table columns={columns} dataSource={data} style={{ color: "#000" }}   className="custom-ant-table" />
 );
 export default TableBody;

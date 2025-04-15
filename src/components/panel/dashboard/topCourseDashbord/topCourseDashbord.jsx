@@ -67,8 +67,8 @@ const TopCourseDashbord = () => {
         </div>
         {data?.listOfMyCourses.map((item, index) => {
           return (
-            <div className=" w-full h-auto px-6 mt-5">
-              <div className=" flex justify-between">
+            <div className=" w-full h-auto px-6 mt-5 ">
+              <div className=" flex justify-between ">
                 <div className="space-y-2">
                   <h1 className="text-base">{item.courseTitle}</h1>
                   <h1 className="text-base text-gray">{item.fullName}</h1>

@@ -52,8 +52,8 @@ const TableFaveCourseHandle = () => {
 
   return (
     <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-70  hidden sm:block">
+      <div className="bg-white w-full h-auto rounded-2xl mt-5 ">
+        <div className=" w-full h-70  hidden sm:block ">
           <Suspense fallback={<h1>loading...</h1>}>
             {isSuccess && <TableBody data={convertedData} />}
           </Suspense>
