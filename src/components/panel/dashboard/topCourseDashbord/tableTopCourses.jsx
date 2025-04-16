@@ -45,12 +45,11 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
-
     width: 80,
   },
 ];
 
-const App = ({ data }) => (
+const App = ({ data, showModal }) => (
   <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
 );
 export default App;

@@ -7,10 +7,21 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import { Divider, Spin } from "antd";
+import PanelModal from "../../../common/panelModal/panelModal";
 
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const getTopCourses = async () => {
     const res = await http.get(
@@ -39,7 +50,9 @@ const TopCourseDashbord = () => {
           </div>
         );
         newData["eye"] = (
-          <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
+          <div onClick={showModal}>
+            <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
+          </div>
         );
         return newData;
       });
@@ -65,7 +78,9 @@ const TopCourseDashbord = () => {
               </div>
             }
           >
-            {isSuccess && <TableTopCourses data={convertedData} />}
+            {isSuccess && (
+              <TableTopCourses showModal={showModal} data={convertedData} />
+            )}
           </Suspense>
         </div>
       </div>
@@ -92,8 +107,8 @@ const TopCourseDashbord = () => {
                     <DateComponent insertDate={item.lastUpdate} />
                   </span>
                 </div>
-                <div>
-                  <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400"  onClick={<PanelModal/>} />
+                <div onClick={showModal}>
+                  <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
                 </div>
               </div>
               <Divider className="dark:bg-gray-700" />
@@ -101,6 +116,11 @@ const TopCourseDashbord = () => {
           );
         })}
       </div>
+      <PanelModal
+        isModalOpen={isModalOpen}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
     </div>
   );
 };
