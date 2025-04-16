@@ -4,7 +4,7 @@ import http from "./../../../core/services/interceptor";
 import defImg from "./../../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../common/date/dateComponent";
 
-const ResponsiveMyCourse = () => {
+const ResponsiveMyCourse = ({showDrawer}) => {
   const getMyCourse = async () => {
     const res = await http.get(
       `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate`
@@ -27,7 +27,7 @@ const ResponsiveMyCourse = () => {
 
       {data?.listOfMyCourses.map((item) => {
         return (
-          <div className="bg-white w-full ">
+          <div onClick={showDrawer} className="bg-white w-full ">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3">
               <div className=" w-28 h-24  mt-8">
                 <img

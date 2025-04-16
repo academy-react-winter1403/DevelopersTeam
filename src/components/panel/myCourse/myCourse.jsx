@@ -3,10 +3,19 @@ import FavBottomCourse from "../favCourse/favBottomCourse";
 import TableMyCoursesHolder from "./tableMyCourses/tableMyCoursesHolder";
 import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
+import PanelModal from "../../common/panelModal/panelModal";
 
 const MyCourse = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const getMyCourses = async () => {
     const res = await http.get(
@@ -50,7 +59,7 @@ const MyCourse = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <div>
         <h2 className="w-full h-10 mt-5 font-bold text-xl">دوره من</h2>
       </div>
@@ -61,8 +70,10 @@ const MyCourse = () => {
           convertedData={convertedData}
           setCovertedData={setCovertedData}
           isSuccess={isSuccess}
+          showDrawer={showDrawer}
         />
       )}
+      <PanelModal onClose={onClose} open={open} />
     </div>
   );
 };

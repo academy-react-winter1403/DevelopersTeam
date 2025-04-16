@@ -49,7 +49,7 @@ const columns = [
   },
 ];
 
-const App = ({ data, showModal }) => (
+const App = ({ data }) => (
   <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
 );
 export default App;

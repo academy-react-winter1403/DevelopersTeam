@@ -12,7 +12,7 @@ const TableMyCoursesHolder = ({
   data,
   convertedData,
   setCovertedData,
-  isSuccess,
+  isSuccess,showDrawer
 }) => {
   const icons = (
     <div className="flex gap-5">
@@ -31,7 +31,7 @@ const TableMyCoursesHolder = ({
           price: <PriceComponent cost={el.cost} />,
           pay: <TagsNotAccept text={el.paymentStatus} />,
           eye: (
-            <div className="flex gap-5">
+            <div onClick={showDrawer} className="flex gap-5">
               <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
             </div>
           ),
@@ -56,7 +56,7 @@ const TableMyCoursesHolder = ({
           </Suspense>
         </div>
       </div>
-      <ResponsiveMyCourse data={data} />
+      <ResponsiveMyCourse showDrawer={showDrawer} data={data} />
     </div>
   );
 };

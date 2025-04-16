@@ -1,40 +1,22 @@
-// import React from 'react';
+import React from "react";
+import { Calendar } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
+import { useDarkMode } from "../../../../../context/theme/themeContext";
+import "./dark.css";
 
-// const Calender = () => {
-//   const localeForPersianCalendar = {
-//     months: [
-//       'فروردین',
-//       'اردیبهشت',
-//       'خرداد',
-//       'تیر',
-//       'مرداد',
-//       'شهریور',
-//       'مهر',
-//       'آبان',
-//       'آذر',
-//       'دی',
-//       'بهمن',
-//       'اسفند',
-//     ],
-//     weekDays: [
-//       { name: 'شنبه', short: 'ش' },
-//       { name: 'یکشنبه', short: 'ی' },
-//       { name: 'دوشنبه', short: 'د' },
-//       { name: 'سه‌شنبه', short: 'س' },
-//       { name: 'چهارشنبه', short: 'چ' },
-//       { name: 'پنجشنبه', short: 'پ' },
-//       { name: 'جمعه', short: 'ج' },
-//     ],
-//     weekStartingIndex: 6,
-//     isRtl: true, // راست‌چین برای زبان فارسی
-//   };
+const CalenderComp = () => {
+  const { darkMode } = useDarkMode();
+  return (
+    <div className="col-span-2 order-1 md:order-2 ">
+      <Calendar
+        calendar={persian}
+        locale={persian_fa}
+        className={darkMode && "dark"}
+      />
+    </div>
+  );
+};
 
-//   return (
-//     <div>
-//       <Calendar locale={localeForPersianCalendar} />
-//     </div>
-//   );
-// };
-
-// export default Calender;
-
+export default CalenderComp;
