@@ -6,27 +6,22 @@ import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
-import { Divider, Spin } from "antd";
-import PanelModal from "../../../common/panelModal/panelModal";
+import { Divider, Spin, Modal } from "antd";
 
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const showModal = (course) => {
+    setSelectedCourse(course);
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const handleOk = () => setIsModalOpen(false);
+  const handleCancel = () => setIsModalOpen(false);
 
   const getTopCourses = async () => {
-    const res = await http.get(
-      `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate&Query=`
-    );
+    const res = await http.get(`/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate&Query=`);
     return res;
   };
 
@@ -50,7 +45,7 @@ const TopCourseDashbord = () => {
           </div>
         );
         newData["eye"] = (
-          <div onClick={showModal}>
+          <div onClick={() => showModal(el)}>
             <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
           </div>
         );
@@ -97,17 +92,13 @@ const TopCourseDashbord = () => {
             <div className="w-full h-auto px-6 mt-5" key={index}>
               <div className="flex justify-between">
                 <div className="space-y-2">
-                  <h1 className="text-base dark:text-white">
-                    {item.courseTitle}
-                  </h1>
-                  <h1 className="text-base text-gray dark:text-gray-400">
-                    {item.fullName}
-                  </h1>
+                  <h1 className="text-base dark:text-white">{item.courseTitle}</h1>
+                  <h1 className="text-base text-gray dark:text-gray-400">{item.fullName}</h1>
                   <span className="text-gray dark:text-gray-400">
                     <DateComponent insertDate={item.lastUpdate} />
                   </span>
                 </div>
-                <div onClick={showModal}>
+                <div onClick={() => showModal(item)}>
                   <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
                 </div>
               </div>
@@ -116,13 +107,21 @@ const TopCourseDashbord = () => {
           );
         })}
       </div>
-      <PanelModal
-        isModalOpen={isModalOpen}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
+      {/* PanelModalِ داخلی، فقط در همین صفحه تعریف کن */}
+      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+        title={selectedCourse?.courseTitle || selectedCourse?.name}
+        footer={null /* خودت کنترلی بذار خواستی */}>
+        {selectedCourse && (
+          <>
+            <p>توضیح: {selectedCourse.describe || selectedCourse.desc}</p>
+            <p>مدرس: {selectedCourse.fullName || selectedCourse.teacher}</p>
+            {/* بقیه اطلاعات که خواستی */}
+          </>
+        )}
+      </Modal>
     </div>
   );
 };
 
 export default TopCourseDashbord;
+
