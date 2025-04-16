@@ -1,23 +1,3 @@
-// import React, { useState } from 'react';
-// import { Button, Modal } from 'antd';
-// const PanelModal = ({isModalOpen,
-//   handleOk,
-//   handleCancel}) => {
- 
-//   return (
-//     <div>
-     
-//       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-//         <p>Some contents...</p>
-//         <p>Some contents...</p>
-//         <p>Some contents...</p>
-//       </Modal>
-//     </div>
-//   );
-// };
-// export default PanelModal;
-
-
 const PanelModal = ({ isModalOpen, handleOk, handleCancel, course }) => {
   if (!course) return null; // اگر هنوز داده نداریم
 
