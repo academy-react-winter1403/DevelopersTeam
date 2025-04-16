@@ -6,9 +6,11 @@ import { MdOutlineViewTimeline } from "react-icons/md";
 import { LuBookMarked } from "react-icons/lu";
 import { RiFileMarkedLine } from "react-icons/ri";
 import { LiaUserEditSolid } from "react-icons/lia";
+import { TfiCommentAlt } from "react-icons/tfi";
+
 const PagesLink = () => {
   return (
-    <div className="mt-3 space-y-5 hidden lg:block">
+    <div className="mt-3 space-y-2 hidden lg:block">
       <NavLink
         to="/panel/dashboard"
         end
@@ -22,6 +24,19 @@ const PagesLink = () => {
       >
         <RxDashboard className="w-6 h-6" />
         <span>داشبرد</span>
+      </NavLink>
+      <NavLink
+        to="/panel/profile"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+          }`
+        }
+      >
+        <LiaUserEditSolid className="w-6 h-6" />
+        <span>پروفایل</span>
       </NavLink>
       <NavLink
         to="/panel/mycourse"
@@ -76,7 +91,7 @@ const PagesLink = () => {
         <span>علاقه‌مندی مقالات</span>
       </NavLink>
       <NavLink
-        to="/panel/profile"
+        to="/panel/mycommentscourse"
         className={({ isActive }) =>
           `${
             isActive
@@ -85,8 +100,21 @@ const PagesLink = () => {
           }`
         }
       >
-        <LiaUserEditSolid className="w-6 h-6" />
-        <span>پروفایل</span>
+        <TfiCommentAlt className="w-6 h-6" />
+        <span>کامنت های دوره</span>
+      </NavLink>
+      <NavLink
+        to="/panel/mycommentsnews"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+          }`
+        }
+      >
+        <TfiCommentAlt className="w-6 h-6" />
+        <span>کامنت های مقالات</span>
       </NavLink>
     </div>
   );

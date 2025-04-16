@@ -7,8 +7,7 @@ import { Tabs } from "antd";
 import LinksTab from "../links/links";
 import "./ProfileTabs.css";
 
-const ProfileTabs = ({data}) => {
-  
+const ProfileTabs = ({ data }) => {
   const items = [
     {
       key: "1",
@@ -33,7 +32,7 @@ const ProfileTabs = ({data}) => {
   ];
   return (
     <div className="mt-10 md:mr-5  custom-tabs ">
-      <Tabs defaultActiveKey="1"  items={items} />
+      <Tabs defaultActiveKey="1" items={items} responsive />
     </div>
   );
 };
