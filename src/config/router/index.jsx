@@ -105,6 +105,7 @@ export const router = createBrowserRouter([
         path: "/panel/profile",
         element: <ProfilePage />,
       },
+     
     ],
   },
   {

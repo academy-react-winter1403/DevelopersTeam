@@ -11,6 +11,7 @@ import { Divider, Spin } from "antd";
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
 
+
   const getTopCourses = async () => {
     const res = await http.get(
       `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate&Query=`
@@ -81,14 +82,18 @@ const TopCourseDashbord = () => {
             <div className="w-full h-auto px-6 mt-5" key={index}>
               <div className="flex justify-between">
                 <div className="space-y-2">
-                  <h1 className="text-base dark:text-white">{item.courseTitle}</h1>
-                  <h1 className="text-base text-gray dark:text-gray-400">{item.fullName}</h1>
+                  <h1 className="text-base dark:text-white">
+                    {item.courseTitle}
+                  </h1>
+                  <h1 className="text-base text-gray dark:text-gray-400">
+                    {item.fullName}
+                  </h1>
                   <span className="text-gray dark:text-gray-400">
                     <DateComponent insertDate={item.lastUpdate} />
                   </span>
                 </div>
                 <div>
-                  <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
+                  <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400"  onClick={<PanelModal/>} />
                 </div>
               </div>
               <Divider className="dark:bg-gray-700" />
