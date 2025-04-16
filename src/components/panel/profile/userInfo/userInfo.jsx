@@ -49,7 +49,7 @@ const UserInfo = ({ data }) => {
             aboutMe: data?.userAbout || "",
             phone: data?.phoneNumber || "",
             code: data?.nationalCode || "",
-            birthday: myBirthDay || "",
+            birthday: data?.birthDay || "",
             gender: data?.gender ?? true,
             email: data?.email || "",
             address: data?.homeAdderess || "",

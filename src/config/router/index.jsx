@@ -18,6 +18,8 @@ import MyReserveCoursePage from "../../screens/myReserveCoursePage";
 import FavCoursePage from "../../screens/favCoursePage";
 import ProfilePage from "../../screens/profilePage";
 import FavNewPage from "../../screens/favNewPage";
+import MyCourseCommentsPage from "../../screens/myCourseCommentsPage/myCourseCommentsPage";
+import MyNewsCommentsPage from "../../screens/myNewsCommentsPage/myNewsCommentsPage";
 
 export const router = createBrowserRouter([
   {
@@ -105,7 +107,14 @@ export const router = createBrowserRouter([
         path: "/panel/profile",
         element: <ProfilePage />,
       },
-     
+      {
+        path: "/panel/mycommentscourse",
+        element: <MyCourseCommentsPage />,
+      },
+      {
+        path: "/panel/mycommentsnews",
+        element: <MyNewsCommentsPage />,
+      },
     ],
   },
   {

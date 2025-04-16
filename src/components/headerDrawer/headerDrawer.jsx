@@ -24,8 +24,13 @@ const HeaderDrawer = () => {
   };
   return (
     <div className="lg:hidden ml-10">
-      <Button variant="text" color="default" onClick={showDrawer}>
-        <AlignLeftOutlined className="dark:text-white" />
+      <Button
+        variant="text"
+        color="default"
+        onClick={showDrawer}
+        style={darkMode && { color: "#fff" }}
+      >
+        <AlignLeftOutlined />
       </Button>
 
       <Drawer

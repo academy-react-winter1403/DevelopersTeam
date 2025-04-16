@@ -15,23 +15,27 @@ const EnterNumberLogin = ({ nextStep, text }) => {
     <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
   );
 
-  const { mutateAsync } = useMutationCustom("/Sign/Login", "Login","عملیات با موفقیت انجام شد");
+  const { mutateAsync } = useMutationCustom(
+    "/Sign/Login",
+    "Login",
+    "عملیات با موفقیت انجام شد"
+  );
   const handleMutation = async (values) => {
     try {
       const response = await mutateAsync(values);
-      // console.log('Login response:', response);      
+      // console.log('Login response:', response);
       if (response) {
-        setData('authToken', response.token); 
-        setData('userData', response.user);       
+        setData("authToken", response.token);
+        setData("userData", response.user);
         nextStep();
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
     }
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -39,7 +43,7 @@ const EnterNumberLogin = ({ nextStep, text }) => {
         <div className="w-xs xs:w-md lg:w-md   mt-12 space-y-4">
           <Formik
             onSubmit={handleMutation}
-            initialValues={{ phoneOrGmail: "", password: "" }}
+            initialValues={{ phoneOrGmail: "", password: "", rememberMe: true }}
           >
             <Form className="space-y-4">
               <AuthInput
