@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "antd";
-import "./table.css"; 
 const columns = [
   {
     title: " ",
@@ -54,6 +53,6 @@ const columns = [
 ];
 
 const TableBody = ({ data }) => (
-  <Table columns={columns} dataSource={data} style={{ color: "#000" }}   className="custom-ant-table" />
+  <Table columns={columns} dataSource={data} style={{ color: "#000" }}   />
 );
 export default TableBody;

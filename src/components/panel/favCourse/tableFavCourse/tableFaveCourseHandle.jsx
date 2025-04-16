@@ -10,22 +10,17 @@ import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsivFavCourse from "../responsivFavCourse";
 
 
-const TableFaveCourseHandle = () => {
-  const [convertedData, setCovertedData] = useState([]);
+const TableFaveCourseHandle = ({ data, convertedData, setCovertedData, isSuccess }) => {
 
-  const getFavCourses = async () => {
-    const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
-    return res;
-  };
+  // const getFavCourses = async () => {
+  //   const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
+  //   return res;
+  // };
   const icons = <div className="flex gap-5">
     <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
     <IoMdClose className="w-6 h-6 text-red-500"/>
   </div>
 
-  const { data, isSuccess } = useQuery({
-    queryKey: "favCoursesPanel",
-    queryFn: getFavCourses,
-  });
 
   const img = (
     <img
@@ -36,7 +31,7 @@ const TableFaveCourseHandle = () => {
   
   useEffect(() => {
     if (isSuccess) {
-      const i = data.favoriteCourseDto.map((el) => {
+      const newConverted = data.favoriteCourseDto.map((el) => {
         let newData = {};
         newData["img"] = img;
         newData["name"] = el.courseTitle;
@@ -46,14 +41,14 @@ const TableFaveCourseHandle = () => {
         newData["eye"] = (icons);
         return newData;
       });
-      setCovertedData(i);
+      setCovertedData(newConverted);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess, setCovertedData]);
 
   return (
     <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5 ">
-        <div className=" w-full h-70  hidden sm:block ">
+      <div className="bg-white w-full h-auto rounded-2xl mt-5">
+        <div className=" w-full h-auto  hidden sm:block ">
           <Suspense fallback={<h1>loading...</h1>}>
             {isSuccess && <TableBody data={convertedData} />}
           </Suspense>

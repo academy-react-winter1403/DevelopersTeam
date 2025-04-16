@@ -7,8 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsivNews from "../responsivNews";
 
-const TableFaveNews = () => {
-  const [convertedData, setCovertedData] = useState([]);
+const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
 
   const getFavNews = async () => {
     const res = await http.get(`/SharePanel/GetMyFavoriteNews`);
@@ -20,12 +19,6 @@ const TableFaveNews = () => {
       <IoMdClose className="w-6 h-6 text-red-500" />
     </div>
   );
-
-  const { data, isSuccess } = useQuery({
-    queryKey: "favNewsPanel",
-    queryFn: getFavNews,
-  });
-
   const img = (
     <img
       src={
@@ -39,7 +32,7 @@ const TableFaveNews = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const i = data.myFavoriteNews.map((el) => {
+      const newConverted  = data.myFavoriteNews.map((el) => {
         let newData = {};
         newData["img"] = img;
         newData["name"] = el.title;
@@ -50,14 +43,14 @@ const TableFaveNews = () => {
         newData["eye"] = icons;
         return newData;
       });
-      setCovertedData(i);
+      setCovertedData(newConverted );
     }
-  }, [isSuccess]);
+  }, [data, isSuccess, setCovertedData]);
 
   return (
     <div>
       <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-70  hidden sm:block">
+        <div className=" w-full h-auto  hidden sm:block">
           <Suspense fallback={<h1>loading...</h1>}>
             {isSuccess && <BodyTableNews data={convertedData} />}
           </Suspense>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
-import NewsNavbar from "../../news/newsNavbar";
-import TableFaveCourseHandle from "./tableFavCourse/tableFaveCourseHandle";
 
 const FavBottomCourse = ({ handleSearch }) => {
   return (
