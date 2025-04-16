@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <div className="flex flex-col justify-center mt-10">
       <h2 className="mx-auto w-[70%] text-[20px] md:text-3xl font-bold text-center dark:text-white">
-        تجربه ای بی نظیر در یادگیری کدنویسی;
+        تجربه ای بی نظیر در یادگیری کدنویسی
       </h2>
       <h2 className="mx-auto w-[70%] text-[20px] md:text-3xl md:mt-2 font-bold text-center dark:text-white">
         از <span className="text-blue-500 ">مبتدی</span> تا{" "}

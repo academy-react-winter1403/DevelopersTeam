@@ -2,7 +2,7 @@ import React from "react";
 import http from "../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import ax from "../../assets/images/3d-glassy-abstract-spiral-band-blue 1.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const GoodTeacher = () => {
   const getGoodTeacher = async () => {
@@ -29,14 +29,14 @@ const GoodTeacher = () => {
           <React.Fragment key={item.id}>
             <div
               className={`border-[#E4E4E4] dark:border-gray-700 rounded-4xl border-4 xl:w-1/4 w-4/5 sm:w-3/5 md:w-[30%] mx-auto mt-12 relative h-[300px] dark:bg-gray-800
-                hover:border-navyBlue hover: group
+                hover:border-navyBlue transition-all duration-700
                 `}
             >
               <div className="absolute top-[-50px] left-[50%] transform -translate-x-[50%] rounded-full  bg-white dark:bg-gray-800">
                 <img
                   src={item.pictureAddress || ax}
                   alt=""
-                  className={`rounded-full border-4 border-[#E4E4E4] dark:border-gray-700 object-cover w-20 h-20 sm:w-24 sm:h-24 group-hover:border-navyBlue`}
+                  className={`rounded-full border-4 border-[#E4E4E4] dark:border-gray-700 object-cover w-20 h-20 sm:w-24 sm:h-24 group-hover:border-navyBlue transition-all duration-700`}
                 />
               </div>
 
@@ -53,10 +53,19 @@ const GoodTeacher = () => {
               </p>
 
               <div
-                className={`bg-[#3772FF] rounded-full w-3/4 mx-auto mt-6 text-[10px] md:text-[12px] h-8 leading-8 text-center text-white
-                `}
+                className={`bg-[#3772FF] rounded-full w-3/4 mx-auto mt-6 text-[10px] md:text-[12px] h-8 leading-8 text-center text-white`}
               >
-                <Link to={item.linkdinProfileLink}>ورود به لینکدین</Link>
+                {item.linkdinProfileLink ? (
+                  <a
+                    href={item.linkdinProfileLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ورود به لینکدین
+                  </a>
+                ) : (
+                  <span style={{ opacity: 0.5 }}>لینکدین ناموجود</span>
+                )}
               </div>
             </div>
           </React.Fragment>

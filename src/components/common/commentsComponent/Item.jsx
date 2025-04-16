@@ -130,7 +130,7 @@ const Item = ({
 
           {openAnser && (
             <div className="mt-3 sm:mt-4 h-auto rounded-3xl text-sm sm:text-md border border-[#3772FF] p-3 sm:p-6 flex gap-2">
-              <div className="flex-1">
+              <div className="flex-1 ">
                 <Formik
                   onSubmit={mutate}
                   initialValues={{
@@ -154,9 +154,6 @@ const Item = ({
                         >
                           <RiTelegram2Line className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                         </button>
-                        {/* <div className="border border-[#F1F1F1] w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center">
-                          <CiFaceSmile className="w-3 h-3 sm:w-4 sm:h-4 text-navyBlue" />
-                        </div> */}
                         <div className="relative">
                           <div
                             onClick={(e) => {

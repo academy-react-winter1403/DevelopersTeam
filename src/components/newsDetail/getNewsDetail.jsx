@@ -257,7 +257,7 @@ const GetNewsDetailList = () => {
           />
         </div>
         <AddUserNewsComment id={id} />
-        <div className="w-full h-auto p-2 space-y-3">
+        <div className="w-full h-auto py-2 space-y-3">
           {/* <h2 className="font-bol text-3xl p-4 dark:text-white">نظرات</h2> */}
           <div className="border border-[#E4E4E4] dark:border-gray-700 w-full h-auto p-2 space-y-3 rounded-4xl dark:bg-gray-800">
             <CommentComp id={id} />
