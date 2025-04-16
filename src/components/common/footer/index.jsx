@@ -9,15 +9,15 @@ const Footer = () => {
     <div className="w-11/12 h-auto md:h-52 bg-lightGray dark:bg-gray-800 rounded-4xl mx-auto mb-10 space-y-7 flex flex-col md:flex-row lg:space-x-20">
       <div className="p-4 order-1 md:order-1">
         <div>
-          <img src={Academi} alt="not set" className="size-20 dark:invert" />
+          <img src={Academi} alt="not set" className="size-20 " />
         </div>
         <div className="hidden md:block space-y-3 mt-5">
           <div className="h-8 w-32 flex justify-center items-center bg-white dark:bg-gray-700 rounded-2xl text-red-400 border border-borderGray dark:border-gray-600 space-x-2">
-            <img src={Instagram} alt="" className="h-5 w-5 dark:invert" />
+            <img src={Instagram} alt="" className="h-5 w-5  " />
             <span className="text-sm dark:text-gray-300">اینستاگرام</span>
           </div>
           <div className="h-8 w-32 flex justify-center items-center bg-white dark:bg-gray-700 rounded-2xl text-blue-400 border border-borderGray dark:border-gray-600 space-x-2">
-            <img src={Telegram} alt="" className="h-5 w-5 dark:invert" />
+            <img src={Telegram} alt="" className="h-5 w-5  " />
             <span className="text-sm dark:text-gray-300">تلگرام</span>
           </div>
         </div>

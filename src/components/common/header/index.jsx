@@ -21,12 +21,12 @@ const Header = () => {
         <img
           src={logo}
           alt="logo"
-          className="w-10 h-10 object-contain xs:w-12 xs:h-14 dark:invert"
+          className="w-10 h-10   xs:w-12 xs:h-14  "
         />
         <img
           src={logoText}
           alt="text"
-          className="w-24 h-10 object-contain dark:invert"
+          className="w-24 h-10  "
         />
       </NavLink>
       <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden">
@@ -70,7 +70,7 @@ const Header = () => {
       <div className="flex w-1/5 justify-center items-center space-x-3">
         <div
           onClick={() => setDarkMode(!darkMode)}
-          className="border-2 border-gray-200 dark:border-gray-600 w-9 h-9 lg:flex justify-center items-center rounded-full hidden"
+          className="border-0 lg:border-2 border-gray-200  dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full "
         >
           {darkMode ? (
             <GoSun className="size-5 text-white cursor-pointer" />

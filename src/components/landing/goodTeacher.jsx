@@ -2,7 +2,6 @@ import React from "react";
 import http from "../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import ax from "../../assets/images/3d-glassy-abstract-spiral-band-blue 1.svg";
-import { Link, NavLink } from "react-router-dom";
 
 const GoodTeacher = () => {
   const getGoodTeacher = async () => {
@@ -24,19 +23,22 @@ const GoodTeacher = () => {
         اساتیدی که با نظرسنجی در دوره‌ها به آنها بیشترین رای مثبت را دادند
       </h2>
 
-      <div className="flex flex-col md:flex-row gap-6 mt-12 sm:mt-18 w-10/12 mx-auto h-auto ">
+      <div className="flex flex-col md:flex-row gap-6 mt-12 sm:mt-18 w-10/12 mx-auto h-auto items-center">
         {data?.slice(0, 3).map((item, index) => (
           <React.Fragment key={item.id}>
             <div
               className={`border-[#E4E4E4] dark:border-gray-700 rounded-4xl border-4 xl:w-1/4 w-4/5 sm:w-3/5 md:w-[30%] mx-auto mt-12 relative h-[300px] dark:bg-gray-800
-                hover:border-navyBlue transition-all duration-700
+                hover:border-navyBlue transition-all duration-700 group
+                ${index === 1 ? "md:scale-110 md:-translate-y-5 z-10" : ""}
                 `}
             >
-              <div className="absolute top-[-50px] left-[50%] transform -translate-x-[50%] rounded-full  bg-white dark:bg-gray-800">
+              <div className="absolute top-[-50px] left-[50%] transform -translate-x-[50%] rounded-full bg-white dark:bg-gray-800 group-hover:bg-white/90">
                 <img
                   src={item.pictureAddress || ax}
                   alt=""
-                  className={`rounded-full border-4 border-[#E4E4E4] dark:border-gray-700 object-cover w-20 h-20 sm:w-24 sm:h-24 group-hover:border-navyBlue transition-all duration-700`}
+                  className={`rounded-full border-4 border-[#E4E4E4] dark:border-gray-700 object-cover w-20 h-20 sm:w-24 sm:h-24 group-hover:border-navyBlue transition-all duration-700 ${
+                    index === 1 ? "w-24 h-24 sm:w-28 sm:h-28" : ""
+                  }`}
                 />
               </div>
 
@@ -53,7 +55,7 @@ const GoodTeacher = () => {
               </p>
 
               <div
-                className={`bg-[#3772FF] rounded-full w-3/4 mx-auto mt-6 text-[10px] md:text-[12px] h-8 leading-8 text-center text-white`}
+                className={`bg-[#3772FF] rounded-full w-3/4 mx-auto mt-6 text-[10px] md:text-[12px] h-8 leading-8 text-center text-white group-hover:bg-navyBlue transition-all duration-300`}
               >
                 {item.linkdinProfileLink ? (
                   <a
