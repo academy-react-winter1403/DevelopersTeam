@@ -55,7 +55,7 @@ const GetNewsDetailList = () => {
       queryClient.invalidateQueries("newsDetail");
       toast.success("لایک با موفقیت انجام شد");
     },
-    onError: () => {
+    onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);
     },
   });
@@ -81,7 +81,7 @@ const GetNewsDetailList = () => {
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries("newsDetail");
-      toast.error("دوره را دوست نداشتید");
+      toast.error("مقاله را دوست نداشتید");
     },
     onError: () => {
       toast.error(error?.response.data.ErrorMessage);

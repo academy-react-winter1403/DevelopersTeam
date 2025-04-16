@@ -40,9 +40,6 @@ const Profile = () => {
             <h2 className="font-bold text-3xl space-x-2 dark:text-white">
               <span>{data?.fName}</span>
               <span>{data?.lName}</span>
-              {/* <span className="text-sm text-gray dark:text-gray-300 leading-8">
-                (ادمین،دانشجو)
-              </span> */}
             </h2>
           </div>
           <div className="mt-4 sm:mt-8 text-gray dark:text-gray-300 flex items-start gap-5 h-auto flex-col xl:flex-row justify-baseline">
@@ -64,7 +61,9 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-1/2 space-y-3">
-          <h2 className="text-gray dark:text-gray-300 text-md font-bold">درباره من</h2>
+          <h2 className="text-gray dark:text-gray-300 text-md font-bold">
+            درباره من
+          </h2>
           <p className="dark:text-gray-200">{data?.userAbout}</p>
         </div>
       </div>

@@ -1,41 +1,36 @@
 import * as yup from "yup";
 
 const ProfileFormSchema = yup.object().shape({
-  LName: yup
+  fname: yup
     .string()
-    .max(3, "نام حداقل باید دارای 3 حرف باشد")
+    .min(3, "نام حداقل باید دارای 3 حرف باشد")
     .max(15, "لطفا نام خود را تا 15 حرف بیشتر وارد نکنید")
     .required("لطفا نام خود را وارد کنید"),
-  FName: yup
+  lname: yup
     .string()
     .min(3, "نام خانوادگی حداقل باید دارای 3 حرف باشد")
     .max(15, "لطفا نام خانوادگی خود را تا 15 حرف بیشتر وارد نکنید")
     .required("لطفا نام خانوادگی خود را وارد کنید"),
-  UserAbout: yup.string().max(500).required("لطفا درباره خود متنی بنویسید"),
-  HomeAdderess: yup
+  aboutMe: yup
+    .string()
+    .max(500, "توضیحات نباید بیشتر از 500 کاراکتر باشد")
+    .nullable(),
+  address: yup
     .string()
     .min(10, "تعداد حروف آدرس خانه باید حداقل 10 حرف باشد")
-    .max(500)
-    .required("لطفا آدرس محل خانه خود را وارد کنید"),
-  NationalCode: yup
+    .max(500, "آدرس نباید بیشتر از 500 کاراکتر باشد")
+    .nullable(),
+  code: yup
     .string()
     .matches(/^[0-9]{10}$/, "لطفا کد ملی خود را درست وارد کنید")
-    .required(" لطفا کد ملی را وارد کنید"),
-  Gender: yup.boolean().required("لطفا نوع جنسیت را انتخاب کنید"),
-  Email: yup
+    .required("لطفا کد ملی را وارد کنید"),
+  gender: yup.boolean().required("لطفا نوع جنسیت را انتخاب کنید"),
+  email: yup.string().email("لطفا یک ایمیل معتبر وارد کنید").nullable(),
+  phone: yup
     .string()
-    .matches(
-      /^(0?9[0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$/,
-      "لطفا شماره تلفن خود یا ایمیل خود را درست وارد کنید"
-    )
-    .required("لطفا ایمیل یا شماره تلفن را وارد کنید"),
-  phoneNumber: yup
-    .string()
-    .matches(
-      /^(0?9[0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$/,
-      "لطفا شماره تلفن خود یا ایمیل خود را درست وارد کنید"
-    )
+    .matches(/^0?9[0-9]{9}$/, "لطفا شماره تلفن خود را درست وارد کنید")
     .required("لطفا شماره تلفن را وارد کنید"),
+  birthday: yup.string().nullable(),
 });
 
 export default ProfileFormSchema;

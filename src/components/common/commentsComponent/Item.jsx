@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
 import EmojiPicker from "emoji-picker-react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const Item = ({
   commentObj,
@@ -54,8 +55,8 @@ const Item = ({
       queryClient.invalidateQueries(["newsComment"]);
       toast.success("نظرتان با موفقیت ثبت شد");
     },
-    onError: () => {
-      toast.error("ابتدا وارد حساب کاربری خود شوید");
+    onError: (error) => {
+      // toast.error(error?.response.data.ErrorMessage);
     },
   });
 
@@ -81,7 +82,7 @@ const Item = ({
               />
               <div>
                 <h2 className="font-medium text-xs sm:text-sm md:text-base dark:text-white">
-                  {autor}
+                  {autor == null ? "Unknown" : autor}
                 </h2>
                 <h2 className="text-gray-500 dark:text-gray-400 text-xs">
                   <DateComp2 inserDate={inserDate} />
@@ -91,7 +92,9 @@ const Item = ({
           </div>
 
           <div className="space-y-1 sm:space-y-2 overflow-hidden">
-            <p className="text-xs sm:text-sm dark:text-gray-300">{title}</p>
+            <p className="text-xs sm:text-sm dark:text-gray-300 font-semibold">
+              {title}
+            </p>
             <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>
           </div>
           {isMyCommentNews && (
