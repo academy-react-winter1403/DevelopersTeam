@@ -99,27 +99,7 @@ const UserProfioleImage = ({ data }) => {
     },
   });
   return (
-    <div className="h-auto mb-10 flex flex-wrap gap-4">
-      <div>
-        <input
-          type="file"
-          className="hidden"
-          id="inp-1"
-          onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
-              mutateUploadProfile(e.target.files[0]);
-            }
-          }}
-        />
-        <label htmlFor="inp-1">
-          <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
-            <BiImageAdd className="text-navyBlue w-10 h-10" />
-            <h1 className="font-semibold">اضافه کردن عکس</h1>
-            <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
-          </div>
-        </label>
-      </div>
-
+    <div className="h-auto mb-10 flex flex-col sm:flex-row sm:flex-wrap items-center gap-4 ">
       {data?.userImage.map((item, index) => (
         <div
           key={index}
@@ -170,6 +150,25 @@ const UserProfioleImage = ({ data }) => {
           )}
         </div>
       ))}
+      <div>
+        <input
+          type="file"
+          className="hidden"
+          id="inp-1"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              mutateUploadProfile(e.target.files[0]);
+            }
+          }}
+        />
+        <label htmlFor="inp-1">
+          <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
+            <BiImageAdd className="text-navyBlue w-10 h-10" />
+            <h1 className="font-semibold">اضافه کردن عکس</h1>
+            <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
+          </div>
+        </label>
+      </div>
     </div>
   );
 };

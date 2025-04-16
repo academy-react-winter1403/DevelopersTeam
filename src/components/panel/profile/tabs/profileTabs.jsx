@@ -33,7 +33,7 @@ const ProfileTabs = ({data}) => {
   ];
   return (
     <div className="mt-10 md:mr-5  custom-tabs ">
-      <Tabs defaultActiveKey="1" items={items} />
+      <Tabs defaultActiveKey="1"  items={items} />
     </div>
   );
 };
