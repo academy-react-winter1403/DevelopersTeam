@@ -60,7 +60,7 @@ const columns = [
   },
 ];
 
-const TableComp = ({ data }) => (
+const TableCompNews = ({ data }) => (
   <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
 );
-export default TableComp;
+export default TableCompNews;
