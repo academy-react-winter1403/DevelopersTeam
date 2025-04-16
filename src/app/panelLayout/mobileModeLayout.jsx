@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { LuBookMarked, LuBookText } from "react-icons/lu";
-import { MdOutlineViewTimeline } from "react-icons/md";
-import { RxDashboard } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
 import http from "./../../core/services/interceptor";
 import profilepic from "./../../assets/images/panel/profilepic.svg";
-import HamberMenu from "./hamberPanel";
-import { IoIosMore } from "react-icons/io";
+import { CiGrid41 } from "react-icons/ci";
+import { PiBookLight } from "react-icons/pi";
+import { CiViewTimeline } from "react-icons/ci";
+import DrawerMenu from "./drawerMenu";
 
 const MobileModeLayout = () => {
   const getProfile = async () => {
@@ -17,6 +16,7 @@ const MobileModeLayout = () => {
     queryKey: ["profile"],
     queryFn: getProfile,
   });
+  
 
   return (
     <div className="sm:hidden h-[72px] border border-[#F0F0F0] bg-[#FEFDFF] rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3  items-center">
@@ -26,55 +26,63 @@ const MobileModeLayout = () => {
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue text-white"
-              : "w-14 h-14 flex justify-center items-center rounded-full"
+              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue text-white"
+              : "w-16 h-16 flex justify-center items-center rounded-full"
           }`
         }
       >
-        <RxDashboard className="w-8 h-8" />
+        <CiGrid41 className="w-8 h-8" />
       </NavLink>
       <NavLink
         to="/panel/mycourse"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue text-white"
-              : "w-14 h-14 flex justify-center items-center rounded-full"
+              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue text-white"
+              : "w-16 h-16 flex justify-center items-center rounded-full"
           }`
         }
       >
-        <LuBookText className="w-8 h-8" />
+        <PiBookLight className="w-8 h-8" />
       </NavLink>
       <NavLink
         to="/panel/myreservecourse"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue text-white"
-              : "w-14 h-14 flex justify-center items-center rounded-full"
+              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue text-white"
+              : "w-16 h-16 flex justify-center items-center rounded-full"
           }`
         }
       >
-        <MdOutlineViewTimeline className="w-8 h-8" />
+        <CiViewTimeline className="w-8 h-8" />
       </NavLink>
       <NavLink
-        to="/panel/favcourse"
+        to="/panel/profile"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue text-white"
+              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue"
               : "w-14 h-14 flex justify-center items-center rounded-full"
           }`
         }
       >
-        <LuBookMarked className="w-8 h-8" />
+        {/* <LuBookMarked className="w-8 h-8" /> */}
+        <div className="w-8 h-8 border rounded-full">
+          <img
+            src={data?.currentPictureAddress}
+            alt=""
+            className={
+              !data?.currentPictureAddress
+                ? "w-8 h-8 rounded-full bg-navyBlue"
+                : "w-8 h-8 rounded-full"
+            }
+          />
+        </div>
       </NavLink>
-      <NavLink className=" w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue">
-        <RxDashboard className="w-8 h-8" />
-      </NavLink>
-      {/* <div className="bg-[#3772FF] w-14 h-14 rounded-full mx-2 flex justify-center items-center ">
-        <HamberMenu />
-      </div> */}
+      <div className=" w-14 h-14 rounded-full mx-2 flex justify-center items-center ">
+        <DrawerMenu />
+      </div>
     </div>
   );
 };

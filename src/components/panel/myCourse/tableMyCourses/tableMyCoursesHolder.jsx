@@ -6,6 +6,7 @@ import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveMyCourse from "../responsiveMyCourse";
 import { Spin } from "antd";
+import { TagsNotAccept } from "../../tagStatus/tagStatus";
 
 const TableMyCoursesHolder = ({
   data,
@@ -28,7 +29,7 @@ const TableMyCoursesHolder = ({
           teacher: el.fullName,
           date: <DateComponent insertDate={el.lastUpdate} />,
           price: <PriceComponent cost={el.cost} />,
-          pay: el.paymentStatus,
+          pay: <TagsNotAccept text={el.paymentStatus} />,
           eye: (
             <div className="flex gap-5">
               <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
