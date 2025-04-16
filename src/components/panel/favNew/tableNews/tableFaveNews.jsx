@@ -6,9 +6,9 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsivNews from "../responsivNews";
+import { Spin } from "antd";
 
 const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
-
   const getFavNews = async () => {
     const res = await http.get(`/SharePanel/GetMyFavoriteNews`);
     return res;
@@ -32,7 +32,7 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      const newConverted  = data.myFavoriteNews.map((el) => {
+      const newConverted = data.myFavoriteNews.map((el) => {
         let newData = {};
         newData["img"] = img;
         newData["name"] = el.title;
@@ -43,7 +43,7 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
         newData["eye"] = icons;
         return newData;
       });
-      setCovertedData(newConverted );
+      setCovertedData(newConverted);
     }
   }, [data, isSuccess, setCovertedData]);
 
@@ -51,7 +51,13 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
     <div>
       <div className="bg-white w-full h-auto rounded-2xl mt-5">
         <div className=" w-full h-auto  hidden sm:block">
-          <Suspense fallback={<h1>loading...</h1>}>
+          <Suspense
+            fallback={
+              <div className="w-full h-32 flex items-center justify-center">
+                <Spin />
+              </div>
+            }
+          >
             {isSuccess && <BodyTableNews data={convertedData} />}
           </Suspense>
         </div>

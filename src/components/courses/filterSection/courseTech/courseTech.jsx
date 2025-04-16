@@ -16,7 +16,7 @@ const CourseTech = ({ setSelectedTech }) => {
   });
 
   const handleChange = (value) => {
-    setSelectedTech(value);
+    setSelectedTech(value && value.length > 0 ? value : null);
   };
 
   const options = data
@@ -30,6 +30,7 @@ const CourseTech = ({ setSelectedTech }) => {
         تکنولوژی
       </div>
       <Select
+        mode="multiple"
         style={{
           width: "100%",
           fontFamily: "yekan",

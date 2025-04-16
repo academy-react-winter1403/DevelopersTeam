@@ -38,7 +38,7 @@ const UserInfo = ({ data }) => {
   const myBirthDay = new Date(data?.birthDay).toLocaleDateString("fa-IR");
 
   return (
-    <div className="md:grid md:grid-cols-10 flex flex-col">
+    <div className="md:grid md:grid-cols-10 flex flex-col dark:text-white">
       <div className="col-span-6 mt-6 order-2 md:order-1">
         <Formik
           onSubmit={(values) => mutateUpdate(values)}
@@ -64,7 +64,7 @@ const UserInfo = ({ data }) => {
                     <span>نام</span>
                     <Field
                       name="fname"
-                      className="h-9 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                      className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                       placeholder="نام خود را وارد کنید"
                     />
                     <ErrorMessage
@@ -77,7 +77,7 @@ const UserInfo = ({ data }) => {
                     <span>نام خانوادگی</span>
                     <Field
                       name="lname"
-                      className="h-9 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                      className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                       placeholder="نام خانوادگی خود را وارد کنید"
                     />
                     <ErrorMessage
@@ -93,7 +93,7 @@ const UserInfo = ({ data }) => {
                   <Field
                     name="aboutMe"
                     as="textarea"
-                    className="h-32 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                    className="h-32 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                     placeholder="یک متن درباره خود را وارد کنید"
                   />
                   <ErrorMessage
@@ -108,7 +108,7 @@ const UserInfo = ({ data }) => {
                     <span>شماره همراه</span>
                     <Field
                       name="phone"
-                      className="h-9 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                      className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                       placeholder="شماره همراه خود را وارد کنید"
                       disabled
                     />
@@ -122,7 +122,7 @@ const UserInfo = ({ data }) => {
                     <span>کد ملی</span>
                     <Field
                       name="code"
-                      className="h-9 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                      className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                       placeholder="کد ملی خود را وارد کنید"
                     />
                     <ErrorMessage
@@ -139,7 +139,7 @@ const UserInfo = ({ data }) => {
                     <Field
                       name="birthday"
                       // type="date"
-                      className="h-9 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                      className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                       placeholder="تاریخ تولد خود را وارد کنید"
                     />
                     <ErrorMessage
@@ -189,7 +189,7 @@ const UserInfo = ({ data }) => {
                   <span>ایمیل</span>
                   <Field
                     name="email"
-                    className="h-9 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                    className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                     placeholder="ایمیل خود را وارد کنید"
                   />
                   <ErrorMessage
@@ -204,7 +204,7 @@ const UserInfo = ({ data }) => {
                   <Field
                     name="address"
                     as="textarea"
-                    className="h-32 w-full outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                    className="h-32 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                     placeholder="آدرس سکونت خود را وارد کنید"
                   />
                   <ErrorMessage

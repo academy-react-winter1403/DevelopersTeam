@@ -141,7 +141,7 @@ const UserProfioleImage = ({ data }) => {
           <img
             src={item.puctureAddress}
             alt=""
-            className="w-full h-full object-cover border border-borderGray"
+            className="w-full h-full object-cover "
           />
           {data.currentPictureAddress === item.puctureAddress && (
             <div className="w-10 h-10 absolute top-3 right-3 bg-[#17C964] flex justify-center items-center rounded-full">

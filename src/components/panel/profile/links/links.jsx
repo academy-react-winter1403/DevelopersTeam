@@ -1,7 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { PiTelegramLogoThin } from "react-icons/pi";
-import { LuLinkedin } from "react-icons/lu";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import toast from "react-hot-toast";
@@ -52,7 +51,7 @@ const LinksTab = ({ data }) => {
             <Form onSubmit={handleSubmit}>
               <div>
                 <span className="font-semibold text-xs sm:text-sm lg:text-base">
-                  <h2 className="font-bold text-md">تلگرام</h2>
+                  <h2 className="font-bold text-md dark:text-white">تلگرام</h2>
                 </span>
                 <span className="relative flex justify-center items-center mt-2 space-x -3 ">
                   <span>
@@ -65,9 +64,9 @@ const LinksTab = ({ data }) => {
                   />
                 </span>
               </div>
-              <div className=" ">
+              <div className=" mt-3">
                 <span className="font-semibold text-xs sm:text-sm lg:text-base">
-                  <h2 className="font-bold text-md">تلگرام</h2>
+                  <h2 className="font-bold text-md dark:text-white">لینکدین</h2>
                 </span>
                 <span className="relative flex justify-center items-center mt-2 space-x -3 ">
                   <span>
@@ -76,7 +75,7 @@ const LinksTab = ({ data }) => {
                   <Field
                     name="LinkdinProfile"
                     className="w-full h-9 outline-none rounded-xl p- 5 pr-11 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
-                    placeholder="لینک تلگرام خود را وارد کنید"
+                    placeholder="لینک لینکدین خود را وارد کنید"
                   />
                 </span>
               </div>

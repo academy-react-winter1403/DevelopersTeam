@@ -29,7 +29,7 @@ const CoursesSection = () => {
     ${selectedType ? `&selectedType=${selectedType}` : ""}
     ${selectedLevel ? `&courseLevelId=${selectedLevel}` : ""}
     ${selectedTeacher ? `&TeacherId=${selectedTeacher}` : ""}
-    ${selectedTech ? `&ListTech=${selectedTech}&TechCount=1` : ""}
+    ${selectedTech && selectedTech.length > 0 ? `&ListTech=${selectedTech}&TechCount=1`: ""}    
     ${selectedPriceMin ? `&CostDown=${selectedPriceMin}` : ""}
     ${selectedPriceMax ? `&CostUp=${selectedPriceMax}` : ""}
     ${selectedSort ? `&SortingCol=${selectedSort.id}` : ""}

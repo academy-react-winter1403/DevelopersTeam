@@ -28,7 +28,7 @@ const CoursesNavbar = ({
       <GridListButton setViewMode={setViewMode} viewMode={viewMode} />
       <div className="hidden lg:flex items-center w-auto h-10 pl-3 border-l text-gray space-x-3 ">
         <SortCustomButton
-          data={{ text: "پرطرفدار ترین", id: "Cost" }}
+          data={{ text: "قیمت", id: "Cost" }}
           selected={selectedSort}
           setSelected={setSelectedSort}
         />

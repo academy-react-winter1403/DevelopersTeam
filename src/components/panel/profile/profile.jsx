@@ -20,19 +20,16 @@ const Profile = () => {
   return (
     <div className="w-full h-auto bg-white dark:bg-gray-800 rounded-2xl mt-5">
       <div className="w-full h-28 bg-[#3772FF] dark:bg-blue-800 rounded-t-2xl"></div>
-      <div className="border-6 border-white rounded-full w-32 h-32 bg-[#3772FF] dark:bg-blue-800 mt-[-60px] mr-10">
+      <div className="border-6 border-white flex justify-center items-center rounded-full w-32 h-32 bg-white  mt-[-60px] mr-10">
         <img
           src={
-            data?.currentPictureAddress == "Not-set"
+            data?.currentPictureAddress == "Not-set" || null
               ? profilepic
               : data?.currentPictureAddress
           }
           alt=""
-          className="mx-auto w-32 h-30 rounded-full"
+          className="mx-auto w-28 h-28 rounded-full"
         />
-        <div className="bg-[#3772FF] dark:bg-blue-800 border-6 border-white rounded-full w-8 h-8 flex items-center mt-[-15px]">
-          <LuImagePlus className="w-4 h-4 mx-auto text-white" />
-        </div>
       </div>
       <div className="w-full mt-5 flex flex-col sm:flex-row px-4">
         <div className="flex flex-col w-full sm:w-1/2">
