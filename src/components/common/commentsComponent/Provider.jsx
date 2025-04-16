@@ -13,7 +13,17 @@ const Provider = ({ newsId, commentId }) => {
   return (
     <div>
       {data.map((el) => (
-        <Item commentObj={el} isReplay={true} />
+        <Item
+          commentObj={el}
+          pictureAddress={el.pictureAddress}
+          autor={el.autor}
+          inserDate={el.inserDate}
+          title={el.title}
+          describe={el.describe}
+          newsId={el.newsId}
+          id={el.id}
+          isReplay={true}
+        />
       ))}
     </div>
   );

@@ -5,23 +5,24 @@ import { LuLinkedin } from "react-icons/lu";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import toast from "react-hot-toast";
+import { SlSocialLinkedin } from "react-icons/sl";
 
 const LinksTab = ({ data }) => {
   const queryClient = useQueryClient();
   const updateProfile = async (userData) => {
     const formData = new FormData();
-   
-    formData.append("LinkdinProfile", userData.linkdinProfile);
-    formData.append("TelegramLink", userData.telegramLink);
-    formData.append("FName", userData.fname);
-    formData.append("LName", userData.lname);
-    formData.append("UserAbout", userData.aboutMe);
-    formData.append("NationalCode", userData.code);
-    formData.append("BirthDay", userData.birthday || "1987-01-01T00:00:00" );
-    formData.append("Gender", userData.gender || false);
-    formData.append("HomeAdderess", userData.address);
+    formData.append("LinkdinProfile", userData.LinkdinProfile || "");
+    formData.append("TelegramLink", userData.TelegramLink || "");
+
+    formData.append("FName", data?.fName || "");
+    formData.append("LName", data?.lName || "");
+    formData.append("UserAbout", data?.userAbout || "");
+    formData.append("NationalCode", data?.nationalCode || "");
+    formData.append("BirthDay", data?.birthDay || "1987-01-01T00:00:00");
+    formData.append("Gender", data?.gender ?? false);
+    formData.append("HomeAdderess", data?.homeAdderess || "");
+
     const res = await http.put(`/SharePanel/UpdateProfileInfo`, formData);
-    console.log("dddd", userData.gender);
     return res;
   };
 
@@ -37,7 +38,7 @@ const LinksTab = ({ data }) => {
   });
 
   return (
-    <div className="w-full h-96 mx-2">
+    <div className="w-full px-4 md:px-0 md:w-xl h-96 ">
       <div className="flex flex-col space-y-3">
         <Formik
           onSubmit={(values) => mutateUpdate(values)}
@@ -49,33 +50,33 @@ const LinksTab = ({ data }) => {
         >
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
-              <div className="">
+              <div>
                 <span className="font-semibold text-xs sm:text-sm lg:text-base">
                   <h2 className="font-bold text-md">تلگرام</h2>
                 </span>
-                <span className="relative flex items-center mt-2 space-x-3 ">
+                <span className="relative flex justify-center items-center mt-2 space-x -3 ">
                   <span>
-                    <PiTelegramLogoThin className="w-6 h-6 absolute top-2.5 right-8 text-navyBlue" />
+                    <PiTelegramLogoThin className="w-5 h-5 absolute top-2 right-3 text-navyBlue" />
                   </span>
                   <Field
                     name="TelegramLink"
-                    className="w-7/11 h-9 outline-none rounded-xl p-5 pr-14 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
+                    className="w-full h-9 outline-none rounded-xl p- 5 pr-11 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
                     placeholder="لینک تلگرام خود را وارد کنید"
                   />
                 </span>
               </div>
-              <div className="">
+              <div className=" ">
                 <span className="font-semibold text-xs sm:text-sm lg:text-base">
-                  <h2 className="font-bold text-md">لینکدین</h2>
+                  <h2 className="font-bold text-md">تلگرام</h2>
                 </span>
-                <span className="relative flex items-center mt-2 space-x-3">
-                  <span className="">
-                    <LuLinkedin className="w-6 h-6 absolute top-2.5 right-8 text-navyBlue " />
+                <span className="relative flex justify-center items-center mt-2 space-x -3 ">
+                  <span>
+                    <SlSocialLinkedin className="w-5 h-5 absolute top-2 right-3 text-navyBlue" />
                   </span>
                   <Field
                     name="LinkdinProfile"
-                    className="w-7/11 h-9 outline-none rounded-xl py-5 pr-14 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
-                    placeholder="لینک لینکدین خود را وارد کنید"
+                    className="w-full h-9 outline-none rounded-xl p- 5 pr-11 placeholder:text-xs border border-lightGray  bg-lightGray  focus:border-navyBlue transition-all duration-300"
+                    placeholder="لینک تلگرام خود را وارد کنید"
                   />
                 </span>
               </div>

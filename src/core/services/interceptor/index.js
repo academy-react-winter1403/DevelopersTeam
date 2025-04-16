@@ -23,6 +23,10 @@ const onError = (error) => {
     toast.error("شما به این بخش دسترسی ندارید");
   }
 
+  if (error?.response.status === 422) {
+    toast.error(error?.response.data.ErrorMessage);
+  }
+
   // if (err?.response.status >= 400 && err.response.status < 500) {
   //   toast.error(err?.response.message);
   //   console.log("client error: " + err.response.status);

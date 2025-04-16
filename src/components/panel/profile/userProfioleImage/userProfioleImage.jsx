@@ -23,13 +23,25 @@ const UserProfioleImage = ({ data }) => {
   };
   const { mutate: mutateSelectProfile } = useMutation({
     mutationFn: (id) => selectProfile(id),
+    onMutate: async (newImageId) => {
+      await queryClient.cancelQueries({ queryKey: ["profile"] });
+      const previousProfile = queryClient.getQueryData(["profile"]);
+      queryClient.setQueryData(["profile"], (old) => ({
+        ...old,
+        currentPictureAddress: old.userImage.find(
+          (img) => img.id === newImageId
+        )?.puctureAddress,
+      }));
+      return { previousProfile };
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-
-      // message.success("تصویر پروفایل با موفقیت تغییر کرد");
+      toast.success("تصویر پروفایل با موفقیت تغییر کرد");
     },
     onError: () => {
       toast.error("خطا در تغییر تصویر پروفایل");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
   });
 
@@ -41,44 +53,71 @@ const UserProfioleImage = ({ data }) => {
   };
   const { mutate: mutateDeleteProfile } = useMutation({
     mutationFn: (id) => deleteProfileImg(id),
+    onMutate: async (deletedImageId) => {
+      await queryClient.cancelQueries({ queryKey: ["profile"] });
+      const previousProfile = queryClient.getQueryData(["profile"]);
+      queryClient.setQueryData(["profile"], (old) => ({
+        ...old,
+        userImage: old.userImage.filter((img) => img.id !== deletedImageId),
+        currentPictureAddress:
+          old.currentPictureAddress ===
+          old.userImage.find((img) => img.id === deletedImageId)?.puctureAddress
+            ? null
+            : old.currentPictureAddress,
+      }));
+
+      return { previousProfile };
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries("profile");
       toast.success("تصویر با موفقیت حذف شد");
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       toast.error("خطا در حذف تصویر");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
   });
 
   const uploadProfileImage = async (file) => {
     const formData = new FormData();
-    console.log(file.target);
-    formData.append("formFile", file.target.file);
+    formData.append("formFile", file);
     const res = await http.post("/SharePanel/AddProfileImage", formData);
     return res;
   };
   const { mutate: mutateUploadProfile } = useMutation({
     mutationFn: uploadProfileImage,
     onSuccess: () => {
-      queryClient.invalidateQueries("profile");
       message.success("تصویر با موفقیت آپلود شد");
     },
     onError: () => {
       message.error("خطا در آپلود تصویر");
     },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+    },
   });
   return (
     <div className="h-auto mb-10 flex flex-wrap gap-4">
-      <Upload onClick={mutateUploadProfile} name="formFile">
-        <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
-          <BiImageAdd className="text-navyBlue w-10 h-10" />
-          <h1 className="font-semibold">اضافه کردن عکس</h1>
-          <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
-        </div>
-      </Upload>
       <div>
-        <input type="file" className="hidden " id="inp-1" />
-        <label htmlFor="inp-1">d</label>
+        <input
+          type="file"
+          className="hidden"
+          id="inp-1"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              mutateUploadProfile(e.target.files[0]);
+            }
+          }}
+        />
+        <label htmlFor="inp-1">
+          <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
+            <BiImageAdd className="text-navyBlue w-10 h-10" />
+            <h1 className="font-semibold">اضافه کردن عکس</h1>
+            <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
+          </div>
+        </label>
       </div>
 
       {data?.userImage.map((item, index) => (
@@ -86,8 +125,6 @@ const UserProfioleImage = ({ data }) => {
           key={index}
           className="w-60 h-60 rounded-2xl flex flex-col justify-center items-center overflow-hidden relative group"
         >
-          {console.log("gtttt", item?.puctureAddress)}
-          {console.log("cccc", item?.currentPictureAddress)}
           <Dropdown
             menu={{
               items: [
@@ -113,25 +150,24 @@ const UserProfioleImage = ({ data }) => {
             arrow
             trigger={["click"]}
           >
-            <CgMoreVertical className="w-10 h-10 bg-white p-2 rounded-full absolute top-3 right-16 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity shadow-md" />
+            <CgMoreVertical
+              className={`w-10 h-10 bg-white p-2 rounded-full absolute top-3 ${
+                data.currentPictureAddress === item.puctureAddress
+                  ? "right-16"
+                  : "right-3"
+              }  cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity shadow-md`}
+            />
           </Dropdown>
           <img
             src={item.puctureAddress}
             alt=""
             className="w-full h-full object-cover border border-borderGray"
           />
-          {/* {data?.map((item) => {
-            return (
-              <div>
-                {item.currentPictureAddress ===
-                item.userImage.puctureAddress ? (
-                  <div className="w-10 h-10 absolute  top-3 right-3  bg-[#17C964] flex justify-center items-center rounded-full">
-                    <TiTickOutline className="text-white w-7 h-7 " />
-                  </div>
-                ) : null}
-              </div>
-            );
-          })} */}
+          {data.currentPictureAddress === item.puctureAddress && (
+            <div className="w-10 h-10 absolute top-3 right-3 bg-[#17C964] flex justify-center items-center rounded-full">
+              <TiTickOutline className="text-white w-7 h-7" />
+            </div>
+          )}
         </div>
       ))}
     </div>
