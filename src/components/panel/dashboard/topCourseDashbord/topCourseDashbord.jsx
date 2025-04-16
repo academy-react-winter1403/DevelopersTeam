@@ -13,6 +13,24 @@ const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const PanelModal = ({ isModalOpen, handleOk, handleCancel, course }) => {
+    if (!course) return null;
+    return (
+      <Modal
+        title={course.name || course.courseTitle}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>توضیح: {course.desc || course.describe}</p>
+        <p>مدرس: {course.teacher || course.fullName}</p>
+        <p>...</p>
+      </Modal>
+    );
+  };
+
+
   const showModal = () => {
     setIsModalOpen(true);
   };
