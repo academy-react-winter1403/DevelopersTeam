@@ -40,7 +40,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             </div>
           ),
           pay: (
-            <div onClick={showModal} className="flex gap-5 cursor-pointer">
+            <div  className="flex gap-5 cursor-pointer">
               <CiMoneyBill className="w-6 h-6 text-gray" />
             </div>
           ),
