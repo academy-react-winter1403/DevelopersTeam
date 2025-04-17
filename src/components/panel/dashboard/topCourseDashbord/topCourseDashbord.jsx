@@ -12,6 +12,7 @@ import PanelModal from "../../../common/panelModal/panelModal";
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [open, setOpen] = useState(false);
+ 
   const showDrawer = () => {
     setOpen(true);
   };
@@ -110,16 +111,7 @@ const TopCourseDashbord = () => {
           );
         })}
       </div>
-      {/* <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
-        title={selectedCourse?.courseTitle || selectedCourse?.name}
-        footer={null  }>
-        {selectedCourse && (
-          <>
-            <p>توضیح: {selectedCourse.describe || selectedCourse.desc}</p>
-            <p>مدرس: {selectedCourse.fullName || selectedCourse.teacher}</p>
-           </>
-        )}
-      </Modal> */}
+      
       <PanelModal onClose={onClose} open={open} />
     </div>
   );
