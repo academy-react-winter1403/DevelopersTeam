@@ -1,7 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 // const TableBody = lazy(() => import("./tableTopCourses"));
-import http from "./../../.././../core/services/interceptor";
-import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
 import TableBody from "./tableBody";
@@ -9,6 +7,8 @@ import { IoMdClose } from "react-icons/io";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsivFavCourse from "../responsivFavCourse";
 import { Spin } from "antd";
+import PanelModal from "../../../common/panelModal/panelModal";
+import PriceComponent from "../../../common/priceComponent/priceComponent";
 
 const TableFaveCourseHandle = ({
   data,
@@ -16,10 +16,15 @@ const TableFaveCourseHandle = ({
   setCovertedData,
   isSuccess,
 }) => {
-  // const getFavCourses = async () => {
-  //   const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
-  //   return res;
-  // };
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
   const icons = (
     <div className="flex gap-5">
       <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
@@ -42,8 +47,17 @@ const TableFaveCourseHandle = ({
         newData["name"] = el.courseTitle;
         newData["teacher"] = el.teacheName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
-        newData["price"] = "15000000";
-        newData["eye"] = icons;
+        newData["price"] = (
+          <div className="flex space-x-2">
+            <PriceComponent cost={"1500000"} />
+            <span>تومان</span>
+          </div>
+        );
+        newData["eye"] = (
+          <div onClick={showDrawer}>
+            <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
+          </div>
+        );
         return newData;
       });
       setCovertedData(newConverted);
@@ -66,6 +80,23 @@ const TableFaveCourseHandle = ({
         </div>
       </div>
       <ResponsivFavCourse data={data} />
+
+      {data?.favoriteCourseDto.map((item) => {
+        return (
+          <PanelModal
+            isMyCourses={true}
+            onClose={onClose}
+            open={open}
+            img={item.tumbImageAddress}
+            title={item.courseTitle}
+            paymentStatus={item.paymentStatus}
+            describe={item.describe}
+            teacher={item.teacheName}
+            lastUpdate={item.lastUpdate}
+            // cost={item.cost}
+          />
+        );
+      })}
     </div>
   );
 };

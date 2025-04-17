@@ -1,11 +1,8 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 const TableMyReserveCourses = lazy(() => import("./tableMyReserveCourses"));
-import http from "./../../.././../core/services/interceptor";
-import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
-import { IoMdClose } from "react-icons/io";
-import { Progress, Spin } from "antd";
+import { Spin } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
@@ -13,15 +10,23 @@ import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import { CiMoneyBill } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import PaymentModal from "../../payment/paymentModal/paymentModal";
+import PanelModal from "../../../common/panelModal/panelModal";
 
 const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
-
   const [convertData, setConvertData] = useState([]);
+
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     if (isSuccess && data) {
       // console.log(data);
       const i = data.map((el) => {
-        
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
           name: el.courseName,
@@ -40,7 +45,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             </div>
           ),
           pay: (
-            <div  className="flex gap-5 cursor-pointer">
+            <div className="flex gap-5 cursor-pointer">
               <CiMoneyBill className="w-6 h-6 text-gray" />
             </div>
           ),
@@ -49,7 +54,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
       setConvertData(i);
     }
   }, [isSuccess, data]);
-console.log(data );
+  console.log(data);
   return (
     <div className="  ">
       <div className="bg-white w-full  rounded-2xl mt-5">
@@ -66,6 +71,18 @@ console.log(data );
         </div>
       </div>
       <ResponsiveReserveMyCourse data={data} />
+      {data?.map((item) => {
+        return (
+          <PanelModal
+            isMyCourses={true}
+            onClose={onClose}
+            open={open}
+            title={item.courseName}
+            teacher={item.courseName}
+            lastUpdate={item.reserverDate}
+          />
+        );
+      })}
     </div>
   );
 };
