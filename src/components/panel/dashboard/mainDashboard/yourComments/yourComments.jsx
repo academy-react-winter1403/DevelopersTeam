@@ -55,7 +55,7 @@ const YourComments = ({ userData }) => {
   const firstCommentNews = newsData?.myNewsCommetDtos[0];
 
   return (
-    <div className="col-span-3 flex flex-col bg-[#FEFDFF] dark:bg-gray-800 h-64 sm:h-72 p-3 rounded-2xl order-2 md:order-1">
+    <div className="col-span-3 flex flex-col bg-[#FEFDFF] dark:bg-gray-800 h-64 sm:h-full p-3 rounded-2xl order-2 md:order-1">
       <div className="flex justify-between">
         <span className="font-semibold dark:text-white">نظرات‌ شما</span>
         <span className="flex items-center text-navyBlue dark:text-blue-400 space-x-2">

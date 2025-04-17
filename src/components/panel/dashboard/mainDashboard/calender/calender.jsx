@@ -4,7 +4,6 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import { useDarkMode } from "../../../../../context/theme/themeContext";
-import "./dark.css";
 
 const CalenderComp = () => {
   const { darkMode } = useDarkMode();
@@ -13,7 +12,18 @@ const CalenderComp = () => {
       <Calendar
         calendar={persian}
         locale={persian_fa}
-        className={darkMode && "dark"}
+        style={{
+          border: "none",
+          width: "100%",
+          height:'100%',
+          borderRadius: "16px",
+          backgroundColor: darkMode ? "#1e2939" : "#FEFDFF",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: darkMode ? "#fff" : "#000",
+        }}
+        shadow={false}
       />
     </div>
   );
