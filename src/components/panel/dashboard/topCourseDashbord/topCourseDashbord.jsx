@@ -112,7 +112,12 @@ const TopCourseDashbord = () => {
         })}
       </div>
       
-      <PanelModal onClose={onClose} open={open} />
+      {data?.listOfMyCourses.map((item) =>{
+        return(
+          
+          <PanelModal isMyCourses={true} onClose={onClose} open={open} img={item.tumbImageAddress} title={item.courseTitle} paymentStatus={item.paymentStatus} describe={item.describe} teacher={item.fullName} lastUpdate={item.lastUpdate} cost={item.cost}/>
+        )
+      })}
     </div>
   );
 };

@@ -1,11 +1,8 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 const TableMyReserveCourses = lazy(() => import("./tableMyReserveCourses"));
-import http from "./../../.././../core/services/interceptor";
-import { useQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import DateComponent from "../../../common/date/dateComponent";
-import { IoMdClose } from "react-icons/io";
-import { Progress, Spin } from "antd";
+import {  Spin } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
@@ -17,6 +14,15 @@ const TableMyReserveCoursesHolder = ({
   isSuccess,
   moreData,
 }) => {
+
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     if (isSuccess && data) {
       const i = data.map((el) => {
@@ -54,6 +60,18 @@ const TableMyReserveCoursesHolder = ({
         </div>
       </div>
       <ResponsiveReserveMyCourse data={data} />
+      {data?.map((item) => {
+        return (
+          <PanelModal
+            isMyCourses={true}
+            onClose={onClose}
+            open={open}
+            title={item.courseName}
+            teacher={item.courseName}
+            lastUpdate={item.reserverDate}
+          />
+        );
+      })}
     </div>
   );
 };

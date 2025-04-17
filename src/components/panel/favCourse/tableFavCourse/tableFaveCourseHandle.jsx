@@ -80,7 +80,23 @@ const TableFaveCourseHandle = ({
         </div>
       </div>
       <ResponsivFavCourse data={data} />
-      <PanelModal onClose={onClose} open={open} />
+
+      {data?.favoriteCourseDto.map((item) => {
+        return (
+          <PanelModal
+            isMyCourses={true}
+            onClose={onClose}
+            open={open}
+            img={item.tumbImageAddress}
+            title={item.courseTitle}
+            paymentStatus={item.paymentStatus}
+            describe={item.describe}
+            teacher={item.teacheName}
+            lastUpdate={item.lastUpdate}
+            // cost={item.cost}
+          />
+        );
+      })}
     </div>
   );
 };

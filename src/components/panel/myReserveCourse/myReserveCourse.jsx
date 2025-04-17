@@ -48,35 +48,6 @@ const MyReserveCourse = () => {
     setFilteredData(filteredCourses);
   };
 
-  // const getMyReserveCoursesMore = async () => {
-  //   const res = await http.get(
-  //     `/Home/GetCourseDetails?CourseId=${data?.courseId}`
-  //   );
-  //   return res;
-  // };
-  // const { data: moreData, error: moreDataError } = useQuery({
-  //   queryKey: "myReserveCoursesPanelMore",
-  //   queryFn: getMyReserveCoursesMore,
-  // });
-
-  // const [combinedData, setCombinedData] = useState([]);
-
-  // if (reserveData && moreData) {
-  //   setCombinedData(...reserveData, ...moreData);
-  // }
-
-  // if (firstLoading || secondLoading) return <div>Loading...</div>;
-  // if (reserveDataError || moreDataError) return <div>Error loading data</div>;
-
-  // function convertData() {
-  //   for (let index = 0; index < array.length; index++) {
-  //     const element = moreData[index];
-  //     m
-  //   }
-  // }
-
-  // console.log("moreData",moreData);
-
   return (
     <div className="">
       <div className="hidden sm:block">
