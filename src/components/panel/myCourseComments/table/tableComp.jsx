@@ -3,59 +3,46 @@ import { Table } from "antd";
 
 const columns = [
   {
-    title: " ",
-    dataIndex: "img",
-    key: "img",
-    width: 150,
-  },
-  {
     title: "نام دوره",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
     width: 150,
   },
 
   {
-    title: "اساتید دوره",
-    dataIndex: "teacher",
-    key: "teacher",
+    title: "عنوان",
+    dataIndex: "title",
+    key: "title",
     ellipsis: {
       showTitle: false,
     },
+    width: 150,
   },
   {
-    title: " شروع دوره",
-    dataIndex: "date",
-    key: "date",
+    title: "نظر",
+    dataIndex: "describe",
+    key: "describe",
     ellipsis: {
       showTitle: false,
     },
+    width: 150,
   },
   {
-    title: "قیمت دوره",
-    dataIndex: "price",
-    key: "price",
+    title: "وضعیت",
+    dataIndex: "accept",
+    key: "accept",
     ellipsis: {
       showTitle: false,
     },
+    width: 150,
   },
   {
-    title: "وضعیت ثبت نام",
-    dataIndex: "register",
-    key: "register",
+    title: "تاریخ ثبت",
+    dataIndex: "insertDate",
+    key: "insertDate",
     ellipsis: {
       showTitle: false,
     },
-  },
-  {
-    title: " ",
-    dataIndex: "eye",
-    key: "eye",
-    ellipsis: {
-      showTitle: false,
-    },
-
     width: 150,
   },
 ];

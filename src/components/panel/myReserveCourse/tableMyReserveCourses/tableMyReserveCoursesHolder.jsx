@@ -11,19 +11,19 @@ import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
 
 const TableMyReserveCoursesHolder = ({
-  convertedData,
-  setCovertedData,
   data,
   isSuccess,
-  moreData,
 }) => {
+  const [convertData,setCovertData]=useState([])
   useEffect(() => {
     if (isSuccess && data) {
+      // console.log(data);
       const i = data.map((el) => {
+        
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
           name: el.courseName,
-          teacher: el.fullName,
+          teacher: el.courseData.teacherName ||22 ,
           date: <DateComponent insertDate={el.lastUpdate} />,
           price: <PriceComponent cost={el.cost} />,
           register: el.paymentStatus,
@@ -34,7 +34,7 @@ const TableMyReserveCoursesHolder = ({
           ),
         };
       });
-      setCovertedData(i);
+      setCovertData(i);
     }
   }, [isSuccess, data]);
 
@@ -49,7 +49,7 @@ const TableMyReserveCoursesHolder = ({
               </div>
             }
           >
-            {isSuccess && <TableMyReserveCourses data={convertedData} />}
+            {isSuccess && <TableMyReserveCourses data={convertData} />}
           </Suspense>
         </div>
       </div>

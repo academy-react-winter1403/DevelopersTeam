@@ -4,6 +4,7 @@ import SortMyReserve from "./sortMyReserve";
 import TableMyReserveCoursesHolder from "./tableMyReserveCourses/tableMyReserveCoursesHolder";
 import { useQuery } from "@tanstack/react-query";
 import http from "./../../../core/services/interceptor";
+import Provider from "./Provider";
 
 const MyReserveCourse = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -48,34 +49,37 @@ const MyReserveCourse = () => {
     setFilteredData(filteredCourses);
   };
 
-  // const getMyReserveCoursesMore = async () => {
-  //   const res = await http.get(
-  //     `/Home/GetCourseDetails?CourseId=${data?.courseId}`
-  //   );
-  //   return res;
-  // };
-  // const { data: moreData, error: moreDataError } = useQuery({
-  //   queryKey: "myReserveCoursesPanelMore",
-  //   queryFn: getMyReserveCoursesMore,
-  // });
+  const getMyReserveCoursesMore = async () => {
+    const res = await http.get(
+      `/Home/GetCourseDetails?CourseId=${data?.courseId}`
+    );
+    return res;
+  };
+  const { data: moreData, error: moreDataError } = useQuery({
+    queryKey: "myReserveCoursesPanelMore",
+    queryFn: getMyReserveCoursesMore,
+  });
 
-  // const [combinedData, setCombinedData] = useState([]);
+  const [combinedData, setCombinedData] = useState([]);
 
-  // if (reserveData && moreData) {
-  //   setCombinedData(...reserveData, ...moreData);
-  // }
+  if (reserveData && moreData) {
+    setCombinedData(...reserveData, ...moreData);
+  }
 
   // if (firstLoading || secondLoading) return <div>Loading...</div>;
-  // if (reserveDataError || moreDataError) return <div>Error loading data</div>;
+  // if (reserveDataError || moreDataError) return <div>Error loading data</div>;   
 
-  // function convertData() {
-  //   for (let index = 0; index < array.length; index++) {
-  //     const element = moreData[index];
-  //     m
-  //   }
-  // }
+  function convertData() {
+    for (let index = 0; index < array.length; index++) {
+      const element = moreData[index];
+      const res =  http.get(
+        `/Home/GetCourseDetails?CourseId=${element?.courseId}`
+      );
+      console.log(res,element);
+    }
+  }
 
-  // console.log("moreData",moreData);
+  console.log("moreData",moreData);
 
   return (
     <div className="">
@@ -90,12 +94,8 @@ const MyReserveCourse = () => {
           <SortMyReserve />
         </div>
       </div>
-      <TableMyReserveCoursesHolder
-        convertedData={convertedData}
-        setCovertedData={setCovertedData}
-        data={filteredData || reserveData}
-        isSuccess={isSuccess}
-      />
+ 
+      <Provider data={filteredData || reserveData} />
     </div>
   );
 };
