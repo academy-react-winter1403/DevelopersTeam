@@ -12,10 +12,11 @@ import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
 import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import { CiMoneyBill } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
+import PaymentModal from "../../payment/paymentModal/paymentModal";
 
 const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
+
   const [convertData, setConvertData] = useState([]);
-  console.log(data);
   useEffect(() => {
     if (isSuccess && data) {
       const i = data.map((el) => {
@@ -37,7 +38,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             </div>
           ),
           pay: (
-            <div className="flex gap-5 cursor-pointer">
+            <div onClick={showModal} className="flex gap-5 cursor-pointer">
               <CiMoneyBill className="w-6 h-6 text-gray" />
             </div>
           ),
@@ -46,7 +47,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
       setConvertData(i);
     }
   }, [isSuccess, data]);
-
+console.log(data );
   return (
     <div className="  ">
       <div className="bg-white w-full  rounded-2xl mt-5">

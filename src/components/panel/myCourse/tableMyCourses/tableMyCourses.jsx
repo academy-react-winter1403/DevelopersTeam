@@ -6,14 +6,12 @@ const columns = [
     title: " ",
     dataIndex: "img",
     key: "img",
-    width: 150,
   },
   {
     title: "نام دوره",
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
-    width: 150,
   },
 
   {
@@ -50,13 +48,23 @@ const columns = [
   },
   {
     title: " ",
+    dataIndex: "payModal",
+    key: "payModal",
+    ellipsis: {
+      showTitle: false,
+    },
+
+    width: 80,
+  },
+  {
+    title: " ",
     dataIndex: "eye",
     key: "eye",
     ellipsis: {
       showTitle: false,
     },
 
-    width: 150,
+    width: 80,
   },
 ];
 
