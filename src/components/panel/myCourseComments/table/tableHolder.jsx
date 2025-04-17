@@ -1,5 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Spin } from "antd";
+import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
+import DateComponent from "../../../common/date/dateComponent";
 const TableComp = lazy(() => import("./tableComp"));
 
 const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
@@ -10,8 +12,12 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
           name: el.courseTitle,
           title: el.title,
           describe: el.describe,
-          accept: el.accept,
-          insertDate: el.insertDate,
+          accept: el.accept ? (
+            <TagsAccept text="پذیرفته شده" />
+          ) : (
+            <TagsNotAccept text="پذیرفته نشده" />
+          ),
+          insertDate: <DateComponent insertDate={el.insertDate} />,
         };
       });
       setCovertedData(newData);

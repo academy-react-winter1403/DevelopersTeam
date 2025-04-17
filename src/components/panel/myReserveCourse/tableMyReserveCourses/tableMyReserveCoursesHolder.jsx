@@ -25,10 +25,15 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
           name: el.courseName,
-          teacher: el.courseData.teacherName ||22 ,
-          date: <DateComponent insertDate={el.lastUpdate} />,
-          price: <PriceComponent cost={el.cost} />,
-          register: el.paymentStatus,
+          teacher: el?.courseData.teacherName,
+          date: <DateComponent insertDate={el.courseData.startTime} />,
+          reserveDate: <DateComponent insertDate={el.reserverDate} />,
+          price: <PriceComponent cost={el.courseData.cost} />,
+          register: el.accept ? (
+            <TagsAccept text="پذیرفته شده" />
+          ) : (
+            <TagsNotAccept text="پذیرفته نشده" />
+          ),
           eye: (
             <div className="flex gap-5 cursor-pointer">
               <PiEyeLight className="w-6 h-6 text-gray" />
@@ -41,7 +46,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           ),
         };
       });
-      setCovertData(i);
+      setConvertData(i);
     }
   }, [isSuccess, data]);
 console.log(data );

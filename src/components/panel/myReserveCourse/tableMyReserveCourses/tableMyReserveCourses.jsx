@@ -6,14 +6,12 @@ const columns = [
     title: " ",
     dataIndex: "img",
     key: "img",
-    width: 150,
   },
   {
     title: "نام دوره",
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
-    width: 150,
   },
 
   {
@@ -23,11 +21,20 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
+    width:200
   },
   {
     title: " شروع دوره",
     dataIndex: "date",
     key: "date",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
+  {
+    title: "زمان رزرو",
+    dataIndex: "reserveDate",
+    key: "reserveDate",
     ellipsis: {
       showTitle: false,
     },
@@ -50,13 +57,23 @@ const columns = [
   },
   {
     title: " ",
+    dataIndex: "pay",
+    key: "pay",
+    ellipsis: {
+      showTitle: false,
+    },
+
+    width: 80,
+  },
+  {
+    title: " ",
     dataIndex: "eye",
     key: "eye",
     ellipsis: {
       showTitle: false,
     },
 
-    width: 150,
+    width: 80,
   },
 ];
 

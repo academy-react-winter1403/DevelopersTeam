@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import http from "./../../../core/services/interceptor";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import TableMyReserveCoursesHolder from "./tableMyReserveCourses/tableMyReserveCoursesHolder";
 
 const Provider = ({ data }) => {
@@ -17,7 +16,7 @@ const Provider = ({ data }) => {
             }`
           )
           .then((el) => {
-            if (el.data) {
+            if (el?.data) {
               element["courseData"] = el?.data;
               convertedData.push(element);
             }
@@ -26,13 +25,14 @@ const Provider = ({ data }) => {
     }
     setFinalData(convertedData);
   }
+
   useEffect(() => {
     if (data) {
       convertData();
     }
   }, [data]);
   return (
-    data && <TableMyReserveCoursesHolder data={finalData} isSuccess={true} />
+    data && <TableMyReserveCoursesHolder  data={finalData} isSuccess={true} />
   );
 };
 

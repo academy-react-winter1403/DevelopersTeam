@@ -20,6 +20,7 @@ import ProfilePage from "../../screens/profilePage";
 import FavNewPage from "../../screens/favNewPage";
 import MyCourseCommentsPage from "../../screens/myCourseCommentsPage/myCourseCommentsPage";
 import MyNewsCommentsPage from "../../screens/myNewsCommentsPage/myNewsCommentsPage";
+import PaymentPage from "../../screens/paymentPage/paymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/mycommentsnews",
         element: <MyNewsCommentsPage />,
+      },
+      {
+        path: "/panel/payment",
+        element: <PaymentPage />,
       },
     ],
   },

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import TableHolder from "./table/tableHolder";
-import { HttpProxy } from "vite";
 import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 

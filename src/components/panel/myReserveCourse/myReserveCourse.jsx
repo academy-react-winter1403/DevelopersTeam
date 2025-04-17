@@ -15,7 +15,6 @@ const MyReserveCourse = () => {
     const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
     return res;
   };
-
   const {
     data: reserveData,
     isSuccess,
@@ -72,14 +71,11 @@ const MyReserveCourse = () => {
   function convertData() {
     for (let index = 0; index < array.length; index++) {
       const element = moreData[index];
-      const res =  http.get(
-        `/Home/GetCourseDetails?CourseId=${element?.courseId}`
-      );
-      console.log(res,element);
+      const res = http.get(`/Home/GetCourseDetails?CourseId=${data?.courseId}`);
     }
   }
 
-  console.log("moreData",moreData);
+  // console.log("moreData", moreData);
 
   return (
     <div className="">
@@ -94,7 +90,6 @@ const MyReserveCourse = () => {
           <SortMyReserve />
         </div>
       </div>
- 
       <Provider data={filteredData || reserveData} />
     </div>
   );
