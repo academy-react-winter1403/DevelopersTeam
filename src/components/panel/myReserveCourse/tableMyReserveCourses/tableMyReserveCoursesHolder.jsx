@@ -9,12 +9,14 @@ import { Progress, Spin } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
+import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
+import { CiMoneyBill } from "react-icons/ci";
+import { PiEyeLight } from "react-icons/pi";
+import PaymentModal from "../../payment/paymentModal/paymentModal";
 
-const TableMyReserveCoursesHolder = ({
-  data,
-  isSuccess,
-}) => {
-  const [convertData,setCovertData]=useState([])
+const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
+
+  const [convertData, setConvertData] = useState([]);
   useEffect(() => {
     if (isSuccess && data) {
       // console.log(data);
@@ -28,8 +30,13 @@ const TableMyReserveCoursesHolder = ({
           price: <PriceComponent cost={el.cost} />,
           register: el.paymentStatus,
           eye: (
-            <div className="flex gap-5">
-              <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
+            <div className="flex gap-5 cursor-pointer">
+              <PiEyeLight className="w-6 h-6 text-gray" />
+            </div>
+          ),
+          pay: (
+            <div onClick={showModal} className="flex gap-5 cursor-pointer">
+              <CiMoneyBill className="w-6 h-6 text-gray" />
             </div>
           ),
         };
@@ -37,7 +44,7 @@ const TableMyReserveCoursesHolder = ({
       setCovertData(i);
     }
   }, [isSuccess, data]);
-
+console.log(data );
   return (
     <div className="  ">
       <div className="bg-white w-full  rounded-2xl mt-5">
