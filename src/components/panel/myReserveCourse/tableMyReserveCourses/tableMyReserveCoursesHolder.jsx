@@ -9,32 +9,41 @@ import { Progress, Spin } from "antd";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
+import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
+import { CiMoneyBill } from "react-icons/ci";
+import { PiEyeLight } from "react-icons/pi";
 
-const TableMyReserveCoursesHolder = ({
-  convertedData,
-  setCovertedData,
-  data,
-  isSuccess,
-  moreData,
-}) => {
+const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
+  const [convertData, setConvertData] = useState([]);
+  console.log(data);
   useEffect(() => {
     if (isSuccess && data) {
       const i = data.map((el) => {
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
           name: el.courseName,
-          teacher: el.fullName,
-          date: <DateComponent insertDate={el.lastUpdate} />,
-          price: <PriceComponent cost={el.cost} />,
-          register: el.paymentStatus,
+          teacher: el?.courseData.teacherName,
+          date: <DateComponent insertDate={el.courseData.startTime} />,
+          reserveDate: <DateComponent insertDate={el.reserverDate} />,
+          price: <PriceComponent cost={el.courseData.cost} />,
+          register: el.accept ? (
+            <TagsAccept text="پذیرفته شده" />
+          ) : (
+            <TagsNotAccept text="پذیرفته نشده" />
+          ),
           eye: (
-            <div className="flex gap-5">
-              <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
+            <div className="flex gap-5 cursor-pointer">
+              <PiEyeLight className="w-6 h-6 text-gray" />
+            </div>
+          ),
+          pay: (
+            <div className="flex gap-5 cursor-pointer">
+              <CiMoneyBill className="w-6 h-6 text-gray" />
             </div>
           ),
         };
       });
-      setCovertedData(i);
+      setConvertData(i);
     }
   }, [isSuccess, data]);
 
@@ -49,7 +58,7 @@ const TableMyReserveCoursesHolder = ({
               </div>
             }
           >
-            {isSuccess && <TableMyReserveCourses data={convertedData} />}
+            {isSuccess && <TableMyReserveCourses data={convertData} />}
           </Suspense>
         </div>
       </div>
