@@ -1,10 +1,36 @@
-import React, { Suspense } from "react";
-import TableCompNews from "./tableCompNews";
-import FavBottomCourse from "../../favCourse/favBottomCourse";
+import React, { lazy, Suspense, useEffect } from "react";
+const TableCompNews = lazy(() => import("./tableCompNews"));
 import { Spin } from "antd";
 import ResponsiveReserveMyCourse from "../../myReserveCourse/responsiveReserveMyCourse";
+import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
+import DateComponent from "../../../common/date/dateComponent";
 
-const TableHolderNews = () => {
+const TableHolderNews = ({
+  data,
+  isSuccess,
+  convertedData,
+  setCovertedData,
+}) => {
+  useEffect(() => {
+    if (isSuccess && data) {
+      const newData = data.myNewsCommetDtos.map((el) => {
+        return {
+          name: el.courseTitle,
+          title: el.title,
+          describe: el.describe,
+          accept: el.accept ? (
+            <TagsAccept text="پذیرفته شده" />
+          ) : (
+            <TagsNotAccept text="پذیرفته نشده" />
+          ),
+          insertDate: <DateComponent insertDate={el.insertDate} />,
+        };
+      });
+      setCovertedData(newData);
+    }
+  }, [isSuccess, data]);
+  console.log(data?.courseTitle);
+
   return (
     <div className=" h- ">
       <div className="bg-white w-full h- rounded-2xl mt-5">
@@ -16,7 +42,7 @@ const TableHolderNews = () => {
               </div>
             }
           >
-            <TableCompNews />
+            {isSuccess && <TableCompNews data={convertedData} />}
           </Suspense>
         </div>
       </div>

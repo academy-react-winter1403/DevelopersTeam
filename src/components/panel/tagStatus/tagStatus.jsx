@@ -3,7 +3,7 @@ import React from "react";
 const TagsAccept = ({ text }) => {
   return (
     <div
-      className={`w-auto h-8 bg-[#17C96433] px-3 rounded-4xl flex justify-center items-center text-white text-sm whitespace-nowrap`}
+      className={`w-24 h-8 bg-[#17C96433] px-3 rounded-4xl flex justify-center items-center text-[#17C964] text-sm whitespace-nowrap`}
     >
       {text}
     </div>
@@ -23,7 +23,7 @@ const TagsNotAccept = ({ text }) => {
 const TagsWaiting = ({ text }) => {
   return (
     <div
-      className={`w-auto h-8 bg-[#7828C833] px-3 rounded-4xl flex justify-center items-center text-white text-sm whitespace-nowrap`}
+      className={`w-24 h-8 bg-[#7828C833] px-3 rounded-4xl flex justify-center items-center text-[#7828C8] text-sm whitespace-nowrap`}
     >
       {text}
     </div>
