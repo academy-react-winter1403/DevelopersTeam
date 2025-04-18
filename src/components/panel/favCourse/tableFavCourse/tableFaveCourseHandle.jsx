@@ -17,7 +17,9 @@ const TableFaveCourseHandle = ({
   isSuccess,
 }) => {
   const [open, setOpen] = useState(false);
-  const [favoriteCourses, setFavoriteCourses] = useState(data?.favoriteCourseDto || []);
+  const [favoriteCourses, setFavoriteCourses] = useState(
+    data?.favoriteCourseDto || []
+  );
 
   const showDrawer = () => {
     setOpen(true);

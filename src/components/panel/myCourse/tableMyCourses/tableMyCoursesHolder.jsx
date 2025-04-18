@@ -17,9 +17,13 @@ const TableMyCoursesHolder = ({
   isSuccess,
   showDrawer,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [CourseIdx, setCourseIdx] = useState();
+  const [firstModal, setFirstModal] = useState(false);
+  const [secondModal, setSecondModal] = useState(false);
+
   const showModal = (id) => {
+    setFirstModal(true)
     setIsModalOpen(true);
     setCourseIdx(id);
   };
@@ -76,7 +80,9 @@ const TableMyCoursesHolder = ({
       </div>
       <ResponsiveMyCourse showDrawer={showDrawer} data={data} />
       <PaymentModal
-        isModalOpen={isModalOpen}
+        firstModal={firstModal}
+        secondModal={secondModal}
+        setSecondModal={setSecondModal}
         handleOk={handleOk}
         handleCancel={handleCancel}
         data={CourseIdx}
