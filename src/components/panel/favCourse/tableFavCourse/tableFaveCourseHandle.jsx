@@ -1,14 +1,16 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
+// const TableBody = lazy(() => import("./tableTopCourses"));
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { VscChromeClose } from "react-icons/vsc"; // Import delete icon
 import DateComponent from "../../../common/date/dateComponent";
 import TableBody from "./tableBody";
+import { IoMdClose } from "react-icons/io";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsivFavCourse from "../responsivFavCourse";
 import { Spin } from "antd";
 import PanelModal from "../../../common/panelModal/panelModal";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
-import http from "./../../../../core/services/interceptor";
+import http from './../../../../core/services/interceptor'
+import { VscChromeClose } from "react-icons/vsc";
 
 const TableFaveCourseHandle = ({
   data,
@@ -24,94 +26,77 @@ const TableFaveCourseHandle = ({
   const showDrawer = () => {
     setOpen(true);
   };
-
   const onClose = () => {
     setOpen(false);
   };
 
-  // Function to delete an item
+  const icons = (
+    <div className="flex gap-5">
+      <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
+      <IoMdClose className="w-6 h-6 text-red-500" />
+    </div>
+  );
+
+  const img = (
+    <img
+      src={data?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
+      alt=""
+    />
+  );
+
+  // Function to delete item
   const handleDeleteItem = async (id) => {
     try {
+      // Make API call
       const res = await http.delete(`/Course/DeleteCourseFavorite/${id}`);
-      if (res.status === 200 || res.ok) {
-        // Update local state
+      if (res.status === 200) {
+        // Remove the item from state
         const updatedCourses = favoriteCourses.filter((item) => item.id !== id);
         setFavoriteCourses(updatedCourses);
-
-        // Update converted data to reflect changes
-        const newConverted = updatedCourses.map((el) => ({
-          img: (
-            <img
-              src={el?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
-              alt={el.courseTitle}
-            />
-          ),
-          name: el.courseTitle,
-          teacher: el.teacheName,
-          date: <DateComponent insertDate={el.lastUpdate} />,
-          price: (
-            <div className="flex space-x-2">
-              <PriceComponent cost="1500000" />
-              <span>تومان</span>
-            </div>
-          ),
-          eye: (
-            <div className="flex gap-2">
-              <div onClick={showDrawer}>
-                <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
-              </div>
-              <div onClick={() => handleDeleteItem(el.id)}>
-                <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400 cursor-pointer" />
-              </div>
-            </div>
-          ),
-        }));
-        setCovertedData(newConverted);
       } else {
-        console.error("Failed to delete item from server!");
+        console.error("Deletion failed!");
       }
     } catch (error) {
-      console.error("Error deleting item:", error);
+      console.error("Error deleting item: ", error);
     }
   };
 
+ 
+
   useEffect(() => {
     if (isSuccess) {
-      const newConverted = favoriteCourses.map((el) => ({
-        img: (
-          <img
-            src={el?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
-            alt={el.courseTitle}
-          />
-        ),
-        name: el.courseTitle,
-        teacher: el.teacheName,
-        date: <DateComponent insertDate={el.lastUpdate} />,
-        price: (
+      const newConverted = data.favoriteCourseDto.map((el) => {
+        let newData = {};
+        newData["img"] = img;
+        newData["name"] = el.courseTitle;
+        newData["teacher"] = el.teacheName;
+        newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
+        newData["price"] = (
           <div className="flex space-x-2">
-            <PriceComponent cost="1500000" />
+            <PriceComponent cost={"1500000"} />
             <span>تومان</span>
           </div>
-        ),
-        eye: (
-          <div className="flex gap-2">
-            <div onClick={showDrawer}>
-              <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
-            </div>
-            <div onClick={() => handleDeleteItem(el.id)}>
-              <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400 cursor-pointer" />
-            </div>
+        );
+        newData["eye"] = (
+         <div className="flex gap-2">
+           <div onClick={showDrawer}>
+            <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
           </div>
-        ),
-      }));
+          <div onClick={() => handleDeleteItem(el.id)}>
+          <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400"/>
+          </div>
+         </div>
+        );
+        return newData;
+      });
       setCovertedData(newConverted);
     }
-  }, [favoriteCourses, isSuccess, setCovertedData]);
+  }, [data, isSuccess, setCovertedData]);
 
   return (
     <div>
       <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className="w-full h-auto hidden sm:block">
+        <div className=" w-full h-auto  hidden sm:block ">
           <Suspense
             fallback={
               <div className="w-full h-32 flex items-center justify-center">
@@ -123,23 +108,23 @@ const TableFaveCourseHandle = ({
           </Suspense>
         </div>
       </div>
-      <ResponsivFavCourse data={favoriteCourses} />
+      <ResponsivFavCourse data={data} />
 
-      {/* Panel modal for additional info */}
-      {favoriteCourses.map((item) => (
-        <PanelModal
-          key={item.id}
-          isMyCourses={true}
-          onClose={onClose}
-          open={open}
-          img={item.tumbImageAddress}
-          title={item.courseTitle}
-          paymentStatus={item.paymentStatus}
-          describe={item.describe}
-          teacher={item.teacheName}
-          lastUpdate={item.lastUpdate}
-        />
-      ))}
+      {data?.favoriteCourseDto.map((item) => {
+        return (
+          <PanelModal
+            isMyCourses={true}
+            onClose={onClose}
+            open={open}
+            img={item.tumbImageAddress}
+            title={item.courseTitle}
+            paymentStatus={item.paymentStatus}
+            describe={item.describe}
+            teacher={item.teacheName}
+            lastUpdate={item.lastUpdate}
+          />
+        );
+      })}
     </div>
   );
 };
