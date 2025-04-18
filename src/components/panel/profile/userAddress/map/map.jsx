@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../../core/services/interceptor";
 import toast from "react-hot-toast";
 
@@ -26,51 +26,58 @@ function Map() {
 export default Map;
 
 function LocationMarkers() {
+  const queryClient = useQueryClient();
+
   const getProfile = async () => {
     const res = await http.get(`/SharePanel/GetProfileInfo`);
     return res;
   };
+
   const { data } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
   });
 
   const { mutate: mutateUpdate } = useMutation({
-    mutationFn: (e) => http.put(`/SharePanel/UpdateProfileInfo`, e),
+    mutationFn: (formData) =>
+      http.put(`/SharePanel/UpdateProfileInfo`, formData),
     onSuccess: () => {
       queryClient.invalidateQueries(["profile"]);
-      toast.success("اطلاعات با موفقیت تغییر یافت");
+      toast.success("موقعیت جدید با موفقیت ذخیره شد");
+    },
+    onError: () => {
+      toast.error("خطا در ذخیره موقعیت جدید");
     },
   });
 
   const [markers, setMarkers] = useState(
-    data.latitude && data.longitude
+    data?.latitude && data?.longitude
       ? [[data.latitude, data.longitude]]
       : [[0, 0]]
   );
 
   const map = useMapEvents({
     click(e) {
-      setMarkers([[e.latlng.lat, e.latlng.lng]]);
-      const form = new FormData();
-      form.append("LName", data.lName);
-      form.append(
-        "UserAbout",
-        data.UserAbout ? data.UserAbout : "--------------------"
-      );
-      form.append("FName", data.fName);
-      if (data.linkdinProfile)
-        form.append("LinkdinProfile", data.linkdinProfile);
-      if (data.telegramLink) form.append("TelegramLink", data.telegramLink);
-      form.append("ReceiveMessageEvent", data.receiveMessageEvent.toString());
-      form.append("HomeAdderess", data.homeAdderess);
-      form.append("NationalCode", data.nationalCode);
-      form.append("Gender", data.gender.toString());
-      form.append("BirthDay", data.birthDay);
-      form.append("Latitude", e.latlng.lat.toString());
-      form.append("Longitude", e.latlng.lng.toString());
-      console.log(data);
-      mutateUpdate(form);
+      const newPosition = [e.latlng.lat, e.latlng.lng];
+      setMarkers([newPosition]);
+
+      const formData = new FormData();
+      formData.append("Latitude", e.latlng.lat.toString());
+      formData.append("Longitude", e.latlng.lng.toString());
+
+      if (data) {
+        formData.append("FName", data.fName || "");
+        formData.append("LName", data.lName || "");
+        formData.append("UserAbout", data.userAbout || "");
+        formData.append("NationalCode", data.nationalCode || "");
+        formData.append("BirthDay", data.birthDay || "");
+        formData.append("Gender", data.gender?.toString() || "true");
+        formData.append("HomeAdderess", data.homeAdderess || "");
+        formData.append("TelegramLink", data.telegramLink || "");
+        formData.append("LinkdinProfile", data.linkdinProfile || "");
+      }
+
+      mutateUpdate(formData);
     },
     locationfound(e) {
       map.flyTo(e.latlng, 13);
@@ -80,29 +87,32 @@ function LocationMarkers() {
     },
   });
 
-  map.locate();
-
   useEffect(() => {
     map.locate();
-    try {
-      if (navigator.geolocation) {
-        navigator.geolocation.watchPosition((e) => {
-          map.flyTo([e.coords.latitude, e.coords.longitude]);
-          console.log("map success");
-        });
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
-    } catch (error) {
-      console.log("map ERR");
+    if (data?.latitude && data?.longitude) {
+      setMarkers([[data.latitude, data.longitude]]);
+      map.flyTo([data.latitude, data.longitude], 13);
     }
-  }, []);
+
+    if (navigator.geolocation) {
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          // map.flyTo([position.coords.latitude, position.coords.longitude]);
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+        }
+      );
+
+      return () => navigator.geolocation.clearWatch(watchId);
+    }
+  }, [data, map]);
 
   return (
-    <React.Fragment>
-      {markers.map((marker) => (
-        <Marker position={marker}></Marker>
+    <>
+      {markers.map((marker, index) => (
+        <Marker key={index} position={marker} />
       ))}
-    </React.Fragment>
+    </>
   );
 }

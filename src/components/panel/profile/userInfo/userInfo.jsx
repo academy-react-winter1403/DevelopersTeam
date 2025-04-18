@@ -7,12 +7,17 @@ import http from "./../../../../core/services/interceptor";
 import ProfileFormSchema from "./profileFormSchema";
 import DateComponent from "../../../common/date/dateComponent";
 import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 const UserInfo = ({ data }) => {
   const queryClient = useQueryClient();
 
   const updateProfile = async (userData) => {
     const formData = new FormData();
+    formData.append("TelegramLink", data?.telegramLink || "");
+    formData.append("LinkdinProfile", data?.linkdinProfile || "");
+
     formData.append("FName", userData.fname);
     formData.append("LName", userData.lname);
     formData.append("UserAbout", userData.aboutMe);
@@ -25,10 +30,41 @@ const UserInfo = ({ data }) => {
     return res;
   };
 
+  // const { mutate: mutateUpdate } = useMutation({
+  //   mutationFn: updateProfile,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(["profile"]);
+  //     toast.success("اطلاعات با موفقیت تغییر یافت");
+  //   },
+  //   onError: () => {
+  //     toast.error("خطا در بروزرسانی اطلاعات");
+  //   },
+  // });
+
   const { mutate: mutateUpdate } = useMutation({
     mutationFn: updateProfile,
-    onSuccess: () => {
+    onMutate: async (newData) => {
+      await queryClient.cancelQueries(["profile"]);
+
+      const previousData = queryClient.getQueryData(["profile"]);
+
+      queryClient.setQueryData(["profile"], (old) => ({
+        ...old,
+        fName: newData.fname,
+        lName: newData.lname,
+        userAbout: newData.aboutMe,
+        nationalCode: newData.code,
+        birthDay: newData.birthday,
+        gender: newData.gender,
+        homeAdderess: newData.address,
+      }));
+
+      return { previousData };
+    },
+    onSettled: () => {
       queryClient.invalidateQueries(["profile"]);
+    },
+    onSuccess: () => {
       toast.success("اطلاعات با موفقیت تغییر یافت");
     },
     onError: () => {
@@ -50,7 +86,7 @@ const UserInfo = ({ data }) => {
             aboutMe: data?.userAbout || "",
             phone: data?.phoneNumber || "",
             code: data?.nationalCode || "",
-            birthday: data?.birthDay || "",
+            birthday: data?.birthDay ? new Date(data.birthDay) : "",
             gender: data?.gender ?? true,
             email: data?.email || "",
             address: data?.homeAdderess || "",
@@ -137,10 +173,16 @@ const UserInfo = ({ data }) => {
                 <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
                     <span>تاریخ تولد</span>
-                    <Field
-                      name="birthday"
-                      // type="date"
-                      as={DatePicker}
+                    <DatePicker
+                      value={values.birthday}
+                      onChange={(dateObject) => {
+                        const dateString = dateObject
+                          ? dateObject.toDate().toISOString()
+                          : "";
+                        setFieldValue("birthday", dateString);
+                      }}
+                      calendar={persian}
+                      locale={persian_fa}
                       style={{
                         height: "2.25rem",
                         width: "100%",
@@ -149,22 +191,10 @@ const UserInfo = ({ data }) => {
                         borderRadius: "0.75rem",
                         padding: "1.25rem",
                         paddingRight: "1.25rem",
-                        placeholder: {
-                          color: "#6b7280",
-                          fontSize: "0.75rem",
-                        },
                         border: "1px solid #f4f4f4",
                         backgroundColor: "#f4f4f4",
                         transitionProperty: "all",
                         transitionDuration: "300ms",
-                        ":focus": {
-                          borderColor: "#1e3a8a",
-                        },
-                        "@media (prefers-color-scheme: dark)": {
-                          placeholder: {
-                            color: "#6b7280",
-                          },
-                        },
                       }}
                       placeholder="تاریخ تولد خود را وارد کنید"
                     />

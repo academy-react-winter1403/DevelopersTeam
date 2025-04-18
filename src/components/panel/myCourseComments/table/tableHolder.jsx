@@ -25,12 +25,12 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
   }, [isSuccess, data]);
   console.log(data?.courseTitle);
   return (
-    <div className=" h- ">
-      <div className="bg-white w-full h- rounded-2xl mt-5">
-        <div className=" w-full h- hidden sm:block">
+    <div className=" ">
+      <div className="bg-white w-full   rounded-2xl mt-5">
+        <div className=" w-full   hidden sm:block">
           <Suspense
             fallback={
-              <div className="w-full h-full flex items-center justify-center">
+              <div className="w-full h-32 flex items-center justify-center">
                 <Spin />
               </div>
             }

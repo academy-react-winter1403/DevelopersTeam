@@ -12,6 +12,7 @@ import PriceComponent from "../../../common/priceComponent/priceComponent";
 import http from "./../../../../core/services/interceptor";
 import { VscChromeClose } from "react-icons/vsc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const TableFaveCourseHandle = ({
   data,
@@ -46,9 +47,10 @@ const TableFaveCourseHandle = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+      toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
-      console.error("Error deleting like:", error);
+      // console.error("Error deleting like:", error);
     },
   });
 
@@ -83,9 +85,9 @@ const TableFaveCourseHandle = ({
   }, [data, isSuccess, setCovertedData]);
 
   return (
-    <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-auto  hidden sm:block ">
+    <div className="">
+      <div className="bg-white w-full   rounded-2xl mt-5">
+        <div className=" w-full   hidden sm:block ">
           <Suspense
             fallback={
               <div className="w-full h-32 flex items-center justify-center">

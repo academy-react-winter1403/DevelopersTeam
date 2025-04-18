@@ -66,7 +66,7 @@ const MyReserveCourse = () => {
   }
 
   // if (firstLoading || secondLoading) return <div>Loading...</div>;
-  // if (reserveDataError || moreDataError) return <div>Error loading data</div>;   
+  // if (reserveDataError || moreDataError) return <div>Error loading data</div>;
 
   function convertData() {
     for (let index = 0; index < array.length; index++) {
@@ -86,9 +86,9 @@ const MyReserveCourse = () => {
         <div>
           <FavBottomCourse handleSearch={handleSearch} />
         </div>
-        <div className="pt-14">
+        {/* <div className="pt-14">
           <SortMyReserve />
-        </div>
+        </div> */}
       </div>
       <Provider data={filteredData || reserveData} />
     </div>

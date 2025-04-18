@@ -21,7 +21,7 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
-    width:200
+    width: 200,
   },
   {
     title: " شروع دوره",
@@ -57,23 +57,13 @@ const columns = [
   },
   {
     title: " ",
-    dataIndex: "pay",
-    key: "pay",
-    ellipsis: {
-      showTitle: false,
-    },
-
-    width: 80,
-  },
-  {
-    title: " ",
     dataIndex: "eye",
     key: "eye",
     ellipsis: {
       showTitle: false,
     },
 
-    width: 80,
+    width: 100,
   },
 ];
 
