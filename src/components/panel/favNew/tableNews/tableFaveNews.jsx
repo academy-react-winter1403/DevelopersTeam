@@ -7,6 +7,8 @@ import PanelModal from "../../../common/panelModal/panelModal";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { VscChromeClose } from "react-icons/vsc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import http from "./../../../../core/services/interceptor";
+import toast from "react-hot-toast";
 
 const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
   const [open, setOpen] = useState(false);
@@ -22,13 +24,17 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
     setOpen(false);
   };
 
-
   const { mutate: mutateDeleteFavNews } = useMutation({
-    mutationFn: (newsId) => {
-      return http.delete("/News/DeleteFavoriteNews", { data: { id: newsId } });
+    mutationFn: async (id) => {
+      return await http.delete("/News/DeleteFavoriteNews", {
+        data: { deleteEntityId: id },
+      });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["favNewsPanel"]);
+      queryClient.invalidateQueries("favNewsPanel");
+    },
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
@@ -60,12 +66,11 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
               >
                 <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
               </div>
-              <div onClick={() => mutateDeleteFavNews(el.id)}>
+              <div onClick={() => mutateDeleteFavNews(el.favoriteId)}>
                 <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
               </div>
             </div>
           ),
-          id: el.id, // اگه بعداً تو map خواندی
         };
       });
       setCovertedData(newConverted);
@@ -103,3 +108,5 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
 };
 
 export default TableFaveNews;
+	
+

@@ -10,17 +10,37 @@ import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import { CiMoneyBill } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import PanelModal from "../../../common/panelModal/panelModal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import http from "./../../../../core/services/interceptor";
+import { VscChromeClose } from "react-icons/vsc";
+import toast from "react-hot-toast";
 
 const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
   const [convertData, setConvertData] = useState([]);
-
   const [open, setOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+
+  const { mutate: mutateDeleteMyReserve } = useMutation({
+    mutationFn: async (id) => {
+      return await http.delete("/CourseReserve", {
+        data: { reserveId:id },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("myReserveCoursesPanel");
+    },
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
+    },
+  });
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -39,8 +59,13 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             <TagsNotAccept text="پذیرفته نشده" />
           ),
           eye: (
-            <div className="flex gap-5 cursor-pointer" onClick={showDrawer}>
-              <PiEyeLight className="w-6 h-6 text-gray" />
+            <div className="flex gap-2 items-center">
+              <div className="flex gap-5 cursor-pointer" onClick={showDrawer}>
+                <PiEyeLight className="w-6 h-6 text-gray" />
+              </div>
+              <div onClick={() => mutateDeleteMyReserve(el.reserveId)}>
+                <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
+              </div>
             </div>
           ),
           pay: (
