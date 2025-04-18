@@ -9,8 +9,9 @@ import ResponsivFavCourse from "../responsivFavCourse";
 import { Spin } from "antd";
 import PanelModal from "../../../common/panelModal/panelModal";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
-import http from './../../../../core/services/interceptor'
+import http from "./../../../../core/services/interceptor";
 import { VscChromeClose } from "react-icons/vsc";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const TableFaveCourseHandle = ({
   data,
@@ -18,10 +19,8 @@ const TableFaveCourseHandle = ({
   setCovertedData,
   isSuccess,
 }) => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [favoriteCourses, setFavoriteCourses] = useState(
-    data?.favoriteCourseDto || []
-  );
 
   const showDrawer = () => {
     setOpen(true);
@@ -30,13 +29,6 @@ const TableFaveCourseHandle = ({
     setOpen(false);
   };
 
-  const icons = (
-    <div className="flex gap-5">
-      <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
-      <IoMdClose className="w-6 h-6 text-red-500" />
-    </div>
-  );
-
   const img = (
     <img
       src={data?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
@@ -44,24 +36,21 @@ const TableFaveCourseHandle = ({
     />
   );
 
-  // Function to delete item
-  const handleDeleteItem = async (id) => {
-    try {
-      // Make API call
-      const res = await http.delete(`/Course/DeleteCourseFavorite/${id}`);
-      if (res.status === 200) {
-        // Remove the item from state
-        const updatedCourses = favoriteCourses.filter((item) => item.id !== id);
-        setFavoriteCourses(updatedCourses);
-      } else {
-        console.error("Deletion failed!");
-      }
-    } catch (error) {
-      console.error("Error deleting item: ", error);
-    }
-  };
-
- 
+  const { mutate: mutateDeleteFav } = useMutation({
+    mutationFn: (id) => {
+      const myData = new FormData();
+      myData.append("CourseFavoriteId", id);
+      return http.delete(`/Course/DeleteCourseFavorite`, {
+        data: myData,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("courseDetail");
+    },
+    onError: (error) => {
+      console.error("Error deleting like:", error);
+    },
+  });
 
   useEffect(() => {
     if (isSuccess) {
@@ -78,14 +67,14 @@ const TableFaveCourseHandle = ({
           </div>
         );
         newData["eye"] = (
-         <div className="flex gap-2">
-           <div onClick={showDrawer}>
-            <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
+          <div className="flex gap-2">
+            <div onClick={showDrawer}>
+              <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
+            </div>
+            <div onClick={() => mutateDeleteFav(el.favoriteId)}>
+              <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
+            </div>
           </div>
-          <div onClick={() => handleDeleteItem(el.id)}>
-          <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400"/>
-          </div>
-         </div>
         );
         return newData;
       });

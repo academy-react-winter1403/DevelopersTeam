@@ -124,9 +124,9 @@ const MoreInfo = ({ data }) => {
       console.error("Error deleting like:", error);
     },
   });
-  useEffect(() => {
-    console.log(data?.currentUserLike);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data?.currentUserLike);
+  // }, [data]);
 
   return (
     <div className="w-auto h-[430px] border-4 border-borderGray dark:border-gray-700 rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0 dark:bg-gray-800">
