@@ -9,7 +9,6 @@ import ResponsiveReserveMyCourse from "../responsiveReserveMyCourse";
 import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import { CiMoneyBill } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
-import PaymentModal from "../../payment/paymentModal/paymentModal";
 import PanelModal from "../../../common/panelModal/panelModal";
 
 const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
@@ -40,7 +39,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             <TagsNotAccept text="پذیرفته نشده" />
           ),
           eye: (
-            <div className="flex gap-5 cursor-pointer">
+            <div className="flex gap-5 cursor-pointer" onClick={showDrawer}>
               <PiEyeLight className="w-6 h-6 text-gray" />
             </div>
           ),
