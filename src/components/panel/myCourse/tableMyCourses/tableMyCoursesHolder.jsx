@@ -9,6 +9,7 @@ import { Spin } from "antd";
 import { TagsNotAccept } from "../../tagStatus/tagStatus";
 import PaymentModal from "../../payment/paymentModal/paymentModal";
 import { CiMoneyBill } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 
 const TableMyCoursesHolder = ({
   data,
@@ -17,21 +18,19 @@ const TableMyCoursesHolder = ({
   isSuccess,
   showDrawer,
 }) => {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [CourseIdx, setCourseIdx] = useState();
   const [firstModal, setFirstModal] = useState(false);
   const [secondModal, setSecondModal] = useState(false);
-
   const showModal = (id) => {
-    setFirstModal(true)
-    setIsModalOpen(true);
+    setFirstModal(true);
     setCourseIdx(id);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const handleFirstOk = () => {
+    setSecondModal(true);
+    setFirstModal(false);
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleSecondOk = () => {
+    setSecondModal(false);
   };
 
   useEffect(() => {
@@ -39,7 +38,11 @@ const TableMyCoursesHolder = ({
       const newData = data.listOfMyCourses.map((el) => {
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
-          name: el.courseTitle,
+          name: (
+            <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+              <span>{el.courseTitle}</span>
+            </NavLink>
+          ),
           teacher: el.fullName,
           date: <DateComponent insertDate={el.lastUpdate} />,
           price: <PriceComponent cost={el.cost} />,
@@ -83,9 +86,11 @@ const TableMyCoursesHolder = ({
         firstModal={firstModal}
         secondModal={secondModal}
         setSecondModal={setSecondModal}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        data={CourseIdx}
+        setFirstModal={setFirstModal}
+        id={CourseIdx}
+        handleFirstOk={handleFirstOk}
+        handleSecondOk={handleSecondOk}
+        factureData={data}
       />
     </div>
   );

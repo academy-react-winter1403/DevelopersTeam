@@ -16,71 +16,68 @@ const MobileModeLayout = () => {
     queryKey: ["profile"],
     queryFn: getProfile,
   });
-  
 
   return (
-    <div className="sm:hidden h-[72px] border border-[#F0F0F0] bg-[#FEFDFF] rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3  items-center">
+    <div className="sm:hidden h-[72px] border border-[#F0F0F0] dark:border-gray-700 bg-[#FEFDFF] dark:bg-gray-800 rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3 items-center">
       <NavLink
         to="/panel/dashboard"
-        // className=" w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue text-white"
-              : "w-16 h-16 flex justify-center items-center rounded-full"
+              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue dark:bg-blue-700 text-white"
+              : "w-16 h-16 flex justify-center items-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           }`
         }
       >
-        <CiGrid41 className="w-8 h-8" />
+        <CiGrid41 className="w-8 h-8 dark:text-gray-300" />
       </NavLink>
       <NavLink
         to="/panel/mycourse"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue text-white"
-              : "w-16 h-16 flex justify-center items-center rounded-full"
+              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue dark:bg-blue-700 text-white"
+              : "w-16 h-16 flex justify-center items-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           }`
         }
       >
-        <PiBookLight className="w-8 h-8" />
+        <PiBookLight className="w-8 h-8 dark:text-gray-300" />
       </NavLink>
       <NavLink
         to="/panel/myreservecourse"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue text-white"
-              : "w-16 h-16 flex justify-center items-center rounded-full"
+              ? "w-16 h-16 flex justify-center items-center rounded-full bg-navyBlue dark:bg-blue-700 text-white"
+              : "w-16 h-16 flex justify-center items-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           }`
         }
       >
-        <CiViewTimeline className="w-8 h-8" />
+        <CiViewTimeline className="w-8 h-8 dark:text-gray-300" />
       </NavLink>
       <NavLink
         to="/panel/profile"
         className={({ isActive }) =>
           `${
             isActive
-              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue"
-              : "w-14 h-14 flex justify-center items-center rounded-full"
+              ? "w-14 h-14 flex justify-center items-center rounded-full bg-navyBlue dark:bg-blue-700"
+              : "w-14 h-14 flex justify-center items-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           }`
         }
       >
-        {/* <LuBookMarked className="w-8 h-8" /> */}
-        <div className="w-8 h-8 border rounded-full">
+        <div className="w-8 h-8 border rounded-full dark:border-gray-600">
           <img
             src={data?.currentPictureAddress}
             alt=""
             className={
               !data?.currentPictureAddress
-                ? "w-8 h-8 rounded-full bg-navyBlue"
+                ? "w-8 h-8 rounded-full bg-navyBlue dark:bg-blue-700"
                 : "w-8 h-8 rounded-full"
             }
           />
         </div>
       </NavLink>
-      <div className=" w-14 h-14 rounded-full mx-2 flex justify-center items-center ">
+      <div className="w-14 h-14 rounded-full mx-2 flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-700">
         <DrawerMenu />
       </div>
     </div>

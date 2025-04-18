@@ -63,7 +63,7 @@ const YourComments = ({ userData }) => {
           <FiChevronLeft />
         </span>
       </div>
-      <div className="relative flex justify-evenly w-full space-x-5 mt-2">
+      <div className="relative flex justify-evenly w-full space-x-5 mt-2 opacity-50">
         <div className="w-2 h-full bg-navyBlue dark:bg-blue-500 rounded-[5px]"></div>
         <div className="w-1/2">
           <h1 className="text-sm text-gray dark:text-gray-400 mt-3">دوره ها</h1>
@@ -83,7 +83,9 @@ const YourComments = ({ userData }) => {
         </div>
         <div className="w-2 h-full bg-navyBlue dark:bg-blue-500 rounded-[5px]"></div>
         <div className="w-1/2">
-          <h1 className="text-sm text-gray dark:text-gray-400 mt-3">اخبار و مقالات</h1>
+          <h1 className="text-sm text-gray dark:text-gray-400 mt-3">
+            اخبار و مقالات
+          </h1>
           <CommentCard
             isMyComment={true}
             likeCount={firstCommentNews?.likeCount}

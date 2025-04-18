@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import http from "./../../../../core/services/interceptor";
 import ProfileFormSchema from "./profileFormSchema";
 import DateComponent from "../../../common/date/dateComponent";
+import DatePicker from "react-multi-date-picker";
 
 const UserInfo = ({ data }) => {
   const queryClient = useQueryClient();
@@ -139,7 +140,32 @@ const UserInfo = ({ data }) => {
                     <Field
                       name="birthday"
                       // type="date"
-                      className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                      as={DatePicker}
+                      style={{
+                        height: "2.25rem",
+                        width: "100%",
+                        color: "#6b7280",
+                        outline: "none",
+                        borderRadius: "0.75rem",
+                        padding: "1.25rem",
+                        paddingRight: "1.25rem",
+                        placeholder: {
+                          color: "#6b7280",
+                          fontSize: "0.75rem",
+                        },
+                        border: "1px solid #f4f4f4",
+                        backgroundColor: "#f4f4f4",
+                        transitionProperty: "all",
+                        transitionDuration: "300ms",
+                        ":focus": {
+                          borderColor: "#1e3a8a",
+                        },
+                        "@media (prefers-color-scheme: dark)": {
+                          placeholder: {
+                            color: "#6b7280",
+                          },
+                        },
+                      }}
                       placeholder="تاریخ تولد خود را وارد کنید"
                     />
                     <ErrorMessage
