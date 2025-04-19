@@ -29,6 +29,10 @@ const TableFaveNews = ({ data, isSuccess }) => {
     setOpen(false);
   };
 
+  const addDefaultImg = (e) => {
+    e.target.src = defImg;
+  };
+
   const { mutate: mutateDeleteFavNews } = useMutation({
     mutationFn: async (id) => {
       return await http.delete("/News/DeleteFavoriteNews", {
@@ -53,8 +57,10 @@ const TableFaveNews = ({ data, isSuccess }) => {
                   ? defImg
                   : el.currentImageAddressTumb
               }
-              alt={el.title}
-              style={{ width: "60px", height: "60px", objectFit: "cover" }}
+              // alt={el.title}
+              // style={{ width: "60px", height: "60px", objectFit: "cover" }}
+              className="w-28 h-16"
+              onError={addDefaultImg}
             />
           ),
           name: (
