@@ -7,7 +7,7 @@ import DateComp2 from "../date/dateComp2";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import CommentLikeDislike from "./commentLikeDislike";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
 import EmojiPicker from "emoji-picker-react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
@@ -25,6 +25,8 @@ const Item = ({
   id,
   isMyCommentNews,
 }) => {
+  const queryClient = useQueryClient();
+
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
@@ -56,7 +58,7 @@ const Item = ({
       toast.success("نظرتان با موفقیت ثبت شد");
     },
     onError: (error) => {
-      // toast.error(error?.response.data.ErrorMessage);
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
