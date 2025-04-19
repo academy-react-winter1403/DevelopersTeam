@@ -57,10 +57,7 @@ const PanelModal = ({
               <h1 className="font-bold text-2xl dark:text-white">{title}</h1>
               <p className="dark:text-gray-300 text-base">وضعیت ثبت نام</p>
               {isMyCourses && (
-                <NavLink
-                  to="/panel/myreservecourse"
-                  className="block"
-                >
+                <NavLink to="/panel/myreservecourse" className="block">
                   <span className="w-24 h-8 bg-navyBlue text-center text-white leading-8 rounded-2xl flex items-center justify-center dark:bg-blue-600">
                     رزرو دوره
                   </span>

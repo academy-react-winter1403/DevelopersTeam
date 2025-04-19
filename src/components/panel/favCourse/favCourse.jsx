@@ -3,17 +3,16 @@ import FavBottomCourse from "./favBottomCourse";
 import TableFaveCourseHandle from "./tableFavCourse/tableFaveCourseHandle";
 import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
+import Provider from "./Provider";
 
 const FavCourse = () => {
-  const [convertedData, setCovertedData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const getFavCourse = async () => {
     const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
     return res;
   };
-
-  const { data, isSuccess } = useQuery({
+  const { data } = useQuery({
     queryKey: "favCoursesPanel",
     queryFn: getFavCourse,
   });
@@ -47,6 +46,8 @@ const FavCourse = () => {
     });
   };
 
+  // console.log("filteredData",filteredData);
+  // console.log("data",data);
   return (
     <div>
       <div className="hidden sm:block">
@@ -55,14 +56,7 @@ const FavCourse = () => {
         </h2>
       </div>
       <FavBottomCourse handleSearch={handleSearch} />
-      {filteredData && (
-        <TableFaveCourseHandle
-          data={filteredData}
-          convertedData={convertedData}
-          setCovertedData={setCovertedData}
-          isSuccess={isSuccess}
-        />
-      )}
+      <Provider data={filteredData || data} />
     </div>
   );
 };

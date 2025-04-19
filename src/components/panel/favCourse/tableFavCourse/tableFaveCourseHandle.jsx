@@ -14,13 +14,9 @@ import { VscChromeClose } from "react-icons/vsc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-const TableFaveCourseHandle = ({
-  data,
-  convertedData,
-  setCovertedData,
-  isSuccess,
-}) => {
+const TableFaveCourseHandle = ({ data, isSuccess }) => {
   const queryClient = useQueryClient();
+  const [convertData, setConvertData] = useState([]);
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -56,7 +52,7 @@ const TableFaveCourseHandle = ({
 
   useEffect(() => {
     if (isSuccess) {
-      const newConverted = data.favoriteCourseDto.map((el) => {
+      const newConverted = data?.map((el) => {
         let newData = {};
         newData["img"] = img;
         newData["name"] = el.courseTitle;
@@ -80,9 +76,9 @@ const TableFaveCourseHandle = ({
         );
         return newData;
       });
-      setCovertedData(newConverted);
+      setConvertData(newConverted);
     }
-  }, [data, isSuccess, setCovertedData]);
+  }, [data, isSuccess]);
 
   return (
     <div className="">
@@ -95,13 +91,13 @@ const TableFaveCourseHandle = ({
               </div>
             }
           >
-            {isSuccess && <TableBody data={convertedData} />}
+            {isSuccess && <TableBody data={convertData} />}
           </Suspense>
         </div>
       </div>
-      <ResponsivFavCourse data={data} />
+      <ResponsivFavCourse data={convertData} />
 
-      {data?.favoriteCourseDto.map((item) => {
+      {data?.map((item) => {
         return (
           <PanelModal
             isMyCourses={true}
