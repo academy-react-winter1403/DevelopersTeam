@@ -103,11 +103,7 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-<<<<<<< HEAD
-      <ResponsivFavCourse data={convertData} showDrawer={showDrawer}/>
-=======
       <ResponsivFavCourse showDrawer={showDrawer} data={data} />
->>>>>>> 79769ab6379c0ca09403280cd978208a3f00af78
 
       {selectedCourse && (
         <PanelModal

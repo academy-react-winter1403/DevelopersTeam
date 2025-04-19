@@ -100,22 +100,6 @@ const TableFaveNews = ({ data, isSuccess  }) => {
           </Suspense>
         </div>
       </div>
-<<<<<<< HEAD
-      <ResponsivNews data={data} showDrawer={showDrawer}/>
-      {data?.map((item) => {
-        return (
-          <PanelModal
-            isMyNews={true}
-            onClose={onClose}
-            open={open}
-            title={item.title}
-            newsId={item.newsId}
-            lastUpdate={item.newsData.detailsNewsDto.insertDate}
-            describe={item.newsData.detailsNewsDto.miniDescribe}
-          />
-        );
-      })}
-=======
       <ResponsivNews showDrawer={showDrawer} data={data} />
       {selectedCourse && (
         <PanelModal
@@ -128,7 +112,6 @@ const TableFaveNews = ({ data, isSuccess  }) => {
           describe={selectedCourse.newsData.detailsNewsDto.miniDescribe}
         />
       )}
->>>>>>> 79769ab6379c0ca09403280cd978208a3f00af78
     </div>
   );
 };

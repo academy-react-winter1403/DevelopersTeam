@@ -4,21 +4,8 @@ import http from "./../../../core/services/interceptor";
 import defImg from "./../../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../common/date/dateComponent";
 
-<<<<<<< HEAD
-const ResponsivFavCourse = ({showDrawer}) => {
-  const getFavCourse = async () => {
-    const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
-    return res;
-  };
-  const { data } = useQuery({
-    queryKey: "favCoursePanel",
-    queryFn: getFavCourse,
-  });
-
-=======
 const ResponsivFavCourse = ({ showDrawer, data }) => {
   console.log("Ddddddd",data);
->>>>>>> 79769ab6379c0ca09403280cd978208a3f00af78
   return (
     <div className="w-full h-auto sm:hidden pb-3">
       <div className="w-full h-auto flex justify-between items-center mt-5 mb-5  ">
@@ -44,14 +31,10 @@ const ResponsivFavCourse = ({ showDrawer, data }) => {
                 />
               </div>
               <div className="flex flex-col">
-<<<<<<< HEAD
-                <div className="text-xl font-bold line-clamp-1 dark:text-white" onClick={showDrawer}>
-=======
                 <div
                   onClick={() => showDrawer(item)}
                   className="text-xl font-bold line-clamp-1 dark:text-white"
                 >
->>>>>>> 79769ab6379c0ca09403280cd978208a3f00af78
                   {item.courseTitle}
                 </div>
                 <div className="text-[#787878] text-sm font-semibold dark:text-gray-300">
