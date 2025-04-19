@@ -13,6 +13,7 @@ import http from "./../../../../core/services/interceptor";
 import { VscChromeClose } from "react-icons/vsc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { NavLink } from "react-router-dom";
 
 const TableFaveCourseHandle = ({ data, isSuccess }) => {
   const queryClient = useQueryClient();
@@ -49,18 +50,22 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
       // console.error("Error deleting like:", error);
     },
   });
-
+  console.log(data, "dataCorse");
   useEffect(() => {
     if (isSuccess) {
       const newConverted = data?.map((el) => {
         let newData = {};
         newData["img"] = img;
-        newData["name"] = el.courseTitle;
+        newData["name"] = (
+          <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+            {el.courseTitle}
+          </NavLink>
+        );
         newData["teacher"] = el.teacheName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = (
           <div className="flex space-x-2">
-            <PriceComponent cost={"1500000"} />
+            <PriceComponent cost={el.courseData.cost} />
             <span>تومان</span>
           </div>
         );
@@ -109,6 +114,7 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
             describe={item.describe}
             teacher={item.teacheName}
             lastUpdate={item.lastUpdate}
+            cost={item.courseData.cost}
           />
         );
       })}
