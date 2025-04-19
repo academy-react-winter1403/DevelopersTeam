@@ -17,22 +17,25 @@ import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 
 const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
-  const [convertData, setConvertData] = useState([]);
-  const [open, setOpen] = useState(false);
-
   const queryClient = useQueryClient();
 
-  const showDrawer = () => {
+  const [convertData, setConvertData] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const showDrawer = (course) => {
+    setSelectedCourse(course);
     setOpen(true);
   };
   const onClose = () => {
+    setSelectedCourse(null);
     setOpen(false);
   };
 
   const { mutate: mutateDeleteMyReserve } = useMutation({
     mutationFn: async (id) => {
       return await http.delete("/CourseReserve", {
-        data: { id:id },
+        data: { id: id },
       });
     },
     onSuccess: () => {
@@ -66,7 +69,10 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           ),
           eye: (
             <div className="flex gap-2 items-center">
-              <div className="flex gap-5 cursor-pointer" onClick={showDrawer}>
+              <div
+                className="flex gap-5 cursor-pointer"
+                onClick={() => showDrawer(el)}
+              >
                 <PiEyeLight className="w-6 h-6 text-gray" />
               </div>
               <div onClick={() => mutateDeleteMyReserve(el.reserveId)}>
@@ -79,7 +85,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
       setConvertData(i);
     }
   }, [isSuccess, data]);
-  console.log(data);
+  // console.log("selectedCourse", selectedCourse);
   return (
     <div className="">
       <div className="bg-white w-full  rounded-2xl mt-5">
@@ -95,21 +101,20 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-      <ResponsiveReserveMyCourse data={data} />
-      {data?.map((item) => {
-        return (
-          <PanelModal
-            isMyCourses={true}
-            onClose={onClose}
-            open={open}
-            title={item.courseName}
-            teacher={item.courseName}
-            lastUpdate={item.reserverDate}
-            courseId={item.courseId}
-            cost={item.courseData.cost}
-          />
-        );
-      })}
+      <ResponsiveReserveMyCourse showDrawer={showDrawer} data={data} />
+      {selectedCourse && (
+        <PanelModal
+          isMyCourses={true}
+          onClose={onClose}
+          open={open}
+          title={selectedCourse.courseName}
+          teacher={selectedCourse.courseName}
+          lastUpdate={selectedCourse.reserverDate}
+          courseId={selectedCourse.courseId}
+          cost={selectedCourse?.courseData?.cost}
+          describe={selectedCourse?.courseData?.describe}
+        />
+      )}
     </div>
   );
 };

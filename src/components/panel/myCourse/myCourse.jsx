@@ -9,14 +9,6 @@ const MyCourse = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
-
   const getMyCourses = async () => {
     const res = await http.get(
       `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate`
@@ -57,7 +49,7 @@ const MyCourse = () => {
       totalCount: filteredCourses.length,
     });
   };
-console.log("mycourses",data);
+  console.log("mycourses", data);
   return (
     <div className="">
       <div>
@@ -70,26 +62,8 @@ console.log("mycourses",data);
           convertedData={convertedData}
           setCovertedData={setCovertedData}
           isSuccess={isSuccess}
-          showDrawer={showDrawer}
         />
       )}
-
-      {data?.listOfMyCourses.map((item) => {
-        return (
-          <PanelModal
-            isMyCourses={true}
-            onClose={onClose}
-            open={open}
-            img={item.tumbImageAddress}
-            title={item.courseTitle}
-            paymentStatus={item.paymentStatus}
-            describe={item.describe}
-            teacher={item.fullName}
-            lastUpdate={item.lastUpdate}
-            cost={item.cost}
-          />
-        );
-      })}
     </div>
   );
 };

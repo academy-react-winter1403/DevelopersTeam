@@ -10,17 +10,18 @@ import { TagsNotAccept } from "../../tagStatus/tagStatus";
 import PaymentModal from "../../payment/paymentModal/paymentModal";
 import { CiMoneyBill } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
+import PanelModal from "../../../common/panelModal/panelModal";
 
 const TableMyCoursesHolder = ({
   data,
   convertedData,
   setCovertedData,
   isSuccess,
-  showDrawer,
 }) => {
   const [CourseIdx, setCourseIdx] = useState();
   const [firstModal, setFirstModal] = useState(false);
   const [secondModal, setSecondModal] = useState(false);
+
   const showModal = (id) => {
     setFirstModal(true);
     setCourseIdx(id);
@@ -31,6 +32,18 @@ const TableMyCoursesHolder = ({
   };
   const handleSecondOk = () => {
     setSecondModal(false);
+  };
+
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const [open, setOpen] = useState(false);
+  const showDrawer = (course) => {
+    setSelectedCourse(course);
+    setOpen(true);
+  };
+  const onClose = () => {
+    setSelectedCourse(null);
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -48,7 +61,7 @@ const TableMyCoursesHolder = ({
           price: <PriceComponent cost={el.cost} />,
           pay: <TagsNotAccept text={el.paymentStatus} />,
           eye: (
-            <div onClick={showDrawer} className="flex gap-5">
+            <div onClick={() => showDrawer(el)} className="flex gap-5">
               <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />
             </div>
           ),
@@ -92,6 +105,21 @@ const TableMyCoursesHolder = ({
         handleSecondOk={handleSecondOk}
         factureData={data}
       />
+      {selectedCourse && (
+        <PanelModal
+          isMyCourses={true}
+          onClose={onClose}
+          open={open}
+          img={selectedCourse.tumbImageAddress}
+          title={selectedCourse.courseTitle}
+          paymentStatus={selectedCourse.paymentStatus}
+          describe={selectedCourse.describe}
+          teacher={selectedCourse.fullName}
+          lastUpdate={selectedCourse.lastUpdate}
+          cost={selectedCourse.cost}
+          courseId={selectedCourse.courseId}
+        />
+      )}
     </div>
   );
 };

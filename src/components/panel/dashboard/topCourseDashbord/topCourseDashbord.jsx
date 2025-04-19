@@ -12,13 +12,17 @@ import { NavLink } from "react-router-dom";
 
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const showDrawer = () => {
+  const showDrawer = (course) => {
+    setSelectedCourse(course);
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
+    setSelectedCourse(null);
   };
 
   const getTopCourses = async () => {
@@ -52,7 +56,7 @@ const TopCourseDashbord = () => {
           </div>
         );
         newData["eye"] = (
-          <div onClick={showDrawer}>
+          <div onClick={() => showDrawer(el)}>
             <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
           </div>
         );
@@ -107,7 +111,7 @@ const TopCourseDashbord = () => {
                     <DateComponent insertDate={item.lastUpdate} />
                   </span>
                 </div>
-                <div onClick={showDrawer}>
+                <div onClick={() => showDrawer(item)}>
                   <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
                 </div>
               </div>
@@ -117,23 +121,21 @@ const TopCourseDashbord = () => {
         })}
       </div>
 
-      {data?.listOfMyCourses.map((item) => {
-        return (
-          <PanelModal
-            isMyCourses={true}
-            onClose={onClose}
-            open={open}
-            img={item.tumbImageAddress}
-            title={item.courseTitle}
-            paymentStatus={item.paymentStatus}
-            describe={item.describe}
-            teacher={item.fullName}
-            lastUpdate={item.lastUpdate}
-            cost={item.cost}
-            courseId={item.courseId}
-          />
-        );
-      })}
+      {selectedCourse && (
+        <PanelModal
+          isMyCourses={true}
+          onClose={onClose}
+          open={open}
+          img={selectedCourse.tumbImageAddress}
+          title={selectedCourse.courseTitle}
+          paymentStatus={selectedCourse.paymentStatus}
+          describe={selectedCourse.describe}
+          teacher={selectedCourse.fullName}
+          lastUpdate={selectedCourse.lastUpdate}
+          cost={selectedCourse.cost}
+          courseId={selectedCourse.courseId}
+        />
+      )}
     </div>
   );
 };

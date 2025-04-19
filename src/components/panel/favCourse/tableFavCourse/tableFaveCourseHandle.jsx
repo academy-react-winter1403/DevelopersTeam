@@ -19,11 +19,14 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
   const queryClient = useQueryClient();
   const [convertData, setConvertData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-  const showDrawer = () => {
+  const showDrawer = (course) => {
     setOpen(true);
+    setSelectedCourse(course);
   };
   const onClose = () => {
+    setSelectedCourse(null);
     setOpen(false);
   };
 
@@ -50,7 +53,7 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
       // console.error("Error deleting like:", error);
     },
   });
-  console.log(data, "dataCorse");
+  // console.log(data, "dataCorse");
   useEffect(() => {
     if (isSuccess) {
       const newConverted = data?.map((el) => {
@@ -71,7 +74,7 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
         );
         newData["eye"] = (
           <div className="flex gap-2">
-            <div onClick={showDrawer}>
+            <div onClick={() => showDrawer(el)}>
               <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
             </div>
             <div onClick={() => mutateDeleteFav(el.favoriteId)}>
@@ -100,24 +103,22 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-      <ResponsivFavCourse data={convertData} />
+      <ResponsivFavCourse showDrawer={showDrawer} data={data} />
 
-      {data?.map((item) => {
-        return (
-          <PanelModal
-            isMyCourses={true}
-            onClose={onClose}
-            open={open}
-            img={item.tumbImageAddress}
-            title={item.courseTitle}
-            paymentStatus={item.paymentStatus}
-            describe={item.describe}
-            teacher={item.teacheName}
-            lastUpdate={item.lastUpdate}
-            cost={item.courseData.cost}
-          />
-        );
-      })}
+      {selectedCourse && (
+        <PanelModal
+          isMyCourses={true}
+          onClose={onClose}
+          open={open}
+          img={selectedCourse.tumbImageAddress}
+          title={selectedCourse.courseTitle}
+          paymentStatus={selectedCourse.paymentStatus}
+          describe={selectedCourse.describe}
+          teacher={selectedCourse.teacheName}
+          lastUpdate={selectedCourse.lastUpdate}
+          cost={selectedCourse.courseData.cost}
+        />
+      )}
     </div>
   );
 };
