@@ -14,19 +14,19 @@ const ResponsivNews = () => {
   });
 
   return (
-    <div className=" w-full h-auto sm:hidden">
-      <div className="w-full h-auto  flex justify-around items-center mt-5">
-        <h2 className="text-lg font-bold">علاقه مندی مقاله</h2>
-        <h2 className="w-20 h-9 rounded-3xl bg-navyBlue leading-9 pr-6">
-          <span className="text-white ">فیلتر</span>
+    <div className="w-full h-auto sm:hidden  ">
+      <div className="w-full h-auto flex justify-between items-center mt-5  ">
+        <h2 className="text-lg font-bold dark:text-white">علاقه مندی مقاله</h2>
+        <h2 className="w-20 h-9 ">
+          {/* <span className="text-white dark:text-gray-200">فیلتر</span> */}
         </h2>
       </div>
 
-      {data?.myFavoriteNews.map((item) => {
+      {data?.myFavoriteNews?.map((item) => {
         return (
-          <div className="bg-white w-full h-auto mt-5">
-            <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3">
-              <div className=" w-1/3  my-5">
+          <div className="bg-white w-full h-auto mt-5 dark:bg-gray-800">
+            <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3 dark:border-gray-600">
+              <div className="w-1/3 my-5">
                 <img
                   src={
                     item.currentImageAddressTumb == null
@@ -34,12 +34,15 @@ const ResponsivNews = () => {
                       : item.currentImageAddressTumb
                   }
                   alt=""
+                  className="dark:opacity-90"
                 />
               </div>
               <div className="flex flex-col">
-                <div className="text-xl font-bold line-clamp-1">{item.title}</div>
-                 {/* <div className='text-[#787878] font-semibold'>{item.محسن}</div> */}
-                        {/* <div className='text-[#787878] font-semibold'>{item.title}</div>  */}
+                <div className="text-xl font-bold line-clamp-1 dark:text-white">
+                  {item.title}
+                </div>
+                {/* <div className='text-[#787878] font-semibold dark:text-gray-300'>{item.محسن}</div> */}
+                {/* <div className='text-[#787878] font-semibold dark:text-gray-300'>{item.title}</div> */}
               </div>
             </div>
           </div>

@@ -14,6 +14,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import { VscChromeClose } from "react-icons/vsc";
 import toast from "react-hot-toast";
+import { NavLink } from "react-router-dom";
 
 const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
   const [convertData, setConvertData] = useState([]);
@@ -36,6 +37,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("myReserveCoursesPanel");
+      toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);
@@ -48,7 +50,11 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
       const i = data.map((el) => {
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
-          name: el.courseName,
+          name: (
+            <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+              <span>{el.courseName}</span>
+            </NavLink>
+          ),
           teacher: el?.courseData.teacherName,
           date: <DateComponent insertDate={el.courseData.startTime} />,
           reserveDate: <DateComponent insertDate={el.reserverDate} />,
@@ -68,11 +74,6 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
               </div>
             </div>
           ),
-          pay: (
-            <div className="flex gap-5 cursor-pointer">
-              <CiMoneyBill className="w-6 h-6 text-gray" />
-            </div>
-          ),
         };
       });
       setConvertData(i);
@@ -80,7 +81,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
   }, [isSuccess, data]);
   console.log(data);
   return (
-    <div className="  ">
+    <div className="">
       <div className="bg-white w-full  rounded-2xl mt-5">
         <div className=" w-full  hidden sm:block">
           <Suspense
@@ -104,6 +105,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             title={item.courseName}
             teacher={item.courseName}
             lastUpdate={item.reserverDate}
+            courseId={item.courseId}
           />
         );
       })}

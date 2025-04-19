@@ -9,6 +9,7 @@ import { Spin } from "antd";
 import { TagsNotAccept } from "../../tagStatus/tagStatus";
 import PaymentModal from "../../payment/paymentModal/paymentModal";
 import { CiMoneyBill } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 
 const TableMyCoursesHolder = ({
   data,
@@ -17,21 +18,19 @@ const TableMyCoursesHolder = ({
   isSuccess,
   showDrawer,
 }) => {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [CourseIdx, setCourseIdx] = useState();
   const [firstModal, setFirstModal] = useState(false);
   const [secondModal, setSecondModal] = useState(false);
-
   const showModal = (id) => {
-    setFirstModal(true)
-    setIsModalOpen(true);
+    setFirstModal(true);
     setCourseIdx(id);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const handleFirstOk = () => {
+    setSecondModal(true);
+    setFirstModal(false);
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleSecondOk = () => {
+    setSecondModal(false);
   };
 
   useEffect(() => {
@@ -39,7 +38,11 @@ const TableMyCoursesHolder = ({
       const newData = data.listOfMyCourses.map((el) => {
         return {
           img: <img src={el.tumbImageAddress || defImg} alt="" />,
-          name: el.courseTitle,
+          name: (
+            <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+              <span>{el.courseTitle}</span>
+            </NavLink>
+          ),
           teacher: el.fullName,
           date: <DateComponent insertDate={el.lastUpdate} />,
           price: <PriceComponent cost={el.cost} />,
@@ -64,12 +67,12 @@ const TableMyCoursesHolder = ({
   }, [isSuccess, data]);
   // console.log("dddd",data);
   return (
-    <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-70 hidden sm:block">
+    <div className=" ">
+      <div className="bg-white w-full rounded-2xl mt-5">
+        <div className=" w-full hidden sm:block">
           <Suspense
             fallback={
-              <div className="w-full h-full flex items-center justify-center">
+              <div className="w-full h-32 flex items-center justify-center">
                 <Spin />
               </div>
             }
@@ -83,9 +86,11 @@ const TableMyCoursesHolder = ({
         firstModal={firstModal}
         secondModal={secondModal}
         setSecondModal={setSecondModal}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        data={CourseIdx}
+        setFirstModal={setFirstModal}
+        id={CourseIdx}
+        handleFirstOk={handleFirstOk}
+        handleSecondOk={handleSecondOk}
+        factureData={data}
       />
     </div>
   );

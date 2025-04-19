@@ -8,11 +8,12 @@ import DateComponent from "../../../common/date/dateComponent";
 import PriceComponent from "../../../common/priceComponent/priceComponent";
 import { Divider, Spin, Modal } from "antd";
 import PanelModal from "../../../common/panelModal/panelModal";
+import { NavLink } from "react-router-dom";
 
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [open, setOpen] = useState(false);
- 
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -36,7 +37,11 @@ const TopCourseDashbord = () => {
     if (isSuccess) {
       const i = data.listOfMyCourses.map((el) => {
         let newData = {};
-        newData["name"] = el.courseTitle;
+        newData["name"] = (
+          <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+            {el.courseTitle}
+          </NavLink>
+        );
         newData["desc"] = el.describe;
         newData["teacher"] = el.fullName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
@@ -63,14 +68,14 @@ const TopCourseDashbord = () => {
         <div className="w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
           <h2 className="dark:text-white">جدیدترین دوره ها</h2>
           <div className="flex items-center text-navyBlue dark:text-blue-400 gap-1">
-            <h2>مشاهده همه</h2>
-            <MdKeyboardArrowLeft />
+            {/* <h2>مشاهده همه</h2>
+            <MdKeyboardArrowLeft /> */}
           </div>
         </div>
-        <div className="w-full h-70">
+        <div className="w-full  ">
           <Suspense
             fallback={
-              <div className="w-full h-full flex items-center justify-center">
+              <div className="w-full h-32 flex items-center justify-center">
                 <Spin />
               </div>
             }
@@ -83,8 +88,8 @@ const TopCourseDashbord = () => {
         <div className="w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
           <h2 className="dark:text-white">جدیدترین دوره ها</h2>
           <div className="flex items-center text-navyBlue dark:text-blue-400 gap-1">
-            <h2>مشاهده همه</h2>
-            <MdKeyboardArrowLeft />
+            {/* <h2>مشاهده همه</h2> */}
+            {/* <MdKeyboardArrowLeft /> */}
           </div>
         </div>
         {data?.listOfMyCourses.map((item, index) => {
@@ -111,12 +116,23 @@ const TopCourseDashbord = () => {
           );
         })}
       </div>
-      
-      {data?.listOfMyCourses.map((item) =>{
-        return(
-          
-          <PanelModal isMyCourses={true} onClose={onClose} open={open} img={item.tumbImageAddress} title={item.courseTitle} paymentStatus={item.paymentStatus} describe={item.describe} teacher={item.fullName} lastUpdate={item.lastUpdate} cost={item.cost}/>
-        )
+
+      {data?.listOfMyCourses.map((item) => {
+        return (
+          <PanelModal
+            isMyCourses={true}
+            onClose={onClose}
+            open={open}
+            img={item.tumbImageAddress}
+            title={item.courseTitle}
+            paymentStatus={item.paymentStatus}
+            describe={item.describe}
+            teacher={item.fullName}
+            lastUpdate={item.lastUpdate}
+            cost={item.cost}
+            courseId={item.courseId}
+          />
+        );
       })}
     </div>
   );

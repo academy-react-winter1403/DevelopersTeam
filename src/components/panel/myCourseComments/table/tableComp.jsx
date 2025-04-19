@@ -6,7 +6,6 @@ const columns = [
     title: "نام دوره",
     dataIndex: "name",
     key: "name",
-    width: 150,
   },
 
   {
@@ -16,7 +15,6 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
-    width: 150,
   },
   {
     title: "نظر",
@@ -25,7 +23,6 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
-    width: 150,
   },
   {
     title: "وضعیت",
@@ -34,12 +31,19 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
-    width: 150,
   },
   {
     title: "تاریخ ثبت",
     dataIndex: "insertDate",
     key: "insertDate",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
+  {
+    title: "ویرایش",
+    dataIndex: "edit",
+    key: "edit",
     ellipsis: {
       showTitle: false,
     },

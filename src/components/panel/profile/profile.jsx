@@ -1,5 +1,5 @@
 import React from "react";
-import profilepic from "./../../../assets/images/panel/profilepic.svg";
+import profilepic from "./../../../assets/images/panel/img.svg";
 import { LuImagePlus } from "react-icons/lu";
 import ProfileTabs from "./tabs/profileTabs";
 import { HiMiniUsers, HiOutlineDevicePhoneMobile } from "react-icons/hi2";
@@ -13,22 +13,27 @@ const Profile = () => {
     const res = await http.get(`/SharePanel/GetProfileInfo`);
     return res;
   };
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
   });
+
+  const addDefaultImg = (e) => {
+    e.target.src = profilepic;
+  };
   return (
     <div className="w-full h-auto bg-white dark:bg-gray-800 rounded-2xl mt-5">
       <div className="w-full h-28 bg-[#3772FF] dark:bg-blue-800 rounded-t-2xl"></div>
       <div className="border-6 border-white flex justify-center items-center rounded-full w-32 h-32 bg-white  mt-[-60px] mr-10">
         <img
           src={
-            data?.currentPictureAddress == "Not-set" || null
+            data?.currentPictureAddress == "Not-set" || null || isLoading
               ? profilepic
               : data?.currentPictureAddress
           }
           alt=""
           className="mx-auto w-28 h-28 rounded-full"
+          onError={addDefaultImg}
         />
       </div>
       <div className="w-full mt-5 flex flex-col sm:flex-row px-4">

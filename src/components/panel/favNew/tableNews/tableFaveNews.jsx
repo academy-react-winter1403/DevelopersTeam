@@ -10,11 +10,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import toast from "react-hot-toast";
 
-const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
+const TableFaveNews = ({ data, isSuccess }) => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState("");
+  const [convertData, setConvertData] = useState([]);
 
-  const queryClient = useQueryClient();
 
   const showDrawer = () => {
     setSelectedTitle();
@@ -40,7 +41,7 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      const newConverted = data.myFavoriteNews.map((el) => {
+      const newConverted = data.map((el) => {
         return {
           img: (
             <img
@@ -73,14 +74,14 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
           ),
         };
       });
-      setCovertedData(newConverted);
+      setConvertData(newConverted);
     }
-  }, [isSuccess, data, setCovertedData]);
+  }, [isSuccess, data]);
 
   return (
     <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className="w-full h-auto hidden sm:block">
+      <div className="bg-white w-full  rounded-2xl mt-5">
+        <div className="w-full  hidden sm:block">
           <Suspense
             fallback={
               <div className="w-full h-32 flex items-center justify-center">
@@ -88,12 +89,12 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
               </div>
             }
           >
-            {isSuccess && <BodyTableNews data={convertedData} />}
+            {isSuccess && <BodyTableNews data={convertData} />}
           </Suspense>
         </div>
       </div>
       <ResponsivNews data={data} />
-      {data?.myFavoriteNews.map((item) => {
+      {data?.map((item) => {
         return (
           <PanelModal
             isMyCourses={true}
@@ -108,5 +109,3 @@ const TableFaveNews = ({ data, convertedData, setCovertedData, isSuccess }) => {
 };
 
 export default TableFaveNews;
-	
-

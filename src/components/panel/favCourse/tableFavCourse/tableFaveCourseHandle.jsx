@@ -12,14 +12,11 @@ import PriceComponent from "../../../common/priceComponent/priceComponent";
 import http from "./../../../../core/services/interceptor";
 import { VscChromeClose } from "react-icons/vsc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
-const TableFaveCourseHandle = ({
-  data,
-  convertedData,
-  setCovertedData,
-  isSuccess,
-}) => {
+const TableFaveCourseHandle = ({ data, isSuccess }) => {
   const queryClient = useQueryClient();
+  const [convertData, setConvertData] = useState([]);
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -46,15 +43,16 @@ const TableFaveCourseHandle = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries("courseDetail");
+      toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
-      console.error("Error deleting like:", error);
+      // console.error("Error deleting like:", error);
     },
   });
 
   useEffect(() => {
     if (isSuccess) {
-      const newConverted = data.favoriteCourseDto.map((el) => {
+      const newConverted = data?.map((el) => {
         let newData = {};
         newData["img"] = img;
         newData["name"] = el.courseTitle;
@@ -78,14 +76,14 @@ const TableFaveCourseHandle = ({
         );
         return newData;
       });
-      setCovertedData(newConverted);
+      setConvertData(newConverted);
     }
-  }, [data, isSuccess, setCovertedData]);
+  }, [data, isSuccess]);
 
   return (
-    <div>
-      <div className="bg-white w-full h-auto rounded-2xl mt-5">
-        <div className=" w-full h-auto  hidden sm:block ">
+    <div className="">
+      <div className="bg-white w-full   rounded-2xl mt-5">
+        <div className=" w-full   hidden sm:block ">
           <Suspense
             fallback={
               <div className="w-full h-32 flex items-center justify-center">
@@ -93,13 +91,13 @@ const TableFaveCourseHandle = ({
               </div>
             }
           >
-            {isSuccess && <TableBody data={convertedData} />}
+            {isSuccess && <TableBody data={convertData} />}
           </Suspense>
         </div>
       </div>
-      <ResponsivFavCourse data={data} />
+      <ResponsivFavCourse data={convertData} />
 
-      {data?.favoriteCourseDto.map((item) => {
+      {data?.map((item) => {
         return (
           <PanelModal
             isMyCourses={true}

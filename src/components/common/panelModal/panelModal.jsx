@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import "./panel.css";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import { PiStudentBold, PiStudentThin } from "react-icons/pi";
+import { useDarkMode } from "./../../../context/theme/themeContext";
 
 const PanelModal = ({
   onClose,
@@ -19,7 +20,9 @@ const PanelModal = ({
   lastUpdate,
   isMyCourses,
   cost,
+  courseId,
 }) => {
+  const { darkMode, setDarkMode } = useDarkMode();
   return (
     <>
       <Drawer
@@ -32,8 +35,9 @@ const PanelModal = ({
         maskStyle={{
           backgroundColor: "rgba(0, 0, 0, 0.1)",
         }}
+        style={darkMode && { backgroundColor: "#1e2939" }}
       >
-        <div className="lg:w-[450px] h-auto mx-4 lg:m-0 dark:text-white">
+        <div className="lg:w-[430px] h-auto mx-4 lg:m-0 dark:text-white dark:bg-gray-800">
           <div className="w-full md:h-[287px] rounded-3xl overflow-hidden ">
             <img
               src={img ? img : defaultImg}
@@ -42,9 +46,9 @@ const PanelModal = ({
             />
           </div>
 
-          <div className="w-full h-auto space-y-3 ">
-            <NavLink to="/panel/mycourse" className="block  ">
-              <span className="w-24 h-8 bg-navyBlue text-center text-white leading-6 rounded-2xl   flex items-center justify-center">
+          <div className="w-full h-auto space-y-3 dark:bg-gray-800">
+            <NavLink to={`/courses/coursedetail/${courseId}`} className="block">
+              <span className="w-24 h-8 bg-navyBlue text-center text-white leading-6 rounded-2xl flex items-center justify-center dark:bg-blue-600">
                 صفحه دوره
               </span>
             </NavLink>
@@ -53,8 +57,8 @@ const PanelModal = ({
               <h1 className="font-bold text-2xl dark:text-white">{title}</h1>
               <p className="dark:text-gray-300 text-base">وضعیت ثبت نام</p>
               {isMyCourses && (
-                <NavLink to="/panel/myreservecourse" className="block ">
-                  <span className="w-24 h-8 bg-navyBlue text-center text-white leading-8 rounded-2xl   flex items-center justify-center">
+                <NavLink to="/panel/myreservecourse" className="block">
+                  <span className="w-24 h-8 bg-navyBlue text-center text-white leading-8 rounded-2xl flex items-center justify-center dark:bg-blue-600">
                     رزرو دوره
                   </span>
                 </NavLink>
@@ -63,9 +67,9 @@ const PanelModal = ({
               <h1 className="text-gray text-base dark:text-gray-400">
                 توضیح مختصر
               </h1>
-              <h1 className="text-base">{describe}</h1>
+              <h1 className="text-base dark:text-gray-300">{describe}</h1>
             </div>
-            <div className="w-full ">
+            <div className="w-full">
               <h1 className="text-gray dark:text-gray-400 text-xl">مدرس</h1>
               <div className="flex space-x-3 items-center">
                 <div className="w-14 h-14 rounded-full overflow-hidden">
@@ -81,22 +85,24 @@ const PanelModal = ({
                   </h1>
                 </div>
               </div>
-              <div className="text-xl font-semiboldbold space-y-3 flex items-center">
-                <PiStudentBold className="w-6 h-6 " />
-                <div >دانشجو</div>
+              <div className="text-xl font-semiboldbold space-y-3 flex items-center dark:text-gray-300">
+                <PiStudentBold className="w-6 h-6" />
+                <div>دانشجو</div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 dark:text-gray-300">
                 <HiOutlineCalendarDateRange className="w-6 h-6" />
                 <span>شروع دوره</span>
               </div>
               <div className="flex justify-between items-center mt-3 font-semibold">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 dark:text-gray-300">
                   <HiOutlineCalendarDateRange className="w-6 h-6" />
                   <DateComponent insertDate={lastUpdate} />
                 </div>
-                <div className="text-xl flex gap-1">
+                <div className="text-xl flex gap-1 dark:text-gray-300">
                   <PriceComponent cost={cost} />
-                  <span className="text-navyBlue">تومان</span>
+                  <span className="text-navyBlue dark:text-blue-400">
+                    تومان
+                  </span>
                 </div>
               </div>
             </div>

@@ -3,16 +3,14 @@ import FavBottomCourse from "../favCourse/favBottomCourse";
 import TableFaveNews from "./tableNews/tableFaveNews";
 import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
-
+import Provider from "./Provider";
 
 const FavNew = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const getFavNews = async () => {
-    const res = await http.get(
-      `/SharePanel/GetMyFavoriteNews`
-    );
+    const res = await http.get(`/SharePanel/GetMyFavoriteNews`);
     return res;
   };
 
@@ -56,15 +54,8 @@ const FavNew = () => {
           علاقه مندی مقالات
         </h2>
       </div>
-      <FavBottomCourse handleSearch={handleSearch}/>
-      {filteredData && (
-        <TableFaveNews
-          data={filteredData}
-          convertedData={convertedData}
-          setCovertedData={setCovertedData}
-          isSuccess={isSuccess}
-        />
-      )}
+      <FavBottomCourse handleSearch={handleSearch} />
+      <Provider data={filteredData || data} />
     </div>
   );
 };
