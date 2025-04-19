@@ -30,8 +30,7 @@ const ReplyCard = ({ data }) => {
             <div>
               <h2 className="font-semibold"> {data?.author}</h2>
               <h2 className="text-gray">
-                {" "}
-                <DateComponent insertDate={data?.insertDate} />{" "}
+                <DateComponent insertDate={data?.insertDate} />
               </h2>
             </div>
           </div>

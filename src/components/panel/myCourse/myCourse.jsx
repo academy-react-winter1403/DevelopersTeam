@@ -57,7 +57,7 @@ const MyCourse = () => {
       totalCount: filteredCourses.length,
     });
   };
-
+console.log("mycourses",data);
   return (
     <div className="">
       <div>

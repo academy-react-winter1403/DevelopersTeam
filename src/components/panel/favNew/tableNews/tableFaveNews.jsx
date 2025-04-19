@@ -16,7 +16,7 @@ const TableFaveNews = ({ data, isSuccess }) => {
   const [selectedTitle, setSelectedTitle] = useState("");
   const [convertData, setConvertData] = useState([]);
 
-
+  console.log("nesData", data);
   const showDrawer = () => {
     setSelectedTitle();
     setOpen(true);
@@ -55,7 +55,7 @@ const TableFaveNews = ({ data, isSuccess }) => {
             />
           ),
           name: el.title,
-          desc: "آموزش صفر تا صد کتابخانه پرطرفدار جی‌اس یعنی ری‌اکت همراه تسک های مفید برای یادگیری بهتر",
+          desc: el.newsData.detailsNewsDto.miniDescribe,
           teacher: "محسن اسفندیاری",
           date: "25 اردیبهشت 1403",
           eye: (
