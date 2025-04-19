@@ -21,7 +21,7 @@ const ResponsiveMyCourse = ({ showDrawer }) => {
       {data?.listOfMyCourses.map((item) => {
         return (
           <div
-            onClick={showDrawer}
+            onClick={() => showDrawer(item)}
             className="bg-white w-full dark:bg-gray-800"
             key={item.courseId}
           >

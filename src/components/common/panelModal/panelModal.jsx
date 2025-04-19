@@ -8,6 +8,7 @@ import "./panel.css";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import { PiStudentBold, PiStudentThin } from "react-icons/pi";
 import { useDarkMode } from "./../../../context/theme/themeContext";
+import { TagsAccept, TagsNotAccept } from "../../panel/tagStatus/tagStatus";
 
 const PanelModal = ({
   onClose,
@@ -22,7 +23,7 @@ const PanelModal = ({
   cost,
   courseId,
   isMyNews,
-  newsId
+  newsId,
 }) => {
   const { darkMode, setDarkMode } = useDarkMode();
   return (
@@ -49,18 +50,29 @@ const PanelModal = ({
           </div>
 
           <div className="w-full h-auto space-y-3 dark:bg-gray-800">
-            
-            <NavLink  to={ isMyNews ? `/news/newsdetail/${newsId}` :`/courses/coursedetail/${courseId}`} className="block">
+            <NavLink
+              to={
+                isMyNews
+                  ? `/news/newsdetail/${newsId}`
+                  : `/courses/coursedetail/${courseId}`
+              }
+              className="block"
+            >
               <span className="w-24 h-8 bg-navyBlue text-center text-white leading-6 rounded-2xl flex items-center justify-center dark:bg-blue-600">
-                صفحه <span>{isMyNews ?"مقالات":"دوره"}</span>
-
+                صفحه <span>{isMyNews ? "مقالات" : "دوره"}</span>
               </span>
             </NavLink>
             <h1 className="text-gray dark:text-gray-400">نام دوره</h1>
             <div className="space-y-5">
               <h1 className="font-bold text-2xl dark:text-white">{title}</h1>
-              <p className="dark:text-gray-300 text-base">{isMyNews ? null : 'وضعیت ثبت نام'}</p>
-              {isMyCourses && (
+              {/* <p className="dark:text-gray-300 text-base">
+                {!isMyNews && paymentStatus === "پرداخت نشده" ? (
+                  <TagsNotAccept text={paymentStatus} />
+                ) : (
+                  <TagsAccept text={paymentStatus} />
+                )}
+              </p> */}
+              {!isMyCourses && !isMyNews && (
                 <NavLink to="/panel/myreservecourse" className="block">
                   <span className="w-24 h-8 bg-navyBlue text-center text-white leading-8 rounded-2xl flex items-center justify-center dark:bg-blue-600">
                     رزرو دوره
@@ -74,7 +86,9 @@ const PanelModal = ({
               <h1 className="text-base dark:text-gray-300">{describe}</h1>
             </div>
             <div className="w-full">
-              <h1 className="text-gray dark:text-gray-400 text-xl">{isMyNews ? 'منتشرکننده' :'مدرس'}</h1>
+              <h1 className="text-gray dark:text-gray-400 text-xl">
+                {isMyNews ? "منتشرکننده" : "مدرس"}
+              </h1>
               <div className="flex space-x-3 items-center">
                 <div className="w-14 h-14 rounded-full overflow-hidden">
                   <img
@@ -96,12 +110,14 @@ const PanelModal = ({
                     <DateComponent insertDate={lastUpdate} />
                   </span>{" "}
                 </div>
-               {!isMyNews &&  <div className="text-xl flex gap-1 dark:text-gray-300">
-                  <PriceComponent cost={cost} />
-                  <span className="text-navyBlue dark:text-blue-400">
-                    تومان
-                  </span>
-                </div> }
+                {!isMyNews && (
+                  <div className="text-xl flex gap-1 dark:text-gray-300">
+                    <PriceComponent cost={cost} />
+                    <span className="text-navyBlue dark:text-blue-400">
+                      تومان
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

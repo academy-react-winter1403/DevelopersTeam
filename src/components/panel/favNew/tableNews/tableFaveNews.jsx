@@ -15,15 +15,17 @@ import { NavLink } from "react-router-dom";
 const TableFaveNews = ({ data, isSuccess  }) => {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState("");
+  // const [selectedTitle, setSelectedTitle] = useState("");
   const [convertData, setConvertData] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-
-  const showDrawer = () => {
-    setSelectedTitle();
+  // console.log("nesData", data);
+  const showDrawer = (course) => {
+    setSelectedCourse(course);
     setOpen(true);
   };
   const onClose = () => {
+    setSelectedCourse(null);
     setOpen(false);
   };
 
@@ -55,16 +57,18 @@ const TableFaveNews = ({ data, isSuccess  }) => {
               style={{ width: "60px", height: "60px", objectFit: "cover" }}
             />
           ),
-          name: <NavLink to={`/news/newsdetail/${el.newsId}`}>
-            {el.title}
-          </NavLink>,
+          name: (
+            <NavLink to={`/news/newsdetail/${el.newsId}`}>{el.title}</NavLink>
+          ),
           desc: el.newsData.detailsNewsDto.miniDescribe,
           teacher: el.newsData.detailsNewsDto.addUserFullName,
-          date:  <DateComponent insertDate={el.newsData.detailsNewsDto.insertDate}/>,
+          date: (
+            <DateComponent insertDate={el.newsData.detailsNewsDto.insertDate} />
+          ),
           eye: (
             <div className="flex gap-2 items-center">
               <div
-                onClick={() => showDrawer(el.title)}
+                onClick={() => showDrawer(el)}
                 className="flex gap-5"
                 style={{ cursor: "pointer" }}
               >
@@ -96,6 +100,7 @@ const TableFaveNews = ({ data, isSuccess  }) => {
           </Suspense>
         </div>
       </div>
+<<<<<<< HEAD
       <ResponsivNews data={data} showDrawer={showDrawer}/>
       {data?.map((item) => {
         return (
@@ -110,6 +115,20 @@ const TableFaveNews = ({ data, isSuccess  }) => {
           />
         );
       })}
+=======
+      <ResponsivNews showDrawer={showDrawer} data={data} />
+      {selectedCourse && (
+        <PanelModal
+          isMyNews={true}
+          onClose={onClose}
+          open={open}
+          title={selectedCourse.title}
+          newsId={selectedCourse.newsId}
+          lastUpdate={selectedCourse.newsData.detailsNewsDto.insertDate}
+          describe={selectedCourse.newsData.detailsNewsDto.miniDescribe}
+        />
+      )}
+>>>>>>> 79769ab6379c0ca09403280cd978208a3f00af78
     </div>
   );
 };
