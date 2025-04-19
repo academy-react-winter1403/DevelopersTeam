@@ -101,23 +101,6 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-<<<<<<< HEAD
-      <ResponsiveReserveMyCourse data={data} showDrawer={showDrawer}/>
-      {data?.map((item) => {
-        return (
-          <PanelModal
-            isMyCourses={true}
-            onClose={onClose}
-            open={open}
-            title={item.courseName}
-            teacher={item.courseName}
-            lastUpdate={item.reserverDate}
-            courseId={item.courseId}
-            cost={item.courseData.cost}
-          />
-        );
-      })}
-=======
       <ResponsiveReserveMyCourse showDrawer={showDrawer} data={data} />
       {selectedCourse && (
         <PanelModal
@@ -132,7 +115,6 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           describe={selectedCourse?.courseData?.describe}
         />
       )}
->>>>>>> 79769ab6379c0ca09403280cd978208a3f00af78
     </div>
   );
 };
