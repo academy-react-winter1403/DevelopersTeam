@@ -32,7 +32,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
   const { mutate: mutateDeleteMyReserve } = useMutation({
     mutationFn: async (id) => {
       return await http.delete("/CourseReserve", {
-        data: { id: id },
+        data: { id:id },
       });
     },
     onSuccess: () => {
@@ -40,7 +40,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
       toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
-      // toast.error(error?.response.data.ErrorMessage);
+      toast.error(error?.response.data.ErrorMessage);
     },
   });
 
