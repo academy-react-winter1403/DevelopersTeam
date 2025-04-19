@@ -30,6 +30,7 @@ const Item = ({
   const [open, setOpen] = useState(false);
   const [openAnser, setOpenAnser] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [activeField, setActiveField] = useState(null);
   const emojiPickerRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -64,6 +65,15 @@ const Item = ({
 
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
+  };
+
+  const onEmojiClick = (emojiObject, { setFieldValue, values }) => {
+    if (!activeField) return;
+
+    setFieldValue(activeField, values[activeField] + emojiObject.emoji);
+  };
+  const handleFieldFocus = (fieldName) => {
+    setActiveField(fieldName);
   };
   return (
     <div
@@ -147,7 +157,7 @@ const Item = ({
                     parentId: id,
                   }}
                 >
-                  {({ handleSubmit }) => (
+                  {({ handleSubmit, setFieldValue, values }) => (
                     <Form
                       onSubmit={handleSubmit}
                       className="space-y-2 flex space-x-5"
@@ -196,6 +206,7 @@ const Item = ({
                           variant="borderless"
                           size="large"
                           className="placeholder:text-gray border-b border-borderGray pb-2 outline-none"
+                          onFocus={() => handleFieldFocus("title")}
                         />
                         <Field
                           as="textarea"
@@ -205,6 +216,7 @@ const Item = ({
                           maxLength={100}
                           variant="borderless"
                           className="placeholder:text-gray outline-none"
+                          onFocus={() => handleFieldFocus("describe")}
                         />
                       </div>
                     </Form>
