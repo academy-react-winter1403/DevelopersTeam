@@ -106,6 +106,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
             teacher={item.courseName}
             lastUpdate={item.reserverDate}
             courseId={item.courseId}
+            cost={item.courseData.cost}
           />
         );
       })}

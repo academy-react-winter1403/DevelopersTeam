@@ -9,6 +9,8 @@ import { VscChromeClose } from "react-icons/vsc";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import toast from "react-hot-toast";
+import DateComponent from "../../../common/date/dateComponent";
+import { NavLink } from "react-router-dom";
 
 const TableFaveNews = ({ data, isSuccess }) => {
   const queryClient = useQueryClient();
@@ -38,7 +40,6 @@ const TableFaveNews = ({ data, isSuccess }) => {
       toast.error(error?.response.data.ErrorMessage);
     },
   });
-
   useEffect(() => {
     if (isSuccess && data) {
       const newConverted = data.map((el) => {
@@ -54,10 +55,12 @@ const TableFaveNews = ({ data, isSuccess }) => {
               style={{ width: "60px", height: "60px", objectFit: "cover" }}
             />
           ),
-          name: el.title,
-          desc: "آموزش صفر تا صد کتابخانه پرطرفدار جی‌اس یعنی ری‌اکت همراه تسک های مفید برای یادگیری بهتر",
-          teacher: "محسن اسفندیاری",
-          date: "25 اردیبهشت 1403",
+          name: <NavLink to={`/news/newsdetail/${el.newsId}`}>
+            {el.title}
+          </NavLink>,
+          desc: el.newsData.detailsNewsDto.miniDescribe,
+          teacher: el.newsData.detailsNewsDto.addUserFullName,
+          date:  <DateComponent insertDate={el.newsData.detailsNewsDto.insertDate}/>,
           eye: (
             <div className="flex gap-2 items-center">
               <div
@@ -97,10 +100,13 @@ const TableFaveNews = ({ data, isSuccess }) => {
       {data?.map((item) => {
         return (
           <PanelModal
-            isMyCourses={true}
+            isMyNews={true}
             onClose={onClose}
             open={open}
             title={item.title}
+            newsId={item.newsId}
+            lastUpdate={item.newsData.detailsNewsDto.insertDate}
+            describe={item.newsData.detailsNewsDto.miniDescribe}
           />
         );
       })}
