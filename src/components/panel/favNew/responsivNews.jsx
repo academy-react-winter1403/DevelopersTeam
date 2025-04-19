@@ -3,16 +3,9 @@ import React from "react";
 import http from "./../../../core/services/interceptor";
 import defImg from "./../../../assets/images/courses/courseimg.svg";
 
-const ResponsivNews = () => {
-  const getFavNews = async () => {
-    const res = await http.get(`/SharePanel/GetMyFavoriteNews`);
-    return res;
-  };
-  const { data } = useQuery({
-    queryKey: "favNewsPanel",
-    queryFn: getFavNews,
-  });
-
+const ResponsivNews = ({data , showDrawer}) => {
+ 
+console.log(data,'dataaaa')
   return (
     <div className="w-full h-auto sm:hidden  ">
       <div className="w-full h-auto flex justify-between items-center mt-5  ">
@@ -22,11 +15,11 @@ const ResponsivNews = () => {
         </h2>
       </div>
 
-      {data?.myFavoriteNews?.map((item) => {
+      {data?.map((item) => {
         return (
-          <div className="bg-white w-full h-auto mt-5 dark:bg-gray-800">
+          <div className="bg-white w-full h-auto  dark:bg-gray-800">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3 dark:border-gray-600">
-              <div className="w-1/3 my-5">
+              <div className="w-28 my-5">
                 <img
                   src={
                     item.currentImageAddressTumb == null
@@ -37,12 +30,16 @@ const ResponsivNews = () => {
                   className="dark:opacity-90"
                 />
               </div>
-              <div className="flex flex-col">
-                <div className="text-xl font-bold line-clamp-1 dark:text-white">
+              <div className="flex w-full flex-col space-y-2">
+                <div className="text-md  font-bold line-clamp-1 dark:text-white" onClick={showDrawer}>
                   {item.title}
                 </div>
-                {/* <div className='text-[#787878] font-semibold dark:text-gray-300'>{item.محسن}</div> */}
-                {/* <div className='text-[#787878] font-semibold dark:text-gray-300'>{item.title}</div> */}
+                <div className="text-sm line-clamp-1 dark:text-white">
+                  {item.newsData.detailsNewsDto.miniDescribe}
+                </div>
+                <div className="text-xs line-clamp-1 dark:text-white">
+                  {item.newsData.detailsNewsDto.addUserFullName}
+                </div>
               </div>
             </div>
           </div>

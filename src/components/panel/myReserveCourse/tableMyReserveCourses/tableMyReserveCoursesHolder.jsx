@@ -95,7 +95,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-      <ResponsiveReserveMyCourse data={data} />
+      <ResponsiveReserveMyCourse data={data} showDrawer={showDrawer}/>
       {data?.map((item) => {
         return (
           <PanelModal

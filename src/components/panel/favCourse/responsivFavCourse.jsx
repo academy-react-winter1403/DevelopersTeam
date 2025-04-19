@@ -4,7 +4,7 @@ import http from "./../../../core/services/interceptor";
 import defImg from "./../../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../common/date/dateComponent";
 
-const ResponsivFavCourse = () => {
+const ResponsivFavCourse = ({showDrawer}) => {
   const getFavCourse = async () => {
     const res = await http.get(`/SharePanel/GetMyFavoriteCourses`);
     return res;
@@ -39,7 +39,7 @@ const ResponsivFavCourse = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <div className="text-xl font-bold line-clamp-1 dark:text-white">
+                <div className="text-xl font-bold line-clamp-1 dark:text-white" onClick={showDrawer}>
                   {item.courseTitle}
                 </div>
                 <div className="text-[#787878] text-sm font-semibold dark:text-gray-300">

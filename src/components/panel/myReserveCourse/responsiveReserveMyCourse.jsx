@@ -5,7 +5,8 @@ import defImg from "./../../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../common/date/dateComponent";
 import { TagsAccept, TagsNotAccept } from "../tagStatus/tagStatus";
 
-const ResponsiveReserveMyCourse = () => {
+const ResponsiveReserveMyCourse = ({showDrawer}) => {
+  
   const getReserveMyCourse = async () => {
     const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
     return res;
@@ -24,7 +25,7 @@ const ResponsiveReserveMyCourse = () => {
       {data?.map((item) => {
         return (
           <div className="bg-white w-full dark:bg-gray-800">
-            <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3 dark:border-gray-600">
+            <div className="border-b-1 border-red-400 w-11/12 mx-auto h-32 flex items-center gap-3 dark:border-gray-600">
               <div className="w-28 h-24 mt-8">
                 <img
                   src={
@@ -37,7 +38,7 @@ const ResponsiveReserveMyCourse = () => {
                 />
               </div>
               <div className="flex justify-between w-80">
-                <div className="text-xl font-bold line-clamp-1 dark:text-white">
+                <div className="text-xl font-bold line-clamp-1 dark:text-white " onClick={showDrawer}>
                   {item.courseName}
                 </div>
                 <div className="text-[#787878] text-sm font-semibold dark:text-gray-300">

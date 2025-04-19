@@ -100,7 +100,7 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-      <ResponsivFavCourse data={convertData} />
+      <ResponsivFavCourse data={convertData} showDrawer={showDrawer}/>
 
       {data?.map((item) => {
         return (

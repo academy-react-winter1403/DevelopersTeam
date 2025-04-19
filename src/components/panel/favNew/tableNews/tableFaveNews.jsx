@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import DateComponent from "../../../common/date/dateComponent";
 import { NavLink } from "react-router-dom";
 
-const TableFaveNews = ({ data, isSuccess }) => {
+const TableFaveNews = ({ data, isSuccess  }) => {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState("");
@@ -96,7 +96,7 @@ const TableFaveNews = ({ data, isSuccess }) => {
           </Suspense>
         </div>
       </div>
-      <ResponsivNews data={data} />
+      <ResponsivNews data={data} showDrawer={showDrawer}/>
       {data?.map((item) => {
         return (
           <PanelModal
