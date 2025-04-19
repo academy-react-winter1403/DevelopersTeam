@@ -31,7 +31,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
   const { mutate: mutateDeleteMyReserve } = useMutation({
     mutationFn: async (id) => {
       return await http.delete("/CourseReserve", {
-        data: { reserveId:id },
+        data: { id:id },
       });
     },
     onSuccess: () => {
