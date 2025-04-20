@@ -32,10 +32,10 @@ const HeroSection = () => {
 
   return (
     <div>
-      {/* Joyride Component */}
+    
       <Joyride steps={steps} continuous showSkipButton />
 
-      {/* Hero Section */}
+      
       <motion.div
         className="flex flex-col justify-center mt-10"
         initial="hidden"
