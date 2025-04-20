@@ -4,7 +4,7 @@ import ViewStroke from "./../../assets/images/view-stroke-rounded (1) 1.svg";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { MdOutlineDateRange } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../components/common/date/dateComponent";
 import http from "../../core/services/interceptor";
@@ -24,14 +24,7 @@ const NewsItemCard = ({
   likeId,
   keyword,
 }) => {
-  const fixUrl = (url) => (url ? url.replace(/\\/g, "/") : url);
-  const isValidImage = (url) =>
-    url &&
-    url !== "null" &&
-    url !== "undefined" &&
-    typeof url === "string" &&
-    url.trim().length > 0;
-
+  console.log(keyword);
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -77,7 +70,6 @@ const NewsItemCard = ({
       queryClient.invalidateQueries("news-list");
     },
   });
-  console.log("addUserProfileImage:", addUserProfileImage);
 
   return (
     <div className="my-5 rounded-2xl relative h-full bg-lightGray dark:bg-gray-800 w-full">
@@ -85,31 +77,19 @@ const NewsItemCard = ({
         {keyword}
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center 2xl:gap-5 relative sm:justify-between">
-        <div
-          className="relative w-fit  sm:h-72 rounded-2xl border-2 bg-black"
-          onClick={handleNavigation}
-        >
+        <div className="relative w-fit  sm:h-72 rounded-2xl border-2 bg-black" onClick={handleNavigation}>
           <img
-            src={
-              isValidImage(addUserProfileImage)
-                ? fixUrl(addUserProfileImage)
-                : defaultImg
-            }
+            src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
             alt="Profile"
-            className="w-fit h-full object-contain rounded-2xl"
-            onError={(e) => {
-              if (!e.target.hasError) {
-                e.target.hasError = true;
-                e.target.src = defaultImg;
-              }
-            }}
+            className="  w-fit  h-full  object-contain rounded-2xl "
+            onError={addDefaultImg}
           />
         </div>
 
         <div className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3 py-2 px-4 ">
           <div className="sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2">
-              {/* <div className=" lg:mt-2 md:w-4/5 w-full mt-0 mt-3">
+        {/* <div className=" lg:mt-2 md:w-4/5 w-full mt-0 mt-3">
           <div className=" sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold  text-[#272727] overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 "> */}
               {title}
@@ -136,9 +116,7 @@ const NewsItemCard = ({
               alt="View Stroke"
               className="md:h-5 md:w-5 w-4 h-4 dark:invert"
             />
-            <span className="text-sm font-bold text-[#272727] dark:text-gray-300">
-              225
-            </span>
+            <span className="text-sm font-bold text-[#272727] dark:text-gray-300">225</span>
           </div>
           <div className="flex items-center gap-2 mt-5">
             <MdOutlineDateRange className="md:h-5 md:w-5 w-4 h-4 dark:text-gray-400" />
