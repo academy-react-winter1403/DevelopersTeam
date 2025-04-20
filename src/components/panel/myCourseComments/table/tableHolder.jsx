@@ -5,6 +5,7 @@ import DateComponent from "../../../common/date/dateComponent";
 const TableComp = lazy(() => import("./tableComp"));
 import { CiEdit } from "react-icons/ci";
 import EditModal from "../editModal";
+import ResponsiveCommentCourse from "../responsiveCommentCourse";
 
 const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
   const [currentEditItem, setCurrentEditItem] = useState(null);
@@ -59,6 +60,7 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
           </Suspense>
         </div>
       </div>
+      <ResponsiveCommentCourse  data={data} />
 
       {currentEditItem && (
         <EditModal

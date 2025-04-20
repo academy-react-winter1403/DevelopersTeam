@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
-import CalenderComp from "./../dashboard/mainDashboard/calender/calender";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";

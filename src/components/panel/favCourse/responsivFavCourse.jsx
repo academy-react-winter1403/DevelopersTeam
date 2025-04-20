@@ -5,7 +5,6 @@ import defImg from "./../../../assets/images/courses/courseimg.svg";
 import DateComponent from "../../common/date/dateComponent";
 
 const ResponsivFavCourse = ({ showDrawer, data }) => {
-  console.log("Ddddddd",data);
   return (
     <div className="w-full h-auto sm:hidden pb-3">
       <div className="w-full h-auto flex justify-between items-center mt-5 mb-5  ">

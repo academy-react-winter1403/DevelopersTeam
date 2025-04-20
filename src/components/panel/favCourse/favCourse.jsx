@@ -46,8 +46,6 @@ const FavCourse = () => {
     });
   };
 
-  // console.log("filteredData",filteredData);
-  // console.log("data",data);
   return (
     <div>
       <div className="hidden sm:block">

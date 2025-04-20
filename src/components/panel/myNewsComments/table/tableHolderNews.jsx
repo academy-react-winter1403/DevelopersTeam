@@ -4,6 +4,7 @@ import { Spin } from "antd";
 import ResponsiveReserveMyCourse from "../../myReserveCourse/responsiveReserveMyCourse";
 import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import DateComponent from "../../../common/date/dateComponent";
+import ResponseveCommentNews from "../responseveCommentNews";
 
 const TableHolderNews = ({
   data,
@@ -46,7 +47,7 @@ const TableHolderNews = ({
           </Suspense>
         </div>
       </div>
-      <ResponsiveReserveMyCourse />
+      <ResponseveCommentNews data={data} />
     </div>
   );
 };
