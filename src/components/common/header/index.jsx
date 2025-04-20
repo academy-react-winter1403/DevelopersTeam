@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import Joyride from "react-joyride";
 import logo from "./../../../assets/images/logo.svg";
 import logoText from "./../../../assets/images/logoText.svg";
-import darkMood from "./../../../assets/images/darkLego.svg";
 import { NavLink } from "react-router-dom";
-import { AlignLeftOutlined } from "@ant-design/icons";
 import { getData } from "../../../core/localStorage/localStorage";
 import { FiUser } from "react-icons/fi";
 import { Button } from "antd";
@@ -15,21 +14,53 @@ import { GoSun } from "react-icons/go";
 const Header = () => {
   const token = getData("authToken");
   const { darkMode, setDarkMode } = useDarkMode();
+
+  const steps = [
+    {
+      target: ".header-logo",
+      content: "این لوگوی سایت ماست. با کلیک به صفحه اصلی می‌روی!",
+    },
+    {
+      target: ".header-menu", 
+      content: "از اینجا به صفحه‌های خانه، دوره‌ها و مقالات برو.",
+    },
+    {
+      target: ".header-darkmode",
+      content: "برای روشن یا تاریک کردن ظاهر سایت، اینجا کلیک کن!",
+    },
+    {
+      target: ".header-auth",  
+      content: "برای ورود یا دسترسی به پنل کاربری از این دکمه استفاده کن.",
+    },
+  ];
+
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      <NavLink to="/" className="flex w-1/5 justify-center items-center">
+      <Joyride
+        steps={steps}
+        continuous
+        showSkipButton
+        locale={{
+          next: "بعدی",
+          back: "قبلی",
+          skip: "رد کردن",
+          last: "پایان",
+        }}
+      />
+
+      <NavLink
+        to="/"
+        className="flex w-1/5 justify-center items-center header-logo"
+      >
         <img
           src={logo}
           alt="logo"
-          className="w-10 h-10   xs:w-12 xs:h-14  "
+          className="w-10 h-10 xs:w-12 xs:h-14"
         />
-        <img
-          src={logoText}
-          alt="text"
-          className="w-24 h-10  "
-        />
+        <img src={logoText} alt="text" className="w-24 h-10" />
       </NavLink>
-      <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden">
+
+      <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden header-menu">
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -67,10 +98,11 @@ const Header = () => {
           <span className="h-28 leading-12">اخبار و مقالات</span>
         </NavLink>
       </div>
+
       <div className="flex w-1/5 justify-center items-center space-x-3">
         <div
           onClick={() => setDarkMode(!darkMode)}
-          className="border-0 lg:border-2 border-gray-200  dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full "
+          className="header-darkmode border-0 lg:border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full"
         >
           {darkMode ? (
             <GoSun className="size-5 text-white cursor-pointer" />
@@ -78,7 +110,7 @@ const Header = () => {
             <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
           )}
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center header-auth">
           {token ? (
             <NavLink to="/panel/dashboard">
               <Button

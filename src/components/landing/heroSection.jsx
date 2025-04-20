@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import Joyride from "react-joyride"; 
 
 const container = {
   hidden: { opacity: 0 },
@@ -22,59 +23,72 @@ const item = {
 };
 
 const HeroSection = () => {
+  const steps = [
+    {
+      target: ".hero-navlink",   
+      content: "با کلیک روی این دکمه می‌توانید یادگیری را شروع کنید!",
+    },
+  ];
+
   return (
-    <motion.div
-      className="flex flex-col justify-center mt-10"
-      initial="hidden"
-      animate="visible"
-      variants={container}
-    >
-      <motion.h2
-        variants={item}
-        className="mx-auto w-[70%] text-[20px] md:text-3xl font-bold text-center dark:text-white"
-      >
-        تجربه ای بی نظیر در یادگیری کدنویسی
-      </motion.h2>
+    <div>
+      {/* Joyride Component */}
+      <Joyride steps={steps} continuous showSkipButton />
 
-      <motion.h2
-        variants={item}
-        className="mx-auto w-[70%] text-[20px] md:text-3xl md:mt-2 font-bold text-center dark:text-white"
+      {/* Hero Section */}
+      <motion.div
+        className="flex flex-col justify-center mt-10"
+        initial="hidden"
+        animate="visible"
+        variants={container}
       >
-        از<span> </span>
-        <motion.span
-          className="text-blue-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+        <motion.h2
+          variants={item}
+          className="hero-title mx-auto w-[70%] text-[20px] md:text-3xl font-bold text-center dark:text-white"
         >
-          مبتدی<span> </span>
-        </motion.span>
-        تا<span> </span>
-        <motion.span
-          className="text-red-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          تجربه ای بی نظیر در یادگیری کدنویسی
+        </motion.h2>
+
+        <motion.h2
+          variants={item}
+          className="hero-subtitle mx-auto w-[70%] text-[20px] md:text-3xl md:mt-2 font-bold text-center dark:text-white"
         >
-          حرفه ای
-        </motion.span>
-        <span>!</span>
-      </motion.h2>
+          از<span> </span>
+          <motion.span
+            className="text-blue-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            مبتدی<span> </span>
+          </motion.span>
+          تا<span> </span>
+          <motion.span
+            className="text-red-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            حرفه ای
+          </motion.span>
+          <span>!</span>
+        </motion.h2>
 
-      <motion.h5
-        variants={item}
-        className="mx-auto w-[70%] text-[#787878] dark:text-gray-400 mt-4 text-[13px] text-center"
-      >
-        آکادمی فوق تخصصی کدنویسی و برنامه نویسی از سنین کودکی تا بزرگسالی
-      </motion.h5>
+        <motion.h5
+          variants={item}
+          className="mx-auto w-[70%] text-[#787878] dark:text-gray-400 mt-4 text-[13px] text-center"
+        >
+          آکادمی فوق تخصصی کدنویسی و برنامه نویسی از سنین کودکی تا بزرگسالی
+        </motion.h5>
 
-      <NavLink
-        to="/courses"
-        className="mx-auto m-2 w-[35%] text-sm h-8 leading-8 xs:w-[20%] sm:w-[17%] md:w-[14%] xl:w-[8%] xl:p-2 xl:leading-4 text-center rounded-full bg-[#3772FF] hover:opacity-85 text-white "
-      >
-        شروع یادگیری
-      </NavLink>
-    </motion.div>
+        <NavLink
+          to="/courses"
+          className="hero-navlink mx-auto m-2 w-[35%] text-sm h-8 leading-8 xs:w-[20%] sm:w-[17%] md:w-[14%] xl:w-[8%] xl:p-2 xl:leading-4 text-center rounded-full bg-[#3772FF] hover:opacity-85 text-white "
+        >
+          شروع یادگیری
+        </NavLink>
+      </motion.div>
+    </div>
   );
 };
 
