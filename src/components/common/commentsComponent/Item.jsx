@@ -105,6 +105,7 @@ const Item = ({
 
           <div className="space-y-1 sm:space-y-2 overflow-hidden">
             <p className="text-xs sm:text-sm dark:text-gray-300 font-semibold">
+              {id}
               {title}
             </p>
             <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>

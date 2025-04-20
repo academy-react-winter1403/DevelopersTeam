@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../core/services/interceptor";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { TagsA } from "../course-card/tags/tags";
+import toast from "react-hot-toast";
 
 const NewsCard = ({
   addUserProfileImage,
@@ -30,7 +31,11 @@ const NewsCard = ({
     mutationFn: handleLike,
     onSuccess: () => {
       queryClient.invalidateQueries("topNews");
+      toast.success("عملیات با موفقیت انجام شد ")
     },
+    onError:(error) => {
+      toast.error(error?.response.data.ErrorMessage)
+    }
   });
 
   const handleDelete = async () => {

@@ -21,6 +21,7 @@ const TableMyCoursesHolder = ({
   const [CourseIdx, setCourseIdx] = useState();
   const [firstModal, setFirstModal] = useState(false);
   const [secondModal, setSecondModal] = useState(false);
+  const [thirdModal, setThirdModal] = useState(false);
 
   const showModal = (id) => {
     setFirstModal(true);
@@ -32,6 +33,11 @@ const TableMyCoursesHolder = ({
   };
   const handleSecondOk = () => {
     setSecondModal(false);
+    setThirdModal(true); // Open third modal when second is closed
+  };
+
+  const handleThirdOk = () => {
+    setThirdModal(false); // Close third modal
   };
 
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -107,17 +113,17 @@ const TableMyCoursesHolder = ({
       />
       {selectedCourse && (
         <PanelModal
-          isMyCourses={true}
-          onClose={onClose}
-          open={open}
-          img={selectedCourse.tumbImageAddress}
-          title={selectedCourse.courseTitle}
-          paymentStatus={selectedCourse.paymentStatus}
-          describe={selectedCourse.describe}
-          teacher={selectedCourse.fullName}
-          lastUpdate={selectedCourse.lastUpdate}
-          cost={selectedCourse.cost}
-          courseId={selectedCourse.courseId}
+          firstModal={firstModal}
+          secondModal={secondModal}
+          thirdModal={thirdModal}
+          setSecondModal={setSecondModal}
+          setFirstModal={setFirstModal}
+          setThirdModal={setThirdModal}
+          id={CourseIdx}
+          handleFirstOk={handleFirstOk}
+          handleSecondOk={handleSecondOk}
+          handleThirdOk={handleThirdOk}
+          factureData={data}
         />
       )}
     </div>

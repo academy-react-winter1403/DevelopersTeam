@@ -13,9 +13,12 @@ const PaymentModal = ({
   firstModal,
   id,
   secondModal,
+  thirdModal,
   setSecondModal,
+  setThirdModal,
   handleFirstOk,
   handleSecondOk,
+  handleThirdOk,
   setFirstModal,
   factureData,
 }) => {
@@ -117,14 +120,19 @@ const PaymentModal = ({
           )}
         </Formik>
       </Modal>
-      <Modal open={false}>
+      <Modal
+        open={secondModal}
+        onOk={handleSecondOk}
+        onCancel={() => setSecondModal(false)}
+        footer={false}
+      >
         <FacturePayment factureData={factureData} data={data} />
       </Modal>
       <Modal
         title="ارسال فیش واریزی"
-        open={secondModal}
-        onOk={handleSecondOk}
-        onCancel={() => setSecondModal(false)}
+        open={thirdModal}
+        onOk={handleThirdOk}
+        onCancel={() => setThirdModal(false)}
         footer={false}
       >
         <Formik onSubmit={handleAddPaymentImage} initialValues={{ Image: "" }}>

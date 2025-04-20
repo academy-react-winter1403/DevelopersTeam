@@ -41,11 +41,11 @@ const PanelModal = ({
         style={darkMode && { backgroundColor: "#1e2939" }}
       >
         <div className="lg:w-[430px] h-auto mx-4 lg:m-0 dark:text-white dark:bg-gray-800">
-          <div className="w-full md:h-[287px] rounded-3xl overflow-hidden ">
+          <div className="w-full md:h-[287px] rounded-3xl overflow-hidden  mb-3">
             <img
               src={img ? img : defaultImg}
               alt="not set"
-              className="w-full h-[287px] "
+              className="w-full h-[287px]  "
             />
           </div>
 

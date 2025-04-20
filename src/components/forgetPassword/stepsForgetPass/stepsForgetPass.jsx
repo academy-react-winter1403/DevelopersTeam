@@ -20,7 +20,7 @@ const StepsForgetPass = ({ step }) => {
         return (
           <div className="w-full h-full flex items-center space-x-5">
             <div
-              className={`w-12 h-12 rounded-full bg-white flex justify-center items-center ${
+              className={`w-12 h-12 rounded-full bg-white flex justify-center items-center dark:text-black ${
                 step > index && "!bg-navyBlue text-white w-14 h-14"
               }`}
             >
@@ -28,7 +28,7 @@ const StepsForgetPass = ({ step }) => {
             </div>
             <div>
               <h1
-                className={`text-gray text-sm lg:text-base ${
+                className={`text-gray text-sm lg:text-base dark:text-white ${
                   step > index && "font-semibold !text-black"
                 }`}
               >

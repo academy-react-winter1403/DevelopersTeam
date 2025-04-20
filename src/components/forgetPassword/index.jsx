@@ -15,12 +15,12 @@ const ForgetPassword = () => {
     setStep(step - 1);
   };
   return (
-    <div dir="rtl" className="md:grid md:grid-cols-5 w-full h-[800px] ">
+    <div dir="rtl" className="md:grid md:grid-cols-5 w-full h-[800px]">
       {/* right section */}
       <NavLink to="/" className="w-fit flex md:hidden p-5 ">
         <img src={logo} alt="logo" className="w-14" />
       </NavLink>
-      <div className="col-span-2 bg-lightGray pt-24 md:pr-5 lg:pr-16 hidden md:block">
+      <div className="col-span-2 bg-lightGray dark:bg-gray-700 pt-24 md:pr-5 lg:pr-16 hidden md:block">
         <NavLink to="/" className="w-fit flex flex-row items-center">
           <img src={logo} alt="logo" className="w-14" />
           <img src={logoText} alt="text" className="w-44 h-8 mt-3" />

@@ -7,7 +7,10 @@ import { NavLink, useParams } from "react-router-dom";
 const FacturePayment = ({ factureData, data }) => {
   const elementRef = useRef(null);
   const [image, setimage] = useState();
-  console.log("fffff", factureData);
+
+  console.log("factureData", factureData);
+  console.log("factureDatafactureData", data);
+
   const htmlToImageConvert = () => {
     toPng(elementRef.current, { cacheBust: false })
       .then((dataUrl) => {
@@ -22,11 +25,6 @@ const FacturePayment = ({ factureData, data }) => {
       .catch((err) => {
         console.log(err);
       });
-  };
-  const { id } = useParams();
-  console.log(id);
-  const getCoursedetail = async () => {
-    const res = await HttpProxy.get;
   };
 
   return (
@@ -48,7 +46,7 @@ const FacturePayment = ({ factureData, data }) => {
             <p className="text-center">اکادمی بحرالعلوم</p>
             <tr className=" flex justify-around border-t border-slate-100 dark:border-slate-900">
               <td className=" border-l-2 border-black w-6/12 text-center">
-                نام دوره :{" "}
+                نام دوره : {data?.groupName}
               </td>
               <td className="w-6/12 text-center">
                 {factureData?.listOfMyCourses.courseTitle}
@@ -84,7 +82,10 @@ const FacturePayment = ({ factureData, data }) => {
               </td>
               {/* <td className="w-6/12 text-center">{data.peyCode}</td> */}
             </tr>
-            <div className="flex max-w-80 h-16 m-2">
+            <button onClick={htmlToImageConvert} type="submit">
+              ارسال
+            </button>
+            {/* <div className="flex max-w-80 h-16 m-2">
               <button
                 className="butten1 md:w-6/12 w-full mx-auto   "
                 onClick={htmlToImageConvert}
@@ -98,7 +99,7 @@ const FacturePayment = ({ factureData, data }) => {
               >
                 برگشت
               </NavLink>
-            </div>
+            </div> */}
           </tbody>
         </table>
       </div>

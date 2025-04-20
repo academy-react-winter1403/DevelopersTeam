@@ -4,7 +4,7 @@ import NewsList from "./newsList";
 
 const News = () => {
   return (
-    <div>
+    <div className="sm:mx-14 mb-4">
       <HeroSectionNews />
       <NewsList />
     </div>

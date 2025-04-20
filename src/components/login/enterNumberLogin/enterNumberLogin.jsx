@@ -63,9 +63,9 @@ const EnterNumberLogin = ({ nextStep, text }) => {
           </Formik>
 
           <div className="flex ">
-            <div className="flex items-center space-x-2">
-              <Checkbox className="text-xs font-semibold">
-                مرا به خاطر بسپار
+            <div className="flex items-center space-x-2  ">
+              <Checkbox className="text-xs  font-semibold">
+                <span className="dark:text-white"> مرا به خاطر بسپار</span>
               </Checkbox>
             </div>
             <div className="relative right-8 xs:right-[156px] flex justify-center items-center space-x-2 w-40 h-9 rounded-full bg-lightBlue text-navyBlue text-xs xs:text-sm">
