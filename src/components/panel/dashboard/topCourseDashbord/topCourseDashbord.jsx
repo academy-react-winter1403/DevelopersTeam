@@ -27,7 +27,7 @@ const TopCourseDashbord = () => {
 
   const getTopCourses = async () => {
     const res = await http.get(
-      `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10&SortingCol=DESC&SortType=LastUpdate&Query=`
+      `/SharePanel/GetMyCourses?SortingCol=LastUpdate`
     );
     return res;
   };

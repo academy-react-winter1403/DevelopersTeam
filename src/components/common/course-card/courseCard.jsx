@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const CourseCard = ({
   title,
@@ -42,6 +43,10 @@ const CourseCard = ({
     mutationFn: handleLike,
     onSuccess: () => {
       queryClient.invalidateQueries(keyMutate);
+      toast.success("عملبات با موفقیت انجام شد");
+    },
+    onError: (error) => {
+      toast.error(error.response.data.ErrorMessage);
     },
   });
 
@@ -54,9 +59,11 @@ const CourseCard = ({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries(keyMutate);
+      toast.success("عملبات با موفقیت انجام شد");
     },
     onError: (error) => {
-      console.error("Error deleting like:", error);
+      // console.error("Error deleting like:", error);
+      toast.error(error.response.data.ErrorMessage);
     },
   });
 
@@ -67,6 +74,11 @@ const CourseCard = ({
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries(keyMutate);
+      // toast.success("عملبات با موفقیت انجام شد");
+    },
+    onError: (error) => {
+      // console.error("Error deleting like:", error);
+      toast.error(error.response.data.ErrorMessage);
     },
   });
 
