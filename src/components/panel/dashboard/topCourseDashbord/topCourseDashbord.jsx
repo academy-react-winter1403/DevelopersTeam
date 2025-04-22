@@ -46,7 +46,7 @@ const TopCourseDashbord = () => {
             {el.courseTitle}
           </NavLink>
         );
-        newData["desc"] = el.describe;
+        newData["desc"] = <span className="truncate line-clamp-3 overflow-hidden">{el.describe}</span>;
         newData["teacher"] = el.fullName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = (
