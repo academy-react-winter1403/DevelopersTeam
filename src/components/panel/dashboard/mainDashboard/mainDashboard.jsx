@@ -12,7 +12,7 @@ const MainDashboard = ({ userData }) => {
   };
 
   const { data } = useQuery({
-    queryKey: "userInfo",
+    queryKey:[ "userInfo"],
     queryFn: getUserInfo,
   });
 

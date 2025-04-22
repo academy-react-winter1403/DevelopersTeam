@@ -33,7 +33,7 @@ const TopCourseDashbord = () => {
   };
 
   const { data, isSuccess } = useQuery({
-    queryKey: "topCoursesPanel",
+    queryKey:[ "topCoursesPanel"],
     queryFn: getTopCourses,
   });
 

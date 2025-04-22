@@ -55,7 +55,7 @@ const MyReserveCourse = () => {
     return res;
   };
   const { data: moreData, error: moreDataError } = useQuery({
-    queryKey: "myReserveCoursesPanelMore",
+    queryKey: ["myReserveCoursesPanelMore"],
     queryFn: getMyReserveCoursesMore,
   });
 

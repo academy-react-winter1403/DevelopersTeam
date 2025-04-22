@@ -25,7 +25,7 @@ const GetNewsDetailList = () => {
     return res?.detailsNewsDto;
   };
   const { data } = useQuery({
-    queryKey: "newsDetail",
+    queryKey: ["newsDetail"],
     queryFn: getDetail,
   });
 
@@ -38,7 +38,7 @@ const GetNewsDetailList = () => {
   const { mutate: mutateRate } = useMutation({
     mutationFn: handleRate,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries(["newsDetail"]);
       toast.success("امتیاز با موفقیت ثبت شد");
     },
     onError: (error) => {
@@ -52,7 +52,7 @@ const GetNewsDetailList = () => {
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries(["newsDetail"]);
       toast.success("لایک با موفقیت انجام شد");
     },
     onError: (error) => {
@@ -67,7 +67,7 @@ const GetNewsDetailList = () => {
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries(["newsDetail"]);
     },
     onError: (error) => {
       console.error("Error deleting like:", error);
@@ -80,7 +80,7 @@ const GetNewsDetailList = () => {
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries(["newsDetail"]);
       toast.error("مقاله را دوست نداشتید");
     },
     onError: () => {
@@ -94,7 +94,7 @@ const GetNewsDetailList = () => {
   const { mutate: mutateFavorite } = useMutation({
     mutationFn: handleFavorite,
     onSuccess: () => {
-      queryClient.invalidateQueries("newsDetail");
+      queryClient.invalidateQueries(["newsDetail"]);
       toast.success("دوره با موفقیت به علاقه مندی ها اضافه شد");
     },
     onError: () => {
@@ -112,7 +112,7 @@ const GetNewsDetailList = () => {
   const { mutate: mutateDeleteFav } = useMutation({
     mutationFn: handleDeleteFav,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
     },
     onError: (error) => {
       console.error("Error deleting like:", error);

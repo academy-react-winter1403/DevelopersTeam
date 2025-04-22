@@ -9,7 +9,7 @@ const TopCourses = () => {
   };
 
   const { data } = useQuery({
-    queryKey: "topCourses",
+    queryKey: ["topCourses"],
     queryFn: getTopCourses,
   });
 

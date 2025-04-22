@@ -42,7 +42,7 @@ const CourseCard = ({
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries(keyMutate);
+      queryClient.invalidateQueries([keyMutate]);
       toast.success("عملبات با موفقیت انجام شد");
     },
     onError: (error) => {
@@ -58,7 +58,7 @@ const CourseCard = ({
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      queryClient.invalidateQueries(keyMutate);
+      queryClient.invalidateQueries([keyMutate]);
       toast.success("عملبات با موفقیت انجام شد");
     },
     onError: (error) => {
@@ -73,7 +73,7 @@ const CourseCard = ({
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries(keyMutate);
+      queryClient.invalidateQueries([keyMutate]);
       // toast.success("عملبات با موفقیت انجام شد");
     },
     onError: (error) => {

@@ -14,7 +14,7 @@ const CommentComp = ({ id }) => {
   };
 
   const { data } = useQuery({
-    queryKey: "newsComment",
+    queryKey:[ "newsComment"],
     queryFn: getNewsComment,
   });
 

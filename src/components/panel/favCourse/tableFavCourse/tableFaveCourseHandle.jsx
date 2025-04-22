@@ -46,7 +46,7 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {

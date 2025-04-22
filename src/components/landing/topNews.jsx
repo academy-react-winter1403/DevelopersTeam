@@ -12,7 +12,7 @@ const TopNews = () => {
   };
 
   const { data } = useQuery({
-    queryKey: "topNews",
+    queryKey:[ "topNews"],
     queryFn: getTopNews,
   });
 

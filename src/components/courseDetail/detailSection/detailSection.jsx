@@ -14,7 +14,7 @@ const DetailSection = () => {
   };
 
   const { data } = useQuery({
-    queryKey: "courseDetail",
+    queryKey:[ "courseDetail"],
     queryFn: getCourseDetail,
   });
 

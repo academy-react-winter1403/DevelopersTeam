@@ -39,7 +39,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("myReserveCoursesPanel");
+      queryClient.invalidateQueries(["myReserveCoursesPanel"]);
       toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {

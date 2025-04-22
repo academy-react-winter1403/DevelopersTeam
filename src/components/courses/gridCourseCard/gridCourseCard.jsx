@@ -40,7 +40,7 @@ const GridCourseCard = ({
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries(keyMutate);
+      queryClient.invalidateQueries([keyMutate]);
     },
   });
   const handleDelete = async () => {
@@ -51,7 +51,7 @@ const GridCourseCard = ({
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      queryClient.invalidateQueries(keyMutate);
+      queryClient.invalidateQueries([keyMutate]);
     },
     onError: (error) => {
       console.error("Error deleting like:", error);
@@ -63,7 +63,7 @@ const GridCourseCard = ({
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries(keyMutate);
+      queryClient.invalidateQueries([keyMutate]);
     },
   });
 

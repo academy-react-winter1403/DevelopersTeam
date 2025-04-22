@@ -41,7 +41,7 @@ const CommentCard = ({
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries(["comments"]);
       toast.success("نظرتان با موفقیت ثبت شد");
     },
     onError: () => {
@@ -58,7 +58,7 @@ const CommentCard = ({
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries(["comments"]);
     },
     onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);
@@ -74,7 +74,7 @@ const CommentCard = ({
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDeleteLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("comments");
+      queryClient.invalidateQueries(["comments"]);
     },
     onError: (error) => {
       console.log("diss", error);

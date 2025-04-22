@@ -28,7 +28,7 @@ const DetailContainer = ({ data, id }) => {
   const { mutate } = useMutation({
     mutationFn: handleRate,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       toast.success("امتیاز با موفقیت ثبت شد");
     },
     onError: (error) => {

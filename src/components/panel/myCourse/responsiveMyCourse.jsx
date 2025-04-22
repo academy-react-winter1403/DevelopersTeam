@@ -12,7 +12,7 @@ const ResponsiveMyCourse = ({ showDrawer }) => {
     return res;
   };
   const { data } = useQuery({
-    queryKey: "myCoursePanel",
+    queryKey: ["myCoursePanel"],
     queryFn: getMyCourse,
   });
 

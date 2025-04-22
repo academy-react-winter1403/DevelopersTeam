@@ -28,7 +28,7 @@ const MoreInfo = ({ data }) => {
   const { mutate: mutateReserve } = useMutation({
     mutationFn: handleReserve,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       setIsReserveModalOpen(true);
       // toast.success("دوره با موفقیت رزرو شد");
     },
@@ -48,7 +48,7 @@ const MoreInfo = ({ data }) => {
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       toast.success("لایک با موفقیت انجام شد");
     },
     onError: () => {
@@ -65,7 +65,7 @@ const MoreInfo = ({ data }) => {
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       toast.success("ویرایش انجام شد");
     },
     onError: (error) => {
@@ -81,7 +81,7 @@ const MoreInfo = ({ data }) => {
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       toast.error("دوره را دوست نداشتید");
     },
     onError: () => {
@@ -97,7 +97,7 @@ const MoreInfo = ({ data }) => {
   const { mutate: mutateFavorite } = useMutation({
     mutationFn: handleFavorite,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
       toast.success("دوره با موفقیت به علاقه مندی ها اضافه شد");
     },
     onError: () => {
@@ -118,7 +118,7 @@ const MoreInfo = ({ data }) => {
   const { mutate: mutateDeleteFav } = useMutation({
     mutationFn: handleDeleteFav,
     onSuccess: () => {
-      queryClient.invalidateQueries("courseDetail");
+      queryClient.invalidateQueries(["courseDetail"]);
     },
     onError: (error) => {
       console.error("Error deleting like:", error);

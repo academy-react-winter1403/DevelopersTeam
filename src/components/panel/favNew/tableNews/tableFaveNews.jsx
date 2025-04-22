@@ -40,7 +40,7 @@ const TableFaveNews = ({ data, isSuccess  }) => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("favNewsPanel");
+      queryClient.invalidateQueries(["favNewsPanel"]);
     },
     onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);

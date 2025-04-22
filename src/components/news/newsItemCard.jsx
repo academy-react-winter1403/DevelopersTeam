@@ -44,7 +44,7 @@ const NewsItemCard = ({
   const { mutate } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("news-list");
+      queryClient.invalidateQueries(["news-list"]);
     },
   });
 
@@ -57,7 +57,7 @@ const NewsItemCard = ({
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      queryClient.invalidateQueries("news-list");
+      queryClient.invalidateQueries(["news-list"]);
     },
   });
 
@@ -67,7 +67,7 @@ const NewsItemCard = ({
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries("news-list");
+      queryClient.invalidateQueries(["news-list"]);
     },
   });
 

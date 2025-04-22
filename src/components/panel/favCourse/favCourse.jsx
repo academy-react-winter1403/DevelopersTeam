@@ -13,7 +13,7 @@ const FavCourse = () => {
     return res;
   };
   const { data } = useQuery({
-    queryKey: "favCoursesPanel",
+    queryKey: ["favCoursesPanel"],
     queryFn: getFavCourse,
   });
 
