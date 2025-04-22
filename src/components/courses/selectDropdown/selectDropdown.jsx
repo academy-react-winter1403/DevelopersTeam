@@ -1,6 +1,5 @@
 import React from "react";
 import { Select } from "antd";
-import { UserAddOutlined } from "@ant-design/icons";
 
 const SelectDropdown = ({ icon, inputLabel, name, placeholder, data , type }) => {
   const handleChange = (value) => {

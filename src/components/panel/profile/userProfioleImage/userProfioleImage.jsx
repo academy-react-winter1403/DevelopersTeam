@@ -8,7 +8,6 @@ import {
 } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import { Dropdown, Upload, message } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
 import { TiTickOutline } from "react-icons/ti";
 

@@ -1,4 +1,3 @@
-import { AlignLeftOutlined } from "@ant-design/icons";
 import { Button, Divider, Drawer } from "antd";
 import React, { useState } from "react";
 import { IoIosClose } from "react-icons/io";
@@ -11,6 +10,7 @@ import logo from "./../../assets/images/landing/logoDrawer.svg";
 import { PiInstagramLogoLight } from "react-icons/pi";
 import { PiTelegramLogoLight } from "react-icons/pi";
 import { useDarkMode } from "../../context/theme/themeContext";
+import { TfiAlignLeft } from "react-icons/tfi";
 
 const HeaderDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -30,7 +30,7 @@ const HeaderDrawer = () => {
         onClick={showDrawer}
         style={darkMode && { color: "#fff" }}
       >
-        <AlignLeftOutlined />
+        <TfiAlignLeft />
       </Button>
 
       <Drawer

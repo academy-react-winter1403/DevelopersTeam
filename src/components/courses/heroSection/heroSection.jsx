@@ -1,4 +1,3 @@
-import { DownOutlined } from "@ant-design/icons";
 import React from "react";
 import { TbChevronsDown } from "react-icons/tb";
 import img1 from "./../../../assets/images/courses/Star1.png";

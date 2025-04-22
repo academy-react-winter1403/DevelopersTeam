@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
-import { CheckCircleFilled } from "@ant-design/icons";
 import img from "./../../../assets/images/courseDetail/reserveModal.svg";
 import { LuCircleCheckBig } from "react-icons/lu";
 import { NavLink } from "react-router-dom";
