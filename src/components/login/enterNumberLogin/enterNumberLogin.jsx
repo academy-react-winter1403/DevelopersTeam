@@ -8,7 +8,7 @@ import { Checkbox } from "antd";
 import { Form, Formik } from "formik";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
-import { setData } from "../../../core/localStorage/localStorage";
+import { getData, setData } from "../../../core/localStorage/localStorage";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
   const icon = (
@@ -34,6 +34,24 @@ const EnterNumberLogin = ({ nextStep, text }) => {
       console.error("Login error:", error);
     }
   };
+
+  // const handleMutation = async (values) => {
+  //     const response = await mutateAsync(values);
+  //     if (response) {
+  //       const existingAccounts = getData("accounts") || [];
+  //       const newAccount = {
+  //         id: response.id,
+  //         token: response.token,
+  //         phoneOrGmail: values.phoneOrGmail,
+  //       };
+  //       const updatedAccounts = [...existingAccounts, newAccount];
+  //       setData("accounts", updatedAccounts);
+
+  //       setData("authToken", response.token);
+  //       setData("currentAccount", newAccount);
+  //       navigate("/");
+  //     }
+  // };
 
   const navigate = useNavigate();
 

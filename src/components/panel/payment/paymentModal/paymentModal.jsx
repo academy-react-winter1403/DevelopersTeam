@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import http from "./../../../../core/services/interceptor";
 import DatePicker from "react-multi-date-picker";
 import { useState } from "react";
@@ -21,8 +21,11 @@ const PaymentModal = ({
   handleThirdOk,
   setFirstModal,
   factureData,
+  cost,
 }) => {
-  const { mutate: handlePay } = useMutation({
+  const [paymentId, setPaymentId] = useState();
+
+  const { mutateAsync: handlePay } = useMutation({
     mutationFn: async (values) => {
       const formData = new FormData();
       formData.append("CourseId", id);
@@ -33,10 +36,12 @@ const PaymentModal = ({
       const res = await http.post(`/CoursePayment/StudentAddPeyment`, formData);
       return res;
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
+      console.log(res, "res payment");
       toast.success("پرداخت با موفقیت انجام شد");
       setFirstModal(false);
       setSecondModal(true);
+      setPaymentId(res.id);
     },
     onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);
@@ -44,23 +49,21 @@ const PaymentModal = ({
   });
 
   const getUserPayList = async () => {
-    if (!id) return;
     const res = await http.get(
-      `/CoursePayment/StudentUserPayList?CourseId=${id}`
+      `/CoursePayment/StudentUserPayList?CourseId=${paymentId}`
     );
     return res;
   };
   const { data } = useQuery({
     queryKey: ["userPayList"],
     queryFn: getUserPayList,
-    enabled: !!id,
   });
 
   const { mutate: handleAddPaymentImage } = useMutation({
     mutationFn: async (values) => {
       const formData = new FormData();
-      formData.append("PaymentId", data?.paymentId);
-      formData.append("Image", values.Image);
+      formData.append("PaymentId", paymentId);
+      formData.append("Image", values);
 
       const res = await http.post(`/CoursePayment/AddPeymentImage`, formData);
       return res;
@@ -73,6 +76,15 @@ const PaymentModal = ({
     onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);
     },
+  });
+
+  const getPaymentDetail = async () => {
+    const res = http.get(`/CoursePayment/${paymentId}`);
+    return res;
+  };
+  const { data: paymentDetail } = useQuery({
+    queryKey: ["paymentDetail", paymentId],
+    queryFn: getPaymentDetail,
   });
 
   return (
@@ -89,7 +101,7 @@ const PaymentModal = ({
           initialValues={{
             PaymentInvoiceNumber: "",
             PeymentDate: "",
-            Paid: "",
+            Paid: cost,
           }}
         >
           {({ handleSubmit }) => (
@@ -126,7 +138,13 @@ const PaymentModal = ({
         onCancel={() => setSecondModal(false)}
         footer={false}
       >
-        <FacturePayment factureData={factureData} data={data} />
+        <FacturePayment
+          setThirdModal={setThirdModal}
+          setSecondModal={setSecondModal}
+          paymentDetail={paymentDetail}
+          factureData={factureData}
+          data={data}
+        />
       </Modal>
       <Modal
         title="ارسال فیش واریزی"
@@ -135,7 +153,7 @@ const PaymentModal = ({
         onCancel={() => setThirdModal(false)}
         footer={false}
       >
-        <Formik onSubmit={handleAddPaymentImage} initialValues={{ Image: "" }}>
+        {/* <Formik onSubmit={handleAddPaymentImage} initialValues={{ Image: "" }}>
           {({ setFieldValue }) => (
             <Form>
               <Field
@@ -143,8 +161,8 @@ const PaymentModal = ({
                 type="file"
                 name="Image"
                 className="hidden"
-                onChange={(event) => {
-                  setFieldValue("Image", event.currentTarget.files[0]);
+                onChange={(e) => {
+                  setFieldValue("Image", e.target.files[0]);
                 }}
               />
               <label htmlFor="file-inp" className="flex flex-row">
@@ -160,7 +178,20 @@ const PaymentModal = ({
               </button>
             </Form>
           )}
-        </Formik>
+        </Formik> */}
+        <input
+          type="file"
+          name=""
+          className="hidden"
+          onChange={(e) => handleAddPaymentImage(e.target.files[0])}
+          id="file-inp"
+        />
+        <label htmlFor="file-inp" className="flex flex-row">
+          <div className="w-20 h-20 border-4 rounded-2xl border-borderGray flex justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
+            <BiImageAdd className="text-navyBlue w-10 h-10" />
+          </div>
+        </label>
+     
       </Modal>
     </>
   );

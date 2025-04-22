@@ -75,7 +75,7 @@ const MyReserveCourse = () => {
     }
   }
 
-  console.log("moreData", filteredData);
+  // console.log("moreData", filteredData);
 
   return (
     <div className="">

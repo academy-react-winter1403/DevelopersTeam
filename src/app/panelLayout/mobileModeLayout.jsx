@@ -6,6 +6,8 @@ import { CiGrid41 } from "react-icons/ci";
 import { PiBookLight } from "react-icons/pi";
 import { CiViewTimeline } from "react-icons/ci";
 import DrawerMenu from "./drawerMenu";
+import { TfiMore } from "react-icons/tfi";
+import { useState } from "react";
 
 const MobileModeLayout = () => {
   const getProfile = async () => {
@@ -16,6 +18,11 @@ const MobileModeLayout = () => {
     queryKey: ["profile"],
     queryFn: getProfile,
   });
+
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div className="sm:hidden h-[72px] border border-[#F0F0F0] dark:border-gray-700 bg-[#FEFDFF] dark:bg-gray-800 rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3 items-center">
@@ -77,8 +84,9 @@ const MobileModeLayout = () => {
           />
         </div>
       </NavLink>
-      <div className="w-14 h-14 rounded-full mx-2 flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-700">
-        <DrawerMenu />
+      <div className="relative w-14 h-14 rounded-full mx-2 flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-700">
+        <DrawerMenu isOpen={isOpen} />
+        <TfiMore onClick={() => setIsOpen(!isOpen)} className="w-8 h-8" />
       </div>
     </div>
   );

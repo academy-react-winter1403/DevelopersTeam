@@ -13,7 +13,7 @@ const onSuccess = (response) => {
 };
 
 const onError = (error) => {
-  console.log(error);
+  // console.log(error);
 
   if (error?.message === "Network Error") {
     toast.error("ابتدا وارد حساب کاربری شوید");
@@ -38,8 +38,11 @@ const onError = (error) => {
 instance.interceptors.response.use(onSuccess, onError);
 
 instance.interceptors.request.use((opt) => {
-  const token = getData("authToken") ? getData("authToken") : null;
-  if (token) opt.headers.Authorization = "Bearer " + token;
+  let token = localStorage.getItem("currentAccount");
+  token = JSON.parse(token);
+  // console.log(token);
+  // const token = getData("authToken") ? getData("authToken") : null;
+  opt.headers.Authorization = "Bearer " + token.token;
   return opt;
 });
 

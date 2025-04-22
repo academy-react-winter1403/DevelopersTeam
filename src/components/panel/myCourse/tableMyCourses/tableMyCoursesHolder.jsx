@@ -18,14 +18,14 @@ const TableMyCoursesHolder = ({
   setCovertedData,
   isSuccess,
 }) => {
-  const [CourseIdx, setCourseIdx] = useState();
+  const [CourseIdx, setCourseIdx] = useState([]);
   const [firstModal, setFirstModal] = useState(false);
   const [secondModal, setSecondModal] = useState(false);
   const [thirdModal, setThirdModal] = useState(false);
 
-  const showModal = (id) => {
+  const showModal = (data) => {
     setFirstModal(true);
-    setCourseIdx(id);
+    setCourseIdx(data);
   };
   const handleFirstOk = () => {
     setSecondModal(true);
@@ -33,11 +33,11 @@ const TableMyCoursesHolder = ({
   };
   const handleSecondOk = () => {
     setSecondModal(false);
-    setThirdModal(true); // Open third modal when second is closed
+    setThirdModal(true); 
   };
 
   const handleThirdOk = () => {
-    setThirdModal(false); // Close third modal
+    setThirdModal(false);
   };
 
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -56,11 +56,17 @@ const TableMyCoursesHolder = ({
     if (isSuccess && data) {
       const newData = data.listOfMyCourses.map((el) => {
         return {
-          img: <img src={el.tumbImageAddress || defImg} alt="" />,
+          img: (
+            <img
+              src={el.tumbImageAddress || defImg}
+              alt=""
+              className=" overflow-hidden w-full h-24 rounded-xl"
+            />
+          ),
           name: (
             <NavLink to={`/courses/coursedetail/${el.courseId}`}>
               <span>{el.courseTitle}</span>
-            </NavLink>
+            </NavLink>  
           ),
           teacher: el.fullName,
           date: <DateComponent insertDate={el.lastUpdate} />,
@@ -73,7 +79,7 @@ const TableMyCoursesHolder = ({
           ),
           payModal: (
             <div
-              onClick={() => showModal(el.courseId)}
+              onClick={() => showModal(el)}
               className="flex gap-5 cursor-pointer"
             >
               <CiMoneyBill className="w-6 h-6 text-gray" />
@@ -105,8 +111,11 @@ const TableMyCoursesHolder = ({
         firstModal={firstModal}
         secondModal={secondModal}
         setSecondModal={setSecondModal}
+        setThirdModal={setThirdModal}
         setFirstModal={setFirstModal}
-        id={CourseIdx}
+        id={CourseIdx.courseId}
+        thirdModal={thirdModal}
+        cost={CourseIdx.cost}
         handleFirstOk={handleFirstOk}
         handleSecondOk={handleSecondOk}
         factureData={data}
