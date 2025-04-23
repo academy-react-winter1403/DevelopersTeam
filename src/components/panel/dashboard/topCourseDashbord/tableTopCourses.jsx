@@ -49,7 +49,18 @@ const columns = [
   },
 ];
 
-const App = ({ data }) => (
-  <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
+const App = ({ data, totalCount, pageNum, setPageNum, itemPerPage }) => (
+  <Table
+    pagination={{
+      total: totalCount,
+      current: pageNum,
+      pageSize: itemPerPage,
+      onChange: setPageNum,
+      total: totalCount,
+    }}
+    columns={columns}
+    dataSource={data}
+    style={{ color: "#000" }}
+  />
 );
 export default App;

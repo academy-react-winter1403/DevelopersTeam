@@ -25,15 +25,18 @@ const TopCourseDashbord = () => {
     setSelectedCourse(null);
   };
 
+  const [pageNum, setPageNum] = useState(1);
+  const [itemPerPage, setItemPerPage] = useState(5);
+
   const getTopCourses = async () => {
     const res = await http.get(
-      `/SharePanel/GetMyCourses?SortingCol=LastUpdate`
+      `/SharePanel/GetMyCourses?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}&SortingCol=DESC&SortType=LastUpdate`
     );
     return res;
   };
 
   const { data, isSuccess } = useQuery({
-    queryKey:[ "topCoursesPanel"],
+    queryKey: ["topCoursesPanel", pageNum, itemPerPage],
     queryFn: getTopCourses,
   });
 
@@ -46,7 +49,11 @@ const TopCourseDashbord = () => {
             {el.courseTitle}
           </NavLink>
         );
-        newData["desc"] = <span className="truncate line-clamp-3 overflow-hidden">{el.describe}</span>;
+        newData["desc"] = (
+          <span className="truncate line-clamp-3 overflow-hidden">
+            {el.describe}
+          </span>
+        );
         newData["teacher"] = el.fullName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = (
@@ -84,7 +91,15 @@ const TopCourseDashbord = () => {
               </div>
             }
           >
-            {isSuccess && <TableTopCourses data={convertedData} />}
+            {isSuccess && (
+              <TableTopCourses
+                totalCount={data?.totalCount}
+                pageNum={pageNum}
+                setPageNum={setPageNum}
+                itemPerPage={itemPerPage}
+                data={convertedData}
+              />
+            )}
           </Suspense>
         </div>
       </div>
