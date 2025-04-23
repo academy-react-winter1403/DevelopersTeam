@@ -68,7 +68,24 @@ const columns = [
   },
 ];
 
-const TableMyCourses = ({ data }) => (
-  <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
+const TableMyCourses = ({
+  data,
+  totalCount,
+  pageNum,
+  setPageNum,
+  itemPerPage,
+}) => (
+  <Table
+    pagination={{
+      total: totalCount,
+      current: pageNum,
+      pageSize: itemPerPage,
+      onChange: setPageNum,
+      total: totalCount,
+    }}
+    columns={columns}
+    dataSource={data}
+    style={{ color: "#000" }}
+  />
 );
 export default TableMyCourses;

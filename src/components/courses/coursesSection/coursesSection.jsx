@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CoursesNavbar from "../coursesNavbar/coursesNavbar";
 import { useQueryGet } from "../../../hooks/useQueryGet/useQueryGet";
-import PaginationSection from "../../common/PaginationSection/paginationSection";
 import FilterSection from "../filterSection";
 import IsLoadingComponent from "./isLoadingComponent/isLoadingComponent";
 import ViewMoodComponent from "./viewMoodComponent/viewMoodComponent";
+import PaginationSection from "../../common/paginationSection/paginationSection";
 
 const CoursesSection = () => {
   const [searchQuery, setSearchQuery] = useState("");

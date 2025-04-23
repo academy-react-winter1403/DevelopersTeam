@@ -17,6 +17,10 @@ const TableMyCoursesHolder = ({
   convertedData,
   setCovertedData,
   isSuccess,
+  totalCount,
+  pageNum,
+  setPageNum,
+  itemPerPage,
 }) => {
   const [CourseIdx, setCourseIdx] = useState([]);
   const [firstModal, setFirstModal] = useState(false);
@@ -33,7 +37,7 @@ const TableMyCoursesHolder = ({
   };
   const handleSecondOk = () => {
     setSecondModal(false);
-    setThirdModal(true); 
+    setThirdModal(true);
   };
 
   const handleThirdOk = () => {
@@ -52,21 +56,30 @@ const TableMyCoursesHolder = ({
     setOpen(false);
   };
 
+  const addDefaultImg = (e) => {
+    e.target.src = defImg;
+  };
+
   useEffect(() => {
     if (isSuccess && data) {
       const newData = data.listOfMyCourses.map((el) => {
         return {
           img: (
             <img
-              src={el.tumbImageAddress || defImg}
+              src={
+                el.tumbImageAddress == null && "undefined"
+                  ? defImg
+                  : el.tumbImageAddress
+              }
               alt=""
               className=" overflow-hidden w-full h-24 rounded-xl"
+              onError={addDefaultImg}
             />
           ),
           name: (
             <NavLink to={`/courses/coursedetail/${el.courseId}`}>
               <span>{el.courseTitle}</span>
-            </NavLink>  
+            </NavLink>
           ),
           teacher: el.fullName,
           date: <DateComponent insertDate={el.lastUpdate} />,
@@ -102,11 +115,19 @@ const TableMyCoursesHolder = ({
               </div>
             }
           >
-            {isSuccess && <TableMyCourses data={convertedData} />}
+            {isSuccess && (
+              <TableMyCourses
+                totalCount={totalCount}
+                pageNum={pageNum}
+                setPageNum={setPageNum}
+                itemPerPage={itemPerPage}
+                data={convertedData}
+              />
+            )}
           </Suspense>
         </div>
       </div>
-      <ResponsiveMyCourse showDrawer={showDrawer} data={data} />
+      <ResponsiveMyCourse isRes={true} showDrawer={showDrawer} data={data} />
       <PaymentModal
         firstModal={firstModal}
         secondModal={secondModal}

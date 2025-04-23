@@ -9,15 +9,18 @@ const MyCourse = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [pageNum, setPageNum] = useState(1);
+  const [itemPerPage, setItemPerPage] = useState(5);
+
   const getMyCourses = async () => {
     const res = await http.get(
-      `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=20&SortingCol=DESC&SortType=LastUpdate`
+      `/SharePanel/GetMyCourses?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}&SortingCol=DESC&SortType=LastUpdate`
     );
     return res;
   };
 
   const { data, isSuccess } = useQuery({
-    queryKey: ["myCoursesPanel"],
+    queryKey: ["myCoursesPanel", pageNum],
     queryFn: getMyCourses,
   });
 
@@ -62,6 +65,10 @@ const MyCourse = () => {
           convertedData={convertedData}
           setCovertedData={setCovertedData}
           isSuccess={isSuccess}
+          totalCount={data?.totalCount}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          itemPerPage={itemPerPage}
         />
       )}
     </div>
