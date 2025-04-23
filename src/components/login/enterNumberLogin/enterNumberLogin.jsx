@@ -20,38 +20,44 @@ const EnterNumberLogin = ({ nextStep, text }) => {
     "Login",
     "عملیات با موفقیت انجام شد"
   );
-  const handleMutation = async (values) => {
-    try {
-      const response = await mutateAsync(values);
-      // console.log('Login response:', response);
-      if (response) {
-        setData("authToken", response.token);
-        setData("userData", response.user);
-        nextStep();
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
-
   // const handleMutation = async (values) => {
+  //   try {
   //     const response = await mutateAsync(values);
+  //     // console.log('Login response:', response);
   //     if (response) {
-  //       const existingAccounts = getData("accounts") || [];
-  //       const newAccount = {
-  //         id: response.id,
-  //         token: response.token,
-  //         phoneOrGmail: values.phoneOrGmail,
-  //       };
-  //       const updatedAccounts = [...existingAccounts, newAccount];
-  //       setData("accounts", updatedAccounts);
-
   //       setData("authToken", response.token);
-  //       setData("currentAccount", newAccount);
+  //       setData("userData", response.user);
+  //       nextStep();
   //       navigate("/");
   //     }
+  //   } catch (error) {
+  //     console.log("Login error:", error);
+  //   }
   // };
+
+  const handleMutation = async (values) => {
+    const response = await mutateAsync(values);
+    if (response) {
+      const existingAccounts = getData("accounts") || [];
+      const accountExists = existingAccounts.some(account => account.id === response.id);
+      if (!accountExists) {
+        const newAccount = {
+          id: response.id,
+          token: response.token,
+          phoneOrGmail: values.phoneOrGmail,
+        };
+        const updatedAccounts = [...existingAccounts, newAccount];
+        setData("accounts", updatedAccounts);
+      }
+      setData("authToken", response.token);
+      setData("currentAccount", {
+        id: response.id,
+        token: response.token,
+        phoneOrGmail: values.phoneOrGmail,
+      });
+      navigate("/");
+    }
+  };
 
   const navigate = useNavigate();
 
