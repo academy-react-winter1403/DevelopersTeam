@@ -13,8 +13,6 @@ const Payment = () => {
       return res;
     },
   });
-  // console.log("myCourseData", myCourseData);
-  //   console.log(paymentData);
 
   const getPayment = async () => {
     const res = await http.get(
@@ -22,12 +20,10 @@ const Payment = () => {
     );
     return res;
   };
-
   const { data: paymentData } = useQuery({
     queryKey: ["paymentList"],
     queryFn: getPayment,
   });
-  // console.log("paymentData", paymentData);
 
   const { data: paymentDataDetail } = useQuery({
     queryKey: ["paymentDetail"],

@@ -25,6 +25,8 @@ const PaymentModal = ({
 }) => {
   const [paymentId, setPaymentId] = useState();
 
+  console.log("payment id ",paymentId);
+
   const { mutateAsync: handlePay } = useMutation({
     mutationFn: async (values) => {
       const formData = new FormData();
