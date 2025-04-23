@@ -45,20 +45,28 @@ const TopCourseDashbord = () => {
       const i = data.listOfMyCourses.map((el) => {
         let newData = {};
         newData["name"] = (
-          <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+          <NavLink
+            to={`/courses/coursedetail/${el.courseId}`}
+            className="dark:text-gray-200 hover:dark:text-blue-300"
+          >
             {el.courseTitle}
           </NavLink>
         );
         newData["desc"] = (
-          <span className="truncate line-clamp-3 overflow-hidden">
+          <span className="truncate line-clamp-3 overflow-hidden dark:text-gray-300">
             {el.describe}
           </span>
         );
-        newData["teacher"] = el.fullName;
+        newData["teacher"] = (
+          <span className="dark:text-gray-400">{el.fullName}</span>
+        );
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = (
           <div className="flex space-x-2">
-            <PriceComponent cost={el.cost} />
+            <PriceComponent
+              cost={el.cost}
+              className="dark:text-gray-100" 
+            />
             <span>تومان</span>
           </div>
         );
@@ -119,7 +127,7 @@ const TopCourseDashbord = () => {
                   <h1 className="text-base dark:text-white">
                     {item.courseTitle}
                   </h1>
-                  <h1 className="text-base text-gray dark:text-gray-400">
+                  <h1 className="text-base text-gray dark:text-gray-300">
                     {item.fullName}
                   </h1>
                   <span className="text-gray dark:text-gray-400">
@@ -130,7 +138,7 @@ const TopCourseDashbord = () => {
                   <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
                 </div>
               </div>
-              <Divider className="dark:bg-gray-700" />
+              <Divider  className="dark:bg-gray-600" />
             </div>
           );
         })}

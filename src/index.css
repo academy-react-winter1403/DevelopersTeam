@@ -28,6 +28,13 @@ body {
 
 .dark body {
   @apply bg-gray-900 text-gray-100;
+  th {
+    @apply dark:bg-gray-700 dark:text-gray-200;
+  }
+  
+  td {
+    @apply dark:bg-gray-800 dark:text-gray-300;
+  }
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
