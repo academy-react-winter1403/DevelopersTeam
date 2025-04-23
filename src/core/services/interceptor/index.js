@@ -42,7 +42,7 @@ instance.interceptors.request.use((opt) => {
   token = JSON.parse(token);
   // console.log(token);
   // const token = getData("authToken") ? getData("authToken") : null;
-  opt.headers.Authorization = "Bearer " + token.token;
+  if(token) opt.headers.Authorization = "Bearer " + token.token;
   return opt;
 });
 
