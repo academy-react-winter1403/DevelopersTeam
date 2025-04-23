@@ -14,6 +14,19 @@ const Payment = () => {
     },
   });
 
+  // const getCoursesId = () => {
+  //   const courseIds = [];
+  //   for (let i = 0; i < myCourseData?.listOfMyCourses.courseId.length; i++) {
+  //     const course = myCourseData?.listOfMyCourses.courseId[i];
+  //     if (course.courseId) {
+  //       courseIds.push(course.courseId);
+  //     }
+  //   }
+  //   return courseIds;
+  // };
+
+  // console.log("csdcsdc",courseIds);
+
   const getPayment = async () => {
     const res = await http.get(
       `/CoursePayment/StudentUserPayList?CourseId=${myCourseData?.listOfMyCourses.courseId}`
