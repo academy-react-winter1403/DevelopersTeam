@@ -58,6 +58,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getData, setData } from "../../core/localStorage/localStorage";
 import { useQuery } from "@tanstack/react-query";
+import { useDarkMode } from "../../context/theme/themeContext";
 
 const MultiAccountModal = ({ isModalOpen, showModal, setIsModalOpen }) => {
   const handleOk = () => {
@@ -80,12 +81,12 @@ const MultiAccountModal = ({ isModalOpen, showModal, setIsModalOpen }) => {
   const switchAccount = (account) => {
     setData("currentAccount", account);
     setCurrentAccount(account);
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
   };
 
   const addAccount = () => {
-    setIsModalOpen(false);  
-    navigate("/login"); 
+    setIsModalOpen(false);
+    navigate("/login");
   };
 
   const getProfile = async () => {
@@ -98,9 +99,11 @@ const MultiAccountModal = ({ isModalOpen, showModal, setIsModalOpen }) => {
     queryFn: getProfile,
   });
   function onSelect(id) {
-    alert(id)
+    alert(id);
   }
-
+  const handleLogOut = () => {
+    removeData("authToken");
+  };
   return (
     <>
       <Modal
@@ -114,7 +117,13 @@ const MultiAccountModal = ({ isModalOpen, showModal, setIsModalOpen }) => {
       >
         {accounts.map((item) => {
           return (
-            <div  onClick={()=>switchAccount(item)} className={`w-full ${currentAccount.id ==item.id && "bg-blue-900 "} p-2 space-y-5 mt-5`}>
+            <div
+              onClick={() => switchAccount(item)}
+              className={`w-full ${
+                currentAccount.id == item.id &&
+                "text-navyBlue bg-lightBlue rounded-full"
+              } p-2 space-y-5 mt-5 `}
+            >
               <div className="flex space-x-3 items-center justify-between">
                 <div className="flex space-x-3 items-center">
                   <div
@@ -124,23 +133,25 @@ const MultiAccountModal = ({ isModalOpen, showModal, setIsModalOpen }) => {
                     <img src={img} alt="" className="w-14 h-14" />
                   </div>
                   <div>
-                    <h1 className="font-semibold dark:text-white">
-
-                    {item.id}
+                    <h1 className="font-semibold dark:text- white">
+                      {item.id}
                     </h1>
-                    <h1 className="font-semibold dark:text-white text-gray">
+                    <h1 className="font-semibold dark:text- white text-gray">
                       {userData?.phoneNumber}
                     </h1>
                   </div>
                 </div>
-                <div>
+                <div onClick={handleLogOut} className="cursor-pointer">
                   <CiLogout className="w-6 h-6 text-red-500" />
                 </div>
               </div>
             </div>
           );
         })}
-        <NavLink to="/login" className="w-full flex flex-col items-center mt-4 cursor-pointer">
+        <NavLink
+          to="/login"
+          className="w-full flex flex-col items-center mt-4 cursor-pointer"
+        >
           <IoIosAddCircleOutline className="w-5 h-5 text-gray" />
           <span className="text-base text-gray">اضافه کردن حساب کاربری</span>
         </NavLink>
