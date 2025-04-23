@@ -5,24 +5,40 @@ const FacturePayment = ({ paymentDetail, setThirdModal, setSecondModal }) => {
   const elementRef = useRef(null);
 
   const generateAndDownloadImage = () => {
+    const originalTransform = elementRef.current.style.transform;
+    const originalWidth = elementRef.current.style.width;
+
+    elementRef.current.style.transform = "scale(2)";
+    elementRef.current.style.transformOrigin = "top left";
+    elementRef.current.style.width = `${elementRef.current.offsetWidth * 2}px`;
+
     domtoimage
       .toPng(elementRef.current, {
-        quality: 5,
+        quality: 1,
         bgcolor: "#ffffff",
-        screenX: 500,
+        width: elementRef.current.scrollWidth,
+        style: {
+          transform: "scale(1)",
+          margin: "0 auto",
+        },
       })
       .then((dataUrl) => {
-        console.log(dataUrl);
+        elementRef.current.style.transform = originalTransform;
+        elementRef.current.style.width = originalWidth;
 
         const link = document.createElement("a");
         link.href = dataUrl;
-        link.download = "facture.png";
+        link.download = `facture_${
+          paymentDetail?.paymentInvoiceNumber || Date.now()
+        }.png`;
         link.click();
         setSecondModal(false);
         setThirdModal(true);
       })
       .catch((error) => {
-        console.error("Oops, something went wrong!", error);
+        console.error("Error generating image:", error);
+        elementRef.current.style.transform = originalTransform;
+        elementRef.current.style.width = originalWidth;
       });
   };
 
@@ -30,11 +46,11 @@ const FacturePayment = ({ paymentDetail, setThirdModal, setSecondModal }) => {
     <div className=" ">
       <div
         id="big"
-        className="lg:w-8/12 md:w-11/12 w-full mx-auto my-auto inset-0"
+        className="lg:w-10/12 md:w-11/12 w-full mx-auto my-auto inset-0"
       >
         <table
           ref={elementRef}
-          className="table-auto w-full text-base bg-slate-400 dark:bg-slate-800 dark:text-white"
+          className="table-auto w-full text-base bg-gray-400 dark:bg-slate-800 dark:text-white"
         >
           <tbody>
             <h1 className="text-center text-2xl font-semibold mt-2">
@@ -71,7 +87,7 @@ const FacturePayment = ({ paymentDetail, setThirdModal, setSecondModal }) => {
         </table>
       </div>
       <button
-        className="cursor-pointer mt-4"
+        className="cursor-pointer mt-4 border border-borderGray p-3 rounded-full "
         onClick={() => {
           generateAndDownloadImage();
           setThirdModal(true);

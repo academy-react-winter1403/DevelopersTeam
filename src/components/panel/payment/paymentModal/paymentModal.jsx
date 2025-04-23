@@ -153,32 +153,6 @@ const PaymentModal = ({
         onCancel={() => setThirdModal(false)}
         footer={false}
       >
-        {/* <Formik onSubmit={handleAddPaymentImage} initialValues={{ Image: "" }}>
-          {({ setFieldValue }) => (
-            <Form>
-              <Field
-                id="file-inp"
-                type="file"
-                name="Image"
-                className="hidden"
-                onChange={(e) => {
-                  setFieldValue("Image", e.target.files[0]);
-                }}
-              />
-              <label htmlFor="file-inp" className="flex flex-row">
-                <div className="w-20 h-20 border-4 rounded-2xl border-borderGray flex justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
-                  <BiImageAdd className="text-navyBlue w-10 h-10" />
-                </div>
-              </label>
-              <button
-                type="submit"
-                className="bg-navyBlue w-20 h-10 rounded-full text-lg text-white hover:opacity-80 cursor-pointer"
-              >
-                ثبت
-              </button>
-            </Form>
-          )}
-        </Formik> */}
         <input
           type="file"
           name=""
@@ -191,7 +165,6 @@ const PaymentModal = ({
             <BiImageAdd className="text-navyBlue w-10 h-10" />
           </div>
         </label>
-     
       </Modal>
     </>
   );
