@@ -1,5 +1,5 @@
 import React from "react";
-import { Space, Table, Tag } from "antd";
+import { Table } from "antd";
 const columns = [
   {
     title: "نام دوره",
@@ -22,29 +22,29 @@ const columns = [
     key: "payment",
     dataIndex: "payment",
   },
-];
-const data = [
   {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
+    title: "وضعیت پرداخت",
+    key: "accept",
+    dataIndex: "accept",
   },
 ];
-const TableComp = () => <Table columns={columns} dataSource={data} />;
+
+const TableComp = ({
+  paymentData,
+  pageNum,
+  setPageNum,
+  itemPerPage,
+  totalCount,
+}) => (
+  <Table
+  pagination={{
+    total: totalCount,
+    current: pageNum,
+    pageSize: itemPerPage,
+    onChange: setPageNum,
+  }}
+    columns={columns}
+    dataSource={paymentData}
+  />
+);
 export default TableComp;
