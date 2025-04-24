@@ -15,7 +15,6 @@ import { removeData } from "../../core/localStorage/localStorage";
 import { useQuery } from "@tanstack/react-query";
 import { useDarkMode } from "../../context/theme/themeContext";
 import { LuUserRoundPlus } from "react-icons/lu";
-import MultiAccountModal from "./multiAccountModal";
 
 const PanelLayout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,7 +42,7 @@ const PanelLayout = () => {
 
   return (
     <div className="w-full relative flex flex-col sm:flex-row bg-[#F0F0F0] dark:bg-gray-900 overflow-x -hidden">
-      <div className=" hidden h-[850px] sticky top-5 lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] dark:bg-gray-800 my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
+      <div className=" hidden h-[800px] sticky top-5 lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] dark:bg-gray-800 my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
         <NavLink to="/" className="flex justify-center items-center ">
           <img src={logo} alt="not set" className="w-14 h-16" />
           <img
@@ -57,18 +56,18 @@ const PanelLayout = () => {
           <PagesLinkRes />
         </div>
         {/* add user */}
-        <div
+        {/* <div
           onClick={showModal}
           className="cursor-pointer lg:w-52 xl:w-56 sm:w-14 h-14 mt-5 border-2 border-borderGray dark:border-gray-700 lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 "
         >
           <LuUserRoundPlus className="w-6 h-6" />
           <span className="hidden lg:block">حساب‌های کابری</span>
-        </div>
-        <MultiAccountModal
+        </div> */}
+        {/* <MultiAccountModal
           isModalOpen={isModalOpen}
           showModal={showModal}
           setIsModalOpen={setIsModalOpen}
-        />
+        /> */}
         <div
           onClick={handleLogOut}
           className="cursor-pointer lg:w-52 xl:w-56 sm:w-14 h-14 text-[#FF5454] mt-5 border-2 border-borderGray dark:border-gray-700 lg:rounded-4xl sm:rounded-full flex justify-center items-center font-semibold lg:space-x-4 "
