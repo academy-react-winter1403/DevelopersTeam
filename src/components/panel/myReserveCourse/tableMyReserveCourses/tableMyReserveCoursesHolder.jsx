@@ -61,7 +61,12 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           teacher: el?.courseData.teacherName,
           date: <DateComponent insertDate={el.courseData.startTime} />,
           reserveDate: <DateComponent insertDate={el.reserverDate} />,
-          price: <PriceComponent cost={el.courseData.cost} />,
+          price: (
+            <div className="flex items-center space-x-3">
+              <PriceComponent cost={el.courseData.cost} />
+              <span className="text-navyBlue">تومان</span>
+            </div>
+          ),
           register: el.accept ? (
             <TagsAccept text="پذیرفته شده" />
           ) : (

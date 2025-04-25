@@ -71,9 +71,13 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
         newData["teacher"] = el.teacheName;
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = (
-          <div className="flex space-x-2">
+          <div className="flex items-center space-x-3">
             <PriceComponent cost={el.courseData.cost} />
+<<<<<<< HEAD
             <span className="dark:text-gray-300">تومان</span>
+=======
+            <span className="text-navyBlue">تومان</span>
+>>>>>>> 3da1653cfbbba4a6d748407b670867140d37411a
           </div>
         );
         newData["eye"] = (

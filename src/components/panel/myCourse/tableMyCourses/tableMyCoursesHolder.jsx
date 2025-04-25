@@ -83,7 +83,12 @@ const TableMyCoursesHolder = ({
           ),
           teacher: el.fullName,
           date: <DateComponent insertDate={el.lastUpdate} />,
-          price: <PriceComponent cost={el.cost} />,
+          price: (
+            <div className="flex items-center space-x-3">
+              <PriceComponent cost={el.cost} />
+              <span className="text-navyBlue">تومان</span>
+            </div>
+          ),
           pay: <TagsNotAccept text={el.paymentStatus} />,
           eye: (
             <div onClick={() => showDrawer(el)} className="flex gap-5">

@@ -1,11 +1,7 @@
 import React from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { CgMoreVertical } from "react-icons/cg";
-import {
-  useMutation,
-  QueryClient,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
 import { Dropdown, Upload, message } from "antd";
 import toast from "react-hot-toast";

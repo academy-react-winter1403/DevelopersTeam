@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      <Joyride
+      {/* <Joyride
         steps={steps}
         continuous
         showSkipButton
@@ -46,7 +46,7 @@ const Header = () => {
           skip: "رد کردن",
           last: "پایان",
         }}
-      />
+      /> */}
 
       <NavLink
         to="/"
