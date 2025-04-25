@@ -47,7 +47,7 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
 
   return (
     <div className="">
-      <div className="bg-white w-full rounded-2xl mt-5">
+      <div className="bg-white w-full  dark:bg-gray-800 rounded-2xl mt-5">
         <div className="w-full hidden sm:block">
           <Suspense
             fallback={

@@ -44,7 +44,7 @@ const TableHolder = ({
   }, [isSuccess, paymentData]);
   console.log("dccdsc", paymentData);
   return (
-    <div className="bg-white w-full rounded-2xl mt-5">
+    <div className="bg-white dark:bg-gray-800 w-full rounded-2xl mt-5">
       <div className=" w-full hidden sm:block">
         <Suspense
           fallback={
