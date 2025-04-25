@@ -77,9 +77,9 @@ const Item = ({
   };
   return (
     <div
-      className={`w-full m-1 sm:m-2 ${isReplay && "space-x-2 sm:space-x-3"}`}
+      className={`w-full m-1 ${isReplay && "space-x-2 sm:space-x-3"}`}
     >
-      <div className="w-full flex my-1 sm:my-2">
+      <div className="w-full flex my-1 ">
         {isReplay && (
           <div className="w-1 sm:w-2 h-40 sm:h-52 bg-navyBlue mr-4 sm:mr-10 dark:bg-blue-600 rounded-sm"></div>
         )}
@@ -90,7 +90,7 @@ const Item = ({
                 src={pictureAddress || defaultImg}
                 alt="Profile"
                 className="border rounded-full w-10 h-10 sm:w-12 sm:h-12 dark:border-gray-600"
-                onError={addDefaultImg}
+                onError={(e) => addDefaultImg(e)}
               />
               <div>
                 <h2 className="font-medium text-xs sm:text-sm md:text-base dark:text-white">
@@ -105,7 +105,6 @@ const Item = ({
 
           <div className="space-y-1 sm:space-y-2 overflow-hidden">
             <p className="text-xs sm:text-sm dark:text-gray-300 font-semibold">
-              {id}
               {title}
             </p>
             <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>

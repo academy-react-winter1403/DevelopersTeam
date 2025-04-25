@@ -23,9 +23,10 @@ const PaymentModal = ({
   factureData,
   cost,
 }) => {
+  console.log(cost);
   const [paymentId, setPaymentId] = useState();
 
-  console.log("payment id ",paymentId);
+  // console.log("payment id ", paymentId);
 
   const { mutateAsync: handlePay } = useMutation({
     mutationFn: async (values) => {
@@ -39,7 +40,7 @@ const PaymentModal = ({
       return res;
     },
     onSuccess: (res) => {
-      console.log(res, "res payment");
+      // console.log("res payment", res);
       toast.success("پرداخت با موفقیت انجام شد");
       setFirstModal(false);
       setSecondModal(true);
@@ -89,6 +90,8 @@ const PaymentModal = ({
     queryFn: getPaymentDetail,
   });
 
+  // console.log(cost);
+
   return (
     <>
       <Modal
@@ -110,6 +113,7 @@ const PaymentModal = ({
             <Form className="flex flex-col">
               <Field
                 name="Paid"
+                 value={cost}
                 className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                 placeholder="مبلغ را وارد کنید"
               />

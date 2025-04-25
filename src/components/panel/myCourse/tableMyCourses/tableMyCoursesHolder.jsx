@@ -22,14 +22,14 @@ const TableMyCoursesHolder = ({
   setPageNum,
   itemPerPage,
 }) => {
-  const [CourseIdx, setCourseIdx] = useState([]);
+  const [MyData, setMyData] = useState(null);
   const [firstModal, setFirstModal] = useState(false);
   const [secondModal, setSecondModal] = useState(false);
   const [thirdModal, setThirdModal] = useState(false);
 
   const showModal = (data) => {
     setFirstModal(true);
-    setCourseIdx(data);
+    setMyData(data);
   };
   const handleFirstOk = () => {
     setSecondModal(true);
@@ -39,7 +39,6 @@ const TableMyCoursesHolder = ({
     setSecondModal(false);
     setThirdModal(true);
   };
-
   const handleThirdOk = () => {
     setThirdModal(false);
   };
@@ -108,7 +107,7 @@ const TableMyCoursesHolder = ({
       setCovertedData(newData);
     }
   }, [isSuccess, data]);
-  // console.log("dddd",data);
+  // console.log("dddd", MyData);
   return (
     <div className=" ">
       <div className="bg-white w-full rounded-2xl mt-5">
@@ -139,26 +138,25 @@ const TableMyCoursesHolder = ({
         setSecondModal={setSecondModal}
         setThirdModal={setThirdModal}
         setFirstModal={setFirstModal}
-        id={CourseIdx.courseId}
+        id={MyData?.courseId}
         thirdModal={thirdModal}
-        cost={CourseIdx.cost}
+        cost={MyData?.cost}
         handleFirstOk={handleFirstOk}
         handleSecondOk={handleSecondOk}
         factureData={data}
       />
       {selectedCourse && (
         <PanelModal
-          firstModal={firstModal}
-          secondModal={secondModal}
-          thirdModal={thirdModal}
-          setSecondModal={setSecondModal}
-          setFirstModal={setFirstModal}
-          setThirdModal={setThirdModal}
-          id={CourseIdx}
-          handleFirstOk={handleFirstOk}
-          handleSecondOk={handleSecondOk}
-          handleThirdOk={handleThirdOk}
+          courseId={selectedCourse.courseId}
+          title={selectedCourse.courseTitle}
+          teacher={selectedCourse.fullName}
+          lastUpdate={selectedCourse.lastUpdate}
+          cost={selectedCourse?.cost}
+          describe={selectedCourse?.describe}
           factureData={data}
+          open={open}
+          onClose={onClose}
+          isMyCourses={true}
         />
       )}
     </div>

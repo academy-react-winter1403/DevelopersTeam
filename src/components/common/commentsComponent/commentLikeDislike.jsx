@@ -58,7 +58,7 @@ const CommentLikeDislike = ({ commentObj }) => {
     },
   });
 
-  console.log(commentObj);
+  // console.log(commentObj);
   return (
     <div>
       <div className="flex  gap-4  ">

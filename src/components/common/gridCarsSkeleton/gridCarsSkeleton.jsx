@@ -3,7 +3,7 @@ import React from "react";
 
 const GridCarsSkeleton = () => {
   return (
-    <div className="w-full my-5 rounded-2xl h-[300px] bg-lightGray border">
+    <div className="w-full my-5 rounded-2xl h-[300px] bg-lightGray ">
       <div className="flex 2xl:gap-5 gap-2 ">
         <div>
           <Skeleton.Image

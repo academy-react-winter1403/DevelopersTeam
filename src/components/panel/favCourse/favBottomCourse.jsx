@@ -44,7 +44,7 @@ const FavBottomCourse = ({ handleSearch }) => {
           </div>
           <div className="flex justify-between items-center relative mt-2">
             <DatePicker
-              name="birthday"
+              name="date"
               calendar={persian}
               locale={persian_fa}
               style={{
