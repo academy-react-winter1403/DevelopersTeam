@@ -30,10 +30,11 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
     setOpen(false);
   };
 
-  const img = (
+  const img = (el) => (
     <img
-      src={data?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
+      src={el?.tumbImageAddress == null ? defImg : el.tumbImageAddress}
       alt=""
+      className="rounded-lg"
     />
   );
 
@@ -53,14 +54,17 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
       // console.error("Error deleting like:", error);
     },
   });
-  // console.log(data, "dataCorse");
+
   useEffect(() => {
     if (isSuccess) {
       const newConverted = data?.map((el) => {
         let newData = {};
-        newData["img"] = img;
+        newData["img"] = img(el); 
         newData["name"] = (
-          <NavLink to={`/courses/coursedetail/${el.courseId}`}>
+          <NavLink
+            to={`/courses/coursedetail/${el.courseId}`}
+            className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+          >
             {el.courseTitle}
           </NavLink>
         );
@@ -69,16 +73,16 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
         newData["price"] = (
           <div className="flex space-x-2">
             <PriceComponent cost={el.courseData.cost} />
-            <span>تومان</span>
+            <span className="dark:text-gray-300">تومان</span>
           </div>
         );
         newData["eye"] = (
           <div className="flex gap-2">
             <div onClick={() => showDrawer(el)}>
-              <MdOutlineRemoveRedEye className="w-5 h-5 text-gray dark:text-gray-400" />
+              <MdOutlineRemoveRedEye className="w-5 h-5 text-gray-600 dark:text-gray-300 cursor-pointer" />
             </div>
             <div onClick={() => mutateDeleteFav(el.favoriteId)}>
-              <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
+              <VscChromeClose className="w-5 h-5 text-red-400 dark:text-red-400 cursor-pointer" />
             </div>
           </div>
         );
@@ -90,8 +94,8 @@ const TableFaveCourseHandle = ({ data, isSuccess }) => {
 
   return (
     <div className="">
-      <div className="bg-white w-full   rounded-2xl mt-5">
-        <div className=" w-full   hidden sm:block ">
+      <div className="bg-white dark:bg-gray-800 w-full rounded-2xl mt-5">
+        <div className="w-full hidden sm:block">
           <Suspense
             fallback={
               <div className="w-full h-32 flex items-center justify-center">
