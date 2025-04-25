@@ -114,10 +114,6 @@ const TopCourseDashbord = () => {
       <div className="bg-white dark:bg-gray-800 w-full h-auto rounded-2xl mt-5 sm:hidden">
         <div className="w-full h-10 flex justify-between items-center px-6 py-2 font-bold">
           <h2 className="dark:text-white">جدیدترین دوره ها</h2>
-          <div className="flex items-center text-navyBlue dark:text-blue-400 gap-1">
-            {/* <h2>مشاهده همه</h2> */}
-            {/* <MdKeyboardArrowLeft /> */}
-          </div>
         </div>
         {data?.listOfMyCourses.map((item, index) => {
           return (

@@ -83,9 +83,11 @@ const TableMyCourses = ({
       onChange: setPageNum,
       total: totalCount,
     }}
+  
     columns={columns}
     dataSource={data}
     style={{ color: "#000" }}
+    rowHoverable={false}
   />
 );
 export default TableMyCourses;

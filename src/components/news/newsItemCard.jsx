@@ -24,7 +24,7 @@ const NewsItemCard = ({
   likeId,
   keyword,
 }) => {
-  console.log(keyword);
+  // console.log(keyword);
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const NewsItemCard = ({
         {keyword}
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center 2xl:gap-5 relative sm:justify-between">
-        <div className="relative w-fit  sm:h-72 rounded-2xl border-2 bg-black" onClick={handleNavigation}>
+        <div className="relative w-fit  sm:h-72 rounded-2xl  bg-black" onClick={handleNavigation}>
           <img
             src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
             alt="Profile"

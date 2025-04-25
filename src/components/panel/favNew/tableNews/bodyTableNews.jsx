@@ -56,8 +56,11 @@ const columns = [
 ];
 
 const BodyTableNews = ({ data }) => (
-  <Table columns={columns} dataSource={data} style={{ color: "#000" }} />
+  <Table
+    columns={columns}
+    dataSource={data}
+    style={{ color: "#000" }}
+    rowHoverable={false}
+  />
 );
 export default BodyTableNews;
-
-

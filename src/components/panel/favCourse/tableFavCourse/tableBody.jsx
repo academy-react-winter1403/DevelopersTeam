@@ -6,7 +6,6 @@ const columns = [
     dataIndex: "img",
     key: "img",
     width: 150,
-    
   },
   {
     title: "نام دوره",
@@ -53,6 +52,11 @@ const columns = [
 ];
 
 const TableBody = ({ data }) => (
-  <Table columns={columns} dataSource={data} style={{ color: "#000" }}   />
+  <Table
+    columns={columns}
+    dataSource={data}
+    style={{ color: "#000" }}
+    rowHoverable={false}
+  />
 );
 export default TableBody;
