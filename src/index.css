@@ -39,17 +39,12 @@ body {
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-<<<<<<< HEAD
-
-
-.dark th{
+.dark th {
   background: #1e2939 !important;
   border-radius: 0px !important;
   color: #fff !important;
 }
-=======
 .ant-pagination-options {
   visibility: hidden;
   position: absolute;
 }
->>>>>>> ebf718b67627f4ad60b6501cd6cf7e091642dc11
