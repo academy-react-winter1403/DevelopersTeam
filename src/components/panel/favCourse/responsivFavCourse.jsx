@@ -18,7 +18,10 @@ const ResponsivFavCourse = ({ showDrawer, data }) => {
         return (
           <div className="bg-white w-full dark:bg-gray-800">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3 dark:border-gray-600">
-              <div onClick={() => showDrawer(item)} className="w-28 h-24 mt-8">
+              <div
+                onClick={() => showDrawer(item)}
+                className="w-28 h-24 mt-8  overflow-hidden"
+              >
                 <img
                   src={
                     item.tumbImageAddress == null
@@ -26,7 +29,7 @@ const ResponsivFavCourse = ({ showDrawer, data }) => {
                       : item.tumbImageAddress
                   }
                   alt=""
-                  className="dark:opacity-90"
+                  className="dark:opacity-90 rounded-xl"
                 />
               </div>
               <div className="flex flex-col">

@@ -9,6 +9,8 @@ import PaginationSection from "../../common/paginationSection/paginationSection"
 const CoursesSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [selectedDate, setSelectedDate] = useState(null);
+
   const [selectedSort, setSelectedSort] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
@@ -29,10 +31,15 @@ const CoursesSection = () => {
     ${selectedType ? `&selectedType=${selectedType}` : ""}
     ${selectedLevel ? `&courseLevelId=${selectedLevel}` : ""}
     ${selectedTeacher ? `&TeacherId=${selectedTeacher}` : ""}
-    ${selectedTech && selectedTech.length > 0 ? `&ListTech=${selectedTech}&TechCount=1`: ""}    
+    ${
+      selectedTech && selectedTech.length > 0
+        ? `&ListTech=${selectedTech}&TechCount=1`
+        : ""
+    }    
     ${selectedPriceMin ? `&CostDown=${selectedPriceMin}` : ""}
     ${selectedPriceMax ? `&CostUp=${selectedPriceMax}` : ""}
     ${selectedSort ? `&SortingCol=${selectedSort.id}` : ""}
+    ${selectedDate ? `&StartDate=${selectedDate}` : ""}
         ${searchQuery ? `&Query=${searchQuery}` : ""}
     `,
     "courses",
@@ -45,7 +52,7 @@ const CoursesSection = () => {
       selectedTech,
       selectedTeacher,
       selectedPriceMin,
-      selectedPriceMax,
+      selectedPriceMax,selectedDate
     ]
   );
 
@@ -62,7 +69,7 @@ const CoursesSection = () => {
     selectedTech,
     selectedTeacher,
     selectedPriceMin,
-    selectedPriceMax,
+    selectedPriceMax,selectedDate
   ]);
 
   return (
@@ -104,6 +111,8 @@ const CoursesSection = () => {
           setSelectedPriceMin={setSelectedPriceMin}
           selectedPriceMax={selectedPriceMax}
           setSelectedPriceMax={setSelectedPriceMax}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
         />
       </div>
     </div>

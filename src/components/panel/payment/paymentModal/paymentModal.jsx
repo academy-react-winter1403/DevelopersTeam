@@ -113,7 +113,7 @@ const PaymentModal = ({
             <Form className="flex flex-col">
               <Field
                 name="Paid"
-                 value={cost}
+                value={cost}
                 className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
                 placeholder="مبلغ را وارد کنید"
               />

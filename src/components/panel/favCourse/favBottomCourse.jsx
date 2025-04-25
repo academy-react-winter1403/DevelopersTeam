@@ -37,7 +37,7 @@ const FavBottomCourse = ({ handleSearch }) => {
             </div>
           </div>
         </div>
-        <div className="">
+        {/* <div className="">
           <div className="flex items-center gap-2">
             <HiOutlineCalendarDateRange className="w-6 h-6" />
             <h2>تاریخ برگزاری</h2>
@@ -63,7 +63,7 @@ const FavBottomCourse = ({ handleSearch }) => {
               placeholder="تاریخ را وارد کنید"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

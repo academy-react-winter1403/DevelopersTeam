@@ -4,6 +4,9 @@ import http from "./../../../core/services/interceptor";
 import defImg from "./../../../assets/images/courses/courseimg.svg";
 
 const ResponsivNews = ({ showDrawer, data }) => {
+  const addDefaultImg = (e) => {
+    e.target.src = defImg;
+  };
   return (
     <div className="w-full h-auto sm:hidden  ">
       <div className="w-full h-auto flex justify-between items-center mt-5  ">
@@ -17,7 +20,10 @@ const ResponsivNews = ({ showDrawer, data }) => {
         return (
           <div className="bg-white w-full h-auto  dark:bg-gray-800">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex items-center gap-3 dark:border-gray-600">
-              <div onClick={() => showDrawer(item)} className="w-1/3 my-5">
+              <div
+                onClick={() => showDrawer(item)}
+                className="w-32 h-24 my- 5 overflow-hidden flex items-center rounded-xl"
+              >
                 <img
                   src={
                     item.currentImageAddressTumb == null
@@ -25,10 +31,11 @@ const ResponsivNews = ({ showDrawer, data }) => {
                       : item.currentImageAddressTumb
                   }
                   alt=""
-                  className="dark:opacity-90"
+                  className="dark:opacity-90 w-40 h-32 rounded-xl"
+                  onError={(e) => addDefaultImg(e)}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-36">
                 <div
                   onClick={() => showDrawer(item)}
                   className="text-xl font-bold line-clamp-1 dark:text-white"
