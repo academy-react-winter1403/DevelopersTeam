@@ -38,3 +38,11 @@ body {
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+
+
+.dark th{
+  background: #1e2939 !important;
+  border-radius: 0px !important;
+  color: #fff !important;
+}
