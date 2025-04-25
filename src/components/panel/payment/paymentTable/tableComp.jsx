@@ -45,6 +45,8 @@ const TableComp = ({
   }}
     columns={columns}
     dataSource={paymentData}
+    rowHoverable={false}
+
   />
 );
 export default TableComp;

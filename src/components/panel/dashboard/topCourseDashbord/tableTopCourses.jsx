@@ -61,6 +61,8 @@ const App = ({ data, totalCount, pageNum, setPageNum, itemPerPage }) => (
     columns={columns}
     dataSource={data}
     style={{ color: "#000" }}
+    rowHoverable={false}
+    
   />
 );
 export default App;
