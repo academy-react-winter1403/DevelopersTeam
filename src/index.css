@@ -31,7 +31,7 @@ body {
   thead {
     @apply dark:bg-gray-700 dark:text-gray-200;
   }
-  
+
   td {
     @apply dark:bg-gray-800 dark:text-gray-300;
   }
@@ -39,6 +39,7 @@ body {
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+<<<<<<< HEAD
 
 
 .dark th{
@@ -46,3 +47,9 @@ body {
   border-radius: 0px !important;
   color: #fff !important;
 }
+=======
+.ant-pagination-options {
+  visibility: hidden;
+  position: absolute;
+}
+>>>>>>> ebf718b67627f4ad60b6501cd6cf7e091642dc11

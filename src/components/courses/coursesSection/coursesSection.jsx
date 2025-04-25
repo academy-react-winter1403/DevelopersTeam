@@ -39,7 +39,6 @@ const CoursesSection = () => {
     ${selectedPriceMin ? `&CostDown=${selectedPriceMin}` : ""}
     ${selectedPriceMax ? `&CostUp=${selectedPriceMax}` : ""}
     ${selectedSort ? `&SortingCol=${selectedSort.id}` : ""}
-    ${selectedDate ? `&StartDate=${selectedDate}` : ""}
         ${searchQuery ? `&Query=${searchQuery}` : ""}
     `,
     "courses",
@@ -52,7 +51,7 @@ const CoursesSection = () => {
       selectedTech,
       selectedTeacher,
       selectedPriceMin,
-      selectedPriceMax,selectedDate
+      selectedPriceMax,  
     ]
   );
 
@@ -69,7 +68,7 @@ const CoursesSection = () => {
     selectedTech,
     selectedTeacher,
     selectedPriceMin,
-    selectedPriceMax,selectedDate
+    selectedPriceMax, 
   ]);
 
   return (

@@ -15,7 +15,7 @@ const DateInput = ({ icon, inputLabel, selectedDate, setSelectedDate }) => {
         name="date"
         calendar={persian}
         locale={persian_fa}
-        onChange={(e) => setSelectedDate(e)}
+        onChange={(e) => setSelectedDate(new Date(e))}
         style={{
           height: "2.25rem",
           width: "100%",
