@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import http from "./../../../../core/services/interceptor";
 import defaultImg from "./../../../../assets/images/courses/courseimg.svg";
-import { Rate } from "antd";
+import { Button, Modal, Rate } from "antd";
 import star from "./../../../../assets/images/courseDetail/star.svg";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import teacherImg from "./../../../../assets/images/courseDetail/teacherDefault.svg";
@@ -10,6 +10,9 @@ import CommentSection from "../../commentSection/commentSection";
 import UserAddComment from "../../commentSection/userAddComment/userAddComment";
 import toast from "react-hot-toast";
 import { useDarkMode } from "../../../../context/theme/themeContext";
+import { CiBoxList } from "react-icons/ci";
+import { TbExternalLink } from "react-icons/tb";
+import TeacherDetailModal from "./teacherDetailModal";
 
 const DetailContainer = ({ data, id }) => {
   const queryClient = useQueryClient();
@@ -47,6 +50,22 @@ const DetailContainer = ({ data, id }) => {
     queryFn: getTeacherInfo,
   });
 
+  console.log("teacherData",teacherData);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="lg:w-[719px] h-auto m-4 lg:m-0 dark:text-white">
       <div className="w-full md:h-[428px] rounded-3xl overflow-hidden">
@@ -72,6 +91,15 @@ const DetailContainer = ({ data, id }) => {
               {data?.teacherName}
             </h1>
           </div>
+          <button type="primary" className="cursor-pointer" onClick={showModal}>
+            <TbExternalLink />
+          </button>
+          <TeacherDetailModal
+            isModalOpen={isModalOpen}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+            teacherData={teacherData}
+          />
         </div>
       </div>
       <div className="w-full h-auto p-2 space-y-3">
