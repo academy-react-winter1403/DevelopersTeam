@@ -82,7 +82,7 @@ const GetNewsDetailList = () => {
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries(["newsDetail"]);
-      toast.error("مقاله را دوست نداشتید");
+      // toast.error("مقاله را دوست نداشتید");
     },
     onError: () => {
       toast.error(error?.response.data.ErrorMessage);

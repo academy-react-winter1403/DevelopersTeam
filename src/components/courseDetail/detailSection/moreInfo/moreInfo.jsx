@@ -82,7 +82,7 @@ const MoreInfo = ({ data }) => {
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries(["courseDetail"]);
-      toast.error("دوره را دوست نداشتید");
+      // toast.error("دوره را دوست نداشتید");
     },
     onError: () => {
       toast.error("ابتدا وارد حساب کاربری خود شوید");
