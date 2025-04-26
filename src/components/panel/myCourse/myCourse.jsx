@@ -14,7 +14,7 @@ const MyCourse = () => {
 
   const getMyCourses = async () => {
     const res = await http.get(
-      `/SharePanel/GetMyCourses?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}&SortingCol=DESC&SortType=LastUpdate`
+      `/SharePanel/GetMyCourses?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}`
     );
     return res;
   };
