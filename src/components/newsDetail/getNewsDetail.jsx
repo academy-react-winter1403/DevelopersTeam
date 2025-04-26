@@ -62,7 +62,8 @@ const GetNewsDetailList = () => {
 
   const handleDelete = async () => {
     const res = await http.delete("/News/DeleteLikeNews", {
-      data: { deleteEntityId: data?.likeId },});
+      data: { deleteEntityId: data?.likeId },
+    });
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,

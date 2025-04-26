@@ -109,14 +109,14 @@ const Item = ({
             </p>
             <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>
           </div>
-          {isMyCommentNews && (
+          {/* {isMyCommentNews && (
             <div className="flex space-x-5 mt-5">
               <AiOutlineLike className="w-6 h-6" />
               <span>2</span>
               <AiOutlineDislike className="w-6 h-6 " />
               <span>4</span>
             </div>
-          )}
+          )} */}
 
           {!isMyCommentNews && (
             <div className="flex p-2 sm:p-4 gap-1 sm:gap-2 items-center flex-wrap">
