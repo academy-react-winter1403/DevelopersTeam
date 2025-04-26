@@ -56,7 +56,6 @@ const App = ({ data, totalCount, pageNum, setPageNum, itemPerPage }) => (
       current: pageNum,
       pageSize: itemPerPage,
       onChange: setPageNum,
-      total: totalCount,
     }}
     columns={columns}
     dataSource={data}
