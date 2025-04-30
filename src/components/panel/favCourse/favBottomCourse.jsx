@@ -30,7 +30,7 @@ const FavBottomCourse = ({ handleSearch }) => {
               type="text"
               onChange={handleSearch}
               placeholder="جستجو کنید..."
-              className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+              className="h-9 w-full  dark:placeholder:text-gray dark:bg-gray-800 outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray dark:border-0 bg-lightGray focus:border-navyBlue transition-all duration-300"
             />
             <div className="w-[42px] h-[42px] bg-navyBlue absolute left-0 rounded-xl flex items-center justify-center">
               <CiSearch className="text-white w-8 h-8" />

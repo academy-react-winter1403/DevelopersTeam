@@ -81,7 +81,6 @@ const TableMyCourses = ({
       current: pageNum,
       pageSize: itemPerPage,
       onChange: setPageNum,
-      total: totalCount,
     }}
   
     columns={columns}
