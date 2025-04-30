@@ -56,9 +56,7 @@ const Profile = () => {
               <AiOutlineMail className="w6 h-6" />
               {data?.email}
             </div>
-            <div className="flex">
-              <TfiPencil className="text-navyBlue dark:text-blue-400 w-6 h-6" />
-            </div>
+        
           </div>
         </div>
         <div className="w-1/2 space-y-3">
