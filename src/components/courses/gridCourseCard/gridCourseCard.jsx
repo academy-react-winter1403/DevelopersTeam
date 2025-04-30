@@ -1,15 +1,36 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
 import TeacherIcon from "./../../../assets/images/teacher-stroke-rounded 1.svg";
 import CalenderIcon from "./../../../assets/images/calendar-03-stroke-rounded 1.svg";
 import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg";
-import { AiOutlineLike } from "react-icons/ai";
-import { AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import DateComponent from "../../common/date/dateComponent";
 import { TagsA, TagsB } from "../../common/course-card/tags/tags";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
+
+// انیمیشن‌های عمومی
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+};
+
+const slideInLeft = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+};
+
+const slideInRight = {
+  hidden: { opacity: 0, x: 100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+};
+
+const imageScale = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.8 } }
+};
 
 const GridCourseCard = ({
   title,
@@ -27,7 +48,7 @@ const GridCourseCard = ({
   userIsLiked,
   userLikedId,
   currentUserDissLike,
-  keyMutate,
+  keyMutate
 }) => {
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
@@ -39,10 +60,9 @@ const GridCourseCard = ({
   };
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
-    onSuccess: () => {
-      queryClient.invalidateQueries([keyMutate]);
-    },
+    onSuccess: () => queryClient.invalidateQueries([keyMutate])
   });
+
   const handleDelete = async () => {
     const myData = new FormData();
     myData.append("CourseLikeId", userLikedId);
@@ -50,30 +70,39 @@ const GridCourseCard = ({
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
-    onSuccess: () => {
-      queryClient.invalidateQueries([keyMutate]);
-    },
+    onSuccess: () => queryClient.invalidateQueries([keyMutate]),
     onError: (error) => {
       console.error("Error deleting like:", error);
-    },
+    }
   });
+
   const handleDisLike = async () => {
     const res = await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
   };
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
-    onSuccess: () => {
-      queryClient.invalidateQueries([keyMutate]);
-    },
+    onSuccess: () => queryClient.invalidateQueries([keyMutate])
   });
 
   return (
-    <div className="w-full h-72 bg-lightGray dark:bg-gray-800 grid grid-cols-5 overflow-hidden rounded-3xl mr-3 relative">
-      <div className="absolute top-2 right-2 sm:flex space-x-2 hidden">
+    <motion.div
+      className="w-full h-72 bg-lightGray dark:bg-gray-800 grid grid-cols-5 overflow-hidden rounded-3xl mr-3 relative"
+      initial="hidden"
+      animate="visible"
+      variants={fadeIn}
+    >
+      <motion.div
+        className="absolute top-2 right-2 sm:flex space-x-2 hidden"
+        variants={slideInRight}
+      >
         <TagsA text={statusName} />
         <TagsB text={levelName} />
-      </div>
-      <div className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden h-72">
+      </motion.div>
+
+      <motion.div
+        className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden h-72"
+        variants={imageScale}
+      >
         <NavLink to={`/courses/coursedetail/${id}`}>
           <img
             src={img == null ? defaultImg : img}
@@ -82,10 +111,13 @@ const GridCourseCard = ({
             onError={addDefaultImg}
           />
         </NavLink>
-      </div>
+      </motion.div>
 
       <div className="col-span-3 m-6 space-y-5">
-        <div className="w-full max-w-[300px] overflow-hidden space-y-2">
+        <motion.div
+          className="w-full max-w-[300px] overflow-hidden space-y-2"
+          variants={fadeIn}
+        >
           <NavLink to={`/courses/coursedetail/${id}`}>
             <h2 className="text-lg font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2 hover:text-navyBlue dark:hover:text-blue-400">
               {title}
@@ -94,8 +126,9 @@ const GridCourseCard = ({
           <h2 className="text-[#787878] dark:text-gray-400 text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">
             {describe}
           </h2>
-        </div>
-        <div className="space-y-3">
+        </motion.div>
+
+        <motion.div className="space-y-3" variants={fadeIn}>
           <div className="flex items-center gap-3 text-base dark:text-gray-300">
             <img src={TeacherIcon} alt="" className="h-5 w-5 dark:invert" />
             <span>{teacherName}</span>
@@ -113,8 +146,12 @@ const GridCourseCard = ({
               <DateComponent insertDate={lastUpdate} />
             </span>
           </div>
-        </div>
-        <div className="flex justify-between items-center mt-12 gap-4 ml-1 sm:mb-2">
+        </motion.div>
+
+        <motion.div
+          className="flex justify-between items-center mt-12 gap-4 ml-1 sm:mb-2"
+          variants={fadeIn}
+        >
           <div className="flex justify-around items-center gap-10">
             <div
               className="flex items-center gap-1"
@@ -151,9 +188,9 @@ const GridCourseCard = ({
             </span>
             <span className="text-blue-400 text-md line-clamp-1">تومان</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

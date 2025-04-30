@@ -1,6 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
 import http from "../../core/services/interceptor";
 import CourseCard from "../common/course-card/courseCard";
+import { motion } from "framer-motion";
+
+// برای استگراگر لیست کارت‌ها
+const containerVariants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", duration: 0.6 },
+  },
+};
+
+// برای Fade-in و حرکت از بالا عنوان و زیرعنوان
+const titleVariants = {
+  hidden: { opacity: 0, y: -30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" } },
+};
+const subtitleVariants = {
+  hidden: { opacity: 0, y: -15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.0, type: "spring", delay: 0.3 },
+  },
+};
 
 const TopCourses = () => {
   const getTopCourses = async () => {
@@ -15,17 +49,38 @@ const TopCourses = () => {
 
   return (
     <div className="w-full mt-20 h-auto">
-      <h1 className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl dark:text-white">
+      {/* انیمیشن برای عنوان */}
+      <motion.h1
+        className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl dark:text-white"
+        variants={titleVariants}
+        initial="hidden"
+        animate="visible"
+      >
         محبوب ترین دوره ها
-      </h1>
-      <h6 className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] dark:text-gray-400 xl:text-[15px]">
+      </motion.h1>
+      {/* انیمیشن برای زیرعنوان */}
+      <motion.h6
+        className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] dark:text-gray-400 xl:text-[15px]"
+        variants={subtitleVariants}
+        initial="hidden"
+        animate="visible"
+      >
         دوره هایی که بین دانشجویان محبوبیت بالایی داشتند
-      </h6>
-      <div className="my-4 flex justify-center gap-4 flex-wrap">
-        {data?.map((item, index) => {
-          return (
+      </motion.h6>
+      {/* لیست کارت‌ها با استگراگر و فرایموشن */}
+      <motion.div
+        className="my-4 flex justify-center gap-4 flex-wrap"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {data?.map((item, index) => (
+          <motion.div
+            key={index}
+            variants={cardVariants}
+            whileHover={{ scale: 1.03, boxShadow: "0 8px 24px #00000011" }}
+          >
             <CourseCard
-              key={index}
               title={item.title}
               img={item.tumbImageAddress}
               describe={item.describe}
@@ -43,9 +98,9 @@ const TopCourses = () => {
               currentUserDissLike={item.userIsDissLiked}
               keyMutate="topCourses"
             />
-          );
-        })}
-      </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 };

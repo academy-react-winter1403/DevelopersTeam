@@ -3,14 +3,27 @@ import TeacherIcon from "./../../../assets/images/teacher-stroke-rounded 1.svg";
 import CalenderIcon from "./../../../assets/images/calendar-03-stroke-rounded 1.svg";
 import StudentIcon from "./../../../assets/images/students-stroke-rounded 1.svg";
 import defaultImg from "./../../../assets/images/courses/courseimg.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import DateComponent from "../date/dateComponent";
 import { TagsA, TagsB } from "./tags/tags";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
-import { AiOutlineLike } from "react-icons/ai";
-import { AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: idx => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.12 * idx, duration: 0.6, type: "spring" }
+  })
+};
+const scaleImg = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { delay: 0.13, duration: 0.6, type: "spring" } }
+};
 
 const CourseCard = ({
   title,
@@ -28,7 +41,7 @@ const CourseCard = ({
   userIsLiked,
   userLikedId,
   currentUserDissLike,
-  keyMutate,
+  keyMutate
 }) => {
   const queryClient = useQueryClient();
 
@@ -37,58 +50,70 @@ const CourseCard = ({
   };
 
   const handleLike = async () => {
-    const res = await http.post(`/Course/AddCourseLike?CourseId=${id}`);
+    await http.post(`/Course/AddCourseLike?CourseId=${id}`);
   };
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
       queryClient.invalidateQueries([keyMutate]);
-      toast.success("عملبات با موفقیت انجام شد");
+      toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
-      toast.error(error.response.data.ErrorMessage);
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در انجام عملیات");
     },
   });
 
   const handleDelete = async () => {
     const myData = new FormData();
     myData.append("CourseLikeId", userLikedId);
-    const res = await http.delete("/Course/DeleteCourseLike", { data: myData });
+    await http.delete("/Course/DeleteCourseLike", { data: myData });
   };
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
       queryClient.invalidateQueries([keyMutate]);
-      toast.success("عملبات با موفقیت انجام شد");
+      toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
-      // console.error("Error deleting like:", error);
-      toast.error(error.response.data.ErrorMessage);
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در انجام عملیات");
     },
   });
 
   const handleDisLike = async () => {
-    const res = await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
+    await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
   };
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
       queryClient.invalidateQueries([keyMutate]);
-      // toast.success("عملبات با موفقیت انجام شد");
     },
     onError: (error) => {
-      // console.error("Error deleting like:", error);
-      toast.error(error.response.data.ErrorMessage);
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در انجام عملیات");
     },
   });
 
   return (
-    <div className="w-[310px] h-[450px] bg-lightGray dark:bg-gray-800 flex flex-col overflow-hidden rounded-3xl relative">
-      <div className="absolute top-2 right-2 flex space-x-2">
+    <motion.div
+      className="w-[310px] h-[450px] bg-lightGray dark:bg-gray-800 flex flex-col overflow-hidden rounded-3xl relative"
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      custom={1}
+    >
+      <motion.div
+        className="absolute top-2 right-2 flex space-x-2"
+        variants={fadeUp}
+        custom={2}
+      >
         <TagsA text={statusName} />
         <TagsB text={levelName} />
-      </div>
-      <div className="w-full h-[200px] rounded-3xl">
+      </motion.div>
+      <motion.div
+        className="w-full h-[200px] rounded-3xl"
+        variants={scaleImg}
+        initial="hidden"
+        animate="visible"
+      >
         <NavLink to={`/courses/coursedetail/${id}`}>
           <img
             src={img == null ? defaultImg : img}
@@ -97,9 +122,9 @@ const CourseCard = ({
             onError={addDefaultImg}
           />
         </NavLink>
-      </div>
+      </motion.div>
       <div className="w-full h-full px-3 flex flex-col mt-3">
-        <div className="grow">
+        <motion.div className="grow" variants={fadeUp} custom={3}>
           <NavLink to={`/courses/coursedetail/${id}`}>
             <h2 className="text-lg font-semibold text-gray-700 dark:text-white line-clamp-1 hover:text-navyBlue dark:hover:text-blue-400 cursor-pointer">
               {title}
@@ -108,8 +133,8 @@ const CourseCard = ({
           <p className="text-[#787878] dark:text-gray-400 text-sm mt-2 line-clamp-2">
             {describe}
           </p>
-        </div>
-        <div className="mt-3 flex-none space-y-3">
+        </motion.div>
+        <motion.div className="mt-3 flex-none space-y-3" variants={fadeUp} custom={4}>
           <div className="flex items-center gap-3 text-sm dark:text-gray-300">
             <img src={TeacherIcon} alt="" className="h-5 w-5 dark:invert" />
             <span>{teacherName}</span>
@@ -125,8 +150,8 @@ const CourseCard = ({
             <img src={CalenderIcon} alt="" className="h-5 w-5 dark:invert" />
             <DateComponent insertDate={lastUpdate} />
           </div>
-        </div>
-        <div className="flex flex-none justify-between my-3">
+        </motion.div>
+        <motion.div className="flex flex-none justify-between my-3" variants={fadeUp} custom={5}>
           <div className="space-x-2 flex justify-center items-center">
             <span className="text-lg font-bold dark:text-white">
               {new Intl.NumberFormat("fa-IR").format(cost)}
@@ -163,9 +188,9 @@ const CourseCard = ({
               <span className="dark:text-gray-300">{dissLikeCount}</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
