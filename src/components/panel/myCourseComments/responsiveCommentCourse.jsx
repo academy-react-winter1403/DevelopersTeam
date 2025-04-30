@@ -14,7 +14,7 @@ const ResponsiveCommentCourse = ({ data }) => {
         return (
           <div className="bg-white w-full dark:bg-gray-800">
             <div className="border-b-1 border-[#E4E4E4] w-11/12 mx-auto h-32 flex justify-evenly items-center gap-3 dark:border-gray-600">
-              <div className="flex flex-col ">
+              <div className="flex flex-col w-40 ">
                 <div
                   onClick={() => showDrawer(item)}
                   className="text-xl font-bold line-clamp-1 dark:text-white"
@@ -22,17 +22,17 @@ const ResponsiveCommentCourse = ({ data }) => {
                   <span>نام دوره: </span>
                   {item.courseTitle}
                 </div>
-                <div className="text-[#787878] text-sm font-semibold dark:text-gray-300">
+                <div className="text-[#787878] text-sm line-clamp-1 font-semibold dark:text-gray-300">
                     <span>عنوان: </span>
                   {item.title}
                 </div>
-                <div className="text-[#787878] text-sm font-semibold dark:text-gray-300">
+                <div className="text-[#787878] text-sm line-clamp-1 font-semibold dark:text-gray-300">
                 <span>نظر: </span>
 
                   {item.describe}
                 </div>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-32">
                 <div className=" text-sm font-semibold dark:text-gray-300">
                 <span>تاریخ ثبت: </span>
 
