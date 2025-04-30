@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-// import Joyride from "react-joyride"; 
+import Joyride from "react-joyride"; 
 
 const container = {
   hidden: { opacity: 0 },
@@ -33,7 +33,7 @@ const HeroSection = () => {
   return (
     <div>
     
-      {/* <Joyride steps={steps} continuous showSkipButton /> */}
+      <Joyride steps={steps} continuous showSkipButton />
 
       
       <motion.div

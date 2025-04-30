@@ -11,9 +11,24 @@ import { IoMoonOutline } from "react-icons/io5";
 import { useDarkMode } from "../../../context/theme/themeContext";
 import { GoSun } from "react-icons/go";
 
+// هوک تشخیص سایز صفحه
+function useIsLargeScreen(minWidth = 1024) {
+  const [isLargeScreen, setIsLargeScreen] = React.useState(() => window.innerWidth >= minWidth);
+
+  React.useEffect(() => {
+    const onResize = () => setIsLargeScreen(window.innerWidth >= minWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [minWidth]);
+
+  return isLargeScreen;
+}
+
 const Header = () => {
   const token = getData("authToken");
   const { darkMode, setDarkMode } = useDarkMode();
+  // فقط بالای 1024 Joyride نمایش داده شود
+  const isLargeScreen = useIsLargeScreen(1024);
 
   const steps = [
     {
@@ -21,7 +36,7 @@ const Header = () => {
       content: "این لوگوی سایت ماست. با کلیک به صفحه اصلی می‌روی!",
     },
     {
-      target: ".header-menu", 
+      target: ".header-menu",
       content: "از اینجا به صفحه‌های خانه، دوره‌ها و مقالات برو.",
     },
     {
@@ -29,24 +44,26 @@ const Header = () => {
       content: "برای روشن یا تاریک کردن ظاهر سایت، اینجا کلیک کن!",
     },
     {
-      target: ".header-auth",  
+      target: ".header-auth",
       content: "برای ورود یا دسترسی به پنل کاربری از این دکمه استفاده کن.",
     },
   ];
 
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      {/* <Joyride
-        steps={steps}
-        continuous
-        showSkipButton
-        locale={{
-          next: "بعدی",
-          back: "قبلی",
-          skip: "رد کردن",
-          last: "پایان",
-        }}
-      /> */}
+      {isLargeScreen && (
+        <Joyride
+          steps={steps}
+          continuous
+          showSkipButton
+          locale={{
+            next: "بعدی",
+            back: "قبلی",
+            skip: "رد کردن",
+            last: "پایان",
+          }}
+        />
+      )}
 
       <NavLink
         to="/"
