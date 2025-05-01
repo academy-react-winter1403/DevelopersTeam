@@ -21,6 +21,9 @@ import FavNewPage from "../../screens/favNewPage";
 import MyCourseCommentsPage from "../../screens/myCourseCommentsPage/myCourseCommentsPage";
 import MyNewsCommentsPage from "../../screens/myNewsCommentsPage/myNewsCommentsPage";
 import PaymentPage from "../../screens/paymentPage/paymentPage";
+import Login from "../../components/login";
+import EnterNumberLogin from "../../components/login/enterNumberLogin/enterNumberLogin";
+import VerifyCodeLogin from "../../components/login/verifyCodeLogin/verifyCodeLogin";
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +58,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/login",
-        element: <LoginPage />,
+        element: <EnterNumberLogin />,
+      },
+      {
+        path: "/login/verifycode",
+        element: <VerifyCodeLogin />,
       },
     ],
   },

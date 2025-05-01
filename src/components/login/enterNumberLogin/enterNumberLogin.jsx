@@ -9,17 +9,40 @@ import { Form, Formik } from "formik";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
 import { getData, setData } from "../../../core/localStorage/localStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { setSteps } from "../../../redux/slices/loginSteps";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import http from "./../../../core/services/interceptor";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
   const icon = (
     <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
   );
+  const navigate = useNavigate();
 
-  const { mutateAsync } = useMutationCustom(
-    "/Sign/Login",
-    "Login",
-    "عملیات با موفقیت انجام شد"
-  );
+  const steps = useSelector((state) => state.steps);
+  const dispatch = useDispatch();
+  // <button onClick={() => dispatch(setSteps())}>Increment</button>
+
+  // const { mutateAsync } = useMutationCustom(
+  //   "/Sign/Login",
+  //   "Login",
+  //   "عملیات با موفقیت انجام شد"
+  // );
+
+  const { mutateAsync } = useMutation({
+    mutationFn: (values) => http.post(`/Sign/Login`, values),
+    mutationKey: ["Login"],
+    onSuccess: () => {
+      toast.success("عملیات با موفقیت انجام شد");
+      navigate("/login/verifycode");
+      dispatch(setSteps(2));
+    },
+    onError: (error) => {
+      toast.error("لطفا دوباره امتحان کنید");
+    },
+  });
 
   const handleMutation = async (values) => {
     const response = await mutateAsync(values);
@@ -43,11 +66,9 @@ const EnterNumberLogin = ({ nextStep, text }) => {
         token: response.token,
         phoneOrGmail: values.phoneOrGmail,
       });
-      navigate("/");
+      // nextStep();
     }
   };
-
-  const navigate = useNavigate();
 
   return (
     <div>
@@ -55,13 +76,16 @@ const EnterNumberLogin = ({ nextStep, text }) => {
         <div className="w-xs xs:w-md lg:w-md   mt-12 space-y-4">
           <Formik
             onSubmit={handleMutation}
-            initialValues={{ phoneOrGmail: "", password: "", rememberMe: true }}
+            initialValues={{
+              phoneOrGmail: "",
+              password: "",
+              rememberMe: true,
+            }}
           >
             <Form className="space-y-4">
               <AuthInput
                 inputLabel={"شماره یا ایمیل"}
                 placeholder={"شماره همراه یا ایمیل خود را وارد کنید"}
-                text={text}
                 name="phoneOrGmail"
                 icon={icon}
               />
@@ -70,7 +94,7 @@ const EnterNumberLogin = ({ nextStep, text }) => {
                 placeholder={"رمزعبور خود را وارد کنید"}
                 name="password"
               />
-              <AuthButton text={text} />
+              <AuthButton text={"ادامه"} />
             </Form>
           </Formik>
 
