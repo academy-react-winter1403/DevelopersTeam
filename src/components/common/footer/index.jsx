@@ -3,6 +3,7 @@ import Academi from "./../../../assets/images/Academi.svg";
 import Instagram from "./../../../assets/images/instagram.svg";
 import Telegram from "./../../../assets/images/telegram.svg";
 import { Link } from "react-router-dom";
+import MapComponent from "./MapComponent";
 
 const Footer = () => {
   return (
@@ -97,6 +98,9 @@ const Footer = () => {
           <img src={Telegram} alt="" className="h-5 w-5 dark:invert" />
           <span className="text-sm dark:text-gray-300">تلگرام</span>
         </div>
+      </div>
+      <div className="border w-64 mt-10 h-32 order-5 hidden xl:block">
+      <MapComponent /> 
       </div>
     </div>
   );
