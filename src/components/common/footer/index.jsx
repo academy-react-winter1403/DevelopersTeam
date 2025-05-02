@@ -99,7 +99,7 @@ const Footer = () => {
           <span className="text-sm dark:text-gray-300">تلگرام</span>
         </div>
       </div>
-      <div className="border w-64 mt-10 h-32 order-5 hidden xl:block">
+      <div className=" w-64 mt-7 mr-4 h-40 order-5 hidden xl:block">
       <MapComponent /> 
       </div>
     </div>

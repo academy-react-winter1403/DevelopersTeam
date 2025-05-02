@@ -17,7 +17,7 @@ const MapComponent = () => {
   const position = [36.598083, 53.064639];
 
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-md bg-white dark:bg-gray-900">
+    <div className="rounded-xl border-2 border-gray-200 h-full dark:border-gray-700 overflow-hidden shadow-md bg-white dark:bg-gray-900">
       <MapContainer
         center={position}
         zoom={15}
