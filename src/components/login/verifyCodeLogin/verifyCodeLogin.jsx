@@ -7,26 +7,20 @@ import http from "./../../../core/services/interceptor";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { getData, setData } from "../../../core/localStorage/localStorage";
+import OTPInput from "react-otp-input";
 
 const VerifyCodeLogin = ({ text, nextStep, prevStep }) => {
   const [otp, setOtp] = useState("");
-  const {navigate}=useNavigate()
-
-  const { data } = useQuery({
-    queryKey: ["profile"],
-    queryFn: async () => {
-      const res = await http.get(`/SharePanel/GetProfileInfo`);
-      return res;
-    },
-  });
+  const navigate = useNavigate();
 
   const values = {
-    phoneOrGmail: data?.email || data?.phoneNumber,
+    phoneOrGmail: "09336876427",
     password: "1",
     rememberMe: true,
   };
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async (VrifyCode) => {
       const res = await http.post(
         `/Sign/LoginTwoStep?VrifyCode=${VrifyCode}`,
@@ -37,7 +31,7 @@ const VerifyCodeLogin = ({ text, nextStep, prevStep }) => {
     },
     onSuccess: () => {
       toast.success("عملبات با موفقیت انجام شد");
-      navigate('/')
+      navigate("/");
     },
     onError: (error) => {
       console.error(error);
@@ -45,37 +39,68 @@ const VerifyCodeLogin = ({ text, nextStep, prevStep }) => {
     },
   });
 
+  const handleMutation = async (values) => {
+    const response = await mutateAsync(values);
+    if (response) {
+      const existingAccounts = getData("accounts") || [];
+      const accountExists = existingAccounts.some(
+        (account) => account.id === response.id
+      );
+      if (!accountExists) {
+        const newAccount = {
+          id: response.id,
+          token: response.token,
+          phoneOrGmail: values.phoneOrGmail,
+        };
+        const updatedAccounts = [...existingAccounts, newAccount];
+        setData("accounts", updatedAccounts);
+      }
+      setData("authToken", response.token);
+      setData("currentAccount", {
+        id: response.id,
+        token: response.token,
+        phoneOrGmail: values.phoneOrGmail,
+      });
+      // nextStep();
+    }
+  };
+
   return (
     <div className="w-xs xs:w-sm sm:w-md mt-10">
       <div>
         <Formik
           initialValues={{ VrifyCode: "" }}
           onSubmit={(values) => {
-            mutate(values.VrifyCode);
+            handleMutation(values.VrifyCode);
           }}
         >
           {({ handleSubmit, values, setFieldValue }) => (
             <Form onSubmit={handleSubmit}>
               <span>کد تایید</span>
-              <div dir="ltr" className="w-full">
-                <Input.OTP
+              <div dir="ltr" className="w-full mt-3">
+                <OTPInput
                   name="VrifyCode"
-                  length={5}
+                  value={values.VrifyCode}
                   onChange={(value) => {
                     setOtp(value);
                     setFieldValue("VrifyCode", value);
                   }}
-                  value={values.VrifyCode}
-                  size="large"
-                  style={{ width: "100%", height: "50px" }}
-                  className="flex justify-center"
-                  inputStyle={{
-                    width: "40px",
-                    height: "40px",
-                    margin: "0 4px",
-                    fontSize: "16px",
+                  numInputs={5}
+                  renderSeparator={<span></span>}
+                  renderInput={(props) => <input {...props} />}
+                  containerStyle={{
+                    height: "56px",
+                    display: "flex",
+                    gap: "15px",
                   }}
-                  autoFocus
+                  inputStyle={{
+                    width: "65px",
+                    height: "67px",
+                    backgroundColor: "#f4f4f4",
+                    borderRadius: "14px",
+                    minWidth: "40px",
+                    minHeight: "42px",
+                  }}
                 />
               </div>
               <button

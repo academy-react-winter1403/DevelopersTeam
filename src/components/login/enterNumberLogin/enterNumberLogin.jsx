@@ -44,38 +44,38 @@ const EnterNumberLogin = ({ nextStep, text }) => {
     },
   });
 
-  const handleMutation = async (values) => {
-    const response = await mutateAsync(values);
-    if (response) {
-      const existingAccounts = getData("accounts") || [];
-      const accountExists = existingAccounts.some(
-        (account) => account.id === response.id
-      );
-      if (!accountExists) {
-        const newAccount = {
-          id: response.id,
-          token: response.token,
-          phoneOrGmail: values.phoneOrGmail,
-        };
-        const updatedAccounts = [...existingAccounts, newAccount];
-        setData("accounts", updatedAccounts);
-      }
-      setData("authToken", response.token);
-      setData("currentAccount", {
-        id: response.id,
-        token: response.token,
-        phoneOrGmail: values.phoneOrGmail,
-      });
-      // nextStep();
-    }
-  };
+  // const handleMutation = async (values) => {
+  //   const response = await mutateAsync(values);
+  //   if (response) {
+  //     const existingAccounts = getData("accounts") || [];
+  //     const accountExists = existingAccounts.some(
+  //       (account) => account.id === response.id
+  //     );
+  //     if (!accountExists) {
+  //       const newAccount = {
+  //         id: response.id,
+  //         token: response.token,
+  //         phoneOrGmail: values.phoneOrGmail,
+  //       };
+  //       const updatedAccounts = [...existingAccounts, newAccount];
+  //       setData("accounts", updatedAccounts);
+  //     }
+  //     setData("authToken", response.token);
+  //     setData("currentAccount", {
+  //       id: response.id,
+  //       token: response.token,
+  //       phoneOrGmail: values.phoneOrGmail,
+  //     });
+  //     // nextStep();
+  //   }
+  // };
 
   return (
     <div>
       <div className="flex flex-col justify-center items-center xs:block">
         <div className="w-xs xs:w-md lg:w-md   mt-12 space-y-4">
           <Formik
-            onSubmit={handleMutation}
+            onSubmit={mutateAsync}
             initialValues={{
               phoneOrGmail: "",
               password: "",

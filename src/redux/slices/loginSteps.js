@@ -11,4 +11,4 @@ const stepsSlice = createSlice({
 });
 
 export const { setSteps } = stepsSlice.actions;
-export default stepsSlice.reducer;  // ✅ Export the reducer
+export default stepsSlice.reducer; 

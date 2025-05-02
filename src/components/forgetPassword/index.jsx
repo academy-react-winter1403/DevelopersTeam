@@ -5,6 +5,9 @@ import StepsForgetPass from "./stepsForgetPass/stepsForgetPass";
 import EnterEmail from "./enterEmail/enterEmail";
 import NewPassword from "./newPassword/newPassword";
 import { NavLink, Outlet } from "react-router-dom";
+import { useDarkMode } from "../../context/theme/themeContext";
+import { GoSun } from "react-icons/go";
+import { IoMoonOutline } from "react-icons/io5";
 
 const ForgetPassword = () => {
   const [step, setStep] = useState(1);
@@ -14,8 +17,20 @@ const ForgetPassword = () => {
   const prevStep = () => {
     setStep(step - 1);
   };
+  const { darkMode, setDarkMode } = useDarkMode();
+
   return (
-    <div dir="rtl" className="md:grid md:grid-cols-5 w-full h-[800px]">
+    <div dir="rtl" className="md:grid md:grid-cols-5 w-full h-[740px]">
+      <div
+        onClick={() => setDarkMode(!darkMode)}
+        className="header-darkmode absolute   bottom-10  md:right-16 right-5  border-0 lg:border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full"
+      >
+        {darkMode ? (
+          <GoSun className="size-5 text-white cursor-pointer" />
+        ) : (
+          <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
+        )}
+      </div>
       {/* right section */}
       <NavLink to="/" className="w-fit flex md:hidden p-5 ">
         <img src={logo} alt="logo" className="w-14" />
@@ -53,6 +68,7 @@ const ForgetPassword = () => {
             </p>
           )}
         </div>
+
         <Outlet />
         {/* inputs section */}
         {/* {step == 1 && <EnterEmail nextStep={nextStep} text={"ارسال لینک"} />} */}
