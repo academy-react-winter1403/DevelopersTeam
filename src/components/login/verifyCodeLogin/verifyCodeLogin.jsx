@@ -15,7 +15,7 @@ const VerifyCodeLogin = ({ text, nextStep, prevStep }) => {
   const navigate = useNavigate();
 
   const values = {
-    phoneOrGmail: "09336876427",
+    phoneOrGmail: "09339294953",
     password: "1",
     rememberMe: true,
   };
