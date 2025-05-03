@@ -11,7 +11,7 @@ const SecurityInfo = () => {
     queryKey: ["SecurityInfo"],
     queryFn: async () => {
       const res = await http.get(`/SharePanel/GetSecurityInfo`);
-      console.log(res);
+      // console.log(res);
       return res;
     },
   });
