@@ -24,7 +24,7 @@ const TopNews = () => {
       <h6 className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] dark:text-gray-400 xl:text-[15px]">
         خبرها و مقاله‌هایی که در این هفته منتشر شدند
       </h6>
-      <div className="flex flex-wrap justify-center gap-y-4  my-8  w-[85%] mx-auto">
+      <div className="flex flex-wrap justify-center gap-y-4  my-8  w-[100%] mx-auto">
         {data?.news.map((item) => (
           <NewsCard
             key={item.id}
