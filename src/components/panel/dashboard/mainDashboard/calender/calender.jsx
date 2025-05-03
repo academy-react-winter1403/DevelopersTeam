@@ -8,27 +8,24 @@ import { useDarkMode } from "../../../../../context/theme/themeContext";
 const CalenderComp = () => {
   const { darkMode } = useDarkMode();
 
-  // State‌ها
-  const [events, setEvents] = useState([]); // ذخیره لیست رویدادها
-  const [newEvent, setNewEvent] = useState(""); // عنوان رویداد جدید
-  const [selectedDate, setSelectedDate] = useState(); // تاریخ انتخاب‌شده
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // مدیریت باز و بسته شدن مودال "افزودن"
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false); // مدیریت باز و بسته شدن مودال "مشاهده"
+  const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState("");
+  const [selectedDate, setSelectedDate] = useState();
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
-  // افزودن رویداد جدید
   const handleAddEvent = () => {
     if (!selectedDate || !newEvent.trim()) {
       alert("لطفاً تاریخ و عنوان رویداد را وارد کنید!");
       return;
     }
     setEvents([...events, { date: selectedDate, title: newEvent }]);
-    setNewEvent(""); // ریست کردن داده‌ها
-    setSelectedDate(null); // reset date
-    setIsAddModalOpen(false); // بستن مودال "افزودن"
+    setNewEvent("");
+    setSelectedDate(null);
+    setIsAddModalOpen(false);
     alert("رویداد جدید اضافه شد!");
   };
 
-  // حذف آخرین رویداد
   const handleRemoveEvent = () => {
     if (events.length === 0) {
       alert("هیچ رویدادی برای حذف وجود ندارد!");
@@ -49,17 +46,15 @@ const CalenderComp = () => {
         maxWidth: "400px",
         backgroundColor: darkMode ? "#1e2939" : "#FEFDFF",
         borderRadius: "16px",
-        boxShadow: darkMode ? "0px 2px 8px rgba(0,0,0,0.8)" : "0px 2px 8px rgba(0,0,0,0.2)",
         overflow: "hidden",
-        border: "1px solid #ced4da",
       }}
     >
       <Calendar
         calendar={persian}
         locale={persian_fa}
-        multiple={false} // انتخاب تک تاریخ
-        value={selectedDate} // ذخیره تاریخ انتخاب‌شده
-        onChange={(date) => setSelectedDate(date)} // تنظیم تاریخ انتخاب شده
+        multiple={false}
+        value={selectedDate}
+        onChange={(date) => setSelectedDate(date)}
         style={{
           border: "none",
           width: "100%",
@@ -73,7 +68,6 @@ const CalenderComp = () => {
         shadow={false}
       />
 
-      {/* دکمه‌های اصلی */}
       <div
         style={{
           display: "flex",
@@ -85,7 +79,7 @@ const CalenderComp = () => {
         }}
       >
         <button
-          onClick={() => setIsAddModalOpen(true)} // باز کردن مودال "افزودن"
+          onClick={() => setIsAddModalOpen(true)}
           style={{
             padding: "5px 10px",
             borderRadius: "6px",
@@ -113,7 +107,7 @@ const CalenderComp = () => {
           حذف
         </button>
         <button
-          onClick={() => setIsViewModalOpen(true)} // باز کردن مودال "مشاهده"
+          onClick={() => setIsViewModalOpen(true)}
           style={{
             padding: "5px 10px",
             borderRadius: "6px",
@@ -128,7 +122,6 @@ const CalenderComp = () => {
         </button>
       </div>
 
-      {/* مودال "افزودن" */}
       {isAddModalOpen && (
         <div
           style={{
@@ -154,7 +147,13 @@ const CalenderComp = () => {
               boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
             }}
           >
-            <h4 style={{ color: darkMode ? "#fff" : "#000", textAlign: "center", marginBottom: "20px" }}>
+            <h4
+              style={{
+                color: darkMode ? "#fff" : "#000",
+                textAlign: "center",
+                marginBottom: "20px",
+              }}
+            >
               افزودن رویداد جدید
             </h4>
             <input
@@ -186,7 +185,7 @@ const CalenderComp = () => {
               ذخیره
             </button>
             <button
-              onClick={() => setIsAddModalOpen(false)} // بستن مودال "افزودن"
+              onClick={() => setIsAddModalOpen(false)}
               style={{
                 padding: "10px 20px",
                 marginTop: "10px",
@@ -205,7 +204,6 @@ const CalenderComp = () => {
         </div>
       )}
 
-      {/* مودال "مشاهده" */}
       {isViewModalOpen && (
         <div
           style={{
@@ -231,7 +229,13 @@ const CalenderComp = () => {
               boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
             }}
           >
-            <h4 style={{ color: darkMode ? "#fff" : "#000", textAlign: "center", marginBottom: "20px" }}>
+            <h4
+              style={{
+                color: darkMode ? "#fff" : "#000",
+                textAlign: "center",
+                marginBottom: "20px",
+              }}
+            >
               رویدادهای ثبت‌شده
             </h4>
             {events.length > 0 ? (
@@ -250,12 +254,17 @@ const CalenderComp = () => {
                 ))}
               </ul>
             ) : (
-              <p style={{ color: darkMode ? "#ccc" : "#555", textAlign: "center" }}>
+              <p
+                style={{
+                  color: darkMode ? "#ccc" : "#555",
+                  textAlign: "center",
+                }}
+              >
                 هیچ برنامه‌ای ثبت نشده است.
               </p>
             )}
             <button
-              onClick={() => setIsViewModalOpen(false)} // بستن مودال "مشاهده"
+              onClick={() => setIsViewModalOpen(false)}
               style={{
                 padding: "10px 20px",
                 marginTop: "10px",
