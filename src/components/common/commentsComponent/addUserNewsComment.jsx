@@ -80,6 +80,7 @@ const AddUserNewsComment = ({ id }) => {
       editor.commands.setContent("");     // متن پاک شود
     },
     onError: (error) => {
+
       toast.error(error?.response?.data?.ErrorMessage || "خطا در ثبت نظر");
     },
   });
