@@ -8,6 +8,9 @@ import ProfileFormSchema from "./profileFormSchema";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import UserForm from "./userForm";
+import SecurityInfo from "./securityInfo";
+import { Divider } from "antd";
 
 function isFirefox() {
   return typeof window !== "undefined" && /firefox/i.test(navigator.userAgent);
@@ -404,11 +407,17 @@ const UserInfo = ({ data }) => {
           )}
         </Formik>
       </div>
-      <div className="col-span-4 order-1 md:order-2 flex justify-center md:justify-end md:ml-16 mt-6">
+      {/* <div className="col-span-4 order-1 md:order-2 flex justify-center md:justify-end md:ml-16 mt-6">
+        <UserForm mutateUpdate={mutateUpdate} data={data} />
+      </div> */}
+      <div className="col-span-4 order-1 md:order-2 flex flex-col justify-center md:justify-start  items-center line md:ml-16 mt-6">
         <div className="md:border-2 md:border-borderGray w-72 h-72 rounded-2xl flex items-center justify-center">
           <ProgressProfile
             profileCompletionPercentage={data?.profileCompletionPercentage}
           />
+        </div>
+        <div className="w-72 h-52 md:border-2 md:border-borderGray  rounded-2xl p-3 flex flex-col mt-10">
+          <SecurityInfo />
         </div>
       </div>
     </div>
