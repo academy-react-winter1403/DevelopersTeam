@@ -50,85 +50,58 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       >
         S
       </button>
-      {/* <button
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}
-        className="px-2 py-1 rounded text-[#232f44]"
-        type="button"
-      >
-        پاک
-      </button> */}
     </div>
   );
 };
 
 const AddUserNewsComment = ({ id }) => {
+  const [title, setTitle] = useState("");           // اضافه شد
+  const [error, setError] = useState("");           // اضافه شد
   const queryClient = useQueryClient();
   const { darkMode } = useDarkMode();
-  const [title, setTitle] = useState("");
-  const [error, setError] = useState("");
-
-  const editor = useEditor({
+  const editor = useEditor({                        // اضافه شد
     extensions: [StarterKit],
     content: "",
-    editorProps: {
-      attributes: {
-        style: `direction: rtl; text-align: right; min-height: 110px; font-family: inherit; background:transparent; color:${
-          darkMode ? "#fff" : "#232f44"
-        };`,
-      },
-    },
-    onUpdate: ({ editor }) => {
-      const currentLength = editor.getText().trim().length;
-      if (currentLength > MAX_LENGTH) {
-        setError(`حداکثر ${MAX_LENGTH} کاراکتر مجاز است`);
-      } else {
-        setError("");
-      }
-    },
   });
 
-  const addComment = async () => {
-    const describe = editor?.getHTML() || "";
-    if (!title.trim()) {
-      setError("عنوان را وارد کنید");
-      return;
-    }
-    if (!describe.trim()) {
-      setError("متن نظر را وارد کنید");
-      return;
-    }
-    if (editor.getText().trim().length > MAX_LENGTH) {
-      setError(`حداکثر ${MAX_LENGTH} کاراکتر مجاز است`);
-      return;
-    }
-
-    const values = {
-      newsId: id,
-      title,
-      describe,
-      userId: 40330,
-      userIpAddress: "1.1.1.1",
-    };
-
-    const response = await http.post(`/News/CreateNewsComment`, values);
-    return response;
+  // تابع ثبت نظر
+  const addComment = async (values) => {
+    const res = await http.post(`/News/CreateNewsComment`, values);
+    return res;
   };
 
   const { mutate, isLoading } = useMutation({
     mutationFn: addComment,
     onSuccess: () => {
       queryClient.invalidateQueries(["newsComment"]);
-      toast.success("نظر شما با موفقیت ثبت شد.");
-      setTitle("");
-      editor?.commands.clearContent();
+      toast.success("نظرتان با موفقیت ثبت شد");
+      setError("");        // پیغام خطا پاک شود
+      setTitle("");        // عنوان پاک شود
+      editor.commands.setContent("");     // متن پاک شود
     },
     onError: (error) => {
-      const errorMessage =
-        error?.response?.data?.ErrorMessage || "خطا در ثبت نظر";
-      setError(errorMessage);
-      toast.error(errorMessage);
+
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در ثبت نظر");
     },
   });
+
+  // تابع کنترل ثبت نظر
+  const handleCommentSubmit = () => {
+    if (!title.trim() || !editor.getText().trim()) {
+      setError("عنوان و متن نظر نمی‌تواند خالی باشد");
+      return;
+    }
+    if (editor.getText().length > MAX_LENGTH) {
+      setError(`حداکثر ${MAX_LENGTH} کاراکتر مجاز است`);
+      return;
+    }
+    setError("");
+    mutate({
+      newsId: id,
+      title,
+      content: editor.getHTML(),
+    });
+  };
 
   return (
     <div
@@ -161,7 +134,7 @@ const AddUserNewsComment = ({ id }) => {
         <div className="flex justify-between items-center">
           <button
             disabled={isLoading}
-            onClick={() => mutate()}
+            onClick={handleCommentSubmit}
             className="bg-[#3772FF] dark:bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:opacity-90 transition-opacity duration-150"
           >
             {isLoading ? "در حال ارسال..." : "ثبت نظر"}
