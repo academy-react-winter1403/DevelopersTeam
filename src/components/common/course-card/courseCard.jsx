@@ -41,7 +41,9 @@ const CourseCard = ({
   userIsLiked,
   userLikedId,
   currentUserDissLike,
-  keyMutate
+  keyMutate,
+  isSelected,
+  onToggleCompare,
 }) => {
   const queryClient = useQueryClient();
 
@@ -189,6 +191,16 @@ const CourseCard = ({
             </div>
           </div>
         </motion.div>
+      </div>
+      <div className="absolute left-2 top-2 z-10">
+        <label className="flex items-center gap-1 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={isSelected}
+            onChange={onToggleCompare}
+          />
+          <span className="text-xs border border-amber-400 rounded-2xl bg-amber-400 p-1">مقایسه</span>
+        </label>
       </div>
     </motion.div>
   );
