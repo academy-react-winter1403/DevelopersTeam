@@ -135,8 +135,9 @@ import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import http from "./../../../core/services/interceptor";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleLogin } from "../../../redux/slices/loginSlice";
+import { getData, setData } from "../../../core/localStorage/localStorage";
 
 const EnterNumberLogin = ({ nextStep, text }) => {
   const icon = (
@@ -144,11 +145,13 @@ const EnterNumberLogin = ({ nextStep, text }) => {
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loginData = useSelector((state) => state.login?.UserLoginInfo);
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync , isPending } = useMutation({
     mutationFn: (values) => http.post(`/Sign/Login`, values),
     mutationKey: ["Login"],
     onSuccess: (data, values) => {
+      console.log(data);
       dispatch(
         handleLogin({
           phoneOrGmail: values.phoneOrGmail,
@@ -156,15 +159,43 @@ const EnterNumberLogin = ({ nextStep, text }) => {
           rememberMe: values.rememberMe,
         })
       );
-
-      toast.success("عملیات با موفقیت انجام شد");
-      navigate("/login/verifycode");
+      if (data.message === "عملیات با موفقیت انجام شد.") {
+        handleSuccessResponse(data);
+        toast.success("عملیات با موفقیت انجام شد");
+        navigate("/");
+      } else if (data.message === "ارسال پیامک انجام شد.") {
+        navigate("/login/verifycode");
+      }
     },
     onError: (error) => {
-      toast.error("لطفا دوباره امتحان کنید");
+      console.log(error);
+      toast.error("لطفا دوباره امتحان کنید"); 
     },
   });
 
+  const handleSuccessResponse = (data) => {
+    const existingAccounts = getData("accounts") || [];
+    const accountExists = existingAccounts.some(
+      (account) => account.id === data.id
+    );
+
+    if (!accountExists) {
+      const newAccount = {
+        id: data.id,
+        token: data.token,
+        phoneOrGmail: loginData.phoneOrGmail,
+      };
+      const updatedAccounts = [...existingAccounts, newAccount];
+      setData("accounts", updatedAccounts);
+    }
+
+    setData("authToken", data.token);
+    setData("currentAccount", {
+      id: data.id,
+      token: data.token,
+      phoneOrGmail: loginData.phoneOrGmail,
+    });
+  };
   return (
     <div>
       <div className="flex flex-col justify-center items-center xs:block">
@@ -213,7 +244,7 @@ const EnterNumberLogin = ({ nextStep, text }) => {
                     );
                   }}
                 />
-                <AuthButton text={"ادامه"} />
+                <AuthButton LogFirstStep={true} isPending={isPending} text={"ادامه"} />
               </Form>
             )}
           </Formik>
