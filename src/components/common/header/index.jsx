@@ -5,54 +5,48 @@ import logoText from "./../../../assets/images/logoText.svg";
 import { NavLink } from "react-router-dom";
 import { getData } from "../../../core/localStorage/localStorage";
 import { FiUser } from "react-icons/fi";
-import { Button, Select } from "antd"; // Select برای انتخاب زبان
+import { Button } from "antd";
 import HeaderDrawer from "../../headerDrawer/headerDrawer";
 import { IoMoonOutline } from "react-icons/io5";
 import { useDarkMode } from "../../../context/theme/themeContext";
 import { GoSun } from "react-icons/go";
-import { useTranslation } from "react-i18next"; // اضافه کردن هوک ترجمه
 
 const Header = () => {
   const token = getData("authToken");
   const { darkMode, setDarkMode } = useDarkMode();
-  const { t, i18n } = useTranslation(); // گرفتن شیء i18n برای تغییر زبان
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng); // تغییر زبان
-  };
 
   const steps = [
     {
       target: ".header-logo",
-      content: t("این لوگوی سایت ماست. با کلیک به صفحه اصلی می‌روی!"),
+      content: "این لوگوی سایت ماست. با کلیک به صفحه اصلی می‌روی!",
     },
     {
-      target: ".header-menu",
-      content: t("از اینجا به صفحه‌های خانه، دوره‌ها و مقالات برو."),
+      target: ".header-menu", 
+      content: "از اینجا به صفحه‌های خانه، دوره‌ها و مقالات برو.",
     },
     {
       target: ".header-darkmode",
-      content: t("darkMode"),
+      content: "برای روشن یا تاریک کردن ظاهر سایت، اینجا کلیک کن!",
     },
     {
-      target: ".header-auth",
-      content: t("auth.login"),
+      target: ".header-auth",  
+      content: "برای ورود یا دسترسی به پنل کاربری از این دکمه استفاده کن.",
     },
   ];
 
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      <Joyride
+      {/* <Joyride
         steps={steps}
         continuous
         showSkipButton
         locale={{
-          next: t("بعدی"),
-          back: t("قبلی"),
-          skip: t("رد کردن"),
-          last: t("پایان"),
+          next: "بعدی",
+          back: "قبلی",
+          skip: "رد کردن",
+          last: "پایان",
         }}
-      />
+      /> */}
 
       <NavLink
         to="/"
@@ -77,9 +71,7 @@ const Header = () => {
             }`
           }
         >
-          <span className={`${i18n.language === "fa" ? "rtl-text" : "ltr-text"} leading-12`}>
-            {t("home")}
-          </span>
+          <span className="leading-12">خانه</span>
         </NavLink>
         <NavLink
           to="/courses"
@@ -91,9 +83,7 @@ const Header = () => {
             }`
           }
         >
-          <span className={`${i18n.language === "fa" ? "rtl-text" : "ltr-text"} leading-12`}>
-            {t("courses")}
-          </span>
+          <span className="leading-12">دوره ها</span>
         </NavLink>
         <NavLink
           to="/news"
@@ -105,11 +95,7 @@ const Header = () => {
             }`
           }
         >
-          <span
-            className={`${i18n.language === "fa" ? "rtl-text" : "ltr-text"} h-28 leading-12`}
-          >
-            {t("news")}
-          </span>
+          <span className="h-28 leading-12">اخبار و مقالات</span>
         </NavLink>
       </div>
 
@@ -124,18 +110,6 @@ const Header = () => {
             <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
           )}
         </div>
-
-        {/* Dropdown برای انتخاب زبان */}
-        <Select
-          defaultValue={i18n.language} // زبان پیش‌فرض
-          onChange={changeLanguage} // هنگام تغییر زبان
-          style={{ width: 120 }}
-          options={[
-            { value: "fa", label: t("فارسی") },
-            { value: "en", label: t("انگلیسی") },
-          ]}
-        />
-
         <div className="flex items-center justify-center header-auth">
           {token ? (
             <NavLink to="/panel/dashboard">
@@ -149,7 +123,7 @@ const Header = () => {
                   fontSize: "12px",
                 }}
               >
-                {t("auth.dashboard")}
+                پنل دانشجویی
               </Button>
             </NavLink>
           ) : (
@@ -158,7 +132,9 @@ const Header = () => {
               shape="round"
               style={{ fontFamily: "yekan" }}
             >
-              <NavLink to="/login">{t("auth.login")}</NavLink>
+              <NavLink to="/login">
+                <span className="dark:text-white">ورود یا ثبت نام</span>
+              </NavLink>
             </Button>
           )}
           <HeaderDrawer />

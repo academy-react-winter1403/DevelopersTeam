@@ -3,7 +3,6 @@ import Academi from "./../../../assets/images/Academi.svg";
 import Instagram from "./../../../assets/images/instagram.svg";
 import Telegram from "./../../../assets/images/telegram.svg";
 import { Link } from "react-router-dom";
-import MapComponent from "./MapComponent";
 
 const Footer = () => {
   return (
@@ -99,7 +98,6 @@ const Footer = () => {
           <span className="text-sm dark:text-gray-300">تلگرام</span>
         </div>
       </div>
-     
     </div>
   );
 };
