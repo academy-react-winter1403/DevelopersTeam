@@ -7,31 +7,9 @@ import { Tabs } from "antd";
 import LinksTab from "../links/links";
 import "./ProfileTabs.css";
 import { motion, AnimatePresence } from "framer-motion";
+import ChangePass from "../changePass/changePass";
 
 const ProfileTabs = ({ data }) => {
-  const items = [
-    {
-      key: "1",
-      label: "اطلاعات شخصی",
-      children: <UserInfo data={data} />,
-    },
-    {
-      key: "2",
-      label: "عکس پروفایل",
-      children: <UserProfioleImage data={data} />,
-    },
-    {
-      key: "3",
-      label: "آدرس سکونت",
-      children: <UserAddress data={data} />,
-    },
-    {
-      key: "4",
-      label: "لینک ها",
-      children: <LinksTab data={data} />,
-    },
-  ];
-
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = [
@@ -43,9 +21,9 @@ const ProfileTabs = ({ data }) => {
       content: <UserAddress data={data} />,
     },
     { id: 3, label: "لینک ها", content: <LinksTab data={data} /> },
+    { id: 4, label: "تغییر رمز", content: <ChangePass data={data} /> },
   ];
 
-  // Animation variants for content
   const contentVariants = {
     enter: { opacity: 0, y: 10 },
     center: { opacity: 1, y: 0 },

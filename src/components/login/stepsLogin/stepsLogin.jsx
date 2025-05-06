@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import { TbLockPassword } from "react-icons/tb";
+import { NavLink } from "react-router-dom";
 
-const StepsLogin = ({ step }) => {
+const StepsLogin = ({ currentStep }) => {
   const detail = [
     {
       title: "وارد کردن شماره همراه یا ایمیل",
       icon: <HiOutlineMail className="w-6 h-6" />,
+      url: "/login",
     },
     {
       title: "تایید کد ارسال شده",
       icon: <TbLockPassword className="w-6 h-6" />,
+      url: "/login/verifycode",
     },
   ];
 
@@ -18,10 +21,13 @@ const StepsLogin = ({ step }) => {
     <div className=" w-96 h-20 mt-10">
       {detail.map((item, index) => {
         return (
-          <div className="w-full h-full flex items-center space-x-5">
+          <NavLink
+            to={item.url}
+            className="w-full h-full flex items-center space-x-5"
+          >
             <div
               className={`w-12 h-12 rounded-full bg-white flex justify-center items-center dark:text-black ${
-                step > index && "!bg-navyBlue text-white w-14 h-14"
+                currentStep > index && "!bg-navyBlue text-white w-14 h-14"
               }`}
             >
               {item.icon}
@@ -29,13 +35,13 @@ const StepsLogin = ({ step }) => {
             <div>
               <h1
                 className={`text-gray text-sm lg:text-base dark:text-white ${
-                  step > index && "font-semibold !text-black "
+                  currentStep > index && "font-semibold !text-black "
                 }`}
               >
                 {item.title}
               </h1>
             </div>
-          </div>
+          </NavLink>
         );
       })}
     </div>

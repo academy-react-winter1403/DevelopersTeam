@@ -1,18 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import arrowUpLeft from "./../../assets/images/arrow-up-left-01.svg";
 import arrowUpLeftStoke from "./../../assets/images/arrow-up-left-01-stroke-rounded 1.svg";
 import Group from "./../../assets/images/Group 143.svg";
 import AxPanel from "./../../assets/images/AxPanel.png";
 import { Marquee } from "./marquee";
 import panel from "./../../assets/images/landing/panel.svg";
+import http from "./../../core/services/interceptor";
+import { useQuery } from "@tanstack/react-query";
 
 const FirstPartOfLanding = () => {
+  const { data } = useQuery({
+    queryKey: ["landing"],
+    queryFn: async () => {
+      const res = await http.get("/Home/LandingReport");
+      return res;
+    },
+  });
   return (
     <>
       <div className=" mt-16 mx-auto gap-4 md:flex  md:flex-row  md:justify-center  md:w-10/12 ">
         <div className="overflow-hidden text-right indent-2  w-[300px] h-[45%] mx-auto md:mx-0 mb-6 border-[#E4E4E4] dark:border-gray-700 border-4 rounded-4xl relative xl:w-4/12 md:h-64 dark:bg-gray-800">
-          <h1 className="font-bold mt-4 text-[20px] dark:text-white">پنل اختصاصی دانشجو</h1>
+          <h1 className="font-bold mt-4 text-[20px] dark:text-white">
+            پنل اختصاصی دانشجو
+          </h1>
           <h6 className=" text-[12px] indent-2 mt-4 dark:text-gray-300">
             پنل های اختصاصی دانشجویی
           </h6>
@@ -48,24 +59,44 @@ const FirstPartOfLanding = () => {
 
         <div className="w-[300px] indent-2 mx-auto md:mx-0 h-[45%] mt-4 md:h-64 md:mt-0 border-[#E4E4E4] dark:border-gray-700 border-4 rounded-4xl relative xl:w-2/12 dark:bg-gray-800">
           <div>
-            <h3 className="mt-3 mr-2 font-semibold dark:text-white">درباره ما</h3>
-            <h4 className=" mr-2 font-semibold dark:text-white">بیشتر بخوانید</h4>
+            <h3 className="mt-3 mr-2 font-semibold dark:text-white">
+              درباره ما
+            </h3>
+            <h4 className=" mr-2 font-semibold dark:text-white">
+              بیشتر بخوانید
+            </h4>
           </div>
-          <div className="mt-10 mr-2">
-            <h1 className="font-semibold text-2xl dark:text-white">+1000</h1>
-            <h6 className="text-[10px] text-gray-500 dark:text-gray-400">دانشجو آنلاین در دوره</h6>
+          <div className="mt-3  mr-2">
+            <h1 className="font-semibold text-2xl dark:text-white">
+              {data?.teacherCount}
+            </h1>
+            <h6 className="text-[10px] text-gray-500 dark:text-gray-400">
+              اساتید
+            </h6>
           </div>
-          <div className="mt-7 mr-2">
-            <h1 className="font-semibold text-2xl dark:text-white">+13</h1>
-            <h6 className="text-[10px] text-gray-500 dark:text-gray-400 mb-4">سال سابقه آموزشی</h6>
+          <div className="mt-3  mr-2">
+            <h1 className="font-semibold text-2xl dark:text-white">
+              {data?.studentCount}
+            </h1>
+            <h6 className="text-[10px] text-gray-500 dark:text-gray-400">
+              دانشجو در دوره
+            </h6>
           </div>
-          <Link>
+          <div className="mt-3 mr-2">
+            <h1 className="font-semibold text-2xl dark:text-white">
+              {data?.courseCount}
+            </h1>
+            <h6 className="text-[10px] text-gray-500 dark:text-gray-400 mb-4">
+              دوره ها
+            </h6>
+          </div>
+          <NavLink to="/aboutUs">
             <img
               src={arrowUpLeftStoke}
               alt=""
               className="rounded-full bg-[#3772FF] absolute top-4 left-4  w-8 h-8 p-1 object-contain fill-white"
             />
-          </Link>
+          </NavLink>
         </div>
       </div>
       <Marquee />

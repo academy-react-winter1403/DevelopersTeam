@@ -1,13 +1,24 @@
+import { Spin } from "antd";
 import React from "react";
-
-const AuthButton = ({ nextStep, text }) => {
+import { FiLoader } from "react-icons/fi";
+const AuthButton = ({ nextStep, text, isPending }) => {
   return (
     <button
       type="submit"
-      onClick={nextStep}
-      className="bg-navyBlue w-full h-10 rounded-full text-white hover:opacity-80"
+      className={
+        isPending
+          ? "bg-navyBlue opacity-50 w-full h-10 rounded-full text-white hover:opacity-80"
+          : "bg-navyBlue w-full h-10 rounded-full text-white hover:opacity-80"
+      }
     >
-      {text}
+      {isPending ? (
+        <Spin
+          indicator={<FiLoader className="text-white w-7 h-7" spin />}
+          size="small"
+        />
+      ) : (
+        text
+      )}
     </button>
   );
 };
