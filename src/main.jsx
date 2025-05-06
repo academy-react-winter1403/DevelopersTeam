@@ -1,8 +1,9 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./app/App";
 import "./assets/styles/fonts.css";
+import App from "./app/App";
+import "./../src/components/common/header/i18n"; // لود تنظیمات i18n
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./context/theme/themeContext";
 import store from "./redux/store";
