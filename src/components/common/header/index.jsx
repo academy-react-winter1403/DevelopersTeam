@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import Joyride from "react-joyride";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
-import { Button } from "antd";
+import { Button, Select } from "antd"; // Select برای انتخاب زبان
 import HeaderDrawer from "../../headerDrawer/headerDrawer";
 import { IoMoonOutline } from "react-icons/io5";
-import { useDarkMode } from "../../../context/theme/themeContext";
 import { GoSun } from "react-icons/go";
 import logo from "./../../../assets/images/logo.svg";
 import logoText from "./../../../assets/images/logoText.svg";
+import { useDarkMode } from "../../../context/theme/themeContext";
 import { getData } from "../../../core/localStorage/localStorage";
-
+import { useTranslation } from "react-i18next"; // هوک ترجمه استفاده شده است
 
 // هوک برای بررسی اندازه صفحه (ریسپانسیو)
 function useIsLargeScreen(minWidth = 1024) {
@@ -31,27 +31,32 @@ const Header = () => {
   const token = getData("authToken");
   const { darkMode, setDarkMode } = useDarkMode(); // مدیریت تم
   const isLargeScreen = useIsLargeScreen(); // هوک ریسپانسیو
+  const { t, i18n } = useTranslation(); // هوک ترجمه اضافه شد
+
+  // تغییر زبان
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   // مراحل راهنمای Joyride
   const steps = [
     {
       target: ".header-logo",
-      content: "این لوگوی سایت است. با کلیک روی آن به صفحه اصلی بروید.",
+      content: t("joyrideLogo"),
     },
     {
       target: ".header-menu",
-      content: "از طریق این منو به صفحات مختلف دسترسی داشته باشید.",
+      content: t("joyrideMenu"),
     },
     {
       target: ".header-darkmode",
-      content: "برای تغییر حالت تم (تاریک/روشن) از این دکمه استفاده کنید.",
+      content: t("joyrideTheme"),
     },
     {
       target: ".header-auth",
-      content: "برای ورود یا دسترسی به پنل دانشجویی از این بخش استفاده کنید.",
+      content: t("joyrideAuth"),
     },
   ];
-
 
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
@@ -62,10 +67,10 @@ const Header = () => {
           continuous
           showSkipButton
           locale={{
-            next: "بعدی",
-            back: "قبلی",
-            skip: "رد کردن",
-            last: "پایان",
+            next: t("next"),
+            back: t("back"),
+            skip: t("skip"),
+            last: t("last"),
           }}
         />
       )}
@@ -81,11 +86,11 @@ const Header = () => {
 
       {/* منوی اصلی */}
       <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden header-menu">
-        {["خانه", "دوره‌ها", "مقالات"].map((item, index) => {
+        {["home", "courses", "news"].map((key, index) => {
           const paths = ["/", "/courses", "/news"];
           return (
             <NavLink
-              key={item}
+              key={key}
               to={paths[index]}
               className={({ isActive }) =>
                 isActive
@@ -93,7 +98,7 @@ const Header = () => {
                   : "dark:text-gray-300"
               }
             >
-              {item}
+              {t(key)}
             </NavLink>
           );
         })}
@@ -101,6 +106,20 @@ const Header = () => {
 
       {/* تنظیمات و دکمه‌های اکانت */}
       <div className="flex w-1/5 justify-center items-center space-x-3">
+        {/* دکمه تغییر زبان */}
+        <Select
+          defaultValue={i18n.language} // زبان پیش‌فرض
+          onChange={(lng) => {
+            i18n.changeLanguage(lng); // تغییر زبان
+            document.body.dir = i18n.dir(lng); // راست‌چین یا چپ‌چین کردن صفحه
+          }}
+          style={{ width: 90, marginLeft: 20 }}
+          options={[
+            { value: "fa", label: "فارسی" },
+            { value: "en", label: "English" },
+          ]}
+        />
+
         {/* تم */}
         <div
           onClick={() => {
@@ -118,9 +137,7 @@ const Header = () => {
         {/* ورود یا پنل دانشجویی */}
         <div className="flex items-center justify-center header-auth">
           {token ? (
-            <NavLink
-              to="/panel/dashboard"
-            >
+            <NavLink to="/panel/dashboard">
               <Button
                 type="primary"
                 shape="round"
@@ -131,15 +148,17 @@ const Header = () => {
                   fontSize: "12px",
                 }}
               >
-                پنل دانشجویی
+                {t("studentPanel")}
               </Button>
             </NavLink>
           ) : (
-            <NavLink
-              to="/login"
-            >
-              <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
-                ورود یا ثبت‌نام
+            <NavLink to="/login">
+              <Button
+                type="primary"
+                shape="round"
+                style={{ fontFamily: "yekan" }}
+              >
+                {t("loginRegister")}
               </Button>
             </NavLink>
           )}

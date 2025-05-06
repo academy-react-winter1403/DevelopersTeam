@@ -1,18 +1,22 @@
-import { RouterProvider } from "react-router-dom";
+import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router-dom";
+import "./../components/common/header/i18n"; 
 import { router } from "./../config/router";
 
 function App() {
   const client = new QueryClient();
 
+ 
+
   return (
-    <>
-      <QueryClientProvider client={client}>
-        
+    <QueryClientProvider client={client}>
+      <div>
         <RouterProvider router={router} />
-      </QueryClientProvider>
-    </>
+      </div>
+    </QueryClientProvider>
   );
+
 }
 
 export default App;

@@ -21,6 +21,7 @@ createRoot(document.getElementById("root")).render(
 );
 
 
+
 // { /*تیکت/* }
 // // import React from 'react';
 // // import ReactDOM from 'react-dom';
