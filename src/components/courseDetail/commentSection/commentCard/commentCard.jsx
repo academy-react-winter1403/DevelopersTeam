@@ -109,7 +109,10 @@ const CommentCard = ({
           <h1 className="font-semibold text-sm sm:text-base dark:text-white">
             {title}
           </h1>
-          <p className="text-xs sm:text-sm dark:text-gray-300">{describe}</p>
+          <div
+            className="text-xs sm:text-sm dark:text-gray-300"
+            dangerouslySetInnerHTML={{ __html: describe }}
+          />
         </div>
 
         <div className="flex flex-wrap gap-3 sm:space-x-5 mt-3 sm:mt-5 items-center">

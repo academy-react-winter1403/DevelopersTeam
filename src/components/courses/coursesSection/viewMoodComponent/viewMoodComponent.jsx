@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CourseCard from "../../../common/course-card/courseCard";
 import GridCourseCard from "../../gridCourseCard/gridCourseCard";
 import ComparisonTable from "./../../../common/course-card/ComparisonTable "; // جدول مقایسه
@@ -7,16 +7,48 @@ const ViewMoodComponent = ({ data, viewMode }) => {
   const [compareList, setCompareList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // مدیریت نمایش مدال
 
+  // مدیریت غیرفعال‌سازی اسکرول هنگام باز بودن مدال
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden"; // غیرفعال کردن اسکرول
+    } else {
+      document.body.style.overflow = "auto"; // بازگرداندن اسکرول
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; // بازگشت به حالت نرمال در زمان پاکسازی
+    };
+  }, [isModalOpen]);
+
+  // مدیریت باز شدن مدال بر اساس طول `compareList`
+  useEffect(() => {
+    if (compareList.length === 2) {
+      setIsModalOpen(true); // باز کردن مدال به صورت خودکار
+    } else {
+      setIsModalOpen(false); // بسته شدن مدال
+    }
+  }, [compareList]);
+
+  // کنترل انتخاب یا حذف مقایسه کارت
   const handleToggleCompare = (courseId) => {
-    setCompareList((prev) =>
-      prev.includes(courseId)
-        ? prev.filter((id) => id !== courseId) // حذف دوره از لیست
-        : prev.length < 2 // محدودیت 2 آیتم مقایسه
-        ? [...prev, courseId]
-        : prev // باقی‌ماندن به حالت فعلی
-    );
+    setCompareList((prev) => {
+      if (prev.includes(courseId)) {
+        return prev.filter((id) => id !== courseId); // حذف دوره از لیست مقایسه
+      } else if (prev.length < 2) {
+        return [...prev, courseId]; // اضافه کردن دوره جدید به لیست مقایسه
+      } else {
+        return prev; // هیچ تغییری ایجاد نکنید (حداکثر دو دوره قابل انتخاب است)
+      }
+    });
   };
 
+  // مدیریت بستن مدال (و پاک کردن مقایسه‌ها)
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // بستن مدال
+    setCompareList([]); // پاک کردن انتخاب‌ها
+  };
+
+  // انتخاب دوره‌هایی که در مقایسه هستند
   const selectedCourses = data?.courseFilterDtos?.filter((item) =>
     compareList.includes(item.courseId)
   );
@@ -74,28 +106,18 @@ const ViewMoodComponent = ({ data, viewMode }) => {
         )}
       </div>
 
-      {/* دکمه و مدال مقایسه */}
-      {compareList.length === 2 && (
-        <div>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-            onClick={() => setIsModalOpen(true)} // باز کردن مدال
-          >
-            نمایش مقایسه
-          </button>
-          {isModalOpen && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-              <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
-                <button
-                  className="text-red-500 float-right"
-                  onClick={() => setIsModalOpen(false)} // بستن مدال
-                >
-                  بستن
-                </button>
-                <ComparisonTable courses={selectedCourses} />
-              </div>
-            </div>
-          )}
+      {/* مدال مقایسه */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+            <button
+              className="text-red-500 float-right"
+              onClick={handleCloseModal} // بستن مدال و پاک کردن انتخاب‌ها
+            >
+              بستن
+            </button>
+            <ComparisonTable courses={selectedCourses} />
+          </div>
         </div>
       )}
     </div>

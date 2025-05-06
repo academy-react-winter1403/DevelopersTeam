@@ -1,0 +1,22 @@
+/* وقتی مدال باز است، اسکرول غیرفعال و صفحه زیرین تار شود */
+.modal-open {
+    overflow: hidden; /* غیرفعال کردن اسکرول */
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8); /* تار کردن پس‌زمینه */
+    backdrop-filter: blur(10px); /* تأثیر تاری */
+    z-index: 50; /* بالاتر از تمام عناصر */
+  }
+  
+  .modal-content {
+    z-index: 51; /* مدال روی overlay قرار گیرد */
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    max-width: 800px;
+    width: 100%;
+  }
+  

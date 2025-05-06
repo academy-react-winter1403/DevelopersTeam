@@ -1,0 +1,10 @@
+.map-container {
+    position: relative; /* اطمینان از موقعیت‌دهی صحیح */
+    z-index: 1; /* زیر مدال */
+  }
+  
+  .map-dimmed {
+    filter: blur(4px); /* تار کردن نقشه */
+    pointer-events: none; /* جلوگیری از تعامل کاربر با نقشه */
+  }
+  

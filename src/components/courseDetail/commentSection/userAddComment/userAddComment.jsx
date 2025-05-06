@@ -133,9 +133,10 @@ const UserAddComment = ({ id }) => {
   });
 
   const handleSubmit = () => {
-    const content = editor?.getText() || "";
+    const content = editor?.getHTML() || "";
     mutate({ title, content });
   };
+  
 
   return (
     <div
