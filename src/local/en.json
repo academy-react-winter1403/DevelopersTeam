@@ -10,6 +10,15 @@
     "academy_name": "Bahar Coding Academy",
     "academy_description": "+13 years of experience in coding and software development",
     "instagram": "Instagram",
-    "telegram": "Telegram"
+    "telegram": "Telegram",
+    
+  "loginRegister": "ورود/ثبت‌نام",
+  "studentPanel": "پنل دانشجویی",
+  "joyrideLogo": "این لوگوی سایت است.",
+  "joyrideMenu": "این منوی اصلی است.",
+  "joyrideTheme": "برای تغییر حالت بین تاریک و روشن کلیک کنید.",
+  "joyrideMic": "این دکمه میکروفون است.",
+  "joyrideAuth": "برای ورود یا ثبت‌نام اینجا کلیک کنید."
+    
   }
   

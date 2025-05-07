@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Joyride from "react-joyride";
-import { NavLink } from "react-router-dom";
-import { FiUser } from "react-icons/fi";
-import { Button, Select } from "antd"; // Select برای انتخاب زبان
+import { NavLink, useNavigate } from "react-router-dom";
+import { FiUser, FiMic, FiMicOff } from "react-icons/fi";
+import { Button, Select } from "antd";
 import HeaderDrawer from "../../headerDrawer/headerDrawer";
 import { IoMoonOutline } from "react-icons/io5";
 import { GoSun } from "react-icons/go";
@@ -10,57 +10,92 @@ import logo from "./../../../assets/images/logo.svg";
 import logoText from "./../../../assets/images/logoText.svg";
 import { useDarkMode } from "../../../context/theme/themeContext";
 import { getData } from "../../../core/localStorage/localStorage";
-import { useTranslation } from "react-i18next"; // هوک ترجمه استفاده شده است
+import { useTranslation } from "react-i18next";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 
-// هوک برای بررسی اندازه صفحه (ریسپانسیو)
 function useIsLargeScreen(minWidth = 1024) {
   const [isLargeScreen, setIsLargeScreen] = React.useState(
     window.innerWidth >= minWidth
   );
-
   useEffect(() => {
     const onResize = () => setIsLargeScreen(window.innerWidth >= minWidth);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [minWidth]);
-
   return isLargeScreen;
 }
 
 const Header = () => {
+  const navigate = useNavigate();
   const token = getData("authToken");
-  const { darkMode, setDarkMode } = useDarkMode(); // مدیریت تم
-  const isLargeScreen = useIsLargeScreen(); // هوک ریسپانسیو
-  const { t, i18n } = useTranslation(); // هوک ترجمه اضافه شد
+  const { darkMode, setDarkMode } = useDarkMode();
+  const isLargeScreen = useIsLargeScreen();
+  const { t, i18n } = useTranslation();
 
-  // تغییر زبان
+  const [listening, setListening] = useState(false);
+  const { transcript, resetTranscript, listening: isListening } = useSpeechRecognition();
+
+  const commands = {
+    fa: { home: ["خانه", "صفحه اصلی"], courses: ["دوره‌ها", "دوره ها", "کلاس"], news: ["خبرها", "مقالات", "اخبار"] },
+    en: { home: ["home", "homepage"], courses: ["courses", "classes"], news: ["news", "articles"] },
+  };
+  
+  useEffect(() => {
+    const languageCommands = commands[i18n.language]; // دستورات زبان انتخاب‌شده
+    
+    // تجزیه گفتار و تطبیق با لیست دستورات
+    const sanitizedTranscript = transcript.toLowerCase(); // متن گفتار به حروف کوچک برای تطبیق دقیق
+    
+    for (const [key, keywords] of Object.entries(languageCommands)) {
+      if (keywords.some((keyword) => sanitizedTranscript.includes(keyword))) {
+        // جابجایی به مسیر مرتبط
+        switch (key) {
+          case "home":
+            navigate("/");
+            resetTranscript();
+            break;
+          case "courses":
+            navigate("/courses");
+            resetTranscript();
+            break;
+          case "news":
+            navigate("/news");
+            resetTranscript();
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }, [transcript, i18n.language, navigate, resetTranscript]);
+  
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    document.body.dir = i18n.dir(lng);
   };
 
-  // مراحل راهنمای Joyride
+  const toggleListening = () => {
+    if (!isListening) {
+      SpeechRecognition.startListening({ continuous: true, language: i18n.language });
+      setListening(true);
+    } else {
+      SpeechRecognition.stopListening();
+      setListening(false);
+    }
+  };
+
   const steps = [
-    {
-      target: ".header-logo",
-      content: t("joyrideLogo"),
-    },
-    {
-      target: ".header-menu",
-      content: t("joyrideMenu"),
-    },
-    {
-      target: ".header-darkmode",
-      content: t("joyrideTheme"),
-    },
-    {
-      target: ".header-auth",
-      content: t("joyrideAuth"),
-    },
+    { target: ".header-logo", content: t("joyrideLogo") },
+    { target: ".header-menu", content: t("joyrideMenu") },
+    { target: ".header-darkmode", content: t("joyrideTheme") },
+    { target: ".header-mic", content: t("joyrideMic") },
+    { target: ".header-auth", content: t("joyrideAuth") },
   ];
 
   return (
-    <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-10">
-      {/* Joyride */}
+    <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-4 sm:px-6 lg:px-10 items-center">
+      {/* Joyride فقط دسکتاپ */}
       {isLargeScreen && (
         <Joyride
           steps={steps}
@@ -78,7 +113,7 @@ const Header = () => {
       {/* لوگو */}
       <NavLink
         to="/"
-        className="flex w-1/5 justify-center items-center header-logo"
+        className="flex w-1/4 xs:w-1/5 justify-center items-center header-logo"
       >
         <img src={logo} alt="لوگو" className="w-10 h-10 xs:w-12 xs:h-14" />
         <img src={logoText} alt="متن لوگو" className="w-24 h-10" />
@@ -104,28 +139,23 @@ const Header = () => {
         })}
       </div>
 
-      {/* تنظیمات و دکمه‌های اکانت */}
-      <div className="flex w-1/5 justify-center items-center space-x-3">
-        {/* دکمه تغییر زبان */}
+      {/* تنظیمات دسکتاپ */}
+      <div className="w-2/7 hidden lg:flex justify-center items-center space-x-2 header-settings">
+        {/* انتخاب زبان */}
         <Select
-          defaultValue={i18n.language} // زبان پیش‌فرض
-          onChange={(lng) => {
-            i18n.changeLanguage(lng); // تغییر زبان
-            document.body.dir = i18n.dir(lng); // راست‌چین یا چپ‌چین کردن صفحه
-          }}
-          style={{ width: 90, marginLeft: 20 }}
+          defaultValue={i18n.language}
+          onChange={changeLanguage}
+          style={{ width: 90 }}
           options={[
             { value: "fa", label: "فارسی" },
             { value: "en", label: "English" },
           ]}
         />
 
-        {/* تم */}
+        {/* مدیریت تم (دارک مد) */}
         <div
-          onClick={() => {
-            setDarkMode(!darkMode);
-          }}
-          className="header-darkmode border-0 lg:border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full"
+          onClick={() => setDarkMode(!darkMode)}
+          className="header-darkmode border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
         >
           {darkMode ? (
             <GoSun className="size-5 text-white cursor-pointer" />
@@ -134,8 +164,16 @@ const Header = () => {
           )}
         </div>
 
+        {/* میکروفون */}
+        <div
+          onClick={toggleListening}
+          className="header-mic border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full cursor-pointer"
+        >
+          {listening ? <FiMic className="text-red-500" /> : <FiMicOff />}
+        </div>
+
         {/* ورود یا پنل دانشجویی */}
-        <div className="flex items-center justify-center header-auth">
+        <div className="header-auth">
           {token ? (
             <NavLink to="/panel/dashboard">
               <Button
@@ -153,20 +191,72 @@ const Header = () => {
             </NavLink>
           ) : (
             <NavLink to="/login">
+              <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
+                {t("loginRegister")}
+              </Button>
+            </NavLink>
+          )}
+        </div>
+      </div>
+
+      {/* تنظیمات موبایل */}
+      <div className="flex lg:hidden items-center space-x-3">
+        {/* دارک مد در موبایل */}
+        <div
+          onClick={() => setDarkMode(!darkMode)}
+          className="header-darkmode  dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
+        >
+          {darkMode ? (
+            <GoSun className="size-5 text-white cursor-pointer" />
+          ) : (
+            <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
+          )}
+        </div>
+
+        {/* پنل دانشجویی */}
+        <div className="header-auth">
+          {token ? (
+            <NavLink to="/panel/dashboard">
               <Button
+                size="small"
                 type="primary"
                 shape="round"
-                style={{ fontFamily: "yekan" }}
+                icon={<FiUser />}
+                style={{
+                  fontFamily: "yekan",
+                  fontSize: "12px",
+                  padding: "0 12px",
+                }}
+              >
+                {t("studentPanel")}
+              </Button>
+            </NavLink>
+          ) : (
+            <NavLink to="/login">
+              <Button
+                size="small"
+                type="primary"
+                shape="round"
+                style={{
+                  fontFamily: "yekan",
+                  fontSize: "12px",
+                  padding: "0 12px",
+                }}
               >
                 {t("loginRegister")}
               </Button>
             </NavLink>
           )}
-          <HeaderDrawer />
         </div>
+
+        {/* منوی موبایل */}
+        <HeaderDrawer />
       </div>
     </div>
   );
 };
 
 export default Header;
+
+
+

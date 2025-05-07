@@ -23,7 +23,7 @@ const HeaderDrawer = () => {
     setOpen(false);
   };
   return (
-    <div className="lg:hidden ml-10">
+    <div className="lg:hidden">
       <Button
         variant="text"
         color="default"
