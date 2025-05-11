@@ -106,8 +106,6 @@
 
 // export default FirstPartOfLanding;
 
-
-
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import arrowUpLeft from "./../../assets/images/arrow-up-left-01.svg";
@@ -116,24 +114,19 @@ import Group from "./../../assets/images/Group 143.svg";
 import panel from "./../../assets/images/landing/panel.svg";
 import http from "./../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next"; // هوک ترجمه
+import { useTranslation } from "react-i18next";
 import { Marquee } from "./marquee";
 
 const FirstPartOfLanding = () => {
-  const { t, i18n } = useTranslation(); // استفاده از ترجمه‌ها و زبان فعلی
+  const { t, i18n } = useTranslation();
 
-  const { data, refetch, isFetching } = useQuery({
-    queryKey: ["landing", i18n.language], // زبان به کلید اضافه می‌شود
+  const { data } = useQuery({
+    queryKey: ["landing"],
     queryFn: async () => {
-      const res = await http.get(`/Home/LandingReport?lang=${i18n.language}`); // ارسال زبان به API
-      return res.data;
+      const res = await http.get("/Home/LandingReport");
+      return res;
     },
   });
-
-  // فراخوانی مجدد API وقتی زبان تغییر می‌کند
-  React.useEffect(() => {
-    refetch(); // درخواست مجدد API در صورت تغییر زبان
-  }, [i18n.language, refetch]); // وابستگی به `i18n.language` برای تغییر زبان
 
   return (
     <>
@@ -189,7 +182,7 @@ const FirstPartOfLanding = () => {
 
           <div className="mt-3 mr-2">
             <h1 className="font-semibold text-2xl dark:text-white">
-              {isFetching ? t("loading") : data?.teacherCount || 97}
+              {data?.teacherCount}
             </h1>
             <h6 className="text-[10px] text-gray-500 dark:text-gray-400">
               {t("teachers")}
@@ -198,7 +191,7 @@ const FirstPartOfLanding = () => {
 
           <div className="mt-3 mr-2">
             <h1 className="font-semibold text-2xl dark:text-white">
-              {isFetching ? t("loading") : data?.studentCount || 262}
+              {data?.studentCount}
             </h1>
             <h6 className="text-[10px] text-gray-500 dark:text-gray-400">
               {t("students")}
@@ -207,7 +200,7 @@ const FirstPartOfLanding = () => {
 
           <div className="mt-3 mr-2">
             <h1 className="font-semibold text-2xl dark:text-white">
-              {isFetching ? t("loading") : data?.courseCount || 154}
+              {data?.courseCount}
             </h1>
             <h6 className="text-[10px] text-gray-500 dark:text-gray-400 mb-4">
               {t("courses")}

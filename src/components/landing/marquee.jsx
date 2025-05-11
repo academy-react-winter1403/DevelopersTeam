@@ -1,10 +1,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const Layers = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <motion.h1 className="text-sm lg:text-xl font-bold text-white whitespace-nowrap">
-        خدماتی که ما به شما ارائه می دهیم
+        {t("movingText")}
       </motion.h1>
       <motion.div className="rounded-full p-1 bg-white"></motion.div>
     </>

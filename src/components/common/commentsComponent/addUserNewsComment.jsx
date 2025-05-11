@@ -6,6 +6,7 @@ import { useDarkMode } from "../../../context/theme/themeContext";
 import { Input } from "antd";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import http from './../../../core/services/interceptor'
 
 const MAX_LENGTH = 100;
 
@@ -67,6 +68,7 @@ const AddUserNewsComment = ({ id }) => {
 
   // تابع ثبت نظر
   const addComment = async (values) => {
+    console.log(values);
     const res = await http.post(`/News/CreateNewsComment`, values);
     return res;
   };
@@ -81,6 +83,7 @@ const AddUserNewsComment = ({ id }) => {
       editor.commands.setContent(""); // متن پاک شود
     },
     onError: (error) => {
+      console.log(error);
       toast.error(error?.response?.data?.ErrorMessage || "خطا در ثبت نظر");
     },
   });

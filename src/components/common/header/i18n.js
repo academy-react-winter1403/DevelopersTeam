@@ -38,6 +38,15 @@ const resources = {
       students: "Students in courses",
       courses: "Courses",
       aboutUsImageAlt: "About Us Image",
+      heroSectionP1: "A unique experience compared to coding",
+      heroSectionP2: "From ",
+      heroSectionP3: "beginner ",
+      heroSectionP4: "to ",
+      heroSectionP5: "professional",
+      heroSectionP6:
+        "Specialized coding and programming academy from childhood to adulthood",
+      heroSectionButton: "Start Learning",
+      movingText: "Services we offer you",
     },
   },
   fa: {
@@ -51,7 +60,8 @@ const resources = {
       joyrideLogo: "این لوگوی سایت است. با کلیک روی آن به صفحه اصلی بروید.",
       joyrideMenu: "از طریق این منو به صفحات مختلف دسترسی داشته باشید.",
       joyrideTheme: "برای تغییر حالت تم (تاریک/روشن) از این دکمه استفاده کنید.",
-      joyrideAuth: "برای ورود یا دسترسی به پنل دانشجویی از این بخش استفاده کنید.",
+      joyrideAuth:
+        "برای ورود یا دسترسی به پنل دانشجویی از این بخش استفاده کنید.",
       pages: "صفحات",
       aboutUs: "ما",
       professors: "اساتید",
@@ -76,7 +86,15 @@ const resources = {
       students: "دانشجویان در دوره‌ها",
       courses: "دوره‌ها",
       aboutUsImageAlt: "تصویر درباره ما",
-      
+      heroSectionP1: "تجربه ای بی نظیر در یادگیری کدنویسی",
+      heroSectionP2: "از",
+      heroSectionP3: "مبتدی",
+      heroSectionP4: "تا",
+      heroSectionP5: "حرفه ای",
+      heroSectionP6:
+        "آکادمی فوق تخصصی کدنویسی و برنامه نویسی از سنین کودکی تا بزرگسالی",
+      heroSectionButton: "شروع یادگیری",
+      movingText: "خدماتی که ما به شما ارائه می دهیم",
     },
   },
 };
