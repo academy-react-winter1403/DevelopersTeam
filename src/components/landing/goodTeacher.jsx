@@ -3,6 +3,7 @@ import http from "../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import ax from "../../assets/images/3d-glassy-abstract-spiral-band-blue 1.svg";
+import { useTranslation } from "react-i18next";
 
 // واریانت عنوان و زیرعنوان
 const titleVariants = {
@@ -36,6 +37,8 @@ const cardVariant = {
 };
 
 const GoodTeacher = () => {
+  const { t, i18n } = useTranslation();
+
   const getGoodTeacher = async () => {
     const res = await http.get("/Home/GetTeachers");
     return res;
@@ -55,7 +58,7 @@ const GoodTeacher = () => {
         initial="hidden"
         animate="visible"
       >
-        برترین اساتید هفته
+        {t("Top professors of the week")}
       </motion.h2>
       {/* زیرعنوان با انیمیشن */}
       <motion.h2
@@ -64,7 +67,8 @@ const GoodTeacher = () => {
         initial="hidden"
         animate="visible"
       >
-        اساتیدی که با نظرسنجی در دوره‌ها به آنها بیشترین رای مثبت را دادند
+        {t("Professors who gave the most positive votes to courses in a survey")}
+        
       </motion.h2>
 
       {/* لیست کارت‌ها */}

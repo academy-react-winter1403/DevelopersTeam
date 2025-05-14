@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import http from "../../core/services/interceptor";
 import CourseCard from "../common/course-card/courseCard";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // برای استگراگر لیست کارت‌ها
 const containerVariants = {
@@ -37,6 +38,8 @@ const subtitleVariants = {
 };
 
 const TopCourses = () => {
+  const { t, i18n } = useTranslation();
+
   const getTopCourses = async () => {
     const res = await http.get("/Home/GetCoursesTop?Count=4");
     return res;
@@ -56,7 +59,8 @@ const TopCourses = () => {
         initial="hidden"
         animate="visible"
       >
-        محبوب ترین دوره ها
+      
+        {t("the most popular courses")}
       </motion.h1>
       {/* انیمیشن برای زیرعنوان */}
       <motion.h6
@@ -65,7 +69,7 @@ const TopCourses = () => {
         initial="hidden"
         animate="visible"
       >
-        دوره هایی که بین دانشجویان محبوبیت بالایی داشتند
+        {t("Courses that were very popular among students")}
       </motion.h6>
       {/* لیست کارت‌ها با استگراگر و فرایموشن */}
       <motion.div

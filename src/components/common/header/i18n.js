@@ -47,6 +47,14 @@ const resources = {
         "Specialized coding and programming academy from childhood to adulthood",
       heroSectionButton: "Start Learning",
       movingText: "Services we offer you",
+      "the most popular courses": "The most popular courses",
+      "Courses that were very popular among students":
+        "Courses that were very popular among students",
+      "News and articles of the week": "News and articles of the week",
+      "News and articles published this week":
+        "News and articles published this week",
+      "Top professors of the week": "Top professors of the week",
+      "Professors who gave the most positive votes to courses in a survey":"Professors who gave the most positive votes to courses in a survey"
     },
   },
   fa: {
@@ -95,6 +103,14 @@ const resources = {
         "آکادمی فوق تخصصی کدنویسی و برنامه نویسی از سنین کودکی تا بزرگسالی",
       heroSectionButton: "شروع یادگیری",
       movingText: "خدماتی که ما به شما ارائه می دهیم",
+      "the most popular courses": "محبوب ترین دوره ها",
+      "Courses that were very popular among students":
+        "دوره هایی که بین دانشجویان محبوبیت بالایی داشتند",
+      "News and articles of the week": "اخبار و مقالات هفته",
+      "News and articles published this week":
+        "خبرها و مقاله‌هایی که در این هفته منتشر شدند",
+      "Top professors of the week": "برترین اساتید هفته",
+      "Professors who gave the most positive votes to courses in a survey":"اساتیدی که با نظرسنجی در دوره‌ها به آنها بیشترین رای مثبت را دادند"
     },
   },
 };
