@@ -24,6 +24,7 @@ import PaymentPage from "../../screens/paymentPage/paymentPage";
 import Login from "../../components/login";
 import EnterNumberLogin from "../../components/login/enterNumberLogin/enterNumberLogin";
 import VerifyCodeLogin from "../../components/login/verifyCodeLogin/verifyCodeLogin";
+import TicketPage from "../../screens/ticketPage";
 
 export const router = createBrowserRouter([
   {
@@ -126,6 +127,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/payment",
         element: <PaymentPage />,
+      },
+      {
+        path: "/panel/ticket",
+        element: <TicketPage />,
       },
     ],
   },

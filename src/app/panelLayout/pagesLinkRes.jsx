@@ -8,6 +8,7 @@ import { RiFileMarkedLine } from "react-icons/ri";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { CiMoneyCheck1 } from "react-icons/ci";
+import { HiOutlineTicket } from "react-icons/hi2";
 
 const PagesLinkRes = () => {
   return (
@@ -120,6 +121,18 @@ const PagesLinkRes = () => {
         }
       >
         <CiMoneyCheck1 className="w-6 h-6" />
+      </NavLink>
+      <NavLink
+        to="/panel/ticket"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold bg-navyBlue text-white"
+              : "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold hover:bg-lightBlue"
+          }`
+        }
+      >
+        <HiOutlineTicket className="w-6 h-6" />
       </NavLink>
     </div>
   );
