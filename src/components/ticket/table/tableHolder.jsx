@@ -1,8 +1,8 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Modal, Spin } from "antd";
- const TableComp = lazy(() => import("./tableComp"));
+const TableComp = lazy(() => import("./tableComp"));
 import { CiEdit } from "react-icons/ci";
- 
+import DateComponent from "../../common/date/dateComponent";
 
 const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
   // const [currentEditItem, setCurrentEditItem] = useState(null);
@@ -15,32 +15,26 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
   //   setCurrentEditItem(null);
   // };
 
-  // useEffect(() => {
-  //   if (isSuccess && data) {
-  //     const newData = data.myCommentsDtos.map((el) => {
-  //       return {
-  //         name: el.courseTitle,
-  //         title: el.title,
-  //         describe: el.describe,
-  //         accept: el.accept ? (
-  //           <TagsAccept text="پذیرفته شده" />
-  //         ) : (
-  //           <TagsNotAccept text="پذیرفته نشده" />
-  //         ),
-  //         insertDate: <DateComponent insertDate={el.insertDate} />,
-  //         edit: (
-  //           <div>
-  //             <CiEdit
-  //               onClick={() => showModal(el)}
-  //               className="w-5 h-5 text-gray cursor-pointer"
-  //             />
-  //           </div>
-  //         ),
-  //       };
-  //     });
-  //     setCovertedData(newData);
-  //   }
-  // }, [isSuccess, data]);
+  useEffect(() => {
+    if (isSuccess && data) {
+      const newData = data?.map((el) => {
+        return {
+          name: el.name,
+          type: el.type,
+          insertTime: <DateComponent insertDate={el.insertTime} />,
+          // edit: (
+          //   <div>
+          //     <CiEdit
+          //       onClick={() => showModal(el)}
+          //       className="w-5 h-5 text-gray cursor-pointer"
+          //     />
+          //   </div>
+          // ),
+        };
+      });
+      setCovertedData(newData);
+    }
+  }, [isSuccess, data]);
 
   return (
     <div className="">
@@ -53,7 +47,7 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
               </div>
             }
           >
-        <TableComp  />
+            {isSuccess && <TableComp data={convertedData} />}
           </Suspense>
         </div>
       </div>

@@ -10,51 +10,26 @@ const columns = [
 
   {
     title: "عنوان",
-    dataIndex: "title",
-    key: "title",
+    dataIndex: "type",
+    key: "type",
     ellipsis: {
       showTitle: false,
     },
   },
   {
     title: "نظر",
-    dataIndex: "describe",
-    key: "describe",
+    dataIndex: "insertTime",
+    key: "insertTime",
     ellipsis: {
       showTitle: false,
     },
-  },
-  {
-    title: "وضعیت",
-    dataIndex: "accept",
-    key: "accept",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
-  {
-    title: "تاریخ ثبت",
-    dataIndex: "insertDate",
-    key: "insertDate",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
-  {
-    title: "ویرایش",
-    dataIndex: "edit",
-    key: "edit",
-    ellipsis: {
-      showTitle: false,
-    },
-    width: 150,
   },
 ];
 
-const TableComp = () => (
+const TableComp = ({ data }) => (
   <Table
     columns={columns}
-    dataSource={null}
+    dataSource={data}
     style={{ color: "#000" }}
     rowHoverable={false}
   />

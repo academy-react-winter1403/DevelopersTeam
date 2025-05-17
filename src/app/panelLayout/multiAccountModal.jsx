@@ -69,7 +69,7 @@ const MultiAccountModal = ({ isModalOpen, setIsModalOpen }) => {
       navigate("/login");
     }
   };
-
+console.log("accounts",accounts);
   return (
     <>
       <Modal
@@ -97,7 +97,7 @@ const MultiAccountModal = ({ isModalOpen, setIsModalOpen }) => {
                 <div>
                   <h1 className="font-semibold dark:text-white">{item.id}</h1>
                   <h1 className="font-semibold dark:text-white text-gray">
-                    {userData?.phoneNumber}
+                    {/* {userData?.phoneNumber} */}
                   </h1>
                 </div>
               </div>

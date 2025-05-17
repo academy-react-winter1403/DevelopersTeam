@@ -1,9 +1,25 @@
 import { Button } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import TableHolder from "../table/tableHolder";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const TicketHolder = () => {
+  const [convertedData, setCovertedData] = useState([]);
+
+  const { data , isSuccess } = useQuery({
+    queryKey: ["answerTickets"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `https://classapi.sepehracademy.ir/api/api/ticket/Answerdmine/09339294953`
+      );
+      return res.data;
+    },
+  });
+
+  console.log("data",data);
+
   return (
     <div className="mt-8">
       <div className="w-full h-auto flex flex-col">
@@ -21,7 +37,12 @@ const TicketHolder = () => {
           </NavLink>
         </div>
         <div className="border border-red-950 w-full">
-          <TableHolder />
+          <TableHolder
+            data={data}
+            isSuccess={isSuccess}
+            convertedData={convertedData}
+            setCovertedData={setCovertedData}
+          />
         </div>
       </div>
     </div>

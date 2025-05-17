@@ -1,9 +1,30 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { TiArrowBack } from "react-icons/ti";
+import { TiArrowBack, TiArrowBackOutline } from "react-icons/ti";
 import { NavLink } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const AddTicket = () => {
+  const loginData = useSelector((state) => state.login?.UserLoginInfo);
+  //   console.log(loginData?.phoneOrGmail);
+
+  const { mutate } = useMutation({
+    mutationFn: async (values) => {
+      const res = await axios.post(
+        `https://taha-sepehr.liara.run/api/ticket/create/09339294953`,
+        {
+          name: values.name,
+          type: values.type,
+          message: values.message,
+          orderId: null,
+        }
+      );
+      return res.data;
+    },
+  });
+
   return (
     <div className="mt-8">
       <div className="w-full h-auto flex flex-col">
@@ -13,11 +34,14 @@ const AddTicket = () => {
             to="/panel/ticket"
             className="bg-white w-12 h-12 rounded-full flex justify-center items-center cursor-pointer"
           >
-            <TiArrowBack className="w-8 h-8 hover:text-navyBlue" />
+            <TiArrowBackOutline className="w-8 h-8 hover:text-navyBlue" />
           </NavLink>
         </div>
         <div className=" w-full h-auto bg-white rounded-2xl p-5">
-          <Formik>
+          <Formik
+            onSubmit={(values) => mutate(values)}
+            initialValues={{ name: "", type: "", message: "" }}
+          >
             <Form className="">
               <div className=" flex flex-row space-x-5 mb-3">
                 <Field

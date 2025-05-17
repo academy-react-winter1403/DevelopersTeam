@@ -146,12 +146,13 @@ const EnterNumberLogin = ({ nextStep, text }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginData = useSelector((state) => state.login?.UserLoginInfo);
+  // console.log(loginData);
 
   const { mutateAsync , isPending } = useMutation({
     mutationFn: (values) => http.post(`/Sign/Login`, values),
     mutationKey: ["Login"],
     onSuccess: (data, values) => {
-      console.log(data);
+      // console.log(data);
       dispatch(
         handleLogin({
           phoneOrGmail: values.phoneOrGmail,
