@@ -12,7 +12,7 @@ const TicketHolder = () => {
     queryKey: ["answerTickets"],
     queryFn: async () => {
       const res = await axios.get(
-        `https://classapi.sepehracademy.ir/api/api/ticket/Answerdmine/09339294953`
+        `http://taha-sepehr.liara.run/api/ticket/Answerdmine/09339294953`
       );
       return res.data;
     },
