@@ -7,15 +7,6 @@ const columns = [
     dataIndex: "name",
     key: "name",
   },
-
-  {
-    title: "نوع",
-    dataIndex: "type",
-    key: "type",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
   {
     title: "تاریخ ثبت",
     dataIndex: "insertTime",
@@ -25,15 +16,7 @@ const columns = [
     },
   },
   {
-    title: "وضعیت پاسخ",
-    dataIndex: "status",
-    key: "status",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
-  {
-    title: "مشاهده پاسخ",
+    title: " پاسخ",
     dataIndex: "answer",
     key: "answer",
     ellipsis: {
@@ -42,7 +25,7 @@ const columns = [
   },
 ];
 
-const TableComp = ({ data }) => (
+const AnswerColumn = ({ data }) => (
   <Table
     columns={columns}
     dataSource={data}
@@ -50,4 +33,4 @@ const TableComp = ({ data }) => (
     rowHoverable={false}
   />
 );
-export default TableComp;
+export default AnswerColumn;

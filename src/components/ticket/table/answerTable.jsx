@@ -6,8 +6,9 @@ import DateComponent from "../../common/date/dateComponent";
 import { TiMessage } from "react-icons/ti";
 import { TagsAccept, TagsWaiting } from "../../panel/tagStatus/tagStatus";
 import AnswersModal from "../answersModal/answersModal";
+import AnswerColumn from "./answerColumn";
 
-const TableHolder = ({
+const AnswerTable = ({
   data,
   isSuccess,
   convertedData,
@@ -30,16 +31,9 @@ const TableHolder = ({
     if (isSuccess && data) {
       const newData = data?.map((el) => {
         return {
-          key: el.id,
           name: el.name,
-          type: el.type,
           insertTime: <DateComponent insertDate={el.insertTime} />,
-          status: answeredIds.has(el.id) ? (
-            <TagsAccept text="پاسخ داده شده" />
-          ) : (
-            <TagsWaiting text="درحال انتظار" />
-          ),
-          answer: <AnswersModal />,
+          answer: el.ticket_Message.map((item) => item.text),
         };
       });
       setCovertedData(newData);
@@ -57,7 +51,7 @@ const TableHolder = ({
               </div>
             }
           >
-            {isSuccess && <TableComp data={convertedData} />}
+            {isSuccess && <AnswerColumn data={convertedData} />}
           </Suspense>
         </div>
       </div>
@@ -74,4 +68,4 @@ const TableHolder = ({
   );
 };
 
-export default TableHolder;
+export default AnswerTable;

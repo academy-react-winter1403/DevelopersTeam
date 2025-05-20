@@ -1,12 +1,15 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { TiArrowBack, TiArrowBackOutline } from "react-icons/ti";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddTicket = () => {
+  const navigate = useNavigate();
+
   const loginData = useSelector((state) => state.login?.UserLoginInfo);
   //   console.log(loginData?.phoneOrGmail);
 
@@ -22,6 +25,10 @@ const AddTicket = () => {
         }
       );
       return res.data;
+    },
+    onSuccess: () => {
+      toast.success("با موفقیت ارسال شد");
+      navigate("/panel/ticket");
     },
   });
 
@@ -63,7 +70,7 @@ const AddTicket = () => {
               />
               <button
                 type="submit"
-                className="bg-navyBlue w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold mt-5"
+                className="cursor-pointer bg-navyBlue w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold mt-5"
               >
                 ارسال
               </button>
