@@ -18,7 +18,6 @@ const AnswerTable = ({
   answered,
   answeredIds,
 }) => {
-
   useEffect(() => {
     if (isSuccess && data) {
       const newData = data?.map((el) => {
@@ -49,15 +48,6 @@ const AnswerTable = ({
           </Suspense>
         </div>
       </div>
-      {/* <ResponsiveCommentCourse  data={data} /> */}
-
-      {/* {currentEditItem && (
-        <EditModal
-          isModalOpen={!!currentEditItem}
-          handleCancel={handleCancel}
-          data={currentEditItem}
-        />
-      )} */}
     </div>
   );
 };
