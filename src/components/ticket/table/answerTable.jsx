@@ -18,16 +18,6 @@ const AnswerTable = ({
   answered,
   answeredIds,
 }) => {
-  // const [currentEditItem, setCurrentEditItem] = useState(null);
-
-  // const showModal = (item) => {
-  //   setCurrentEditItem(item);
-  // };
-
-  // const handleCancel = () => {
-
-  //   setCurrentEditItem(null);
-  // };
 
   useEffect(() => {
     if (isSuccess && data) {
