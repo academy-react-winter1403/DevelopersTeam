@@ -36,8 +36,6 @@ const TicketHolder = ({ isAnswer }) => {
     },
   });
 
-  console.log("data", combinedData?.allTickets);
-
   return (
     <div className="mt-8">
       <div className="w-full h-auto flex flex-col">

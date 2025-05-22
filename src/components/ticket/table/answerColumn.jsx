@@ -16,9 +16,17 @@ const columns = [
     },
   },
   {
-    title: " پاسخ",
+    title: " مشاهده پاسخ",
     dataIndex: "answer",
     key: "answer",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
+  {
+    title: " اضافه کردن پاسخ",
+    dataIndex: "response",
+    key: "response",
     ellipsis: {
       showTitle: false,
     },

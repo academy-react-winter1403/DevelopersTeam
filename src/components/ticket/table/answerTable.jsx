@@ -7,6 +7,8 @@ import { TiMessage } from "react-icons/ti";
 import { TagsAccept, TagsWaiting } from "../../panel/tagStatus/tagStatus";
 import AnswersModal from "../answersModal/answersModal";
 import AnswerColumn from "./answerColumn";
+import AddTicket from "../addTicket/addTicket";
+import AddTicketModal from "./addModal";
 
 const AnswerTable = ({
   data,
@@ -30,10 +32,12 @@ const AnswerTable = ({
   useEffect(() => {
     if (isSuccess && data) {
       const newData = data?.map((el) => {
+        console.log("el", el);
         return {
           name: el.name,
           insertTime: <DateComponent insertDate={el.insertTime} />,
           answer: el.ticket_Message.map((item) => item.text),
+          response: <AddTicketModal id={el.id} />,
         };
       });
       setCovertedData(newData);
