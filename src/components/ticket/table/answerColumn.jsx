@@ -4,8 +4,8 @@ import { Table } from "antd";
 const columns = [
   {
     title: "عنوان تیکت",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "text",
+    key: "text",
   },
   {
     title: "تاریخ ثبت",
@@ -15,14 +15,7 @@ const columns = [
       showTitle: false,
     },
   },
-  {
-    title: " مشاهده پاسخ",
-    dataIndex: "answer",
-    key: "answer",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
+
   {
     title: " اضافه کردن پاسخ",
     dataIndex: "response",

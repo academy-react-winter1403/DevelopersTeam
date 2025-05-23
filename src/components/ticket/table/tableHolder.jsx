@@ -6,6 +6,8 @@ import DateComponent from "../../common/date/dateComponent";
 import { TiMessage } from "react-icons/ti";
 import { TagsAccept, TagsWaiting } from "../../panel/tagStatus/tagStatus";
 import AnswersModal from "../answersModal/answersModal";
+import { BsEye } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
 
 const TableHolder = ({
   data,
@@ -39,7 +41,13 @@ const TableHolder = ({
           ) : (
             <TagsWaiting text="درحال انتظار" />
           ),
-          answer: <AnswersModal />,
+          answer: answeredIds.has(el.id) ? (
+            <NavLink to={`/panel/ticket/${el.id}`}>
+              <TiMessage className="w-7 h-7" />
+            </NavLink>
+          ) : (
+            ""
+          ),
         };
       });
       setCovertedData(newData);

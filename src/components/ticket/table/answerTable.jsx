@@ -15,17 +15,14 @@ const AnswerTable = ({
   isSuccess,
   convertedData,
   setCovertedData,
-  answered,
   answeredIds,
 }) => {
   useEffect(() => {
     if (isSuccess && data) {
       const newData = data?.map((el) => {
-        console.log("el", el);
         return {
-          name: el.name,
-          insertTime: <DateComponent insertDate={el.insertTime} />,
-          answer: el.ticket_Message.map((item) => item.text),
+          text: el.text || "-",
+          insertTime: <DateComponent insertDate={el.insertDate} />,
           response: <AddTicketModal id={el.id} />,
         };
       });

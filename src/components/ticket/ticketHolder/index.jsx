@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import AnswerTable from "../table/answerTable";
 
-const TicketHolder = ({ isAnswer }) => {
+const TicketHolder = ({ isAnswer, ticketDetailData }) => {
   const [convertedData, setCovertedData] = useState([]);
 
   const {
@@ -67,8 +67,7 @@ const TicketHolder = ({ isAnswer }) => {
           )}
           {isAnswer && (
             <AnswerTable
-              data={combinedData?.answered}
-              answered={combinedData?.answered}
+              data={ticketDetailData}
               isSuccess={isSuccess}
               convertedData={convertedData}
               setCovertedData={setCovertedData}

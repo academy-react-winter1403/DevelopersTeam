@@ -26,6 +26,7 @@ import EnterNumberLogin from "../../components/login/enterNumberLogin/enterNumbe
 import VerifyCodeLogin from "../../components/login/verifyCodeLogin/verifyCodeLogin";
 import TicketPage from "../../screens/ticketPage";
 import AddTicket from "../../components/ticket/addTicket/addTicket";
+import AnswerFromAdmin from "../../components/ticket/ticketHolder/answerFromAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/ticket",
         element: <TicketPage />,
+      },
+      {
+        path: "/panel/ticket/:id",
+        element: <AnswerFromAdmin />,
       },
       {
         path: "/panel/ticket/add",
