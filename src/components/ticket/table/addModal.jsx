@@ -22,6 +22,8 @@ const AddTicketModal = ({ id }) => {
     setIsModalOpen(false);
   };
 
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationFn: async (values) => {
       const res = await axios.post(
@@ -36,8 +38,9 @@ const AddTicketModal = ({ id }) => {
       return res.data;
     },
     onSuccess: () => {
+      queryClient.invalidateQueries(["allTickets"]);
       toast.success("با موفقیت ارسال شد");
-      setIsModalOpen(false)
+      setIsModalOpen(false);
     },
   });
 
