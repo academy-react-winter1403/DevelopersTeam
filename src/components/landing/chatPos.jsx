@@ -22,18 +22,6 @@ const ChatPos = () => {
 
       {isModalOpen && (
         <div className="fixed bottom-20 right-6 w-96 h-[500px] bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 flex flex-col">
-          {/* Modal Header */}
-          <div className="bg-blue-600 text-white p-4 flex justify-between items-center">
-            <h3 className="font-semibold text-lg">پشتیبانی</h3>
-            <button
-              onClick={toggleModal}
-              className="text-white hover:text-gray-200"
-              aria-label="Close chat"
-            >
-              <FaCircleArrowRight />
-            </button>
-          </div>
-
           <div className="flex-1">
             <ChatBox />
           </div>
