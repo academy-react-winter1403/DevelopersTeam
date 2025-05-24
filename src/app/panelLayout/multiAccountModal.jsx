@@ -108,6 +108,7 @@ const MultiAccountModal = ({ isModalOpen, setIsModalOpen }) => {
               : ""
           } p-2 mt-5 cursor-pointer`}
         >
+          {console.log(item)}
           <div className="flex space-x-3 items-center justify-between">
             <div className="flex space-x-3 items-center">
               <div className="w-14 h-14 rounded-full overflow-hidden">

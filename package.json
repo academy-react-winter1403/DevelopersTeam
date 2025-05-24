@@ -20,6 +20,7 @@
     "antd": "^5.24.4",
     "axios": "^1.8.3",
     "dom-to-image-more": "^3.5.0",
+    "editorjs-html": "^4.0.5",
     "emoji-picker-react": "^4.12.2",
     "formik": "^2.4.6",
     "framer-motion": "^12.6.5",
