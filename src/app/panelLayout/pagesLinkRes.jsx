@@ -121,6 +121,19 @@ const PagesLinkRes = () => {
       >
         <CiMoneyCheck1 className="w-6 h-6" />
       </NavLink>
+
+       <NavLink
+        to="/panel/job"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold bg-navyBlue text-white"
+              : "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold hover:bg-lightBlue"
+          }`
+        }
+      >
+        <CiMoneyCheck1 className="w-6 h-6" />
+      </NavLink>
     </div>
   );
 };

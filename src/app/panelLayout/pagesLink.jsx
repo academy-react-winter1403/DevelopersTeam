@@ -8,6 +8,7 @@ import { RiFileMarkedLine } from "react-icons/ri";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { CiMoneyCheck1 } from "react-icons/ci";
+import { IoAccessibilityOutline } from "react-icons/io5";
 
 const PagesLink = () => {
   return (
@@ -129,6 +130,20 @@ const PagesLink = () => {
       >
         <CiMoneyCheck1 className="w-6 h-6" />
         <span>پرداخت</span>
+      </NavLink>
+
+       <NavLink
+        to="/panel/job"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+          }`
+        }
+      >
+        <IoAccessibilityOutline className="w-6 h-6"/>
+        <span> شغل ها </span>
       </NavLink>
     </div>
   );
