@@ -43,8 +43,8 @@ const PanelLayout = () => {
 
   return (
     <div className="w-full relative flex flex-col sm:flex-row bg-[#F0F0F0] dark:bg-gray-900 overflow-x -hidden">
-      <div className="hidden h-[950px] sticky top-5 lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] dark:bg-gray-800 my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
-        <NavLink to="/" className="flex justify-center items-center ">
+      <div className=" hidden h-auto lg:w-1/5 lg:mx-auto sm:w-20 sm:mx-3 bg-[#FEFDFF] dark:bg-gray-800 my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
+        <NavLink to="/" className="flex justify-center items-center  ">
           <img src={logo} alt="not set" className="w-14 h-16" />
           <img
             src={logoText}
