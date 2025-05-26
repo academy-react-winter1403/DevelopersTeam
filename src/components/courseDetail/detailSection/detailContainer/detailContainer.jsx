@@ -108,7 +108,7 @@ const DetailContainer = ({ data, id }) => {
         <div className="space-y-5">
           {/* <h1 className="font-bold text-xl dark:text-white">ری اکت چیست؟</h1> */}
           {/* <p className="dark:text-gray-300">{data?.describe}</p> */}
-          {data?.describe && <Editor describe={data?.describe} />}
+          {/* {data?.describe && <Editor describe={data.describe} />} */}
         </div>
       </div>
       <div className="p-2 mt-10 space-x-4 flex items-center dark:text-white">
