@@ -5,6 +5,8 @@ import FirstPartOfLanding from "./firstPartOfLanding";
 import TopCourses from "./topCourses";
 import GoodTeacher from "./goodTeacher";
 import TopNews from "./topNews";
+import ChatPos from "./chatPos";
+import CustomSpeedDial from "./customSpeedDial";
 
 const Landing = () => {
   return (
@@ -15,6 +17,7 @@ const Landing = () => {
       <TopCourses />
       <GoodTeacher />
       <TopNews />
+      <ChatPos />
     </div>
   );
 };

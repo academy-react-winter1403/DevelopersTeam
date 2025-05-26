@@ -13,7 +13,10 @@ const accountSlice = createSlice({
       state.accounts = action.payload;
     },
     setCurrentAccount: (state, action) => {
-      state.currentAccount = action.payload;
+      state.currentAccount =
+        typeof action.payload === "string"
+          ? JSON.parse(action.payload)
+          : action.payload;
     },
     logoutAccount: (state, action) => {
       const remainingAccounts = state.accounts.filter(
@@ -28,12 +31,30 @@ const accountSlice = createSlice({
       }
     },
     addAccount: (state, action) => {
-      state.accounts.push(action.payload);
-      state.currentAccount = action.payload;
+      const newAccount =
+        typeof action.payload === "string"
+          ? JSON.parse(action.payload)
+          : action.payload;
+
+      state.accounts.push(newAccount);
+      state.currentAccount = newAccount;
+    },
+    updateCurrentAccountProfile: (state, action) => {
+      if (state.currentAccount) {
+        state.currentAccount = {
+          ...state.currentAccount,
+          profileData: action.payload,
+        };
+      }
     },
   },
 });
 
-export const { setAccounts, setCurrentAccount, logoutAccount, addAccount } =
-  accountSlice.actions;
+export const {
+  setAccounts,
+  setCurrentAccount,
+  logoutAccount,
+  addAccount,
+  updateCurrentAccountProfile,
+} = accountSlice.actions;
 export default accountSlice.reducer;

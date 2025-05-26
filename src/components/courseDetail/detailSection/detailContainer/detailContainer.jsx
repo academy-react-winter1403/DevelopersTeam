@@ -13,6 +13,7 @@ import { useDarkMode } from "../../../../context/theme/themeContext";
 import { CiBoxList } from "react-icons/ci";
 import { TbExternalLink } from "react-icons/tb";
 import TeacherDetailModal from "./teacherDetailModal";
+import Editor from "../../../common/Editor/editor";
 
 const DetailContainer = ({ data, id }) => {
   const queryClient = useQueryClient();
@@ -50,7 +51,7 @@ const DetailContainer = ({ data, id }) => {
     queryFn: getTeacherInfo,
   });
 
-  console.log("teacherData",teacherData);
+  console.log("teacherData", teacherData);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -105,8 +106,9 @@ const DetailContainer = ({ data, id }) => {
       <div className="w-full h-auto p-2 space-y-3">
         <h1 className="text-gray dark:text-gray-400">توضیحات</h1>
         <div className="space-y-5">
-          <h1 className="font-bold text-xl dark:text-white">ری اکت چیست؟</h1>
-          <p className="dark:text-gray-300">{data?.describe}</p>
+          {/* <h1 className="font-bold text-xl dark:text-white">ری اکت چیست؟</h1> */}
+          {/* <p className="dark:text-gray-300">{data?.describe}</p> */}
+          {/* {data?.describe && <Editor describe={data.describe} />} */}
         </div>
       </div>
       <div className="p-2 mt-10 space-x-4 flex items-center dark:text-white">

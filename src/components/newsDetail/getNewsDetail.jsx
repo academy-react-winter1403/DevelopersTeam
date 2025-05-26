@@ -15,6 +15,7 @@ import CommentComp from "../common/commentsComponent/commentComp";
 import { TagsA } from "../common/course-card/tags/tags";
 import AddUserNewsComment from "../common/commentsComponent/addUserNewsComment";
 import toast from "react-hot-toast";
+import Editor from "../common/Editor/editor";
 
 const GetNewsDetailList = () => {
   const queryClient = useQueryClient();
@@ -239,7 +240,8 @@ const GetNewsDetailList = () => {
         </div>
 
         <div className="w-full h-auto p-2 space-y-3">
-          <h2 className="mt-5 p-5 dark:text-gray-300">{data?.miniDescribe}</h2>
+          {/* <h2 className="mt-5 p-5 dark:text-gray-300">{data?.describe}</h2> */}
+          {/* {data?.describe && <Editor describe={data?.describe} />} */}
         </div>
 
         <div className="p-2 mt-10 space-x-4 flex items-center dark:text-white">
