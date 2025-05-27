@@ -1,33 +1,31 @@
 import React, { useState } from "react";
 import http from "./../../../core/services/interceptor";
 import { useQuery } from "@tanstack/react-query";
-import TableHolderJobs from "./jobTable/tableHolder";
-import JobBottom from "./jobBottom";
-import AddJob from "./addJob/addJob";
+import SchedualBottom from "./SchedualBottom";
+import TableHolder from "./SchedualTable/tableHolder";
 
-const Job = () => {
+const Schedual = () => {
   const [convertedData, setCovertedData] = useState([]);
 
-  const getJob = async () => {
-    const res = await http.get(`/SharePanel/GetMyJobHistories`);
+  const getSchedual = async () => {
+    const res = await http.get(`/Schedual/GetStudentScheduals?startDate=05/05/1753&endDate=05/05/9999&StudentId=40330`);
     return res;
   };
   const { data, isSuccess } = useQuery({
-    queryKey: ["jobPanel"],
-    queryFn: getJob,
+    queryKey: ["SchedualPanel"],
+    queryFn: getSchedual,
   });
 
   return (
     <div>
       <div className="hidden sm:block">
-        <h2 className="w-full h-10  mt-5 font-bold text-xl "> شغل ها </h2>
+        <h2 className="w-full h-10  mt-5 font-bold text-xl ">  اسکژول </h2>
       </div>
       <div className="flex justify-between items-end">
-        <JobBottom />
-        <AddJob isEdit={false}  />
+        <SchedualBottom />
       </div>
-      <TableHolderJobs
-        data={data?.jobLists}
+      <TableHolder
+        data={data}
         isSuccess={isSuccess}
         convertedData={convertedData}
         setCovertedData={setCovertedData}
@@ -36,4 +34,4 @@ const Job = () => {
   );
 };
 
-export default Job;
+export default Schedual;

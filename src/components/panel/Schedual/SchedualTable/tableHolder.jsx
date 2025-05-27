@@ -2,11 +2,9 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Spin } from "antd";
 import DateComponent from "../../../common/date/dateComponent";
 import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
-import AddJob from "../addJob/addJob";
-import ResponsiveJob from "../responsiveJob";
+import ResponsiveSchedual from "./../responsiveSchedual"
 const TableComp = lazy(() => import("./tableComp"));
-
-const TableHolderJobs = ({
+const TableHolder = ({
   data,
   isSuccess,
   convertedData,
@@ -26,17 +24,16 @@ const TableHolderJobs = ({
     if (isSuccess && data) {
       const newData = data?.map((el) => {
         return {
-          name: el.jobTitle,
-          about: el.aboutJob,
-          companyTitle: el.companyName,
-          start: <DateComponent insertDate={el.workStartDate} />,
-          end: <DateComponent insertDate={el.workEndDate} />,
-          status: el.inWork ? (
-            <TagsAccept text="در حال کار" />
+          sTime: el.startTime,
+          eTime: el.endTime,
+          week: el.weekNumber,
+          start: <DateComponent insertDate={el.startDate} />,
+          end: <DateComponent insertDate={el.endDate} />,
+          status: el.lockToRaise ? (
+            <TagsAccept text="حاضر  " />
           ) : (
-            <TagsNotAccept text="پایان کار" />
+            <TagsNotAccept text="غایب " />
           ),
-          edit: <AddJob isEdit={true} el={el}  />,
         };
       });
       setCovertedData(newData);
@@ -58,17 +55,12 @@ const TableHolderJobs = ({
           </Suspense>
         </div>
       </div>
-      <ResponsiveJob  data={data} />
+      {/* <responsiveSchedual   data={data} /> */}
+      <ResponsiveSchedual data={data}/>
 
-      {/* {currentEditItem && (
-        <EditModal
-          isModalOpen={!!currentEditItem}
-          handleCancel={handleCancel}
-          data={currentEditItem}
-        />
-      )} */}
+     
     </div>
   );
 };
 
-export default TableHolderJobs;
+export default TableHolder;

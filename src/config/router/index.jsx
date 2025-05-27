@@ -28,6 +28,7 @@ import JobPage from "../../screens/jobPage/jobPage";
 import TicketPage from "../../screens/ticketPage";
 import AddTicket from "../../components/ticket/addTicket/addTicket";
 import AnswerFromAdmin from "../../components/ticket/ticketHolder/answerFromAdmin";
+import SchedualPage from "../../screens/SchedualPage/SchedualPage";
 
 export const router = createBrowserRouter([
   {
@@ -134,6 +135,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/job",
         element: <JobPage />,
+      },
+      {
+        path: "/panel/schedual",
+        element: <SchedualPage />,
       },
       {
         path: "/panel/ticket",

@@ -65,6 +65,7 @@ const AddJob = ({ isEdit, el }) => {
         type={isEdit ? "text" : "primary"}
         onClick={showModal}
         style={{ fontFamily: "yekan" }}
+        className="btn-sm-hidden"
       >
         {isEdit ? <CiEdit className="w-5 h-5" /> : "افزودن شغل"}
       </Button>

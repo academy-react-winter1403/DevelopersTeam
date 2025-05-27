@@ -63,3 +63,15 @@ body {
   outline: none !important;
   background: transparent;
 }
+
+
+
+/* styles.css */
+.btn-sm-hidden {
+  display: none;
+}
+@media (min-width: 640px) {
+  .btn-sm-hidden {
+    display: inline-flex;
+  }
+}
