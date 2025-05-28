@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Spin } from "antd";
 import DateComponent from "../../../common/date/dateComponent";
 import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
+import AddHomeWork from "../addHomeWork/addHomeWork";
 const TableComp = lazy(() => import("./tableComp"));
 
 const HwTableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
@@ -24,6 +25,12 @@ const HwTableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
           sessionTitle: el.sessionTitle,
           groupName: el.groupName,
           homeWorkDate: <DateComponent insertDate={el.homeWorkDate} />,
+          addHW: (
+            <AddHomeWork
+              courseStudentId={el.courseStudentId}
+              homeWorkId={el.homeWorkId}
+            />
+          ),
         };
       });
       setCovertedData(newData);

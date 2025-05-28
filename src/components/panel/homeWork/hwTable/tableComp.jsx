@@ -40,6 +40,14 @@ const columns = [
       showTitle: false,
     },
   },
+  {
+    title: "ارسال تکلیف",
+    dataIndex: "addHW",
+    key: "addHW",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
 ];
 
 const TableComp = ({ data }) => (
