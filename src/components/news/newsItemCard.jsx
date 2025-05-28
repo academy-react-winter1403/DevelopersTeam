@@ -14,12 +14,16 @@ import { motion } from "framer-motion";
 // Variants برای مدیریت انیمیشن‌ها
 const fadeIn = {
   hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
 };
 
 const fadeFromBottom = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" } },
 };
 
 const NewsItemCard = ({
@@ -35,6 +39,7 @@ const NewsItemCard = ({
   currentUserIsDissLike,
   likeId,
   keyword,
+  newsCatregoryName,
 }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -50,7 +55,7 @@ const NewsItemCard = ({
   const handleLike = async () => {
     const res = await http.post(`/News/NewsLike/${id}`);
   };
-  
+
   const { mutate } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
@@ -63,7 +68,7 @@ const NewsItemCard = ({
       data: { deleteEntityId: likeId },
     });
   };
-  
+
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
@@ -74,7 +79,7 @@ const NewsItemCard = ({
   const handleDisLike = async () => {
     const res = await http.post(`/News/NewsDissLike/${id}`);
   };
-  
+
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
@@ -90,7 +95,7 @@ const NewsItemCard = ({
       exit="hidden"
       variants={{
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+        visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
       }}
     >
       {/* کلمه کلیدی */}
@@ -98,7 +103,7 @@ const NewsItemCard = ({
         className="absolute z-30 text-white bg-[#5A7EFF] dark:bg-blue-600 px-3 py-1 rounded-4xl 2xl:top-4 md:top-8 right-3 hidden md:block"
         variants={fadeIn}
       >
-        {keyword}
+        {newsCatregoryName}
       </motion.div>
 
       {/* ساختار اصلی کارت */}

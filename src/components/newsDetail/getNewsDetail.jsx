@@ -241,7 +241,7 @@ const GetNewsDetailList = () => {
 
         <div className="w-full h-auto p-2 space-y-3">
           {/* <h2 className="mt-5 p-5 dark:text-gray-300">{data?.describe}</h2> */}
-          {/* {data?.describe && <Editor describe={data?.describe} />} */}
+          {data?.describe && <Editor describe={data?.describe} />}
         </div>
 
         <div className="p-2 mt-10 space-x-4 flex items-center dark:text-white">

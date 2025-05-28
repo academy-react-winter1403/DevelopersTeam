@@ -69,6 +69,7 @@ const NewsList = () => {
                 likeId={item.likeId}
                 mutate={item.mutate}
                 keyword={item.keyword}
+                newsCatregoryName={item.newsCatregoryName}
               />
             );
           })}
