@@ -3,7 +3,7 @@ import ChatBox from "./chatBox";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { TbMessageCircleUser } from "react-icons/tb";
 
-const ChatPos = () => {
+const ChatTicket = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -31,4 +31,4 @@ const ChatPos = () => {
   );
 };
 
-export default ChatPos;
+export default ChatTicket;
