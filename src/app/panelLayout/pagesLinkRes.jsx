@@ -10,6 +10,7 @@ import { TfiCommentAlt } from "react-icons/tfi";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { HiOutlineTicket } from "react-icons/hi2";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { PiBackpack } from "react-icons/pi";
 
 const PagesLinkRes = () => {
   return (
@@ -123,7 +124,18 @@ const PagesLinkRes = () => {
       >
         <CiMoneyCheck1 className="w-6 h-6" />
       </NavLink>
-
+      <NavLink
+        to="/panel/homework"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold bg-navyBlue text-white"
+              : "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold hover:bg-lightBlue"
+          }`
+        }
+      >
+        <PiBackpack className="w-6 h-6" />
+      </NavLink>
       <NavLink
         to="/panel/job"
         className={({ isActive }) =>
@@ -147,7 +159,7 @@ const PagesLinkRes = () => {
           }`
         }
       >
-        <FaRegCalendarAlt  className="w-6 h-6" />
+        <FaRegCalendarAlt className="w-6 h-6" />
       </NavLink>
 
       <NavLink
