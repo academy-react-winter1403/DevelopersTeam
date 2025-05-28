@@ -4,19 +4,23 @@ import edjsHTML from "editorjs-html";
 const Editor = ({ describe }) => {
   const ref1 = useRef();
   useEffect(() => {
-    const edjsParser = edjsHTML();
-    const HTML = edjsParser.parse(JSON.parse(describe));
-    console.log(HTML);
-    ref1.current.innerHTML=HTML
+    try {
+      const edjsParser = edjsHTML();
+      const HTML = edjsParser.parse(JSON.parse(describe));
+      console.log(HTML);
+      ref1.current.innerHTML = HTML;
+    } catch (error) {
+      ref1.current.innerHTML = describe;
+    }
+
     // ref1.current.focus();
-    
   }, []);
-// ref1.current.focus();
-  return <>
-  
-  <div ref={ref1}></div>
-  
-  </>;
+  // ref1.current.focus();
+  return (
+    <>
+      <div ref={ref1}></div>
+    </>
+  );
 };
 
 export default Editor;
