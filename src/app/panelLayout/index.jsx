@@ -94,7 +94,7 @@ const PanelLayout = () => {
             </div>
             <div className="flex flex-col justify-center">
               <h1 className="font-semibold dark:text-white">
-                {userData?.fName} {userData?.lName}
+                {userData?.fName || "بی نام"} {userData?.lName}
               </h1>
             </div>
           </div>

@@ -19,8 +19,7 @@ import {
 import http from "./../../core/services/interceptor";
 import axios from "axios";
 import MultiModal from "./multiModal";
-import img from "./../../assets/images/panel/img.svg";
-
+ 
 const MultiAccountModal = ({ isModalOpen, setIsModalOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
