@@ -11,6 +11,7 @@ import { CiMoneyCheck1 } from "react-icons/ci";
 import { HiOutlineTicket } from "react-icons/hi2";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { PiBackpack } from "react-icons/pi";
+import { RiRobot2Line } from "react-icons/ri";
 
 const PagesLinkRes = () => {
   return (
@@ -148,7 +149,6 @@ const PagesLinkRes = () => {
       >
         <CiMoneyCheck1 className="w-6 h-6" />
       </NavLink>
-
       <NavLink
         to="/panel/schedual"
         className={({ isActive }) =>
@@ -161,7 +161,6 @@ const PagesLinkRes = () => {
       >
         <FaRegCalendarAlt className="w-6 h-6" />
       </NavLink>
-
       <NavLink
         to="/panel/ticket"
         className={({ isActive }) =>
@@ -173,6 +172,18 @@ const PagesLinkRes = () => {
         }
       >
         <HiOutlineTicket className="w-6 h-6" />
+      </NavLink>
+      <NavLink
+        to="/panel/aiassistance"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold bg-navyBlue text-white"
+              : "w-14 h-14 rounded-4xl flex justify-center items-center font-semibold hover:bg-lightBlue"
+          }`
+        }
+      >
+        <RiRobot2Line className="w-6 h-6" />
       </NavLink>
     </div>
   );

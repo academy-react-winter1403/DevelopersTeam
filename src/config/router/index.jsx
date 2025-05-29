@@ -30,6 +30,7 @@ import AddTicket from "../../components/ticket/addTicket/addTicket";
 import AnswerFromAdmin from "../../components/ticket/ticketHolder/answerFromAdmin";
 import SchedualPage from "../../screens/SchedualPage/SchedualPage";
 import HomeWorkPage from "../../screens/HomeWorkPage";
+import AiChat from "../../components/panel/AiChat/AiChat";
 
 export const router = createBrowserRouter([
   {
@@ -156,6 +157,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/homework",
         element: <HomeWorkPage />,
+      },
+      {
+        path: "/panel/aiassistance",
+        element: <AiChat />,
       },
     ],
   },

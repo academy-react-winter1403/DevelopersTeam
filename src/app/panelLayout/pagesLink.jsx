@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { LuBookText } from "react-icons/lu";
 import { MdOutlineViewTimeline } from "react-icons/md";
 import { LuBookMarked } from "react-icons/lu";
-import { RiFileMarkedLine } from "react-icons/ri";
+import { RiFileMarkedLine, RiRobot2Line } from "react-icons/ri";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { CiMoneyCheck1 } from "react-icons/ci";
@@ -185,6 +185,19 @@ const PagesLink = () => {
       >
         <HiOutlineTicket className="w-6 h-6" />
         <span>تیکت ها</span>
+      </NavLink>
+      <NavLink
+        to="/panel/aiassistance"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+          }`
+        }
+      >
+        <RiRobot2Line className="w-6 h-6" />
+        <span>دستیار AI</span>
       </NavLink>
     </div>
   );

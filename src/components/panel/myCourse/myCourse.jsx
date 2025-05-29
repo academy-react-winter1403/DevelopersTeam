@@ -22,6 +22,7 @@ const MyCourse = () => {
   const { data, isSuccess } = useQuery({
     queryKey: ["myCoursesPanel", pageNum],
     queryFn: getMyCourses,
+    keepPreviousData: true,
   });
 
   const [filteredData, setFilteredData] = useState(null);
