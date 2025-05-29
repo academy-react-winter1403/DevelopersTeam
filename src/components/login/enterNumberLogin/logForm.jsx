@@ -4,8 +4,9 @@ import AuthButton from "../../common/auth-button";
 import AuthPassInput from "../../common/auth-pass-input";
 import { Form, Formik } from "formik";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import ReCAPTCHA from "react-google-recaptcha";
 
-const LogForm = ({ mutateAsync, isPending, dispatch }) => {
+const LogForm = ({ mutateAsync, isPending, dispatch,setCaptchaToken }) => {
   const icon = (
     <HiOutlineDevicePhoneMobile className="absolute top-2.5 right-3 text-xl" />
   );
@@ -53,6 +54,13 @@ const LogForm = ({ mutateAsync, isPending, dispatch }) => {
               );
             }}
           />
+          <div className="flex justify-center w-full my-4">
+            <ReCAPTCHA
+              sitekey="6LdkY04rAAAAANR7vTpZDdpYrzPscqgNNGlEhvv1"
+              onChange={setCaptchaToken}
+              className="recaptcha"
+            />
+          </div>
           <AuthButton
             LogFirstStep={true}
             isPending={isPending}

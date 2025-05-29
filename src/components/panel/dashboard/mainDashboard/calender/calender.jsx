@@ -4,6 +4,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import { useDarkMode } from "../../../../../context/theme/themeContext";
+import toast from "react-hot-toast";
 
 const CalenderComp = () => {
   const { darkMode } = useDarkMode();
@@ -16,25 +17,25 @@ const CalenderComp = () => {
 
   const handleAddEvent = () => {
     if (!selectedDate || !newEvent.trim()) {
-      alert("لطفاً تاریخ و عنوان رویداد را وارد کنید!");
+      toast.success("لطفاً تاریخ و عنوان رویداد را وارد کنید!");
       return;
     }
     setEvents([...events, { date: selectedDate, title: newEvent }]);
     setNewEvent("");
     setSelectedDate(null);
     setIsAddModalOpen(false);
-    alert("رویداد جدید اضافه شد!");
+    toast.success("رویداد جدید اضافه شد!");
   };
 
   const handleRemoveEvent = () => {
     if (events.length === 0) {
-      alert("هیچ رویدادی برای حذف وجود ندارد!");
+      toast.success("هیچ رویدادی برای حذف وجود ندارد!");
       return;
     }
     const updatedEvents = [...events];
     updatedEvents.pop();
     setEvents(updatedEvents);
-    alert("آخرین رویداد حذف شد!");
+    toast.success("آخرین رویداد حذف شد!");
   };
 
   return (
@@ -66,6 +67,7 @@ const CalenderComp = () => {
           background: "inherit",
         }}
         shadow={false}
+          className={darkMode ? "rmdp-dark-pure" : ""}
       />
 
       <div
