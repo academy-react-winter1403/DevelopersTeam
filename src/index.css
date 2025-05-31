@@ -75,3 +75,16 @@ body {
     display: inline-flex;
   }
 }
+
+.rmdp-dark-pure .rmdp-day span {
+  color: #fff !important;
+}
+.rmdp-dark-pure .rmdp-day.rmdp-selected span {
+  color: #222 !important;
+}
+.circle-progress-bar__background {
+  stroke: #fff !important;
+}
+.circle-progress-bar__text {
+  color: #fff !important;
+}

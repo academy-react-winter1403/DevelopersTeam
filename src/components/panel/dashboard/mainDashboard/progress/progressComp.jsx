@@ -14,7 +14,22 @@ const ProgressComp = ({ userData }) => {
         </span>
       </div>
       <div className="mt-2">
-        <Progress progress={userData?.profileCompletionPercentage} fill="white"/>
+        <Progress
+          progress={userData?.profileCompletionPercentage}
+          fill="#fff"
+          renderText={({ percent }) => (
+            <span
+              style={{
+                color: darkMode ? "#fff" : "#1790ff", // مدل رنگ درست برای مد شما
+                background: darkMode ? "transparent" : "#1790ff", // پس زمینه فقط حالت عادی
+                padding: "4px 12px",
+                borderRadius: "4px",
+              }}
+            >
+              {percent}%
+            </span>
+          )}
+        />
       </div>
       <div className="mb-3">
         {userData?.profileCompletionPercentage == 100 ? (
