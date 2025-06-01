@@ -6,20 +6,31 @@ import StarNewsPage from "./../../assets/images/StarNewsPage.svg";
 import FrameNewsPage from "./../../assets/images/FrameNewsPage.svg";
 
 const HeroSectionNews = () => {
-  // Variants برای مدیریت انیمیشن عناصر مختلف
   const fadeFromAbove = {
     hidden: { opacity: 0, y: -40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" } }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, type: "spring" },
+    },
   };
 
   const fadeFromBelow = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" } }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, type: "spring" },
+    },
   };
 
   const fadeIn = {
     hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeIn" } }
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeIn" },
+    },
   };
 
   return (
@@ -30,26 +41,23 @@ const HeroSectionNews = () => {
       exit="hidden"
       variants={{
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+        visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
       }}
     >
-      {/* تصویر اول */}
       <motion.img
         src={StarOfNewsPage}
         alt=""
         className="absolute sm:top-10 md:top-[45px] w-4 h-4 left-20 top-20 sm:left-52 md:left-16 xl:left-56 xl:top-10"
         variants={fadeIn}
       />
-      
-      {/* تیتر اصلی */}
+
       <motion.h2
         className="text-2xl xs:text-3xl md:text-4xl font-bold mb-7"
         variants={fadeFromAbove}
       >
         اخبار و مقالات آکادمی
       </motion.h2>
-      
-      {/* توضیحات */}
+
       <motion.div
         className="text-[#787878] text-[14px] text-center mt-2"
         variants={fadeFromBelow}
@@ -63,7 +71,6 @@ const HeroSectionNews = () => {
         <h2 className="text-gray hidden mb-8 sm:block">لیست اخبار و مقالات</h2>
       </motion.div>
 
-      {/* تصویر دوم */}
       <motion.img
         src={GlassyGradientNewsPage}
         alt=""
@@ -71,7 +78,6 @@ const HeroSectionNews = () => {
         variants={fadeIn}
       />
 
-      {/* تصویر سوم */}
       <motion.img
         src={StarNewsPage}
         alt=""
@@ -79,7 +85,6 @@ const HeroSectionNews = () => {
         variants={fadeIn}
       />
 
-      {/* تصویر چهارم */}
       <motion.img
         src={FrameNewsPage}
         alt=""
