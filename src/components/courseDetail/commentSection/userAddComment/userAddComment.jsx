@@ -10,10 +10,9 @@ import StarterKit from "@tiptap/starter-kit";
 
 const MAX_LENGTH = 100;
 
-// --- Toolbar Component ---
 const TiptapToolbar = ({ editor, darkMode }) => {
   if (!editor) return null;
-  const iconColor = darkMode ? "white" : "#232f44";  // Determine icon color based on dark mode
+  const iconColor = darkMode ? "white" : "#232f44";
 
   return (
     <div
@@ -28,7 +27,9 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={`px-2 py-1 rounded ${
-          editor.isActive("bold") ? "bg-[#3772FF] text-white" : `text-[${iconColor}]`  // Use iconColor here
+          editor.isActive("bold")
+            ? "bg-[#3772FF] text-white"
+            : `text-[${iconColor}]`
         }`}
         title="بولد"
         type="button"
@@ -36,13 +37,12 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       >
         B
       </button>
-      <span className={`text-[${iconColor}]`}>/</span> {/* Use iconColor here */}
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={`px-2 py-1 rounded ${
           editor.isActive("italic")
             ? "bg-[#3772FF] text-white"
-            : `text-[${iconColor}]` // Use iconColor here
+            : `text-[${iconColor}]`
         }`}
         title="مورب"
         type="button"
@@ -50,43 +50,17 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       >
         I
       </button>
-      <span className={`text-[${iconColor}]`}>/</span> {/* Use iconColor here */}
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={`px-2 py-1 rounded ${
           editor.isActive("strike")
             ? "bg-[#3772FF] text-white"
-            : `text-[${iconColor}]` // Use iconColor here
+            : `text-[${iconColor}]`
         }`}
         title="خط خورده"
         type="button"
       >
         S
-      </button>
-      <span className={`text-[${iconColor}]`}>•</span> {/* Use iconColor here */}
-      <button
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={`px-2 py-1 rounded ${
-          editor.isActive("bulletList")
-            ? "bg-[#3772FF] text-white"
-            : `text-[${iconColor}]` // Use iconColor here
-        }`}
-        title="لیست"
-        type="button"
-      >
-        لیست
-      </button>
-      <button
-        onClick={() => editor.chain().focus().setParagraph().run()}
-        className={`px-2 py-1 rounded ${
-          editor.isActive("paragraph")
-            ? "bg-[#3772FF] text-white"
-            : `text-[${iconColor}]` // Use iconColor here
-        }`}
-        title="متن ساده"
-        type="button"
-      >
-        متن
       </button>
     </div>
   );
@@ -97,7 +71,6 @@ const UserAddComment = ({ id }) => {
   const { darkMode } = useDarkMode();
   const [title, setTitle] = useState("");
 
-  // TIPTAP Editor setup
   const editor = useEditor({
     extensions: [StarterKit],
     content: "",
@@ -110,7 +83,6 @@ const UserAddComment = ({ id }) => {
     },
   });
 
-  // ارسال کامنت
   const addComment = async ({ title, content }) => {
     const formData = new FormData();
     formData.append("CourseId", id);
@@ -136,7 +108,6 @@ const UserAddComment = ({ id }) => {
     const content = editor?.getHTML() || "";
     mutate({ title, content });
   };
-  
 
   return (
     <div
@@ -154,7 +125,7 @@ const UserAddComment = ({ id }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           maxLength={50}
-          className="bg-[#f5f5f9] dark:bg-gray-700 dark:text-white dark:border-gray-600 rounded-xl border-none placeholder:text-gray-400"
+          className="bg-[#f5f5f9] dark:bg-gray-700 dark:text-white dark:border-gray-600 rounded-xl border-none  dark:placeholder:text-white focus:border-navyBlue transition-all duration-300"
           style={{
             color: darkMode ? "#fff" : "#232f44",
             background: darkMode ? "#374151" : "#f5f5f9",
@@ -163,15 +134,15 @@ const UserAddComment = ({ id }) => {
           }}
         />
         <div
-          className="p-2 rounded-xl"
+          className="p-2 mt-4 rounded-xl"
           style={{
-            border: "1.5px solid #3772FF",
-            background: darkMode ? "#374151" : "#fff",
+            background: darkMode ? "#374151" : "#f5f5f9",
             minHeight: 110,
           }}
         >
           <EditorContent
             editor={editor}
+            placeholder="نظر خود را وارد کنید"
             style={{
               border: "none",
               outline: "none",
