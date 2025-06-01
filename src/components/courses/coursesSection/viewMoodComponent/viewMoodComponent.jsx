@@ -1,61 +1,56 @@
 import React, { useState, useEffect } from "react";
 import CourseCard from "../../../common/course-card/courseCard";
 import GridCourseCard from "../../gridCourseCard/gridCourseCard";
-import ComparisonTable from "./../../../common/course-card/ComparisonTable "; // جدول مقایسه
+import ComparisonTable from "./../../../common/course-card/ComparisonTable ";
+import { GrClose } from "react-icons/gr";
 
 const ViewMoodComponent = ({ data, viewMode }) => {
   const [compareList, setCompareList] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // مدیریت نمایش مدال
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // مدیریت غیرفعال‌سازی اسکرول هنگام باز بودن مدال
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; // غیرفعال کردن اسکرول
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; // بازگرداندن اسکرول
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "auto"; // بازگشت به حالت نرمال در زمان پاکسازی
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
-  // مدیریت باز شدن مدال بر اساس طول `compareList`
   useEffect(() => {
     if (compareList.length === 2) {
-      setIsModalOpen(true); // باز کردن مدال به صورت خودکار
+      setIsModalOpen(true);
     } else {
-      setIsModalOpen(false); // بسته شدن مدال
+      setIsModalOpen(false);
     }
   }, [compareList]);
 
-  // کنترل انتخاب یا حذف مقایسه کارت
   const handleToggleCompare = (courseId) => {
     setCompareList((prev) => {
       if (prev.includes(courseId)) {
-        return prev.filter((id) => id !== courseId); // حذف دوره از لیست مقایسه
+        return prev.filter((id) => id !== courseId);
       } else if (prev.length < 2) {
-        return [...prev, courseId]; // اضافه کردن دوره جدید به لیست مقایسه
+        return [...prev, courseId];
       } else {
-        return prev; // هیچ تغییری ایجاد نکنید (حداکثر دو دوره قابل انتخاب است)
+        return prev;
       }
     });
   };
 
-  // مدیریت بستن مدال (و پاک کردن مقایسه‌ها)
   const handleCloseModal = () => {
-    setIsModalOpen(false); // بستن مدال
-    setCompareList([]); // پاک کردن انتخاب‌ها
+    setIsModalOpen(false);
+    setCompareList([]);
   };
 
-  // انتخاب دوره‌هایی که در مقایسه هستند
   const selectedCourses = data?.courseFilterDtos?.filter((item) =>
     compareList.includes(item.courseId)
   );
 
   return (
     <div>
-      {/* نمایش کارت‌های دوره */}
       <div className="flex flex-wrap justify-evenly space-y-5 p-2">
         {data?.courseFilterDtos?.map((item, index) =>
           viewMode === "list" ? (
@@ -77,8 +72,8 @@ const ViewMoodComponent = ({ data, viewMode }) => {
               userLikedId={item.userLikedId}
               currentUserDissLike={item.currentUserDissLike}
               keyMutate="courses"
-              isSelected={compareList.includes(item.courseId)} // دوره انتخاب‌شده
-              onToggleCompare={() => handleToggleCompare(item.courseId)} // مدیریت انتخاب
+              isSelected={compareList.includes(item.courseId)}
+              onToggleCompare={() => handleToggleCompare(item.courseId)}
             />
           ) : (
             <GridCourseCard
@@ -99,22 +94,21 @@ const ViewMoodComponent = ({ data, viewMode }) => {
               userLikedId={item.userLikedId}
               currentUserDissLike={item.currentUserDissLike}
               keyMutate="courses"
-              isSelected={compareList.includes(item.courseId)} // دوره انتخاب‌شده
-              onToggleCompare={() => handleToggleCompare(item.courseId)} // مدیریت انتخاب
+              isSelected={compareList.includes(item.courseId)}
+              onToggleCompare={() => handleToggleCompare(item.courseId)}
             />
           )
         )}
       </div>
 
-      {/* مدال مقایسه */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
             <button
-              className="text-red-500 float-right"
-              onClick={handleCloseModal} // بستن مدال و پاک کردن انتخاب‌ها
+              className=" cursor-pointer float-right"
+              onClick={handleCloseModal}
             >
-              بستن
+              <GrClose />
             </button>
             <ComparisonTable courses={selectedCourses} />
           </div>
