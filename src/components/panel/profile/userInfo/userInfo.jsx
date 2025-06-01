@@ -14,6 +14,8 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumePDF from "./ResumePDF";
 import { Spin } from "antd";
 // import LoadingSpinner from "./LoadingSpinner "; // مسیر نسبت به ساختار پروژه
+import { MdOutlineKeyboardVoice } from "react-icons/md";
+import { HiOutlineSpeakerWave } from "react-icons/hi2";
 
 function isFirefox() {
   return typeof window !== "undefined" && /firefox/i.test(navigator.userAgent);
@@ -180,22 +182,22 @@ const UserInfo = ({ data }) => {
                           onClick={() =>
                             handleSpeechToField(setFieldValue, "fname")
                           }
-                          className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          className="absolute bg-navyBlue text-white w-9 h-9 left-1 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                           title="ورود صوتی"
                         >
-                          🎤
+                          <MdOutlineKeyboardVoice />
                         </button>
                         <button
                           type="button"
                           onClick={() => handleReadField(values.fname)}
-                          className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          className="absolute bg-navyBlue text-white w-9 h-9 left-11 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                           title="خواندن صوتی"
-                          disabled={isSpeaking || !values.fname}
+                          disabled={isSpeaking || !values.lname}
                           style={{
-                            opacity: !values.fname || isSpeaking ? 0.6 : 1,
+                            opacity: !values.lname || isSpeaking ? 0.6 : 1,
                           }}
                         >
-                          🔊
+                          <HiOutlineSpeakerWave />
                         </button>
                       </div>
                       <ErrorMessage
@@ -217,22 +219,22 @@ const UserInfo = ({ data }) => {
                           onClick={() =>
                             handleSpeechToField(setFieldValue, "lname")
                           }
-                          className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          className="absolute bg-navyBlue text-white w-9 h-9 left-1 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                           title="ورود صوتی"
                         >
-                          🎤
+                          <MdOutlineKeyboardVoice />
                         </button>
                         <button
                           type="button"
                           onClick={() => handleReadField(values.lname)}
-                          className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          className="absolute bg-navyBlue text-white w-9 h-9 left-11 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                           title="خواندن صوتی"
                           disabled={isSpeaking || !values.lname}
                           style={{
                             opacity: !values.lname || isSpeaking ? 0.6 : 1,
                           }}
                         >
-                          🔊
+                          <HiOutlineSpeakerWave />
                         </button>
                       </div>
                       <ErrorMessage
@@ -258,22 +260,22 @@ const UserInfo = ({ data }) => {
                         onClick={() =>
                           handleSpeechToField(setFieldValue, "aboutMe")
                         }
-                        className="absolute left-2 top-2 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        className="absolute bg-navyBlue text-white w-9 h-9 left-2 top-2 border  cursor-pointer rounded-full flex items-center justify-center"
                         title="ورود صوتی"
                       >
-                        🎤
+                        <MdOutlineKeyboardVoice />
                       </button>
                       <button
                         type="button"
                         onClick={() => handleReadField(values.aboutMe)}
-                        className="absolute left-12 top-2 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        className="absolute bg-navyBlue text-white w-9 h-9 left-12 top-2 border  cursor-pointer rounded-full flex items-center justify-center"
                         title="خواندن صوتی"
-                        disabled={isSpeaking || !values.aboutMe}
+                        disabled={isSpeaking || !values.lname}
                         style={{
-                          opacity: !values.aboutMe || isSpeaking ? 0.6 : 1,
+                          opacity: !values.lname || isSpeaking ? 0.6 : 1,
                         }}
                       >
-                        🔊
+                        <HiOutlineSpeakerWave />
                       </button>
                     </div>
                     <ErrorMessage
@@ -312,22 +314,22 @@ const UserInfo = ({ data }) => {
                           onClick={() =>
                             handleSpeechToField(setFieldValue, "code")
                           }
-                          className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          className="absolute bg-navyBlue text-white w-9 h-9 left-1 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                           title="ورود صوتی"
                         >
-                          🎤
+                          <MdOutlineKeyboardVoice />
                         </button>
                         <button
                           type="button"
                           onClick={() => handleReadField(values.code)}
-                          className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          className="absolute bg-navyBlue text-white w-9 h-9 left-11 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                           title="خواندن صوتی"
-                          disabled={isSpeaking || !values.code}
+                          disabled={isSpeaking || !values.lname}
                           style={{
-                            opacity: !values.code || isSpeaking ? 0.6 : 1,
+                            opacity: !values.lname || isSpeaking ? 0.6 : 1,
                           }}
                         >
-                          🔊
+                          <HiOutlineSpeakerWave />
                         </button>
                       </div>
                       <ErrorMessage
@@ -424,22 +426,22 @@ const UserInfo = ({ data }) => {
                         onClick={() =>
                           handleSpeechToField(setFieldValue, "email")
                         }
-                        className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        className="absolute bg-navyBlue text-white w-9 h-9 left-1 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                         title="ورود صوتی"
                       >
-                        🎤
+                        <MdOutlineKeyboardVoice />
                       </button>
                       <button
                         type="button"
                         onClick={() => handleReadField(values.email)}
-                        className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        className="absolute bg-navyBlue text-white w-9 h-9 left-11 top-0.5 border  cursor-pointer rounded-full flex items-center justify-center"
                         title="خواندن صوتی"
-                        disabled={isSpeaking || !values.email}
+                        disabled={isSpeaking || !values.lname}
                         style={{
-                          opacity: !values.email || isSpeaking ? 0.6 : 1,
+                          opacity: !values.lname || isSpeaking ? 0.6 : 1,
                         }}
                       >
-                        🔊
+                        <HiOutlineSpeakerWave />
                       </button>
                     </div>
                     <ErrorMessage
@@ -464,22 +466,22 @@ const UserInfo = ({ data }) => {
                         onClick={() =>
                           handleSpeechToField(setFieldValue, "address")
                         }
-                        className="absolute left-2 top-2 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        className="absolute bg-navyBlue text-white w-9 h-9 left-2 top-2 border  cursor-pointer rounded-full flex items-center justify-center"
                         title="ورود صوتی"
                       >
-                        🎤
+                        <MdOutlineKeyboardVoice />
                       </button>
                       <button
                         type="button"
                         onClick={() => handleReadField(values.address)}
-                        className="absolute left-12 top-2 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        className="absolute  bg-navyBlue text-white w-9 h-9 left-12 top-2 border  cursor-pointer rounded-full flex items-center justify-center"
                         title="خواندن صوتی"
-                        disabled={isSpeaking || !values.address}
+                        disabled={isSpeaking || !values.lname}
                         style={{
-                          opacity: !values.address || isSpeaking ? 0.6 : 1,
+                          opacity: !values.lname || isSpeaking ? 0.6 : 1,
                         }}
                       >
-                        🔊
+                        <HiOutlineSpeakerWave />
                       </button>
                     </div>
                     <ErrorMessage
@@ -492,7 +494,7 @@ const UserInfo = ({ data }) => {
                 <div className="flex flex-row-reverse gap-3 mt-8">
                   <button
                     type="submit"
-                    className="bg-blue-800 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                    className="bg-navyBlue w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
                   >
                     اعمال تغییرات
                   </button>
@@ -503,7 +505,7 @@ const UserInfo = ({ data }) => {
                     {({ loading }) => (
                       <button
                         type="button"
-                        className="bg-blue-800 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                        className="bg-navyBlue w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
                         style={{ opacity: loading ? 0.7 : 1 }}
                         disabled={loading}
                       >
