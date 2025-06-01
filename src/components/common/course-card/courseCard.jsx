@@ -11,6 +11,7 @@ import http from "../../../core/services/interceptor";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import PriceComponent from "../priceComponent/priceComponent";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -152,7 +153,7 @@ const CourseCard = ({
         >
           <div className="flex items-center gap-3 text-sm dark:text-gray-300">
             <img src={TeacherIcon} alt="" className="h-5 w-5 dark:invert" />
-            <span>{teacherName}</span>
+            <span>{teacherName || "بینام"}</span>
           </div>
           <div className="flex items-center gap-3 mt-2 text-sm dark:text-gray-300">
             <img src={StudentIcon} alt="" className="h-5 w-5 dark:invert" />
@@ -173,7 +174,7 @@ const CourseCard = ({
         >
           <div className="space-x-2 flex justify-center items-center">
             <span className="text-lg font-bold dark:text-white">
-              {new Intl.NumberFormat("fa-IR").format(cost)}
+              <PriceComponent cost={cost} />
             </span>
             <span className="text-blue-400 text-md line-clamp-1">تومان</span>
           </div>

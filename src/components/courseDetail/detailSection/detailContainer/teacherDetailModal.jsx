@@ -28,28 +28,28 @@ const TeacherDetailModal = ({
               <LiaChalkboardTeacherSolid className="w-5 h-5" />
             </span>
             <span className="ml-2 font-bold">نام استاد : </span>
-            {teacherData?.fullName}
+            {teacherData?.fullName || "-"}
           </div>
           <div className="flex items-center space-x-1">
             <span>
               <CiLinkedin className="w-5 h-5" />
             </span>
             <span className="ml-2 font-bold">لینکدین: </span>
-            {teacherData?.linkdinProfileLink}
+            {teacherData?.linkdinProfileLink || "-"}
           </div>
           <div className="flex items-center space-x-1">
             <span>
               <HiOutlineBookOpen className="w-5 h-5" />
             </span>
             <span className="ml-2 font-bold">دوره ها : </span>
-            {teacherData?.courseCounts}
+            {teacherData?.courseCounts || "-"}
           </div>
           <div className="flex items-center space-x-1">
             <span>
               <BiBookAlt className="w-5 h-5" />
             </span>
             <span className="ml-2 font-bold">مقاله ها : </span>
-            {teacherData?.newsCount}
+            {teacherData?.newsCount || "-"}
           </div>
         </div>
       )}
