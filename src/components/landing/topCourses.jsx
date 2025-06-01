@@ -4,7 +4,6 @@ import CourseCard from "../common/course-card/courseCard";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-// برای استگراگر لیست کارت‌ها
 const containerVariants = {
   hidden: { opacity: 1 },
   visible: {
@@ -23,7 +22,6 @@ const cardVariants = {
   },
 };
 
-// برای Fade-in و حرکت از بالا عنوان و زیرعنوان
 const titleVariants = {
   hidden: { opacity: 0, y: -30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring" } },
@@ -52,17 +50,14 @@ const TopCourses = () => {
 
   return (
     <div className="w-full mt-20 h-auto">
-      {/* انیمیشن برای عنوان */}
       <motion.h1
         className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl dark:text-white"
         variants={titleVariants}
         initial="hidden"
         animate="visible"
       >
-      
         {t("the most popular courses")}
       </motion.h1>
-      {/* انیمیشن برای زیرعنوان */}
       <motion.h6
         className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] dark:text-gray-400 xl:text-[15px]"
         variants={subtitleVariants}
@@ -71,7 +66,6 @@ const TopCourses = () => {
       >
         {t("Courses that were very popular among students")}
       </motion.h6>
-      {/* لیست کارت‌ها با استگراگر و فرایموشن */}
       <motion.div
         className="my-4 flex justify-center gap-4 flex-wrap"
         variants={containerVariants}

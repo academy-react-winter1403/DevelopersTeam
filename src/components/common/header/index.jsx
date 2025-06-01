@@ -11,7 +11,9 @@ import logoText from "./../../../assets/images/logoText.svg";
 import { useDarkMode } from "../../../context/theme/themeContext";
 import { getData } from "../../../core/localStorage/localStorage";
 import { useTranslation } from "react-i18next";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 function useIsLargeScreen(minWidth = 1024) {
   const [isLargeScreen, setIsLargeScreen] = React.useState(
@@ -33,22 +35,32 @@ const Header = () => {
   const { t, i18n } = useTranslation();
 
   const [listening, setListening] = useState(false);
-  const { transcript, resetTranscript, listening: isListening } = useSpeechRecognition();
+  const {
+    transcript,
+    resetTranscript,
+    listening: isListening,
+  } = useSpeechRecognition();
 
   const commands = {
-    fa: { home: ["خانه", "صفحه اصلی"], courses: ["دوره‌ها", "دوره ها", "کلاس"], news: ["خبرها", "مقالات", "اخبار"] },
-    en: { home: ["home", "homepage"], courses: ["courses", "classes"], news: ["news", "articles"] },
+    fa: {
+      home: ["خانه", "صفحه اصلی"],
+      courses: ["دوره‌ها", "دوره ها", "کلاس"],
+      news: ["خبرها", "مقالات", "اخبار"],
+    },
+    en: {
+      home: ["home", "homepage"],
+      courses: ["courses", "classes"],
+      news: ["news", "articles"],
+    },
   };
-  
+
   useEffect(() => {
-    const languageCommands = commands[i18n.language]; // دستورات زبان انتخاب‌شده
-    
-    // تجزیه گفتار و تطبیق با لیست دستورات
-    const sanitizedTranscript = transcript.toLowerCase(); // متن گفتار به حروف کوچک برای تطبیق دقیق
-    
+    const languageCommands = commands[i18n.language];
+
+    const sanitizedTranscript = transcript.toLowerCase();
+
     for (const [key, keywords] of Object.entries(languageCommands)) {
       if (keywords.some((keyword) => sanitizedTranscript.includes(keyword))) {
-        // جابجایی به مسیر مرتبط
         switch (key) {
           case "home":
             navigate("/");
@@ -68,7 +80,6 @@ const Header = () => {
       }
     }
   }, [transcript, i18n.language, navigate, resetTranscript]);
-  
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -77,7 +88,10 @@ const Header = () => {
 
   const toggleListening = () => {
     if (!isListening) {
-      SpeechRecognition.startListening({ continuous: true, language: i18n.language });
+      SpeechRecognition.startListening({
+        continuous: true,
+        language: i18n.language,
+      });
       setListening(true);
     } else {
       SpeechRecognition.stopListening();
@@ -95,7 +109,6 @@ const Header = () => {
 
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-4 sm:px-6 lg:px-10 items-center">
-      {/* Joyride فقط دسکتاپ */}
       {isLargeScreen && (
         <Joyride
           steps={steps}
@@ -110,7 +123,6 @@ const Header = () => {
         />
       )}
 
-      {/* لوگو */}
       <NavLink
         to="/"
         className="flex w-1/4 xs:w-1/5 justify-center items-center header-logo"
@@ -119,7 +131,6 @@ const Header = () => {
         <img src={logoText} alt="متن لوگو" className="w-24 h-10" />
       </NavLink>
 
-      {/* منوی اصلی */}
       <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden header-menu">
         {["home", "courses", "news"].map((key, index) => {
           const paths = ["/", "/courses", "/news"];
@@ -139,20 +150,17 @@ const Header = () => {
         })}
       </div>
 
-      {/* تنظیمات دسکتاپ */}
       <div className="w-2/7 hidden lg:flex justify-center items-center space-x-2 header-settings">
-        {/* انتخاب زبان */}
         <Select
           defaultValue={i18n.language}
           onChange={changeLanguage}
-          style={{ width: 90 }}
+          style={{ width: 90, background: "#ccc", borderRadius: "40px" }}
           options={[
             { value: "fa", label: "فارسی" },
             { value: "en", label: "English" },
           ]}
         />
 
-        {/* مدیریت تم (دارک مد) */}
         <div
           onClick={() => setDarkMode(!darkMode)}
           className="header-darkmode border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
@@ -164,7 +172,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* میکروفون */}
         <div
           onClick={toggleListening}
           className="header-mic border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full cursor-pointer"
@@ -172,7 +179,6 @@ const Header = () => {
           {listening ? <FiMic className="text-red-500" /> : <FiMicOff />}
         </div>
 
-        {/* ورود یا پنل دانشجویی */}
         <div className="header-auth">
           {token ? (
             <NavLink to="/panel/dashboard">
@@ -191,7 +197,11 @@ const Header = () => {
             </NavLink>
           ) : (
             <NavLink to="/login">
-              <Button type="primary" shape="round" style={{ fontFamily: "yekan" }}>
+              <Button
+                type="primary"
+                shape="round"
+                style={{ fontFamily: "yekan" }}
+              >
                 {t("loginRegister")}
               </Button>
             </NavLink>
@@ -199,9 +209,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* تنظیمات موبایل */}
       <div className="flex lg:hidden items-center space-x-3">
-        {/* دارک مد در موبایل */}
         <div
           onClick={() => setDarkMode(!darkMode)}
           className="header-darkmode  dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
@@ -213,7 +221,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* پنل دانشجویی */}
         <div className="header-auth">
           {token ? (
             <NavLink to="/panel/dashboard">
@@ -249,7 +256,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* منوی موبایل */}
         <HeaderDrawer />
       </div>
     </div>
@@ -257,6 +263,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-

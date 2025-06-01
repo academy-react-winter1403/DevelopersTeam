@@ -1,27 +1,26 @@
 /* در حالت فارسی، همه چیز راست‌چین شود */
 html[dir="rtl"] {
-    direction: rtl;
-    text-align: right;
-  }
-  
-  /* در حالت انگلیسی، همه چیز چپ‌چین شود */
-  html[dir="ltr"] {
-    direction: ltr;
-    text-align: left;
-  }
-  
-  /* تنظیم متن ترکیبی */
-  .rtl-text {
-    direction: rtl;
-  }
-  
-  .ltr-text {
-    direction: ltr;
-    text-align: left;
-  }
-  
-  /* فضای داخلی برای فاصله‌دهی بین متن‌ها */
-  .header .space-x-3 {
-    gap: 10px;
-  }
-  
+  direction: rtl;
+  text-align: right;
+}
+
+/* در حالت انگلیسی، همه چیز چپ‌چین شود */
+html[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* تنظیم متن ترکیبی */
+.rtl-text {
+  direction: rtl;
+}
+
+.ltr-text {
+  direction: ltr;
+  text-align: left;
+}
+
+/* فضای داخلی برای فاصله‌دهی بین متن‌ها */
+.header .space-x-3 {
+  gap: 10px;
+}

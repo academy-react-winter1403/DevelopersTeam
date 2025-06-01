@@ -16,6 +16,9 @@ const onError = (error) => {
   // console.log(error);
 
   if (error?.message === "Network Error") {
+    toast.error("اتصال خود را بررسی کنید");
+  }
+  if (error?.response.status === 401) {
     toast.error("ابتدا وارد حساب کاربری شوید");
   }
 
@@ -42,7 +45,7 @@ instance.interceptors.request.use((opt) => {
   token = JSON.parse(token);
   // console.log(token);
   // const token = getData("authToken") ? getData("authToken") : null;
-  if(token) opt.headers.Authorization = "Bearer " + token.token;
+  if (token) opt.headers.Authorization = "Bearer " + token.token;
   return opt;
 });
 

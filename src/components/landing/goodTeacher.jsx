@@ -51,8 +51,7 @@ const GoodTeacher = () => {
 
   return (
     <div>
-      {/* عنوان با انیمیشن */}
-      <motion.h2
+       <motion.h2
         className="text-center mx-auto font-bold text-2xl xl:mt-24 mt-10 sm:mt-[50px] xl:text-3xl dark:text-white"
         variants={titleVariants}
         initial="hidden"
@@ -60,19 +59,18 @@ const GoodTeacher = () => {
       >
         {t("Top professors of the week")}
       </motion.h2>
-      {/* زیرعنوان با انیمیشن */}
-      <motion.h2
+       <motion.h2
         className="text-center mx-auto font-normal text-[12px] mt-6 text-[#787878] dark:text-gray-400 xl:text-[15px]"
         variants={subtitleVariants}
         initial="hidden"
         animate="visible"
       >
-        {t("Professors who gave the most positive votes to courses in a survey")}
-        
+        {t(
+          "Professors who gave the most positive votes to courses in a survey"
+        )}
       </motion.h2>
 
-      {/* لیست کارت‌ها */}
-      <motion.div
+       <motion.div
         className="flex flex-col md:flex-row gap-6 mt-12 sm:mt-18 w-10/12 mx-auto h-auto items-center"
         variants={cardsContainer}
         initial="hidden"

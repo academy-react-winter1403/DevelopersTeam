@@ -14,15 +14,19 @@ import { motion } from "framer-motion";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  visible: idx => ({
+  visible: (idx) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.12 * idx, duration: 0.6, type: "spring" }
-  })
+    transition: { delay: 0.12 * idx, duration: 0.6, type: "spring" },
+  }),
 };
 const scaleImg = {
   hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: { delay: 0.13, duration: 0.6, type: "spring" } }
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { delay: 0.13, duration: 0.6, type: "spring" },
+  },
 };
 
 const CourseCard = ({
@@ -61,7 +65,12 @@ const CourseCard = ({
       toast.success("عملیات با موفقیت انجام شد");
     },
     onError: (error) => {
-      toast.error(error?.response?.data?.ErrorMessage || "خطا در انجام عملیات");
+      console.log(error);
+      if (error.status == 401) {
+        toast.error("ابتدا وارد حساب کاربری شوید");
+      } else {
+        toast.error("مشکلی پیش آمده");
+      }
     },
   });
 
@@ -136,7 +145,11 @@ const CourseCard = ({
             {describe}
           </p>
         </motion.div>
-        <motion.div className="mt-3 flex-none space-y-3" variants={fadeUp} custom={4}>
+        <motion.div
+          className="mt-3 flex-none space-y-3"
+          variants={fadeUp}
+          custom={4}
+        >
           <div className="flex items-center gap-3 text-sm dark:text-gray-300">
             <img src={TeacherIcon} alt="" className="h-5 w-5 dark:invert" />
             <span>{teacherName}</span>
@@ -153,7 +166,11 @@ const CourseCard = ({
             <DateComponent insertDate={lastUpdate} />
           </div>
         </motion.div>
-        <motion.div className="flex flex-none justify-between my-3" variants={fadeUp} custom={5}>
+        <motion.div
+          className="flex flex-none justify-between my-3"
+          variants={fadeUp}
+          custom={5}
+        >
           <div className="space-x-2 flex justify-center items-center">
             <span className="text-lg font-bold dark:text-white">
               {new Intl.NumberFormat("fa-IR").format(cost)}
@@ -199,7 +216,9 @@ const CourseCard = ({
             checked={isSelected}
             onChange={onToggleCompare}
           />
-          <span className="text-xs border border-amber-400 rounded-2xl bg-amber-400 p-1">مقایسه</span>
+          <span className="text-xs border border-amber-400 rounded-2xl bg-amber-400 p-1">
+            مقایسه
+          </span>
         </label>
       </div>
     </motion.div>
