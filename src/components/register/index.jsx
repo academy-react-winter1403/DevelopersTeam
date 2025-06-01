@@ -45,7 +45,7 @@ const Register = () => {
           {step == 2 && (
             <div className="space-x-3 mt-5 text-md text-gray">
               <span>لطفا کد ارسال شده به شماره</span>
-              <span className="text-navyBlue">0111111111</span>
+              <span className="text-navyBlue">{PhoneNumber}</span>
               <span>را وارد کنید</span>
             </div>
           )}

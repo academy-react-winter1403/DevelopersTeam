@@ -1,19 +1,42 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthInput from "../../common/auth-inputs";
 import AuthButton from "../../common/auth-button";
 import { Form, Formik } from "formik";
 import { useMutationCustom } from "../../../core/services/api/authApi/register.api";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import { useMutation } from "@tanstack/react-query";
+import http from "./../../../core/services/interceptor";
+import toast from "react-hot-toast";
 
-const EnterNumber = ({ nextStep, text , setPhoneNumber }) => {
-  const { mutateAsync } = useMutationCustom(
-    "/Sign/SendVerifyMessage",
-    "SendVerifyMessage",
-    "عملیات با موفقیت انجام شد"
-  );
+const EnterNumber = ({ nextStep, text, setPhoneNumber }) => {
+  // const { mutateAsync } = useMutationCustom(
+  //   "/Sign/SendVerifyMessage",
+  //   "SendVerifyMessage",
+  //   "عملیات با موفقیت انجام شد"
+  // );
+
+  const navigate = useNavigate();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: (values) => http.post("/Sign/SendVerifyMessage", values),
+    mutationKey: ["SendVerifyMessage"],
+    onSuccess: (data) => {
+      if (id == 0) {
+        toast.error("این شماره تکراری می باشد");
+        navigate("/login");
+      } else {
+        toast.success("عملیات با موفقیت انجام شد");
+        console.log(data);
+      }
+    },
+    onError: (error) => {
+      toast.error("لطفا دوباره امتحان کنید");
+    },
+  });
+
   const handleMutation = async (values) => {
-    setPhoneNumber(values.phoneNumber)
+    setPhoneNumber(values.phoneNumber);
     await mutateAsync(values);
     nextStep();
   };
