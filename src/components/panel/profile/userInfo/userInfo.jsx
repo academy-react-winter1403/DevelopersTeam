@@ -10,7 +10,10 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import UserForm from "./userForm";
 import SecurityInfo from "./securityInfo";
-import { Divider } from "antd";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ResumePDF from "./ResumePDF";
+import { Spin } from "antd";
+// import LoadingSpinner from "./LoadingSpinner "; // مسیر نسبت به ساختار پروژه
 
 function isFirefox() {
   return typeof window !== "undefined" && /firefox/i.test(navigator.userAgent);
@@ -20,6 +23,16 @@ const UserInfo = ({ data }) => {
   const queryClient = useQueryClient();
   const recognitionRef = useRef(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // if (!data) return <LoadingSpinner />;
+
+  // از LocalStorage (در اولویت)، یا داده پروفایل سرور استفاده کن:
+  const localResume = localStorage.getItem("resumeData");
+  const localResumeData = localResume ? JSON.parse(localResume) : {};
+
+  // const LoadingSpinner = () => <Spin tip="در حال بارگذاری..." />;
+  // const saved = localStorage.getItem("resumeData");
+  // const savedData = saved ? JSON.parse(saved) : null;
 
   // خواندن صوتی متن
   const handleReadField = (text) => {
@@ -46,7 +59,9 @@ const UserInfo = ({ data }) => {
   // ورودی صوتی (پشتیبانی از فایرفاکس هندل شده)
   const handleSpeechToField = (setFieldValue, fieldName) => {
     if (isFirefox()) {
-      toast.error("قابلیت ورود صوتی فعلاً در Firefox پشتیبانی نمی‌شود. لطفاً با مرورگر Chrome تست کنید.");
+      toast.error(
+        "قابلیت ورود صوتی فعلاً در Firefox پشتیبانی نمی‌شود. لطفاً با مرورگر Chrome تست کنید."
+      );
       return;
     }
     if (!("webkitSpeechRecognition" in window)) {
@@ -89,7 +104,9 @@ const UserInfo = ({ data }) => {
     mutationFn: updateProfile,
     onMutate: async (newData) => {
       await queryClient.cancelQueries(["profile"]);
+      // داده قبلی را نگه دار تا بعداً بتوانیم برگردانیم (در صورت نیاز!)
       const previousData = queryClient.getQueryData(["profile"]);
+      // داده جدید را ست می‌کنیم تا سریع ریفرش شود
       queryClient.setQueryData(["profile"], (old) => ({
         ...old,
         fName: newData.fname,
@@ -100,6 +117,8 @@ const UserInfo = ({ data }) => {
         gender: newData.gender,
         homeAdderess: newData.address,
       }));
+      // LocalStorage را هم سریعاً آپدیت کن
+      localStorage.setItem("resumeData", JSON.stringify(newData));
       return { previousData };
     },
     onSettled: () => {
@@ -108,151 +127,303 @@ const UserInfo = ({ data }) => {
     onSuccess: () => {
       toast.success("اطلاعات با موفقیت تغییر یافت");
     },
-    onError: () => {
-      toast.error("خطا در بروزرسانی اطلاعات");
-    },
+    // onError: () => {
+    //   toast.error("خطا در بروزرسانی اطلاعات");
+    // },
   });
 
   return (
     <div className="md:grid md:grid-cols-10 flex flex-col dark:text-white">
       <div className="col-span-6 mt-6 order-2 md:order-1">
         <Formik
-          onSubmit={(values) => mutateUpdate(values)}
+          onSubmit={(values) => {
+            // همزمان به سرور و لوکال ذخیره کن
+            localStorage.setItem("resumeData", JSON.stringify(values));
+            mutateUpdate(values);
+          }}
           validationSchema={ProfileFormSchema}
           initialValues={{
-            fname: data?.fName || "",
-            lname: data?.lName || "",
-            aboutMe: data?.userAbout || "",
-            phone: data?.phoneNumber || "",
-            code: data?.nationalCode || "",
-            birthday: data?.birthDay ? new Date(data.birthDay) : "",
-            gender: data?.gender ?? true,
-            email: data?.email || "",
-            address: data?.homeAdderess || "",
+            fname: localResumeData.fname ?? data?.fName ?? "",
+            lname: localResumeData.lname ?? data?.lName ?? "",
+            aboutMe: localResumeData.aboutMe ?? data?.userAbout ?? "",
+            phone: localResumeData.phone ?? data?.phoneNumber ?? "",
+            code: localResumeData.code ?? data?.nationalCode ?? "",
+            birthday:
+              localResumeData.birthday ??
+              (data?.birthDay ? new Date(data.birthDay) : ""),
+            gender: localResumeData.gender ?? data?.gender ?? true,
+            email: localResumeData.email ?? data?.email ?? "",
+            address: localResumeData.address ?? data?.homeAdderess ?? "",
           }}
           enableReinitialize
         >
-          {({ handleSubmit, values, setFieldValue }) => (
-            <Form onSubmit={handleSubmit} className="px-6 mb-10">
-              <div className="space-y-5 mb-10">
-
-                {/* نام */}
-                <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
-                  <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                    <span>نام</span>
-                    <div className="relative">
-                      <Field
+          {({ handleSubmit, values, setFieldValue }) => {
+            React.useEffect(() => {
+              // هر تغییر مقدار فرم، اتومات داده‌ها را در localStorage بریز
+              localStorage.setItem("resumeData", JSON.stringify(values));
+            }, [values]);
+            return (
+              <Form onSubmit={handleSubmit} className="px-6 mb-10">
+                <div className="space-y-5 mb-10">
+                  {/* نام */}
+                  <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
+                    <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                      <span>نام</span>
+                      <div className="relative">
+                        <Field
+                          name="fname"
+                          className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                          placeholder="نام خود را وارد کنید"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleSpeechToField(setFieldValue, "fname")
+                          }
+                          className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          title="ورود صوتی"
+                        >
+                          🎤
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleReadField(values.fname)}
+                          className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          title="خواندن صوتی"
+                          disabled={isSpeaking || !values.fname}
+                          style={{
+                            opacity: !values.fname || isSpeaking ? 0.6 : 1,
+                          }}
+                        >
+                          🔊
+                        </button>
+                      </div>
+                      <ErrorMessage
                         name="fname"
-                        className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                        placeholder="نام خود را وارد کنید"
+                        component="h1"
+                        className="text-navyBlue"
                       />
-                      <button
-                        type="button"
-                        onClick={() => handleSpeechToField(setFieldValue, "fname")}
-                        className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
-                        title="ورود صوتی"
-                      >
-                        🎤
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleReadField(values.fname)}
-                        className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
-                        title="خواندن صوتی"
-                        disabled={isSpeaking || !values.fname}
-                        style={{ opacity: !values.fname || isSpeaking ? 0.6 : 1 }}
-                      >
-                        🔊
-                      </button>
                     </div>
-                    <ErrorMessage name="fname" component="h1" className="text-navyBlue" />
-                  </div>
-                  <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                    <span>نام خانوادگی</span>
-                    <div className="relative">
-                      <Field
+                    <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                      <span>نام خانوادگی</span>
+                      <div className="relative">
+                        <Field
+                          name="lname"
+                          className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                          placeholder="نام خانوادگی خود را وارد کنید"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleSpeechToField(setFieldValue, "lname")
+                          }
+                          className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          title="ورود صوتی"
+                        >
+                          🎤
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleReadField(values.lname)}
+                          className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          title="خواندن صوتی"
+                          disabled={isSpeaking || !values.lname}
+                          style={{
+                            opacity: !values.lname || isSpeaking ? 0.6 : 1,
+                          }}
+                        >
+                          🔊
+                        </button>
+                      </div>
+                      <ErrorMessage
                         name="lname"
-                        className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                        placeholder="نام خانوادگی خود را وارد کنید"
+                        component="h1"
+                        className="text-navyBlue"
                       />
-                      <button
-                        type="button"
-                        onClick={() => handleSpeechToField(setFieldValue, "lname")}
-                        className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
-                        title="ورود صوتی"
-                      >
-                        🎤
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleReadField(values.lname)}
-                        className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
-                        title="خواندن صوتی"
-                        disabled={isSpeaking || !values.lname}
-                        style={{ opacity: !values.lname || isSpeaking ? 0.6 : 1 }}
-                      >
-                        🔊
-                      </button>
                     </div>
-                    <ErrorMessage name="lname" component="h1" className="text-navyBlue" />
                   </div>
-                </div>
 
-                {/* درباره من */}
-                <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                  <span>درباره من</span>
-                  <div className="relative">
-                    <Field
-                      name="aboutMe"
-                      as="textarea"
-                      className="h-32 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                      placeholder="یک متن درباره خود را وارد کنید"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleSpeechToField(setFieldValue, "aboutMe")}
-                      className="absolute left-2 top-2 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
-                      title="ورود صوتی"
-                    >
-                      🎤
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleReadField(values.aboutMe)}
-                      className="absolute left-12 top-2 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
-                      title="خواندن صوتی"
-                      disabled={isSpeaking || !values.aboutMe}
-                      style={{ opacity: !values.aboutMe || isSpeaking ? 0.6 : 1 }}
-                    >
-                      🔊
-                    </button>
-                  </div>
-                  <ErrorMessage name="aboutMe" component="h1" className="text-navyBlue" />
-                </div>
-
-                {/* شماره همراه */}
-                <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
-                  <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                    <span>شماره همراه</span>
-                    <Field
-                      name="phone"
-                      className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                      placeholder="شماره همراه خود را وارد کنید"
-                      disabled
-                    />
-                    <ErrorMessage name="phone" component="h1" className="text-navyBlue" />
-                  </div>
-                  <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                    <span>کد ملی</span>
+                  {/* درباره من */}
+                  <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                    <span>درباره من</span>
                     <div className="relative">
                       <Field
-                        name="code"
-                        className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                        placeholder="کد ملی خود را وارد کنید"
+                        name="aboutMe"
+                        as="textarea"
+                        className="h-32 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                        placeholder="یک متن درباره خود را وارد کنید"
                       />
                       <button
                         type="button"
-                        onClick={() => handleSpeechToField(setFieldValue, "code")}
+                        onClick={() =>
+                          handleSpeechToField(setFieldValue, "aboutMe")
+                        }
+                        className="absolute left-2 top-2 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        title="ورود صوتی"
+                      >
+                        🎤
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleReadField(values.aboutMe)}
+                        className="absolute left-12 top-2 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        title="خواندن صوتی"
+                        disabled={isSpeaking || !values.aboutMe}
+                        style={{
+                          opacity: !values.aboutMe || isSpeaking ? 0.6 : 1,
+                        }}
+                      >
+                        🔊
+                      </button>
+                    </div>
+                    <ErrorMessage
+                      name="aboutMe"
+                      component="h1"
+                      className="text-navyBlue"
+                    />
+                  </div>
+
+                  {/* شماره همراه */}
+                  <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
+                    <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                      <span>شماره همراه</span>
+                      <Field
+                        name="phone"
+                        className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                        placeholder="شماره همراه خود را وارد کنید"
+                        disabled
+                      />
+                      <ErrorMessage
+                        name="phone"
+                        component="h1"
+                        className="text-navyBlue"
+                      />
+                    </div>
+                    <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                      <span>کد ملی</span>
+                      <div className="relative">
+                        <Field
+                          name="code"
+                          className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                          placeholder="کد ملی خود را وارد کنید"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleSpeechToField(setFieldValue, "code")
+                          }
+                          className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          title="ورود صوتی"
+                        >
+                          🎤
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleReadField(values.code)}
+                          className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                          title="خواندن صوتی"
+                          disabled={isSpeaking || !values.code}
+                          style={{
+                            opacity: !values.code || isSpeaking ? 0.6 : 1,
+                          }}
+                        >
+                          🔊
+                        </button>
+                      </div>
+                      <ErrorMessage
+                        name="code"
+                        component="h1"
+                        className="text-navyBlue"
+                      />
+                    </div>
+                  </div>
+
+                  {/* تاریخ تولد و جنسیت */}
+                  <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
+                    <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                      <span>تاریخ تولد</span>
+                      <DatePicker
+                        value={values.birthday}
+                        onChange={(dateObject) => {
+                          const dateString = dateObject
+                            ? dateObject.toDate().toISOString()
+                            : "";
+                          setFieldValue("birthday", dateString);
+                        }}
+                        calendar={persian}
+                        locale={persian_fa}
+                        style={{
+                          height: "2.25rem",
+                          width: "100%",
+                          color: "#6b7280",
+                          outline: "none",
+                          borderRadius: "0.75rem",
+                          padding: "1.25rem",
+                          paddingRight: "1.25rem",
+                          border: "1px solid #f4f4f4",
+                          backgroundColor: "#f4f4f4",
+                          transitionProperty: "all",
+                          transitionDuration: "300ms",
+                        }}
+                        placeholder="تاریخ تولد خود را وارد کنید"
+                      />
+                      <ErrorMessage
+                        name="birthday"
+                        component="h1"
+                        className="text-navyBlue"
+                      />
+                    </div>
+                    <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                      <span>جنسیت</span>
+                      <div className="flex space-x-4">
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="gender"
+                            checked={values.gender === true}
+                            onChange={() => setFieldValue("gender", true)}
+                            className="mr-2 cursor-pointer"
+                          />
+                          <span>مرد</span>
+                        </label>
+                        <ErrorMessage
+                          name="gender"
+                          component="h1"
+                          className="text-navyBlue"
+                        />
+                        <label className="flex items-center space-x-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="gender"
+                            checked={values.gender === false}
+                            onChange={() => setFieldValue("gender", false)}
+                            className="mr-2 cursor-pointer"
+                          />
+                          <span>زن</span>
+                        </label>
+                        <ErrorMessage
+                          name="gender"
+                          component="h1"
+                          className="text-navyBlue"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ایمیل */}
+                  <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                    <span>ایمیل</span>
+                    <div className="relative">
+                      <Field
+                        name="email"
+                        className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                        placeholder="ایمیل خود را وارد کنید"
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleSpeechToField(setFieldValue, "email")
+                        }
                         className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
                         title="ورود صوتی"
                       >
@@ -260,156 +431,93 @@ const UserInfo = ({ data }) => {
                       </button>
                       <button
                         type="button"
-                        onClick={() => handleReadField(values.code)}
+                        onClick={() => handleReadField(values.email)}
                         className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
                         title="خواندن صوتی"
-                        disabled={isSpeaking || !values.code}
-                        style={{ opacity: !values.code || isSpeaking ? 0.6 : 1 }}
+                        disabled={isSpeaking || !values.email}
+                        style={{
+                          opacity: !values.email || isSpeaking ? 0.6 : 1,
+                        }}
                       >
                         🔊
                       </button>
                     </div>
-                    <ErrorMessage name="code" component="h1" className="text-navyBlue" />
-                  </div>
-                </div>
-
-                {/* تاریخ تولد و جنسیت */}
-                <div className="w-full flex md:flex-row flex-col md:space-x-8 space-y-5">
-                  <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                    <span>تاریخ تولد</span>
-                    <DatePicker
-                      value={values.birthday}
-                      onChange={(dateObject) => {
-                        const dateString = dateObject
-                          ? dateObject.toDate().toISOString()
-                          : "";
-                        setFieldValue("birthday", dateString);
-                      }}
-                      calendar={persian}
-                      locale={persian_fa}
-                      style={{
-                        height: "2.25rem",
-                        width: "100%",
-                        color: "#6b7280",
-                        outline: "none",
-                        borderRadius: "0.75rem",
-                        padding: "1.25rem",
-                        paddingRight: "1.25rem",
-                        border: "1px solid #f4f4f4",
-                        backgroundColor: "#f4f4f4",
-                        transitionProperty: "all",
-                        transitionDuration: "300ms",
-                      }}
-                      placeholder="تاریخ تولد خود را وارد کنید"
-                    />
-                    <ErrorMessage name="birthday" component="h1" className="text-navyBlue" />
-                  </div>
-                  <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                    <span>جنسیت</span>
-                    <div className="flex space-x-4">
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="gender"
-                          checked={values.gender === true}
-                          onChange={() => setFieldValue("gender", true)}
-                          className="mr-2 cursor-pointer"
-                        />
-                        <span>مرد</span>
-                      </label>
-                      <ErrorMessage name="gender" component="h1" className="text-navyBlue" />
-                      <label className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="gender"
-                          checked={values.gender === false}
-                          onChange={() => setFieldValue("gender", false)}
-                          className="mr-2 cursor-pointer"
-                        />
-                        <span>زن</span>
-                      </label>
-                      <ErrorMessage name="gender" component="h1" className="text-navyBlue" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* ایمیل */}
-                <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                  <span>ایمیل</span>
-                  <div className="relative">
-                    <Field
+                    <ErrorMessage
                       name="email"
-                      className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                      placeholder="ایمیل خود را وارد کنید"
+                      component="h1"
+                      className="text-navyBlue"
                     />
-                    <button
-                      type="button"
-                      onClick={() => handleSpeechToField(setFieldValue, "email")}
-                      className="absolute left-2 top-1.5 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
-                      title="ورود صوتی"
-                    >
-                      🎤
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleReadField(values.email)}
-                      className="absolute left-12 top-1.5 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
-                      title="خواندن صوتی"
-                      disabled={isSpeaking || !values.email}
-                      style={{ opacity: !values.email || isSpeaking ? 0.6 : 1 }}
-                    >
-                      🔊
-                    </button>
                   </div>
-                  <ErrorMessage name="email" component="h1" className="text-navyBlue" />
-                </div>
 
-                {/* آدرس سکونت */}
-                <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
-                  <span>آدرس سکونت</span>
-                  <div className="relative">
-                    <Field
+                  {/* آدرس سکونت */}
+                  <div className="font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
+                    <span>آدرس سکونت</span>
+                    <div className="relative">
+                      <Field
+                        name="address"
+                        as="textarea"
+                        className="h-32 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                        placeholder="آدرس سکونت خود را وارد کنید"
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleSpeechToField(setFieldValue, "address")
+                        }
+                        className="absolute left-2 top-2 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        title="ورود صوتی"
+                      >
+                        🎤
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleReadField(values.address)}
+                        className="absolute left-12 top-2 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
+                        title="خواندن صوتی"
+                        disabled={isSpeaking || !values.address}
+                        style={{
+                          opacity: !values.address || isSpeaking ? 0.6 : 1,
+                        }}
+                      >
+                        🔊
+                      </button>
+                    </div>
+                    <ErrorMessage
                       name="address"
-                      as="textarea"
-                      className="h-32 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
-                      placeholder="آدرس سکونت خود را وارد کنید"
+                      component="h1"
+                      className="text-navyBlue"
                     />
-                    <button
-                      type="button"
-                      onClick={() => handleSpeechToField(setFieldValue, "address")}
-                      className="absolute left-2 top-2 bg-navyBlue text-white px-2 py-1 rounded-full flex items-center justify-center"
-                      title="ورود صوتی"
-                    >
-                      🎤
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleReadField(values.address)}
-                      className="absolute left-12 top-2 bg-indigo-500 text-white px-2 py-1 rounded-full flex items-center justify-center"
-                      title="خواندن صوتی"
-                      disabled={isSpeaking || !values.address}
-                      style={{ opacity: !values.address || isSpeaking ? 0.6 : 1 }}
-                    >
-                      🔊
-                    </button>
                   </div>
-                  <ErrorMessage name="address" component="h1" className="text-navyBlue" />
                 </div>
-              </div>
-
-              <button
-                type="submit"
-                className="bg-navyBlue w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
-              >
-                اعمال تغییرات
-              </button>
-            </Form>
-          )}
+                <div className="flex flex-row-reverse gap-3 mt-8">
+                  <button
+                    type="submit"
+                    className="bg-blue-800 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                  >
+                    اعمال تغییرات
+                  </button>
+                  <PDFDownloadLink
+                    document={<ResumePDF data={values} />}
+                    fileName="رزومه.pdf"
+                  >
+                    {({ loading }) => (
+                      <button
+                        type="button"
+                        className="bg-blue-800 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold"
+                        style={{ opacity: loading ? 0.7 : 1 }}
+                        disabled={loading}
+                      >
+                        {loading ? "در حال ساخت رزومه..." : "دانلود رزومه"}
+                      </button>
+                    )}
+                  </PDFDownloadLink>
+                </div>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
-      {/* <div className="col-span-4 order-1 md:order-2 flex justify-center md:justify-end md:ml-16 mt-6">
-        <UserForm mutateUpdate={mutateUpdate} data={data} />
-      </div> */}
+
       <div className="col-span-4 order-1 md:order-2 flex flex-col justify-center md:justify-start  items-center line md:ml-16 mt-6">
         <div className="md:border-2 md:border-borderGray w-72 h-72 rounded-2xl flex items-center justify-center">
           <ProgressProfile

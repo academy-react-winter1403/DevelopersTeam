@@ -20,7 +20,7 @@ const MapComponent = ({ isModalOpen }) => {
     <div
       className={`map-container ${
         isModalOpen ? "map-dimmed" : ""
-      } rounded-xl border-2 border-gray-200 h-full dark:border-gray-700 overflow-hidden shadow-md bg-white dark:bg-gray-900`}
+      } rounded-xl border-2 border-gray-200 h-full dark:border-gray-700 overflow-hidden shadow-md bg-white dark:bg-gray-900 `}
     >
       <MapContainer
         center={position}

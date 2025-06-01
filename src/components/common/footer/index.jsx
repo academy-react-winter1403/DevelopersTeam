@@ -9,6 +9,18 @@ import { useTranslation } from "react-i18next"; // هوک ترجمه
 const Footer = () => {
   const { t } = useTranslation(); // استفاده از هوک ترجمه
 
+  function DocsEmbed() {
+    return (
+      <iframe
+        src="https://docs.google.com/document/d/https://docs.google.com/document/d/e/2PACX-1vT1yBehmsep8uiuI3wWEgo3M0ZCr4loG8fhk_ALTf_AhGXHkwrkv_F_G4z_w8PM67x02Ub02kkVf_15/pub/preview"
+        width="100%"
+        height="600"
+        style={{ border: "none" }}
+        title="معرفی پروژه"
+      />
+    );
+  }
+
   return (
     <div className="w-11/12 h-auto md:h-52 bg-lightGray dark:bg-gray-800 rounded-4xl mx-auto mb-10 space-y-7 flex flex-col md:flex-row lg:space-x-20">
       <div className="p-4 order-1 md:order-1">
@@ -52,16 +64,22 @@ const Footer = () => {
           <Link to="/professors">
             <h2 className="mr-6 dark:text-gray-300">{t("professors")}</h2>
           </Link>
-          <Link to="/about">
-            <h2 className="mr-6 whitespace-nowrap dark:text-gray-300">
-              {t("about")}
-            </h2>
-          </Link>
-          <Link to="/contact">
+         
+           <Link to="/contact">
             <h2 className="mr-6 whitespace-nowrap dark:text-gray-300">
               {t("contactUs")}
             </h2>
           </Link>
+
+          <a
+            href="https://docs.google.com/document/d/e/2PACX-1vT1yBehmsep8uiuI3wWEgo3M0ZCr4loG8fhk_ALTf_AhGXHkwrkv_F_G4z_w8PM67x02Ub02kkVf_15/pub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-6 dark:text-blue-400 text-blue-600 "
+          >
+             {t("about")}
+          </a>
+         
         </div>
         <div className="hidden xs:block">
           <h1 className="text-gray-600 dark:text-gray-400 leading-14 mr-6">
@@ -90,6 +108,7 @@ const Footer = () => {
           {t("academyDescription")}
         </h5>
       </div>
+
       <div className="flex space-x-4 md:hidden p-4 order-4">
         <div className="h-8 w-32 flex justify-center items-center bg-white dark:bg-gray-700 rounded-2xl text-red-400 border border-borderGray dark:border-gray-600 space-x-2">
           <img src={Instagram} alt="" className="h-5 w-5 dark:invert" />
