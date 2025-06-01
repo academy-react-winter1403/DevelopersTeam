@@ -106,7 +106,7 @@ const NewsItemCard = ({
 
       <div className="flex flex-col sm:flex-row justify-center items-center 2xl:gap-5 relative sm:justify-between">
         <motion.div
-          className="relative w-fit sm:h-72 rounded-2xl bg-black cursor-pointer"
+          className="relative w-fit sm:h-72 rounded-2xl bg-black cursor-pointer mt-3 sm:mt-0"
           variants={fadeIn}
           onClick={handleNavigation}
         >

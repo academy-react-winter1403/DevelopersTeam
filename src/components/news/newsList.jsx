@@ -43,8 +43,8 @@ const NewsList = () => {
   }, [pageNum, itemPerPage, refetch]);
 
   return (
-    <div className="grid grid-cols-4 h-auto w-80 sm:w-full mx-auto border-4 border-borderGray dark:border-gray-700 rounded-4xl px-4">
-      <div className="col-span-4 lg:col-span-3 w-full ">
+    <div className="grid grid-cols-4 h-auto w-fit sm:w-full mx-auto border-4 border-borderGray dark:border-gray-700 rounded-4xl px-4">
+      <div className="col-span-4 lg:col-span-3 w-full">
         <NewsNavbar
           selectedSort={selectedSort}
           setSelectedSort={setSelectedSort}
