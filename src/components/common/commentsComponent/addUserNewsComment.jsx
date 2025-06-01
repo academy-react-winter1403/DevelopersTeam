@@ -6,7 +6,7 @@ import { useDarkMode } from "../../../context/theme/themeContext";
 import { Input } from "antd";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import http from './../../../core/services/interceptor'
+import http from "./../../../core/services/interceptor";
 
 const MAX_LENGTH = 100;
 
@@ -25,7 +25,11 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={`px-2 py-1 rounded ${
-          editor.isActive("bold") ? "bg-[#3772FF] text-white" : darkMode ? "text-white" : "text-[#232f44]"
+          editor.isActive("bold")
+            ? "bg-[#3772FF] text-white"
+            : darkMode
+            ? "text-white"
+            : "text-[#232f44]"
         }`}
         type="button"
         style={{ fontWeight: "bold" }}
@@ -35,7 +39,11 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={`px-2 py-1 rounded ${
-          editor.isActive("italic") ? "bg-[#3772FF] text-white" : darkMode ? "text-white" : "text-[#232f44]"
+          editor.isActive("italic")
+            ? "bg-[#3772FF] text-white"
+            : darkMode
+            ? "text-white"
+            : "text-[#232f44]"
         }`}
         type="button"
         style={{ fontStyle: "italic" }}
@@ -45,7 +53,11 @@ const TiptapToolbar = ({ editor, darkMode }) => {
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={`px-2 py-1 rounded ${
-          editor.isActive("strike") ? "bg-[#3772FF] text-white" : darkMode ? "text-white" : "text-[#232f44]"
+          editor.isActive("strike")
+            ? "bg-[#3772FF] text-white"
+            : darkMode
+            ? "text-white"
+            : "text-[#232f44]"
         }`}
         type="button"
       >
@@ -109,7 +121,9 @@ const AddUserNewsComment = ({ id }) => {
   return (
     <div
       className={`w-full h-auto border-2 ${
-        darkMode ? "dark:border-gray-700 bg-gray-800" : "border-gray-300 bg-white"
+        darkMode
+          ? "dark:border-gray-700 bg-gray-800"
+          : "border-gray-300 bg-white"
       } rounded-2xl sm:rounded-3xl mt-6 sm:mt-10 p-4 sm:p-6`}
       dir="rtl"
     >
