@@ -1,15 +1,28 @@
 import { Input } from "antd";
-import React from "react";
+import React, { useRef } from "react";
 
 const FilterSearchInput = ({
   icon,
   inputLabel,
   placeholder,
-  setSearchQuery,searchQuery
+  setSearchQuery,
+  searchQuery,
 }) => {
+  // const handleSearch = (e) => {
+  //   const query = e.target.value;
+  //   setSearchQuery(query);
+  // };
+
+  const ref = useRef();
+
   const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
+    if (ref.current) clearTimeout(ref.current);
+    const timeOut = setTimeout(() => {
+      const query = e.target.value;
+      setSearchQuery(query);
+      console.log(query);
+    }, 700);
+    ref.current = timeOut;
   };
 
   return (
@@ -23,7 +36,7 @@ const FilterSearchInput = ({
         className="w-full h-8 outline-none rounded-xl p-5 pr-3 placeholder:text-xs border border-lightGray bg-inputBg focus:border-navyBlue transition-all duration-300"
         placeholder={placeholder}
         onChange={handleSearch}
-        value={searchQuery}
+        // value={searchQuery}
       />
     </div>
   );

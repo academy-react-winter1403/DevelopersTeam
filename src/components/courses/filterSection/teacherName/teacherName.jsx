@@ -19,9 +19,10 @@ const TeacherName = ({ setSelectedTeacher }) => {
     setSelectedTeacher(value);
   };
 
-  const options = data
-    ?.slice(1, 10)
-    .map((item) => ({ label: item.fullName, value: item.teacherId }));
+  const options = data?.slice(0, 25).map((item) => ({
+    label: item.fullName || "unknown",
+    value: item.teacherId,
+  }));
 
   return (
     <div className="flex flex-col space-y-1 px-4">

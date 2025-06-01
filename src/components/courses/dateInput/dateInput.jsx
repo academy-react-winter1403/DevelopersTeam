@@ -4,6 +4,11 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
 const DateInput = ({ icon, inputLabel, selectedDate, setSelectedDate }) => {
+  const handleDate = (e) => {
+    console.log(e.target.value);
+    setSelectedDate(new Date(e.target.value));
+  };
+
   return (
     <div dir="ltr" className="flex flex-col space-y-1 px-4">
       <div dir="rtl" className="text-xs sm:text-sm flex items-center gap-2 ">
@@ -11,7 +16,9 @@ const DateInput = ({ icon, inputLabel, selectedDate, setSelectedDate }) => {
         {inputLabel}
       </div>
 
-      <DatePicker
+      <input name="date" type="date" onChange={(e) => handleDate(e)} />
+
+      {/* <DatePicker
         name="date"
         calendar={persian}
         locale={persian_fa}
@@ -30,7 +37,7 @@ const DateInput = ({ icon, inputLabel, selectedDate, setSelectedDate }) => {
           transitionDuration: "300ms",
         }}
         placeholder="تاریخ را وارد کنید"
-      />
+      /> */}
     </div>
   );
 };
