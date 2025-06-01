@@ -11,7 +11,6 @@ import http from "../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
-// Variants برای مدیریت انیمیشن‌ها
 const fadeIn = {
   hidden: { opacity: 0, scale: 0.9 },
   visible: {
@@ -98,7 +97,6 @@ const NewsItemCard = ({
         visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
       }}
     >
-      {/* کلمه کلیدی */}
       <motion.div
         className="absolute z-30 text-white bg-[#5A7EFF] dark:bg-blue-600 px-3 py-1 rounded-4xl 2xl:top-4 md:top-8 right-3 hidden md:block"
         variants={fadeIn}
@@ -106,7 +104,6 @@ const NewsItemCard = ({
         {newsCatregoryName}
       </motion.div>
 
-      {/* ساختار اصلی کارت */}
       <div className="flex flex-col sm:flex-row justify-center items-center 2xl:gap-5 relative sm:justify-between">
         <motion.div
           className="relative w-fit sm:h-72 rounded-2xl bg-black cursor-pointer"
@@ -116,7 +113,7 @@ const NewsItemCard = ({
           <img
             src={addUserProfileImage == null ? defaultImg : addUserProfileImage}
             alt="Profile"
-            className="w-fit h-full object-contain rounded-2xl"
+            className="w-72 h-full object-contain rounded-2xl"
             onError={addDefaultImg}
           />
         </motion.div>
@@ -125,21 +122,18 @@ const NewsItemCard = ({
           className="lg:mt-2 md:w-4/5 w-full mt-0 md:mt-3 py-2 px-4"
           variants={fadeFromBottom}
         >
-          {/* عنوان خبر */}
           <div className="sm:mt-2 w-full max-w-[300px] overflow-hidden">
             <h2 className="text-lg font-bold text-[#272727] dark:text-white overflow-hidden text-ellipsis truncate whitespace-nowrap sm:mt-2">
               {title}
             </h2>
           </div>
 
-          {/* توضیح کوتاه خبر */}
           <div className="mt-2 w-full max-w-[300px]">
             <h2 className="text-[#787878] dark:text-gray-400 text-sm font-semibold overflow-hidden text-ellipsis truncate whitespace-nowrap">
               {miniDescribe}
             </h2>
           </div>
 
-          {/* نویسنده خبر */}
           <div className="flex items-center gap-2 mt-5">
             <img
               src={QuillWrite}
@@ -151,7 +145,6 @@ const NewsItemCard = ({
             </span>
           </div>
 
-          {/* تاریخ انتشار خبر */}
           <div className="flex items-center gap-2 mt-5">
             <MdOutlineDateRange className="md:h-5 md:w-5 w-4 h-4 dark:text-gray-400" />
             <span className="dark:text-gray-300">
@@ -159,7 +152,6 @@ const NewsItemCard = ({
             </span>
           </div>
 
-          {/* لایک و دیس‌لایک */}
           <motion.div
             className="flex justify-between items-center mt-6 gap-4 ml-1 sm:mb-2"
             variants={fadeFromBottom}
@@ -207,7 +199,6 @@ const NewsItemCard = ({
               )}
             </div>
 
-            {/* دکمه ادامه خواندن */}
             <motion.div
               className="md:px-2 mb-2 sm:mb-0"
               whileHover={{ scale: 1.05 }}
