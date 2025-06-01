@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useDarkMode } from "../../../../context/theme/themeContext";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useSelector } from "react-redux";
 
 const MAX_LENGTH = 100;
 
@@ -66,7 +67,7 @@ const TiptapToolbar = ({ editor, darkMode }) => {
   );
 };
 
-const UserAddComment = ({ id }) => {
+const UserAddComment = ({ id, isNews }) => {
   const queryClient = useQueryClient();
   const { darkMode } = useDarkMode();
   const [title, setTitle] = useState("");
@@ -107,6 +108,35 @@ const UserAddComment = ({ id }) => {
   const handleSubmit = () => {
     const content = editor?.getHTML() || "";
     mutate({ title, content });
+  };
+
+  const currentAccount = useSelector((state) => state.accounts.currentAccount);
+
+  const { mutate: addNewsComment, isLoading: isLoadingNews } = useMutation({
+    mutationFn: async ({ title, content }) => {
+      const res = await http.post(`/News/CreateNewsComment`, {
+        newsId: id,
+        userIpAddress: "1.1.1.1",
+        title: title,
+        describe: content,
+        userId: currentAccount?.id,
+      });
+
+      return res;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["newsComment"]);
+      toast.success("نظرتان با موفقیت ثبت شد");
+    },
+    onError: (error) => {
+      console.log(error);
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در ثبت نظر");
+    },
+  });
+
+  const handleSubmitNews = () => {
+    const content = editor?.getHTML() || "";
+    addNewsComment({ title, content });
   };
 
   return (
@@ -164,7 +194,7 @@ const UserAddComment = ({ id }) => {
             type="button"
             disabled={isLoading}
             className="bg-[#3772FF] dark:bg-blue-600 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold transition-all duration-150"
-            onClick={handleSubmit}
+            onClick={isNews ? handleSubmitNews : handleSubmit}
           >
             {isLoading ? "در حال ارسال..." : "ثبت"}
           </button>

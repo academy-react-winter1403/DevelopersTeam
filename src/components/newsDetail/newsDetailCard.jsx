@@ -49,7 +49,7 @@ const NewsDetailCard = ({
           />
         </div>
 
-        <div className="w-full h-auto p-2 space-y-3">
+        <div className="w-full mt-3 h-auto p-2 space-y-3">
           {/* <h2 className="mt-5 p-5 dark:text-gray-300">{data?.describe}</h2> */}
           {data?.describe && <Editor describe={data?.describe} />}
         </div>
@@ -69,7 +69,7 @@ const NewsDetailCard = ({
             className="dark:[&_.ant-rate-star]:text-yellow-400"
           />
         </div>
-        <UserAddComment id={id} />
+        <UserAddComment id={id} isNews={true} />
         <div className="w-full h-auto py-2 space-y-3">
           <div className="border border-[#E4E4E4] dark:border-gray-700 w-full h-auto p-2 space-y-3 rounded-4xl dark:bg-gray-800">
             <CommentComp id={id} />
