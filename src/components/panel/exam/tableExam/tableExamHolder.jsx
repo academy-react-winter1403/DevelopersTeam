@@ -43,7 +43,7 @@ const TableExamHolder = ({
               onError={addDefaultImg}
             />
           ),
-          name: el.UserId,
+          name: el.title,
           user: el.Percent,
           date: el.Time,
           edit: (
