@@ -44,8 +44,12 @@ const TableExamHolder = ({
             />
           ),
           name: el.title,
-          user: el.Percent,
-          date: el.Time,
+          describe: el.Desc,
+          clock: el.time,
+          date: <DateComponent insertDate={el.Insert} />,
+          lev: el.Level,
+          average: el.av,
+
           edit: (
             <div>
               <CiEdit

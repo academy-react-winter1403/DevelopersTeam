@@ -8,24 +8,47 @@ const columns = [
     key: "img",
   },
   {
-    title: "آیدی کاربر",
+    title: " عنوان",
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
   },
-
+   {
+    title: "توضیحات",
+    dataIndex: "describe",
+    key: "describe",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
   {
-    title: " حاضرین",
-    dataIndex: "user",
-    key: "user",
+    title: " تاریخ شروع ",
+    dataIndex: "date",
+    key: "date",
     ellipsis: {
       showTitle: false,
     },
   },
   {
     title: " ساعت شروع ",
-    dataIndex: "date",
+    dataIndex: "clock",
     key: "date",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
+  {
+    title: "سطح ",
+    dataIndex: "lev",
+    key: "lev",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
+  {
+    title: "میانگین ",
+    dataIndex: "average",
+    key: "average",
     ellipsis: {
       showTitle: false,
     },
