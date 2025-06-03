@@ -2,18 +2,18 @@ import React from "react";
 import { Table } from "antd";
 
 const columns = [
-  {
-    title: " ",
-    dataIndex: "img",
-    key: "img",
-  },
+  // {
+  //   title: " ",
+  //   dataIndex: "img",
+  //   key: "img",
+  // },
   {
     title: " عنوان",
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
   },
-   {
+  {
     title: "توضیحات",
     dataIndex: "describe",
     key: "describe",
@@ -52,18 +52,6 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
-  },
- 
- 
-  {
-    title: " حذف",
-    dataIndex: "delet",
-    key: "delet",
-    ellipsis: {
-      showTitle: false,
-    },
-
-    width: 130,
   },
 ];
 

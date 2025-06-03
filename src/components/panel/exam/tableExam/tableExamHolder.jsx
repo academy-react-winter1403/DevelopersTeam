@@ -22,56 +22,28 @@ const TableExamHolder = ({
   itemPerPage,
   totalCount,
 }) => {
-  const showModal = (item) => {
-    setCurrentEditItem(item);
-  };
-
-  const handleCancel = () => {
-    setCurrentEditItem(null);
-  };
-
   const addDefaultImg = (e) => {
     e.target.src = defImg;
   };
-
-   const { mutate: mutateDeleteExam} = useMutation({
-    mutationFn: async (id) => {
-      return await axios.delete("https://taha-sepehr.liara.run/Exam/delete", {
-        data: { id: id },
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["examPanel"]);
-      toast.success("عملیات با موفقیت انجام شد");
-    },
-    onError: (error) => {
-      toast.error(error?.response.data.ErrorMessage);
-    },
-  });
 
   useEffect(() => {
     if (isSuccess && data) {
       const newData = data?.map((el) => {
         return {
-          img: (
-            <img
-              src={el.Image == null && "undefined" ? defImg : el.Image}
-              alt=""
-              className=" overflow-hidden w-full h-24 rounded-xl"
-              onError={addDefaultImg}
-            />
-          ),
-          name: el.title,
+          // img: (
+          //   <img
+          //     src={el.Image == null && "undefined" ? defImg : el.Image}
+          //     alt=""
+          //     className=" overflow-hidden w-full h-24 rounded-xl"
+          //     onError={addDefaultImg}
+          //   />
+          // ),
+          name: <NavLink to={`/panel/exampage/${el?.id}`}>{el.title}</NavLink>,
           describe: el.Desc,
           clock: el.time,
           date: <DateComponent insertDate={el.Insert} />,
           lev: el.Level,
           average: el.av,
-
-           delet: <div onClick={() => mutateDeleteExam(el.id)}>
-               <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
-             </div>
-         
         };
       });
       setCovertedData(newData);

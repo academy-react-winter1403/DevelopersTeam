@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableExamHolder from "./tableExam/tableExamHolder";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import AddExam from "./addExam";
-
+ 
 const Exam = () => {
   const [convertedData, setCovertedData] = useState([]);
 
@@ -22,9 +21,6 @@ const Exam = () => {
     <div>
       <div className="hidden sm:block">
         <h2 className="w-full h-10 mt-5 font-bold text-xl">آزمون های من</h2>
-      </div>
-       <div className="flex justify-end items-end">
-        <AddExam/>
       </div>
       <TableExamHolder
         data={data?.data}

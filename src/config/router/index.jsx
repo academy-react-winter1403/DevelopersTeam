@@ -32,6 +32,7 @@ import SchedualPage from "../../screens/SchedualPage/SchedualPage";
 import HomeWorkPage from "../../screens/HomeWorkPage";
 import AiChat from "../../components/panel/AiChat/AiChat";
 import ExamPage from "../../screens/examPage/examPage";
+import Test from "../../components/panel/exam/test";
 
 export const router = createBrowserRouter([
   {
@@ -166,6 +167,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/exampage",
         element: <ExamPage />,
+      },
+      {
+        path: "/panel/exampage/:id",
+        element: <Test />,
       },
     ],
   },
