@@ -56,14 +56,14 @@ const columns = [
  
  
   {
-    title: " ",
-    dataIndex: "eye",
-    key: "eye",
+    title: " حذف",
+    dataIndex: "delet",
+    key: "delet",
     ellipsis: {
       showTitle: false,
     },
 
-    width: 80,
+    width: 130,
   },
 ];
 

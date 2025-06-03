@@ -8,6 +8,9 @@ import { Spin } from "antd";
 import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import { CiEdit, CiMoneyBill } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { VscChromeClose } from "react-icons/vsc";
 
 const TableExamHolder = ({
   data,
@@ -31,6 +34,21 @@ const TableExamHolder = ({
     e.target.src = defImg;
   };
 
+   const { mutate: mutateDeleteExam} = useMutation({
+    mutationFn: async (id) => {
+      return await axios.delete("https://taha-sepehr.liara.run/Exam/delete", {
+        data: { id: id },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["examPanel"]);
+      toast.success("عملیات با موفقیت انجام شد");
+    },
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
+    },
+  });
+
   useEffect(() => {
     if (isSuccess && data) {
       const newData = data?.map((el) => {
@@ -50,20 +68,16 @@ const TableExamHolder = ({
           lev: el.Level,
           average: el.av,
 
-          edit: (
-            <div>
-              <CiEdit
-                onClick={() => showModal(el)}
-                className="w-5 h-5 text-gray cursor-pointer"
-              />
-            </div>
-          ),
+           delet: <div onClick={() => mutateDeleteExam(el.id)}>
+               <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
+             </div>
+         
         };
       });
       setCovertedData(newData);
     }
   }, [isSuccess, data]);
-  console.log("dddd", data);
+  // console.log("dddd", data);
   return (
     <div className=" ">
       <div className="bg-white w-full  dark:bg-gray-800 rounded-2xl mt-5">
