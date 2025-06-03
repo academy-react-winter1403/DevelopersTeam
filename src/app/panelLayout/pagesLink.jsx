@@ -12,6 +12,7 @@ import { IoAccessibilityOutline } from "react-icons/io5";
 import { HiOutlineTicket } from "react-icons/hi2";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { PiBackpack } from "react-icons/pi";
+import { PiExamLight } from "react-icons/pi";
 
 const PagesLink = () => {
   return (
@@ -146,6 +147,19 @@ const PagesLink = () => {
       >
         <PiBackpack className="w-6 h-6" />
         <span> تکالیف </span>
+      </NavLink>
+      <NavLink
+        to="/panel/exampage"
+        className={({ isActive }) =>
+          `${
+            isActive
+              ? "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 bg-navyBlue text-white"
+              : "lg:w-52 xl:w-56 h-14 rounded-4xl flex items-center font-semibold space-x-4 pr-6 hover:bg-lightBlue"
+          }`
+        }
+      >
+        <PiExamLight className="w-6 h-6" />
+        <span> آزمون ها </span>
       </NavLink>
       <NavLink
         to="/panel/job"
