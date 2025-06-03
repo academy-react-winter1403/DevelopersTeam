@@ -43,15 +43,9 @@ const TableExamHolder = ({
               onError={addDefaultImg}
             />
           ),
-          name: el.courseTitle,
-          title: el.title,
-          describe: el.describe,
-          accept: el.accept ? (
-            <TagsAccept text="پذیرفته شده" />
-          ) : (
-            <TagsNotAccept text="پذیرفته نشده" />
-          ),
-          insertDate: <DateComponent insertDate={el.insertDate} />,
+          name: el.UserId,
+          user: el.Percent,
+          date: el.Time,
           edit: (
             <div>
               <CiEdit
@@ -65,7 +59,7 @@ const TableExamHolder = ({
       setCovertedData(newData);
     }
   }, [isSuccess, data]);
-  // console.log("dddd", MyData);
+  console.log("dddd", data);
   return (
     <div className=" ">
       <div className="bg-white w-full  dark:bg-gray-800 rounded-2xl mt-5">

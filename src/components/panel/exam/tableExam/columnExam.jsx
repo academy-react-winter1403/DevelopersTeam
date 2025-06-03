@@ -8,54 +8,30 @@ const columns = [
     key: "img",
   },
   {
-    title: "",
+    title: "آیدی کاربر",
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
   },
 
   {
-    title: "اساتید دوره",
-    dataIndex: "teacher",
-    key: "teacher",
+    title: " حاضرین",
+    dataIndex: "user",
+    key: "user",
     ellipsis: {
       showTitle: false,
     },
   },
   {
-    title: " شروع دوره",
+    title: " ساعت شروع ",
     dataIndex: "date",
     key: "date",
     ellipsis: {
       showTitle: false,
     },
   },
-  {
-    title: "قیمت دوره",
-    dataIndex: "price",
-    key: "price",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
-  {
-    title: "وضعیت پرداختی",
-    dataIndex: "pay",
-    key: "pay",
-    ellipsis: {
-      showTitle: false,
-    },
-  },
-  {
-    title: " ",
-    dataIndex: "payModal",
-    key: "payModal",
-    ellipsis: {
-      showTitle: false,
-    },
-
-    width: 80,
-  },
+ 
+ 
   {
     title: " ",
     dataIndex: "eye",

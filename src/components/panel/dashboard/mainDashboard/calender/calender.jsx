@@ -69,61 +69,6 @@ const CalenderComp = () => {
         shadow={false}
           className={darkMode ? "rmdp-dark-pure" : ""}
       />
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          padding: "10px",
-          backgroundColor: darkMode ? "#1e2939" : "#f4f4f4",
-          borderTop: `1px solid ${darkMode ? "#464E57" : "#ced4da"}`,
-        }}
-      >
-        <button
-          onClick={() => setIsAddModalOpen(true)}
-          style={{
-            padding: "5px 10px",
-            borderRadius: "6px",
-            border: "none",
-            backgroundColor: darkMode ? "#0066ff" : "#007bff",
-            color: "#fff",
-            fontSize: "0.8rem",
-            cursor: "pointer",
-          }}
-        >
-          افزودن
-        </button>
-        <button
-          onClick={handleRemoveEvent}
-          style={{
-            padding: "5px 10px",
-            borderRadius: "6px",
-            border: "none",
-            backgroundColor: darkMode ? "#ff4d4f" : "#dc3545",
-            color: "#fff",
-            fontSize: "0.8rem",
-            cursor: "pointer",
-          }}
-        >
-          حذف
-        </button>
-        <button
-          onClick={() => setIsViewModalOpen(true)}
-          style={{
-            padding: "5px 10px",
-            borderRadius: "6px",
-            border: "none",
-            backgroundColor: darkMode ? "#ffc107" : "#f8c210",
-            color: "#000",
-            fontSize: "0.8rem",
-            cursor: "pointer",
-          }}
-        >
-          مشاهده
-        </button>
-      </div>
-
       {isAddModalOpen && (
         <div
           style={{
