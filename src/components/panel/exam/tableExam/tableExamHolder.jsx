@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { VscChromeClose } from "react-icons/vsc";
+import Percent from "./percent";
 
 const TableExamHolder = ({
   data,
@@ -43,7 +44,7 @@ const TableExamHolder = ({
           clock: el.time,
           date: <DateComponent insertDate={el.Insert} />,
           lev: el.Level,
-          average: el.av,
+          average: <Percent id={el.id} />,
         };
       });
       setCovertedData(newData);

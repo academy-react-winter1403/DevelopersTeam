@@ -22,7 +22,7 @@ const columns = [
     },
   },
   {
-    title: " تاریخ شروع ",
+    title: "  شروع ",
     dataIndex: "date",
     key: "date",
     ellipsis: {
@@ -30,7 +30,7 @@ const columns = [
     },
   },
   {
-    title: " ساعت شروع ",
+    title: " زمان",
     dataIndex: "clock",
     key: "date",
     ellipsis: {
@@ -46,7 +46,7 @@ const columns = [
     },
   },
   {
-    title: "میانگین ",
+    title: "درصد ",
     dataIndex: "average",
     key: "average",
     ellipsis: {
