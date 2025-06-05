@@ -1,9 +1,20 @@
 import React from "react";
 import CourseCard from "../../common/course-card/courseCard";
 import { useQueryGet } from "../../../hooks/useQueryGet/useQueryGet";
+import { useQuery } from "@tanstack/react-query";
+import http from "./../../../core/services/interceptor";
 
-const MoreCourses = () => {
-  const { data } = useQueryGet(`/Home/GetCoursesWithPagination`, "courses", []);
+const MoreCourses = ({ id }) => {
+  // const { data } = useQueryGet(`/Home/GetCoursesWithPagination`, "courses", []);
+
+  const { data } = useQuery({
+    queryKey: ["courses", id],
+    queryFn: async () => {
+      const res = await http.get(`/Home/GetCoursesWithPagination`);
+      return res;
+    },
+  });
+
   return (
     <div className="w-full h-auto mb-8">
       <h1 className="font-bold text-2xl sm:text-3xl mt-10 mr-14 mb-8 dark:text-white">
