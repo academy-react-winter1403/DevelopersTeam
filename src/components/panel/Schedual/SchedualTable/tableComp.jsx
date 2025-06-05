@@ -40,15 +40,15 @@ const columns = [
       showTitle: false,
     },
   },
-  {
-    title: "وضعیت ",
-    dataIndex: "status",
-    key: "status",
-    ellipsis: {
-      showTitle: false,
-    },
-    width: 150,
-  },
+  // {
+  //   title: "وضعیت ",
+  //   dataIndex: "status",
+  //   key: "status",
+  //   ellipsis: {
+  //     showTitle: false,
+  //   },
+  //   width: 150,
+  // },
   
 ];
 

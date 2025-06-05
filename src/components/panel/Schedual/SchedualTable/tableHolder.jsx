@@ -29,11 +29,11 @@ const TableHolder = ({
           week: el.weekNumber,
           start: <DateComponent insertDate={el.startDate} />,
           end: <DateComponent insertDate={el.endDate} />,
-          status: el.lockToRaise ? (
-            <TagsAccept text="حاضر  " />
-          ) : (
-            <TagsNotAccept text="غایب " />
-          ),
+          // status: el.lockToRaise ? (
+          //   <TagsAccept text="حاضر  " />
+          // ) : (
+          //   <TagsNotAccept text="غایب " />
+          // ),
         };
       });
       setCovertedData(newData);
