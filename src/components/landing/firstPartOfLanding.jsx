@@ -21,7 +21,7 @@ const FirstPartOfLanding = () => {
   });
 
   return (
-    <>
+    <div className="max-w-[1536px]">
       <div className="mt-16 mx-auto gap-4 md:flex md:flex-row md:justify-center md:w-10/12">
         <div className="overflow-hidden text-right indent-2 w-[300px] h-[45%] mx-auto md:mx-0 mb-6 border-[#E4E4E4] dark:border-gray-700 border-4 rounded-4xl relative xl:w-4/12 md:h-64 dark:bg-gray-800">
           <h1 className="font-bold mt-4 text-[20px] dark:text-white">
@@ -109,7 +109,7 @@ const FirstPartOfLanding = () => {
         </div>
       </div>
       <Marquee />
-    </>
+    </div>
   );
 };
 
