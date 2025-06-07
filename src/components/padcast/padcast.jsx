@@ -13,7 +13,7 @@ const Padcast = ({data}) => {
    <div className="grid grid-cols-4 h-96 m-4 border-4 border-borderGray dark:border-gray-700 rounded-4xl">
       <div className="col-span-4 lg:col-span-3 w-full ">
         {data?.Dots?.map((item, index) => (
-          <div key={item.courseId || index}>
+          <div key={item.id || index}>
             <PadcastCard 
               title={item.title}
               img={item.imageLink}
