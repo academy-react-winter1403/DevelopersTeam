@@ -33,6 +33,7 @@ import HomeWorkPage from "../../screens/HomeWorkPage";
 import AiChat from "../../components/panel/AiChat/AiChat";
 import ExamPage from "../../screens/examPage/examPage";
 import Test from "../../components/panel/exam/test";
+import PadcastPage from "../../screens/PadcastPage/PadcastPage";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/news/newsdetail/:id",
         element: <NewsDetailPage />,
+      },
+      {
+        path: "/padcast",
+        element: <PadcastPage />,
       },
     ],
   },
