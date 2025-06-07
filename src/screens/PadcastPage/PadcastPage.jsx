@@ -1,12 +1,8 @@
-import React from 'react'
-import Padcast from '../../components/padcast/padcast'
+import React from "react";
+import Padcast from "../../components/padcast/padcast";
 
 const PadcastPage = () => {
-  return (
-    <div>
-      <Padcast/>
-    </div>
-  )
-}
+  return <Padcast />;
+};
 
-export default PadcastPage
+export default PadcastPage;

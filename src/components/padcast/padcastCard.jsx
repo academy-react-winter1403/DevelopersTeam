@@ -44,9 +44,9 @@ const PadcastCard = ({
   userLikedId,
   currentUserDissLike,
   keyMutate,
-  
-//   isSelected,
-//   onToggleCompare,
+
+  //   isSelected,
+  //   onToggleCompare,
 }) => {
   const queryClient = useQueryClient();
 
@@ -54,9 +54,7 @@ const PadcastCard = ({
     e.target.src = defaultImg;
   };
 
-//   const handleLike = async () => {
-//     await http.post(`/Course/AddCourseLike?CourseId=${id}`);
-//   };
+  const handleLike = async () => {};
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
@@ -73,11 +71,7 @@ const PadcastCard = ({
     },
   });
 
-//   const handleDelete = async () => {
-//     const myData = new FormData();
-//     myData.append("CourseLikeId", userLikedId);
-//     await http.delete("/Course/DeleteCourseLike", { data: myData });
-//   };
+  const handleDelete = async () => {};
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
@@ -89,9 +83,7 @@ const PadcastCard = ({
     },
   });
 
-//   const handleDisLike = async () => {
-//     await http.post(`/Course/AddCourseDissLike?CourseId=${id}`);
-//   };
+  const handleDisLike = async () => {};
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
     onSuccess: () => {
@@ -170,7 +162,6 @@ const PadcastCard = ({
           variants={fadeUp}
           custom={5}
         >
-         
           <div className="flex gap-2">
             <div
               className="flex items-center gap-1"
@@ -203,7 +194,6 @@ const PadcastCard = ({
           </div>
         </motion.div>
       </div>
-     
     </motion.div>
   );
 };
