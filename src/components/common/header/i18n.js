@@ -7,6 +7,7 @@ const resources = {
       home: "Home",
       courses: "Courses",
       news: "News",
+      podcast: "Podcast",
       studentPanel: "Student Panel",
       loginRegister: "Login or Register",
       themeToggle: "Toggle Theme",
@@ -54,12 +55,14 @@ const resources = {
       "News and articles published this week":
         "News and articles published this week",
       "Top professors of the week": "Top professors of the week",
-      "Professors who gave the most positive votes to courses in a survey":"Professors who gave the most positive votes to courses in a survey"
+      "Professors who gave the most positive votes to courses in a survey":
+        "Professors who gave the most positive votes to courses in a survey",
     },
   },
   fa: {
     translation: {
       home: "خانه",
+      podcast: "پادکست",
       courses: "دوره‌ها",
       news: "مقالات",
       studentPanel: "پنل دانشجویی",
@@ -110,7 +113,8 @@ const resources = {
       "News and articles published this week":
         "خبرها و مقاله‌هایی که در این هفته منتشر شدند",
       "Top professors of the week": "برترین اساتید هفته",
-      "Professors who gave the most positive votes to courses in a survey":"اساتیدی که با نظرسنجی در دوره‌ها به آنها بیشترین رای مثبت را دادند"
+      "Professors who gave the most positive votes to courses in a survey":
+        "اساتیدی که با نظرسنجی در دوره‌ها به آنها بیشترین رای مثبت را دادند",
     },
   },
 };

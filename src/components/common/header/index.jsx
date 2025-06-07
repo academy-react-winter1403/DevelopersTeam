@@ -47,11 +47,13 @@ const Header = () => {
       home: ["خانه", "صفحه اصلی"],
       courses: ["دوره‌ها", "دوره ها", "کلاس"],
       news: ["خبرها", "مقالات", "اخبار"],
+      podcast: ["پادکست"],
     },
     en: {
       home: ["home", "homepage"],
       courses: ["courses", "classes"],
       news: ["news", "articles"],
+      podcast: ["podcast"],
     },
   };
 
@@ -75,10 +77,12 @@ const Header = () => {
             navigate("/news");
             resetTranscript();
             break;
+          case "podcast":
+            navigate("/padcast");
+            resetTranscript();
+            break;
           default:
             break;
-
-           
         }
       }
     }
@@ -137,8 +141,8 @@ const Header = () => {
       </NavLink>
 
       <div className="w-3/5 lg:flex justify-center items-center gap-10 hidden header-menu">
-        {["home", "courses", "news"].map((key, index) => {
-          const paths = ["/", "/courses", "/news"];
+        {["home", "courses", "news", "podcast"].map((key, index) => {
+          const paths = ["/", "/courses", "/news", "/padcast"];
           return (
             <NavLink
               key={key}
@@ -277,10 +281,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import Joyride from "react-joyride";
