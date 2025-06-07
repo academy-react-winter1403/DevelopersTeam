@@ -126,9 +126,9 @@ const PanelLayout = () => {
         </div>
       </div>
 
-      {/* <div>
+      <div>
         <MobileModeLayout />
-      </div> */}
+      </div>
     </div>
   );
 };

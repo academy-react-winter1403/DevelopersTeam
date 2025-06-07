@@ -6,6 +6,7 @@ import http from "./../../../../core/services/interceptor";
 import { Dropdown, Upload, message } from "antd";
 import toast from "react-hot-toast";
 import { TiTickOutline } from "react-icons/ti";
+import { RiAiGenerate } from "react-icons/ri";
 
 const UserProfioleImage = ({ data }) => {
   const queryClient = useQueryClient();
@@ -161,6 +162,25 @@ const UserProfioleImage = ({ data }) => {
             <BiImageAdd className="text-navyBlue w-10 h-10" />
             <h1 className="font-semibold">اضافه کردن عکس</h1>
             <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
+          </div>
+        </label>
+      </div>{" "}
+      <div>
+        <input
+          type="file"
+          className="hidden"
+          id="inp-1"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              mutateUploadProfile(e.target.files[0]);
+            }
+          }}
+        />
+        <label htmlFor="inp-1">
+          <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
+            <RiAiGenerate className="text-navyBlue w-10 h-10" />
+            <h1 className="font-semibold">اضافه کردن عکس</h1>
+            <span className="text-sm text-gray">با هوش مصنوعی</span>
           </div>
         </label>
       </div>

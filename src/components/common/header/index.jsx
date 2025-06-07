@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Joyride from "react-joyride";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiUser, FiMic, FiMicOff } from "react-icons/fi";
-import { Button, Select } from "antd";
+import { Button } from "antd";
 import HeaderDrawer from "../../headerDrawer/headerDrawer";
 import { IoMoonOutline } from "react-icons/io5";
 import { GoSun } from "react-icons/go";
@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { HiMiniLanguage } from "react-icons/hi2";
 
 function useIsLargeScreen(minWidth = 1024) {
   const [isLargeScreen, setIsLargeScreen] = React.useState(
@@ -81,9 +82,10 @@ const Header = () => {
     }
   }, [transcript, i18n.language, navigate, resetTranscript]);
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    document.body.dir = i18n.dir(lng);
+  const toggleLanguage = () => {
+    const newLanguage = i18n.language === "en" ? "fa" : "en";
+    i18n.changeLanguage(newLanguage);
+    document.body.dir = i18n.dir(newLanguage);
   };
 
   const toggleListening = () => {
@@ -103,6 +105,7 @@ const Header = () => {
     { target: ".header-logo", content: t("joyrideLogo") },
     { target: ".header-menu", content: t("joyrideMenu") },
     { target: ".header-darkmode", content: t("joyrideTheme") },
+    { target: ".header-language", content: t("joyrideLanguage") },
     { target: ".header-mic", content: t("joyrideMic") },
     { target: ".header-auth", content: t("joyrideAuth") },
   ];
@@ -151,16 +154,6 @@ const Header = () => {
       </div>
 
       <div className="w-2/7 hidden lg:flex justify-center items-center space-x-2 header-settings">
-        <Select
-          defaultValue={i18n.language}
-          onChange={changeLanguage}
-          style={{ width: 90, background: "#ccc", borderRadius: "40px" }}
-          options={[
-            { value: "fa", label: "فارسی" },
-            { value: "en", label: "English" },
-          ]}
-        />
-
         <div
           onClick={() => setDarkMode(!darkMode)}
           className="header-darkmode border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
@@ -170,6 +163,17 @@ const Header = () => {
           ) : (
             <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
           )}
+        </div>
+
+        <div
+          onClick={toggleLanguage}
+          className="header-language border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full cursor-pointer"
+          title={i18n.language === "en" ? "فارسی" : "English"}
+        >
+          <HiMiniLanguage className="size-4" />
+          <span className="text-xs ml-1">
+            {i18n.language === "en" ? "Fa" : "En"}
+          </span>
         </div>
 
         <div
@@ -212,13 +216,21 @@ const Header = () => {
       <div className="flex lg:hidden items-center space-x-3">
         <div
           onClick={() => setDarkMode(!darkMode)}
-          className="header-darkmode  dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
+          className="header-darkmode dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full mr-1"
         >
           {darkMode ? (
             <GoSun className="size-5 text-white cursor-pointer" />
           ) : (
             <IoMoonOutline className="size-5 cursor-pointer dark:text-gray-300" />
           )}
+        </div>
+
+        <div
+          onClick={toggleLanguage}
+          className="header-language border-2 border-gray-200 dark:border-gray-600 w-9 h-9 flex justify-center items-center rounded-full cursor-pointer"
+          title={i18n.language === "en" ? "فارسی" : "English"}
+        >
+          <HiMiniLanguage className="size-4" />
         </div>
 
         <div className="header-auth">
