@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Joyride from "react-joyride";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiUser, FiMic, FiMicOff } from "react-icons/fi";
 import { Button } from "antd";
@@ -107,30 +106,11 @@ const Header = () => {
     }
   };
 
-  const steps = [
-    { target: ".header-logo", content: t("joyrideLogo") },
-    { target: ".header-menu", content: t("joyrideMenu") },
-    { target: ".header-darkmode", content: t("joyrideTheme") },
-    { target: ".header-language", content: t("joyrideLanguage") },
-    { target: ".header-mic", content: t("joyrideMic") },
-    { target: ".header-auth", content: t("joyrideAuth") },
-  ];
+ 
 
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-4 sm:px-6 lg:px-10 items-center">
-      {isLargeScreen && (
-        <Joyride
-          steps={steps}
-          continuous
-          showSkipButton
-          locale={{
-            next: t("next"),
-            back: t("back"),
-            skip: t("skip"),
-            last: t("last"),
-          }}
-        />
-      )}
+     
 
       <NavLink
         to="/"

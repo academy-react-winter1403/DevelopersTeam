@@ -104,4 +104,14 @@ body {
 }
 .button-main:hover { background: #1447d0; }
 
+body .react-joyride__beacon,
+body .react-joyride__beacon span,
+body .react-joyride__beacon-inner,
+body .react-joyride__beacon-outer {
+  background: transparent !important;
+  background-color: transparent !important;
+  /* border: 2px solid #bdbdbd !important;    طوسی ملایم */
+  box-shadow: none !important;
+  opacity: 1 !important;                    
+}
 
