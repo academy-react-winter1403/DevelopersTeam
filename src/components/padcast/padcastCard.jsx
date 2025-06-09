@@ -43,9 +43,6 @@ const PadcastCard = ({
   allLike,
   allDissLike,
   InsertTime,
-
-  //   isSelected,
-  //   onToggleCompare,
 }) => {
   const queryClient = useQueryClient();
 
@@ -53,22 +50,24 @@ const PadcastCard = ({
     e.target.src = defaultImg;
   };
 
-  const AudioPlayer = ({ src }) => {
-    return (
-      <audio controls style={{ width: "100%" }}>
-        <source src={src} type="audio/mp3" />
-        مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
-      </audio>
-    );
-  };
+  // const AudioPlayer = ({ src }) => {
+  //   return (
+  //     <audio controls style={{ width: "100%" }}>
+  //       <source src={src} type="audio/mp3" />
+  //       مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+  //     </audio>
+  //   );
+  // };
 
-  const handleLike = async () => {
-    const res = await axios.post(`https://taha-sepehr.liara.run/podcast/like/AddLike/:id/:userId`);
-  };
   const { mutate: mutateLike } = useMutation({
-    mutationFn: handleLike,
+    mutationFn: async () => {
+      const res = await axios.post(
+        `https://taha-sepehr.liara.run/podcast/like/AddLike/${id}/40330`
+      );
+      return res.data;
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries(["padcastDetail"]);
+      queryClient.invalidateQueries(["podcasts"]);
       toast.success("لایک با موفقیت انجام شد");
     },
     onError: (error) => {
@@ -76,30 +75,31 @@ const PadcastCard = ({
     },
   });
 
-  const handleDelete = async () => {
-    const res = await axios.delete("https://taha-sepehr.liara.run/podcast/like/deleteMany", {
-    //   data: { deleteEntityId: data?.likeId },
-    });
-  };
   const { mutate: mutateDeleteLike } = useMutation({
-    mutationFn: handleDelete,
+    mutationFn: async () => {
+      const res = await axios.delete(
+        "https://taha-sepehr.liara.run/podcast/like/deleteMany",
+        {
+          data: { ids: id },
+        }
+      );
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries(["padcastDetail"]);
+      queryClient.invalidateQueries(["podcasts"]);
     },
     onError: (error) => {
-      console.error("Error deleting like:", error);
+      // console.error(error);
     },
   });
 
-  
-  const handleDisLike = async () => {
-    const res = await axios.post(`https://taha-sepehr.liara.run/podcast/like/AddDissLike/:id/:userId${id}`); /* مشکل داره */
-  };
   const { mutate: mutateDisLike } = useMutation({
-    mutationFn: handleDisLike,
+    mutationFn: async () => {
+      const res = await axios.post(
+        `https://taha-sepehr.liara.run/podcast/like/AddDissLike/${id}/40330`
+      );
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries(["padcastDetail"]);
-      toast.error("پادکست را دوست نداشتید");
+      queryClient.invalidateQueries(["podcasts"]);
     },
     onError: () => {
       toast.error(error?.response.data.ErrorMessage);
@@ -120,7 +120,7 @@ const PadcastCard = ({
         initial="hidden"
         animate="visible"
       >
-        <NavLink >
+        <NavLink>
           <img
             src={img == null ? defaultImg : img}
             alt="not set"
@@ -131,7 +131,7 @@ const PadcastCard = ({
       </motion.div>
       <div className="w-full h-full px-3 flex flex-col mt-3">
         <motion.div className="grow" variants={fadeUp} custom={3}>
-          <NavLink >
+          <NavLink>
             <h2 className="text-lg font-semibold text-gray-700 dark:text-white line-clamp-1 hover:text-navyBlue dark:hover:text-blue-400 cursor-pointer">
               {title}
             </h2>
@@ -177,13 +177,11 @@ const PadcastCard = ({
                     : "w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
-              <span className="dark:text-gray-300">{allLike}</span> 
+              <span className="dark:text-gray-300">{allLike}</span>
             </div>
             <div
               className="flex items-center gap-1"
-              onClick={() =>
-                isDissLike ? mutateDisLike() : mutateDisLike()
-              }
+              onClick={() => isDissLike == false && mutateDisLike()}
             >
               <AiOutlineDislike
                 className={
@@ -192,7 +190,7 @@ const PadcastCard = ({
                     : "w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400"
                 }
               />
-              <span className="dark:text-gray-300">{allDissLike}</span> 
+              <span className="dark:text-gray-300">{allDissLike}</span>
             </div>
           </div>
           <div className="flex items-center justify-end">

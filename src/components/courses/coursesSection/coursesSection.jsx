@@ -72,7 +72,7 @@ const CoursesSection = () => {
   ]);
 
   return (
-    <div className="grid grid-cols-4 h-auto m-4 border-4 border-borderGray dark:border-gray-700 rounded-4xl ">
+    <div className="grid grid-cols-4 h-auto m-4 lg:ml-10 border-4 border-borderGray dark:border-gray-700 rounded-4xl ">
       <div className="col-span-4 lg:col-span-3 w-full ">
         <CoursesNavbar
           selectedSort={selectedSort}
