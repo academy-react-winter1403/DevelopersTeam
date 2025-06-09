@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { CgMoreVertical } from "react-icons/cg";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../core/services/interceptor";
-import { Dropdown, Upload, message } from "antd";
+import { Dropdown, message } from "antd";
 import toast from "react-hot-toast";
 import { TiTickOutline } from "react-icons/ti";
 import { RiAiGenerate } from "react-icons/ri";
+import axios from "axios";
 
 const UserProfioleImage = ({ data }) => {
   const queryClient = useQueryClient();
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const selectProfile = async (id) => {
     const myData = new FormData();
@@ -17,6 +19,7 @@ const UserProfioleImage = ({ data }) => {
     const res = await http.post("/SharePanel/SelectProfileImage", myData);
     return res;
   };
+
   const { mutate: mutateSelectProfile } = useMutation({
     mutationFn: (id) => selectProfile(id),
     onMutate: async (newImageId) => {
@@ -47,6 +50,7 @@ const UserProfioleImage = ({ data }) => {
     const res = http.delete("/SharePanel/DeleteProfileImage", { data: myData });
     return res;
   };
+
   const { mutate: mutateDeleteProfile } = useMutation({
     mutationFn: (id) => deleteProfileImg(id),
     onMutate: async (deletedImageId) => {
@@ -61,7 +65,6 @@ const UserProfioleImage = ({ data }) => {
             ? null
             : old.currentPictureAddress,
       }));
-
       return { previousProfile };
     },
     onSuccess: () => {
@@ -82,6 +85,7 @@ const UserProfioleImage = ({ data }) => {
     const res = await http.post("/SharePanel/AddProfileImage", formData);
     return res;
   };
+
   const { mutate: mutateUploadProfile } = useMutation({
     mutationFn: uploadProfileImage,
     onSuccess: () => {
@@ -94,6 +98,53 @@ const UserProfioleImage = ({ data }) => {
       queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
   });
+
+  const { mutate: mutateGenerateAIImage } = useMutation({
+    mutationFn: async () => {
+      setIsGenerating(true);
+      try {
+        const res = await axios.post(
+          "https://img-generator-production.up.railway.app/generate-image",
+          {
+            prompt: "یک تصویر پروفایل حرفه ای و مناسب برای شبکه های اجتماعی",
+          },
+          {
+            headers: {
+              Authorization:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODJjYzk3M2QzN2Q2YjdmZTEzMTVkODEiLCJpYXQiOjE3NDc4MzMyNTd9.mDkDrws5jJNh4mXj3vrAzaY6YntnOU5KP8dOobT7Hlc",
+            },
+            responseType: "blob",
+          }
+        );
+
+        const file = new File([res.data], "ai-profile.png", {
+          type: "image/png",
+        });
+
+        const formData = new FormData();
+        formData.append("formFile", file);
+        const uploadRes = await http.post(
+          "/SharePanel/AddProfileImage",
+          formData
+        );
+
+        return uploadRes;
+      } finally {
+        setIsGenerating(false);
+      }
+    },
+    onSuccess: () => {
+      toast.success("تصویر با موفقیت تولید و آپلود شد");
+    },
+    onError: (error) => {
+      toast.error("خطا در تولید یا آپلود تصویر");
+      console.error("Error:", error);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+    },
+  });
+
   return (
     <div className="h-auto mb-10 flex flex-col sm:flex-row sm:flex-wrap items-center gap-4 ">
       {data?.userImage.map((item, index) => (
@@ -137,7 +188,7 @@ const UserProfioleImage = ({ data }) => {
           <img
             src={item.puctureAddress}
             alt=""
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover"
           />
           {data.currentPictureAddress === item.puctureAddress && (
             <div className="w-10 h-10 absolute top-3 right-3 bg-[#17C964] flex justify-center items-center rounded-full">
@@ -146,13 +197,15 @@ const UserProfioleImage = ({ data }) => {
           )}
         </div>
       ))}
+
       <div>
         <input
           type="file"
           className="hidden"
           id="inp-1"
+          accept="image/*"
           onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
+            if (e.target.files?.[0]) {
               mutateUploadProfile(e.target.files[0]);
             }
           }}
@@ -164,25 +217,18 @@ const UserProfioleImage = ({ data }) => {
             <span className="text-sm text-gray">اندازه فریم ( 236*236 )</span>
           </div>
         </label>
-      </div>{" "}
+      </div>
+
       <div>
-        <input
-          type="file"
-          className="hidden"
-          id="inp-1"
-          onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
-              mutateUploadProfile(e.target.files[0]);
-            }
-          }}
-        />
-        <label htmlFor="inp-1">
+        <div onClick={() => mutateGenerateAIImage()} className="relative">
           <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
             <RiAiGenerate className="text-navyBlue w-10 h-10" />
-            <h1 className="font-semibold">اضافه کردن عکس</h1>
+            <h1 className="font-semibold">
+              {isGenerating ? "در حال تولید..." : "تولید عکس جدید"}
+            </h1>
             <span className="text-sm text-gray">با هوش مصنوعی</span>
           </div>
-        </label>
+        </div>
       </div>
     </div>
   );
