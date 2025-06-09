@@ -115,3 +115,6 @@ body .react-joyride__beacon-outer {
   opacity: 1 !important;                    
 }
 
+#react-joyride-step-0 > span {
+  opacity: 0;
+}
