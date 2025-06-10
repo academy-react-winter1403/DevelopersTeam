@@ -26,7 +26,7 @@ const Padcast = () => {
   };
 
   return (
-    <div className=" flex flex-wrap justify-around space-y-6 w-11/12 m-auto mt-20 border-4 border-borderGray dark:border-gray-700 rounded-4xl p-10">
+    <div className=" flex flex-wrap justify-around space-y-6 w-11/12 m-auto mt-20 mb-10  border-4 border-borderGray dark:border-gray-700 rounded-4xl p-10">
       {isLoading && <LoadingDef isLoading={isLoading} />}
 
       {data?.data?.Dots?.map((item, index) => (
