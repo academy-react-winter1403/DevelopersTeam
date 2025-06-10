@@ -77,7 +77,7 @@ const Footer = () => {
             </Link>
 
             <a
-              href="https://docs.google.com/document/d/e/2PACX-1vT1yBehmsep8uiuI3wWEgo3M0ZCr4loG8fhk_ALTf_AhGXHkwrkv_F_G4z_w8PM67x02Ub02kkVf_15/pub"
+              href="https://docs.google.com/document/d/1ozcMF1K3UfAVXiOrXn4txTXZ3Dlt1RGy_Md575xwHOY/edit?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="mr-6 dark:text-blue-400 text-blue-600 "
