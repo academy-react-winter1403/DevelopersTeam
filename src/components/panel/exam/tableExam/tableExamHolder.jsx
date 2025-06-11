@@ -45,6 +45,7 @@ const TableExamHolder = ({
           date: <DateComponent insertDate={el.Insert} />,
           lev: el.Level,
           average: <Percent id={el.id} />,
+          status: <Percent id={el.id} isStatus={true} />,
         };
       });
       setCovertedData(newData);

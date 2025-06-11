@@ -190,7 +190,7 @@ const AddUserNewsComment = ({ id }) => {
           <button
             type="button"
             disabled={isLoading}
-            className="bg-[#3772FF] dark:bg-blue-600 w-32 h-10 rounded-full text-white hover:opacity-80 font-semibold transition-all duration-150"
+            className="bg-[#3772FF] dark:bg-blue-600 w-20 h-10 rounded-full text-white hover:opacity-80 font-semibold transition-all duration-150"
             onClick={handleSubmit}
           >
             {isLoading ? "در حال ارسال..." : "ثبت"}

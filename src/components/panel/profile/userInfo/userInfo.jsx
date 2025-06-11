@@ -560,8 +560,7 @@ const UserInfo = ({ data }) => {
   const recognitionRef = useRef(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  // خواندن صوتی متن
-  const handleReadField = (text) => {
+   const handleReadField = (text) => {
     if (!text) {
       toast.error("مقداری برای خواندن وارد نشده است.");
       return;
@@ -582,8 +581,7 @@ const UserInfo = ({ data }) => {
     window.speechSynthesis.speak(utterance);
   };
 
-  // ورودی صوتی (پشتیبانی از فایرفاکس هندل شده)
-  const handleSpeechToField = (setFieldValue, fieldName) => {
+   const handleSpeechToField = (setFieldValue, fieldName) => {
     if (isFirefox()) {
       toast.error(
         "قابلیت ورود صوتی فعلاً در Firefox پشتیبانی نمی‌شود. لطفاً با مرورگر Chrome تست کنید."

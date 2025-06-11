@@ -49,6 +49,7 @@ const CourseCard = ({
   keyMutate,
   isSelected,
   onToggleCompare,
+  isTopCourse,
 }) => {
   const queryClient = useQueryClient();
 
@@ -210,26 +211,30 @@ const CourseCard = ({
           </div>
         </motion.div>
       </div>
-      <div className="absolute left-2 top-2 z-10">
-        <span
-          className={
-            `text-xs border rounded-2xl p-1 select-none cursor-pointer font-bold transition-colors duration-150 ` +
-            (isSelected
-              ? "bg-blue-500 border-blue-600 text-white shadow"
-              : "bg-amber-400 border-amber-400 text-black")
-          }
-          onClick={onToggleCompare}
-          role="button"
-          tabIndex={0}
-          aria-pressed={isSelected ? "true" : "false"}
-          onKeyDown={e => {
-            if (e.key === "Enter" || e.key === " ") onToggleCompare(e);
-          }}
-          title="اضافه/حذف از مقایسه"
-        >
-          مقایسه
-        </span>
-      </div>
+      {isTopCourse ? (
+        ""
+      ) : (
+        <div className="absolute left-2 top-2 z-10">
+          <span
+            className={
+              `text-xs border rounded-2xl p-1 select-none cursor-pointer font-bold transition-colors duration-150 ` +
+              (isSelected
+                ? "bg-blue-500 border-blue-600 text-white shadow"
+                : "bg-amber-400 border-amber-400 text-black")
+            }
+            onClick={onToggleCompare}
+            role="button"
+            tabIndex={0}
+            aria-pressed={isSelected ? "true" : "false"}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") onToggleCompare(e);
+            }}
+            title="اضافه/حذف از مقایسه"
+          >
+            مقایسه
+          </span>
+        </div>
+      )}
     </motion.div>
   );
 };

@@ -95,6 +95,7 @@ const TopCourses = () => {
               userLikedId={item.userLikeId}
               currentUserDissLike={item.userIsDissLiked}
               keyMutate="topCourses"
+              isTopCourse={true}
             />
           </motion.div>
         ))}

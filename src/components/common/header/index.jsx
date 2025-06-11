@@ -43,15 +43,15 @@ const Header = () => {
 
   const commands = {
     fa: {
-      home: ["خانه", "صفحه اصلی"],
-      courses: ["دوره‌ها", "دوره ها", "کلاس"],
-      news: ["خبرها", "مقالات", "اخبار"],
-      podcast: ["پادکست"],
+      home: ["خانه", "صفحه اصلی", "برو خانه", "برو به خانه"],
+      courses: ["دوره‌ها", "دوره ها", "کلاس", "کلاس‌ها"],
+      news: ["خبرها", "اخبار", "مقالات", "خبر", "خبر جدید"],
+      podcast: ["پادکست", "پادکست‌ها"],
     },
     en: {
-      home: ["home", "homepage"],
-      courses: ["courses", "classes"],
-      news: ["news", "articles"],
+      home: ["home", "homepage", "go home"],
+      courses: ["courses", "classes", "go to courses"],
+      news: ["news", "articles", "latest news"],
       podcast: ["podcast"],
     },
   };
@@ -59,30 +59,33 @@ const Header = () => {
   useEffect(() => {
     const languageCommands = commands[i18n.language];
 
-    const sanitizedTranscript = transcript.toLowerCase();
+    const sanitizedTranscript = transcript
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, "")
+      .trim();
+
+    console.log("🎤 Voice transcript:", sanitizedTranscript);
 
     for (const [key, keywords] of Object.entries(languageCommands)) {
       if (keywords.some((keyword) => sanitizedTranscript.includes(keyword))) {
+        resetTranscript();
         switch (key) {
           case "home":
             navigate("/");
-            resetTranscript();
             break;
           case "courses":
             navigate("/courses");
-            resetTranscript();
             break;
           case "news":
             navigate("/news");
-            resetTranscript();
             break;
           case "podcast":
             navigate("/padcast");
-            resetTranscript();
             break;
           default:
             break;
         }
+        break;
       }
     }
   }, [transcript, i18n.language, navigate, resetTranscript]);
@@ -97,7 +100,7 @@ const Header = () => {
     if (!isListening) {
       SpeechRecognition.startListening({
         continuous: true,
-        language: i18n.language,
+        language: i18n.language === "fa" ? "fa-IR" : "en-US",
       });
       setListening(true);
     } else {
@@ -106,12 +109,8 @@ const Header = () => {
     }
   };
 
- 
-
   return (
     <div className="border-[#E4E4E4] dark:border-gray-700 cursor-pointer mt-5 mx-auto flex flex-nowrap justify-between px-4 sm:px-6 lg:px-10 items-center">
-     
-
       <NavLink
         to="/"
         className="flex w-1/4 xs:w-1/5 justify-center items-center header-logo"
@@ -261,4 +260,3 @@ const Header = () => {
 };
 
 export default Header;
-
