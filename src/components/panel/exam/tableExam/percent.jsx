@@ -1,8 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import {
+  TagsAccept,
+  TagsNotAccept,
+  TagsWaiting,
+} from "../../tagStatus/tagStatus";
 
-const Percent = ({ id }) => {
+const Percent = ({ id, isStatus }) => {
   const { data } = useQuery({
     queryKey: ["percents", id],
     queryFn: async () => {
@@ -15,7 +20,19 @@ const Percent = ({ id }) => {
 
   console.log("data?.data?.Percent", data?.data?.Percent);
 
-  return <div>{data?.data?.Percent || "0"}%</div>;
+  return (
+    <div>
+      {isStatus ? (
+        data?.data?.Percent > 0 ? (
+          <TagsAccept text="تکمیل شده" />
+        ) : (
+          <TagsNotAccept text="تکمیل نشده" />
+        )
+      ) : (
+        <div>{data?.data?.Percent || "0"}%</div>
+      )}
+    </div>
+  );
 };
 
 export default Percent;

@@ -53,6 +53,14 @@ const columns = [
       showTitle: false,
     },
   },
+  {
+    title: "وضعیت ",
+    dataIndex: "status",
+    key: "status",
+    ellipsis: {
+      showTitle: false,
+    },
+  },
 ];
 
 const ColumnExam = ({ data, totalCount, pageNum, setPageNum, itemPerPage }) => (

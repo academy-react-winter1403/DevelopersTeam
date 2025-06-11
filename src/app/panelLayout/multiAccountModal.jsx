@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
-import { CiLogout } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useQuery } from "@tanstack/react-query";
 
 import {
   setAccounts,
   setCurrentAccount,
-  updateCurrentAccountProfile,
 } from "../../redux/slices/accountSlice";
 import {
   getData,
   removeData,
   setData,
 } from "../../core/localStorage/localStorage";
-import http from "./../../core/services/interceptor";
-import axios from "axios";
+
 import MultiModal from "./multiModal";
- 
+
 const MultiAccountModal = ({ isModalOpen, setIsModalOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

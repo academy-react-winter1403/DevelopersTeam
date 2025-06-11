@@ -1,9 +1,7 @@
-import { Modal } from "antd";
+import React, { useState, useRef } from "react";
+import { Modal, Input } from "antd";
 import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
 import http from "./../../../../core/services/interceptor";
-import DatePicker from "react-multi-date-picker";
-import { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -23,10 +21,9 @@ const PaymentModal = ({
   factureData,
   cost,
 }) => {
-  console.log(cost);
   const [paymentId, setPaymentId] = useState();
-
-  // console.log("payment id ", paymentId);
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = useRef(null);
 
   const { mutateAsync: handlePay } = useMutation({
     mutationFn: async (values) => {
@@ -35,16 +32,33 @@ const PaymentModal = ({
       formData.append("Paid", values.Paid);
       formData.append("PeymentDate", values.PeymentDate);
       formData.append("PaymentInvoiceNumber", values.PaymentInvoiceNumber);
-
       const res = await http.post(`/CoursePayment/StudentAddPeyment`, formData);
       return res;
     },
     onSuccess: (res) => {
-      // console.log("res payment", res);
       toast.success("پرداخت با موفقیت انجام شد");
       setFirstModal(false);
       setSecondModal(true);
       setPaymentId(res.id);
+    },
+    onError: (error) => {
+      toast.error(error?.response.data.ErrorMessage);
+    },
+  });
+
+  const { mutate: handleAddPaymentImage } = useMutation({
+    mutationFn: async (file) => {
+      const formData = new FormData();
+      formData.append("PaymentId", paymentId);
+      formData.append("Image", file);
+      const res = await http.post(`/CoursePayment/AddPeymentImage`, formData);
+      return res;
+    },
+    onSuccess: () => {
+      toast.success("تصویر پرداخت با موفقیت اضافه شد");
+      setFirstModal(false);
+      setSecondModal(false);
+      setThirdModal(false);
     },
     onError: (error) => {
       toast.error(error?.response.data.ErrorMessage);
@@ -60,25 +74,7 @@ const PaymentModal = ({
   const { data } = useQuery({
     queryKey: ["userPayList"],
     queryFn: getUserPayList,
-  });
-
-  const { mutate: handleAddPaymentImage } = useMutation({
-    mutationFn: async (values) => {
-      const formData = new FormData();
-      formData.append("PaymentId", paymentId);
-      formData.append("Image", values);
-
-      const res = await http.post(`/CoursePayment/AddPeymentImage`, formData);
-      return res;
-    },
-    onSuccess: () => {
-      toast.success("تصویر پرداخت با موفقیت اضافه شد");
-      setFirstModal(false);
-      setSecondModal(false);
-    },
-    onError: (error) => {
-      toast.error(error?.response.data.ErrorMessage);
-    },
+    enabled: !!paymentId,
   });
 
   const getPaymentDetail = async () => {
@@ -88,9 +84,40 @@ const PaymentModal = ({
   const { data: paymentDetail } = useQuery({
     queryKey: ["paymentDetail", paymentId],
     queryFn: getPaymentDetail,
+    enabled: !!paymentId,
   });
 
-  // console.log(cost);
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      handleAddPaymentImage(file);
+    }
+  };
+
+  const handleZoneClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileSelected = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      handleAddPaymentImage(e.target.files[0]);
+    }
+  };
 
   return (
     <>
@@ -138,6 +165,7 @@ const PaymentModal = ({
           )}
         </Formik>
       </Modal>
+
       <Modal
         open={secondModal}
         onOk={handleSecondOk}
@@ -152,6 +180,7 @@ const PaymentModal = ({
           data={data}
         />
       </Modal>
+
       <Modal
         title="ارسال فیش واریزی"
         open={thirdModal}
@@ -159,18 +188,29 @@ const PaymentModal = ({
         onCancel={() => setThirdModal(false)}
         footer={false}
       >
+        <div
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={handleZoneClick}
+          style={{
+            border: "2px dashed #ccc",
+            borderRadius: "8px",
+            padding: "20px",
+            textAlign: "center",
+            cursor: "pointer",
+            backgroundColor: dragActive ? "#fafafa" : "transparent",
+          }}
+        >
+          <BiImageAdd className="text-navyBlue w-10 h-10 inline-block" />
+          <p>فایل خود را به اینجا بکشید یا برای انتخاب کلیک کنید</p>
+        </div>
         <input
           type="file"
-          name=""
+          ref={fileInputRef}
           className="hidden"
-          onChange={(e) => handleAddPaymentImage(e.target.files[0])}
-          id="file-inp"
+          onChange={handleFileSelected}
         />
-        <label htmlFor="file-inp" className="flex flex-row">
-          <div className="w-20 h-20 border-4 rounded-2xl border-borderGray flex justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
-            <BiImageAdd className="text-navyBlue w-10 h-10" />
-          </div>
-        </label>
       </Modal>
     </>
   );

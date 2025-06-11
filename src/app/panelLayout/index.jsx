@@ -42,7 +42,7 @@ const PanelLayout = () => {
   });
 
   return (
-    <div className="w-full relative flex flex-col sm:flex-row bg-[#F0F0F0] dark:bg-gray-900 overflow-x -hidden">
+    <div className="w-full h-[100vh] md:h-auto relative flex flex-col sm:flex-row bg-[#F0F0F0] dark:bg-gray-900 overflow-x -hidden">
       <div className="bg-bla ck lg:w-1/5 sm:w-20 sm:mx-3 ">
         <div className=" hidden h-auto w-full   lg:mx-auto  bg-[#FEFDFF] dark:bg-gray-800 my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
           <NavLink to="/" className="flex justify-center items-center  ">
@@ -126,7 +126,7 @@ const PanelLayout = () => {
         </div>
       </div>
 
-      <div>
+      <div className="flex justify-center">
         <MobileModeLayout />
       </div>
     </div>

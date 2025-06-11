@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import http from "./../../core/services/interceptor";
-import profilepic from "./../../assets/images/panel/profilepic.svg";
 import { CiGrid41 } from "react-icons/ci";
 import { PiBookLight } from "react-icons/pi";
 import { CiViewTimeline } from "react-icons/ci";
@@ -25,7 +24,7 @@ const MobileModeLayout = () => {
   };
 
   return (
-    <div className="sm:hidden h-[72px] border border-[#F0F0F0] dark:border-gray-700 bg-[#FEFDFF] dark:bg-gray-800 rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3 items-center">
+    <div className="sm:hidden h-[72px] fixed bottom-0 mb-8 border border-[#F0F0F0] dark:border-gray-700 bg-[#FEFDFF] dark:bg-gray-800 rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3 items-center">
       <NavLink
         to="/panel/dashboard"
         className={({ isActive }) =>
