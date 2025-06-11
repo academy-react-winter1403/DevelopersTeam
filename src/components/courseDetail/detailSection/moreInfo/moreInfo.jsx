@@ -130,9 +130,9 @@ const MoreInfo = ({ data }) => {
 
   return (
     <div className="w-auto h-[430px] border-4 border-borderGray dark:border-gray-700 rounded-3xl lg:sticky top-5 p-3 space-y-5 m-4 lg:m-0 dark:bg-gray-800">
-      <div className="bg-[#FFD1CB] dark:bg-red-900/30 w-30 md:min-w-32 h-6 rounded-xl flex justify-center items-center space-x-2">
+      <div className="inline-flex bg-[#FFD1CB] dark:bg-red-900/30 h-6 rounded-xl justify-center items-center space-x-2 px-3 max-w-full">
         <div className="w-2 h-2 rounded-full bg-[#FF5454] dark:bg-red-400"></div>
-        <h1 className="text-xs md:text-sm text-[#FF5454] dark:text-red-300">
+        <h1 className="text-xs md:text-sm text-[#FF5454] dark:text-red-300 truncate">
           {data?.courseStatusName}
         </h1>
       </div>
@@ -142,7 +142,7 @@ const MoreInfo = ({ data }) => {
             {data?.title}
           </h1>
           ({data?.currentUserRateNumber}
-          <FaStar  className="text-yellow-200" />)
+          <FaStar className="text-yellow-200" />)
         </div>
         <div className="w-28">
           <TagsA text={data?.courseLevelName} />
