@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../../core/services/interceptor";
 import toast from "react-hot-toast";
 
-function Map() {
+function Map({ onAddressChange }) {
   return (
     <div className="h-[500px] z-10 w-full py-6">
       <MapContainer
@@ -17,16 +17,15 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarkers />
+        <LocationMarkers onAddressChange={onAddressChange} />
       </MapContainer>
     </div>
   );
 }
 
-export default Map;
-
-function LocationMarkers() {
+function LocationMarkers({ onAddressChange }) {
   const queryClient = useQueryClient();
+  const [isLoadingAddress, setIsLoadingAddress] = useState(false);
 
   const getProfile = async () => {
     const res = await http.get(`/SharePanel/GetProfileInfo`);
@@ -56,10 +55,32 @@ function LocationMarkers() {
       : [[0, 0]]
   );
 
+  const getAddressFromCoordinates = async (lat, lng) => {
+    setIsLoadingAddress(true);
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      );
+      const data = await response.json();
+      if (data.display_name) {
+        onAddressChange(data.display_name);
+      } else {
+        onAddressChange("آدرس یافت نشد");
+      }
+    } catch (error) {
+      console.error("Error fetching address:", error);
+      onAddressChange("خطا در دریافت آدرس");
+    } finally {
+      setIsLoadingAddress(false);
+    }
+  };
+
   const map = useMapEvents({
-    click(e) {
+    async click(e) {
       const newPosition = [e.latlng.lat, e.latlng.lng];
       setMarkers([newPosition]);
+
+      await getAddressFromCoordinates(e.latlng.lat, e.latlng.lng);
 
       const formData = new FormData();
       formData.append("Latitude", e.latlng.lat.toString());
@@ -92,13 +113,12 @@ function LocationMarkers() {
     if (data?.latitude && data?.longitude) {
       setMarkers([[data.latitude, data.longitude]]);
       map.flyTo([data.latitude, data.longitude], 13);
+      getAddressFromCoordinates(data.latitude, data.longitude);
     }
 
     if (navigator.geolocation) {
       const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          // map.flyTo([position.coords.latitude, position.coords.longitude]);
-        },
+        (position) => {},
         (error) => {
           console.error("Geolocation error:", error);
         }
@@ -116,3 +136,28 @@ function LocationMarkers() {
     </>
   );
 }
+
+const UserAddress = () => {
+  const [address, setAddress] = useState("");
+
+  return (
+    <div className="w-full mb-10">
+      <div className="ml-10 rounded-2xl mt-2 w-full px-3">
+        <Map onAddressChange={setAddress} />
+        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+          {address ? (
+            <p className="text-sm">
+              <strong>آدرس :</strong> {address}
+            </p>
+          ) : (
+            <p className="text-sm text-gray-500">
+              روی نقشه کلیک کنید تا آدرس انتخاب شود
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UserAddress;
