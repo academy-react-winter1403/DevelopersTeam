@@ -1,6 +1,6 @@
 import React from "react";
 import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css"; // حتما ایمپورت کن
+import "react-h5-audio-player/lib/styles.css";
 
 const MiniAudioPlayer = ({ src }) => (
   <AudioPlayer
@@ -8,8 +8,8 @@ const MiniAudioPlayer = ({ src }) => (
     autoPlay={false}
     showJumpControls={false}
     layout="horizontal-reverse"
-    customAdditionalControls={[]}      // هیچ کنترل اضافه‌ای (بجز ولوم و play)
-    customVolumeControls={[]}         // می‌تونی اگه خواستی کنترل صدا رو بذاری/برداری
+    customAdditionalControls={[]}
+    customVolumeControls={[]}
     style={{
       borderRadius: 10,
       height: 45,
@@ -19,7 +19,7 @@ const MiniAudioPlayer = ({ src }) => (
       minWidth: 150,
       maxWidth: 220,
       padding: 0,
-      margin: "0 auto"
+      margin: "0 auto",
     }}
     className="!mb-0"
   />

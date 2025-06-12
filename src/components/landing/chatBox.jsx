@@ -253,7 +253,6 @@ const ChatBox = () => {
           </div>
         ))}
       </div>
-      {/* Input area */}
       <div className="border-t border-gray-300 p-4 bg-white">
         <Formik
           onSubmit={(values) => mutate(values)}

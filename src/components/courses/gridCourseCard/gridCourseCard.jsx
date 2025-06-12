@@ -11,25 +11,25 @@ import { TagsA, TagsB } from "../../common/course-card/tags/tags";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import http from "../../../core/services/interceptor";
 
-// انیمیشن‌های عمومی
+ 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
 const slideInLeft = {
   hidden: { opacity: 0, x: -100 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 const slideInRight = {
   hidden: { opacity: 0, x: 100 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 const imageScale = {
   hidden: { scale: 0.8, opacity: 0 },
-  visible: { scale: 1, opacity: 1, transition: { duration: 0.8 } }
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.8 } },
 };
 
 const GridCourseCard = ({
@@ -48,7 +48,7 @@ const GridCourseCard = ({
   userIsLiked,
   userLikedId,
   currentUserDissLike,
-  keyMutate
+  keyMutate,
 }) => {
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
@@ -60,7 +60,7 @@ const GridCourseCard = ({
   };
   const { mutate: mutateLike } = useMutation({
     mutationFn: handleLike,
-    onSuccess: () => queryClient.invalidateQueries([keyMutate])
+    onSuccess: () => queryClient.invalidateQueries([keyMutate]),
   });
 
   const handleDelete = async () => {
@@ -73,7 +73,7 @@ const GridCourseCard = ({
     onSuccess: () => queryClient.invalidateQueries([keyMutate]),
     onError: (error) => {
       console.error("Error deleting like:", error);
-    }
+    },
   });
 
   const handleDisLike = async () => {
@@ -81,7 +81,7 @@ const GridCourseCard = ({
   };
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: handleDisLike,
-    onSuccess: () => queryClient.invalidateQueries([keyMutate])
+    onSuccess: () => queryClient.invalidateQueries([keyMutate]),
   });
 
   return (
@@ -100,14 +100,14 @@ const GridCourseCard = ({
       </motion.div>
 
       <motion.div
-        className="col-span-2 bg-red-400 rounded-3xl hidden sm:block overflow-hidden h-72"
+        className="col-span-2   rounded-3xl hidden sm:block overflow-hidden h-72"
         variants={imageScale}
       >
         <NavLink to={`/courses/coursedetail/${id}`}>
           <img
             src={img == null ? defaultImg : img}
             alt="not set"
-            className="w-full h-full object-cover rounded-3xl"
+            className="w-96 h-full object-cover rounded-3xl"
             onError={addDefaultImg}
           />
         </NavLink>

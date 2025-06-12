@@ -4,13 +4,13 @@ import CalenderIcon from "./../../assets/images/calendar-03-stroke-rounded 1.svg
 import StudentIcon from "./../../assets/images/students-stroke-rounded 1.svg";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import { NavLink } from "react-router-dom";
-import DateComponent from "./../common/date/dateComponent";
+import DateComponent from "../common/date/dateComponent";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import MiniAudioPlayer from "./MiniAudioPlayer ";
 import axios from "axios";
+import MiniAudioPlayer from "./MiniAudioPlayer";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -19,14 +19,6 @@ const fadeUp = {
     y: 0,
     transition: { delay: 0.12 * idx, duration: 0.6, type: "spring" },
   }),
-};
-const scaleImg = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { delay: 0.13, duration: 0.6, type: "spring" },
-  },
 };
 
 const PadcastCard = ({
@@ -38,7 +30,6 @@ const PadcastCard = ({
   id,
   isLike,
   isDissLike,
-  keyMutate,
   FileLink,
   allLike,
   allDissLike,
@@ -46,18 +37,17 @@ const PadcastCard = ({
 }) => {
   const queryClient = useQueryClient();
 
+  const handleLike = () => {
+    isLike ? mutateDeleteLike() : mutateLike();
+  };
+
+  const handleDisLike = () => {
+    if (!isDissLike) mutateDisLike();
+  };
+
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
-
-  // const AudioPlayer = ({ src }) => {
-  //   return (
-  //     <audio controls style={{ width: "100%" }}>
-  //       <source src={src} type="audio/mp3" />
-  //       مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
-  //     </audio>
-  //   );
-  // };
 
   const { mutate: mutateLike } = useMutation({
     mutationFn: async () => {
@@ -71,13 +61,13 @@ const PadcastCard = ({
       toast.success("لایک با موفقیت انجام شد");
     },
     onError: (error) => {
-      toast.error(error?.response.data.ErrorMessage);
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در لایک");
     },
   });
 
   const { mutate: mutateDeleteLike } = useMutation({
     mutationFn: async () => {
-      const res = await axios.delete(
+      await axios.delete(
         "https://taha-sepehr.liara.run/podcast/like/deleteMany",
         {
           data: { ids: id },
@@ -87,116 +77,99 @@ const PadcastCard = ({
     onSuccess: () => {
       queryClient.invalidateQueries(["podcasts"]);
     },
-    onError: (error) => {
-      // console.error(error);
-    },
   });
 
   const { mutate: mutateDisLike } = useMutation({
     mutationFn: async () => {
-      const res = await axios.post(
+      await axios.post(
         `https://taha-sepehr.liara.run/podcast/like/AddDissLike/${id}/40330`
       );
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["podcasts"]);
     },
-    onError: () => {
-      toast.error(error?.response.data.ErrorMessage);
+    onError: (error) => {
+      toast.error(error?.response?.data?.ErrorMessage || "خطا در دیسلایک");
     },
   });
 
   return (
     <motion.div
-      className="w-[310px] h-[450px] bg-lightGray dark:bg-gray-800 flex flex-col overflow-hidden rounded-3xl relative"
+      className="w-[600px]  h-[250px] bg-lightGray dark:bg-gray-800 rounded-3xl overflow-hidden flex flex-col sm:flex-row items-stretch"
       variants={fadeUp}
       initial="hidden"
       animate="visible"
       custom={1}
     >
-      <motion.div
-        className="w-full h-[200px] rounded-3xl"
-        variants={scaleImg}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="w-full sm:w-60 h-52 sm:h-auto shrink-0">
         <NavLink>
           <img
-            src={img == null ? defaultImg : img}
-            alt="not set"
-            className="w-[310px] h-[200px] object-cover rounded-3xl blur-[#54545417] shadow-md mb-3"
+            src={img || defaultImg}
+            alt="Podcast"
             onError={addDefaultImg}
+            className="w-full h-full object-cover rounded-2xl"
           />
         </NavLink>
-      </motion.div>
-      <div className="w-full h-full px-3 flex flex-col mt-3">
-        <motion.div className="grow" variants={fadeUp} custom={3}>
+      </div>
+
+      <div className="flex flex-col justify-between flex-1 p-4 space-y-3">
+        <div className="space-y-2">
           <NavLink>
-            <h2 className="text-lg font-semibold text-gray-700 dark:text-white line-clamp-1 hover:text-navyBlue dark:hover:text-blue-400 cursor-pointer">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white hover:text-navyBlue dark:hover:text-blue-400 line-clamp-1">
               {title}
             </h2>
           </NavLink>
-          <p className="text-[#787878] dark:text-gray-400 text-sm mt-2 line-clamp-2">
+          <p className="text-[#787878] dark:text-gray-400 text-sm line-clamp-1">
             {describe}
           </p>
-        </motion.div>
-        <motion.div
-          className="mt-3 flex-none space-y-3"
-          variants={fadeUp}
-          custom={4}
-        >
-          <div className="flex items-center gap-3 text-sm dark:text-gray-300">
-            <img src={TeacherIcon} alt="" className="h-5 w-5 dark:invert" />
+        </div>
+
+        <div className="space-y-2 text-sm dark:text-gray-300">
+          <div className="flex items-center gap-2">
+            <img src={TeacherIcon} className="w-5 h-5 dark:invert" alt="" />
             <span>{teacherName || "بینام"}</span>
           </div>
-          <div className="flex items-center gap-3 mt-2 text-sm dark:text-gray-300">
-            <img src={StudentIcon} alt="" className="h-5 w-5 dark:invert" />
-            <span className="text-md space-x-2">
-              <span>{Category}</span>
-            </span>
+          <div className="flex items-center gap-2">
+            <img src={StudentIcon} className="w-5 h-5 dark:invert" alt="" />
+            <span>{Category}</span>
           </div>
-          <div className="flex items-center gap-3 mt-2 text-sm dark:text-gray-300">
-            <img src={CalenderIcon} alt="" className="h-5 w-5 dark:invert" />
+          <div className="flex items-center gap-2">
+            <img src={CalenderIcon} className="w-5 h-5 dark:invert" alt="" />
             <DateComponent insertDate={InsertTime} />
           </div>
-        </motion.div>
-        <motion.div
-          className="flex flex-none justify-between my-3 "
-          variants={fadeUp}
-          custom={5}
-        >
-          <div className="flex justify-between gap-2 ">
+        </div>
+
+        <div className="flex justify-between items-center mt-4">
+          <div className="flex gap-4">
             <div
-              className="flex items-center gap-1"
-              onClick={() => (isLike ? mutateDeleteLike() : mutateLike())}
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={handleLike}
             >
               <AiOutlineLike
-                className={
+                className={`w-5 h-5 ${
                   isLike
-                    ? "w-5 h-5 text-navyBlue dark:text-blue-400"
-                    : "w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400"
-                }
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "hover:text-blue-600 dark:hover:text-blue-400"
+                }`}
               />
-              <span className="dark:text-gray-300">{allLike}</span>
+              <span>{allLike}</span>
             </div>
             <div
-              className="flex items-center gap-1"
-              onClick={() => isDissLike == false && mutateDisLike()}
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={handleDisLike}
             >
               <AiOutlineDislike
-                className={
+                className={`w-5 h-5 ${
                   isDissLike
-                    ? "w-5 h-5 text-navyBlue dark:text-blue-400"
-                    : "w-5 h-5 hover:text-navyBlue dark:hover:text-blue-400"
-                }
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "hover:text-blue-600 dark:hover:text-blue-400"
+                }`}
               />
-              <span className="dark:text-gray-300">{allDissLike}</span>
+              <span>{allDissLike}</span>
             </div>
           </div>
-          <div className="flex items-center justify-end">
-            <MiniAudioPlayer src={FileLink} />
-          </div>
-        </motion.div>
+          <MiniAudioPlayer src={FileLink} />
+        </div>
       </div>
     </motion.div>
   );

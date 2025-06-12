@@ -98,6 +98,7 @@ const ViewMoodComponent = ({ data, viewMode }) => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
+              className="pl-6"
             >
               <GridCourseCard
                 title={item.title}
