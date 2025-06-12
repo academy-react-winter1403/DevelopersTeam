@@ -3,6 +3,7 @@ import CourseCard from "../../../common/course-card/courseCard";
 import GridCourseCard from "../../gridCourseCard/gridCourseCard";
 import ComparisonTable from "./../../../common/course-card/ComparisonTable ";
 import { GrClose } from "react-icons/gr";
+import { motion } from "framer-motion";
 
 const ViewMoodComponent = ({ data, viewMode }) => {
   const [compareList, setCompareList] = useState([]);
@@ -14,7 +15,6 @@ const ViewMoodComponent = ({ data, viewMode }) => {
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -49,54 +49,77 @@ const ViewMoodComponent = ({ data, viewMode }) => {
     compareList.includes(item.courseId)
   );
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, type: "spring" },
+    },
+  };
+
   return (
     <div>
-      <div className="flex flex-wrap justify-evenly space-y-5 p-2">
+      <div className="flex flex-wrap justify-around space-y-5 p-2">
         {data?.courseFilterDtos?.map((item, index) =>
           viewMode === "list" ? (
-            <CourseCard
-              key={index}
-              title={item.title}
-              img={item.tumbImageAddress}
-              describe={item.describe}
-              teacherName={item.teacherName}
-              statusName={item.statusName}
-              student={item.commandCount}
-              cost={item.cost}
-              likeCount={item.likeCount}
-              dissLikeCount={item.dissLikeCount}
-              lastUpdate={item.lastUpdate}
-              id={item.courseId}
-              levelName={item.levelName}
-              userIsLiked={item.userIsLiked}
-              userLikedId={item.userLikedId}
-              currentUserDissLike={item.currentUserDissLike}
-              keyMutate="courses"
-              isSelected={compareList.includes(item.courseId)}
-              onToggleCompare={() => handleToggleCompare(item.courseId)}
-            />
+            <motion.div
+              key={item.courseId}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <CourseCard
+                title={item.title}
+                img={item.tumbImageAddress}
+                describe={item.describe}
+                teacherName={item.teacherName}
+                statusName={item.statusName}
+                student={item.commandCount}
+                cost={item.cost}
+                likeCount={item.likeCount}
+                dissLikeCount={item.dissLikeCount}
+                lastUpdate={item.lastUpdate}
+                id={item.courseId}
+                levelName={item.levelName}
+                userIsLiked={item.userIsLiked}
+                userLikedId={item.userLikedId}
+                currentUserDissLike={item.currentUserDissLike}
+                keyMutate="courses"
+                isSelected={compareList.includes(item.courseId)}
+                onToggleCompare={() => handleToggleCompare(item.courseId)}
+              />
+            </motion.div>
           ) : (
-            <GridCourseCard
-              key={index}
-              title={item.title}
-              img={item.tumbImageAddress}
-              describe={item.describe}
-              teacherName={item.teacherName}
-              statusName={item.statusName}
-              student={item.commandCount}
-              cost={item.cost}
-              likeCount={item.likeCount}
-              dissLikeCount={item.dissLikeCount}
-              id={item.courseId}
-              lastUpdate={item.lastUpdate}
-              levelName={item.levelName}
-              userIsLiked={item.userIsLiked}
-              userLikedId={item.userLikedId}
-              currentUserDissLike={item.currentUserDissLike}
-              keyMutate="courses"
-              isSelected={compareList.includes(item.courseId)}
-              onToggleCompare={() => handleToggleCompare(item.courseId)}
-            />
+            <motion.div
+              key={item.courseId}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <GridCourseCard
+                title={item.title}
+                img={item.tumbImageAddress}
+                describe={item.describe}
+                teacherName={item.teacherName}
+                statusName={item.statusName}
+                student={item.commandCount}
+                cost={item.cost}
+                likeCount={item.likeCount}
+                dissLikeCount={item.dissLikeCount}
+                id={item.courseId}
+                lastUpdate={item.lastUpdate}
+                levelName={item.levelName}
+                userIsLiked={item.userIsLiked}
+                userLikedId={item.userLikedId}
+                currentUserDissLike={item.currentUserDissLike}
+                keyMutate="courses"
+                isSelected={compareList.includes(item.courseId)}
+                onToggleCompare={() => handleToggleCompare(item.courseId)}
+              />
+            </motion.div>
           )
         )}
       </div>
@@ -105,7 +128,7 @@ const ViewMoodComponent = ({ data, viewMode }) => {
         <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
             <button
-              className=" cursor-pointer float-right"
+              className="cursor-pointer float-right"
               onClick={handleCloseModal}
             >
               <GrClose />
