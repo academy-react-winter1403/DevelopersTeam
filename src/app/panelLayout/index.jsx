@@ -16,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDarkMode } from "../../context/theme/themeContext";
 import { LuUserRoundPlus } from "react-icons/lu";
 import MultiAccountModal from "./multiAccountModal";
+import img from "./../../assets/images/panel/img.svg";
 
 const PanelLayout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,8 +42,12 @@ const PanelLayout = () => {
     queryFn: getProfile,
   });
 
+  const addDefaultImg = (e) => {
+    e.target.src = img;
+  };
+
   return (
-    <div className="w-full h-[100vh] md:h-auto relative flex flex-col sm:flex-row bg-[#F0F0F0] dark:bg-gray-900 overflow-x -hidden">
+    <div className="w-full min-h-[100vh] md:h-auto relative flex flex-col sm:flex-row bg-[#F0F0F0] dark:bg-gray-900 overflow-x -hidden">
       <div className="bg-bla ck lg:w-1/5 sm:w-20 sm:mx-3 ">
         <div className=" hidden h-auto w-full   lg:mx-auto  bg-[#FEFDFF] dark:bg-gray-800 my-4 rounded-2xl p-5 sm:flex flex-col justify-center items-center">
           <NavLink to="/" className="flex justify-center items-center  ">
@@ -84,9 +89,10 @@ const PanelLayout = () => {
           <div className="sm:flex space-x-3 relative hidden">
             <div className="w-14 h-14 bg-navyBlue rounded-full">
               <img
-                src={userData?.currentPictureAddress}
+                src={userData?.currentPictureAddress || img}
                 alt=""
                 className="w-14 h-14 rounded-full"
+                onError={addDefaultImg}
               />
               <NavLink to="/panel/profile">
                 <LuPencilLine className="absolute top-9 bg-navyBlue text-white p-1 w-6 h-6 rounded-full" />
@@ -126,7 +132,7 @@ const PanelLayout = () => {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="">
         <MobileModeLayout />
       </div>
     </div>

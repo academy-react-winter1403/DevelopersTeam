@@ -9,6 +9,7 @@ import PriceComponent from "../../../common/priceComponent/priceComponent";
 import { Divider, Spin, Modal } from "antd";
 import PanelModal from "../../../common/panelModal/panelModal";
 import { NavLink } from "react-router-dom";
+import Editor from "../../../common/Editor/editor";
 
 const TopCourseDashbord = () => {
   const [convertedData, setCovertedData] = useState([]);
@@ -54,7 +55,7 @@ const TopCourseDashbord = () => {
         );
         newData["desc"] = (
           <span className="truncate line-clamp-3 overflow-hidden dark:text-gray-300">
-            {el.describe}
+            {el.describe && <Editor describe={el.describe} />}
           </span>
         );
         newData["teacher"] = (
@@ -63,10 +64,7 @@ const TopCourseDashbord = () => {
         newData["date"] = <DateComponent insertDate={el.lastUpdate} />;
         newData["price"] = (
           <div className="flex space-x-2">
-            <PriceComponent
-              cost={el.cost}
-              className="dark:text-gray-100" 
-            />
+            <PriceComponent cost={el.cost} className="dark:text-gray-100" />
             <span>تومان</span>
           </div>
         );
@@ -134,7 +132,7 @@ const TopCourseDashbord = () => {
                   <MdOutlineRemoveRedEye className="w-6 h-6 text-gray dark:text-gray-400" />
                 </div>
               </div>
-              <Divider  className="dark:bg-gray-600" />
+              <Divider className="dark:bg-gray-600" />
             </div>
           );
         })}

@@ -10,6 +10,7 @@ const MyReserveCourse = () => {
   const [convertedData, setCovertedData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(null);
+  const initialValue = {};
 
   const getMyReserveCourses = async () => {
     const res = await http.get(`/SharePanel/GetMyCoursesReserve`);
@@ -22,6 +23,7 @@ const MyReserveCourse = () => {
   } = useQuery({
     queryKey: ["myReserveCoursesPanel"],
     queryFn: getMyReserveCourses,
+    initialData: initialValue,
   });
 
   useEffect(() => {

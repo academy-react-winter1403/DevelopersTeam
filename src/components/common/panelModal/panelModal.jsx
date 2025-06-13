@@ -9,6 +9,7 @@ import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import { PiStudentBold, PiStudentThin } from "react-icons/pi";
 import { useDarkMode } from "./../../../context/theme/themeContext";
 import { TagsAccept, TagsNotAccept } from "../../panel/tagStatus/tagStatus";
+import Editor from "../Editor/editor";
 
 const PanelModal = ({
   onClose,
@@ -83,7 +84,10 @@ const PanelModal = ({
               <h1 className="text-gray text-base dark:text-gray-400">
                 توضیح مختصر
               </h1>
-              <h1 className="text-base dark:text-gray-300">{describe}</h1>
+              <h1 className="text-base dark:text-gray-300">
+                {" "}
+                {describe && <Editor describe={describe} />}
+              </h1>
             </div>
             <div className="w-full">
               <h1 className="text-gray dark:text-gray-400 text-xl">

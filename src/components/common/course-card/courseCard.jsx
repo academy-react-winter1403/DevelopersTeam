@@ -12,6 +12,7 @@ import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import PriceComponent from "../priceComponent/priceComponent";
+import { MdCompareArrows } from "react-icons/md";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -214,14 +215,17 @@ const CourseCard = ({
       {isTopCourse ? (
         ""
       ) : (
-        <div className="absolute left-2 top-2 z-10">
+        <div
+          className={
+            `absolute left-2 top-[165px] z-10  rounded-2xl px-[3px] pt-0.5 flex justify-center items-center ` +
+            (isSelected
+              ? "bg-amber-400   text-black"
+              : "bg-blue-500  text-white shadow")
+          }
+        >
+          <MdCompareArrows />
           <span
-            className={
-              `text-xs border rounded-2xl p-1 select-none cursor-pointer font-bold transition-colors duration-150 ` +
-              (isSelected
-                ? "bg-blue-500 border-blue-600 text-white shadow"
-                : "bg-amber-400 border-amber-400 text-black")
-            }
+            className={`text-xs p-1 select-none cursor-pointer font-bold transition-colors duration-150 `}
             onClick={onToggleCompare}
             role="button"
             tabIndex={0}

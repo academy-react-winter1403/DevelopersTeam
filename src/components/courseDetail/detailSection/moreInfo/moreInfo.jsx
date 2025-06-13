@@ -151,7 +151,7 @@ const MoreInfo = ({ data }) => {
           <div className="flex items-center gap-3 md:text-xl dark:text-gray-300">
             <img src={StudentIcon} alt="" className="h-6 w-6 dark:invert" />
             <span className="font-semibold">
-              {data?.currentRegistrants} / {data?.capacity}
+              {data?.capacity} / {data?.currentRegistrants}
             </span>
             <span className="font-semibold">دانشجو</span>
           </div>

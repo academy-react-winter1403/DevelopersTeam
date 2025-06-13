@@ -13,16 +13,17 @@ const MyCourse = () => {
   const [itemPerPage, setItemPerPage] = useState(5);
 
   const getMyCourses = async () => {
-    const res = await http.get(
+    const res = http.get(
       `/SharePanel/GetMyCourses?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}`
     );
     return res;
   };
-
+  const initialvalue = { listOfMyCourses: [], totalCount: 0 };
   const { data, isSuccess } = useQuery({
     queryKey: ["myCoursesPanel", pageNum],
     queryFn: getMyCourses,
     keepPreviousData: true,
+    initialData: initialvalue,
   });
 
   const [filteredData, setFilteredData] = useState(null);
@@ -48,11 +49,13 @@ const MyCourse = () => {
     );
 
     setFilteredData({
-      ...data,
       listOfMyCourses: filteredCourses,
       totalCount: filteredCourses.length,
     });
   };
+  useEffect(() => {
+    console.log(filteredData, data);
+  }, [filteredData]);
   // console.log("mycourses", data);
   return (
     <div className="">
@@ -60,13 +63,14 @@ const MyCourse = () => {
         <h2 className="w-full h-10 mt-5 font-bold text-xl">دوره من</h2>
       </div>
       <FavBottomCourse handleSearch={handleSearch} />
+
       {filteredData && (
         <TableMyCoursesHolder
           data={filteredData}
           convertedData={convertedData}
           setCovertedData={setCovertedData}
           isSuccess={isSuccess}
-          totalCount={data?.totalCount}
+          totalCount={filteredData?.totalCount}
           pageNum={pageNum}
           setPageNum={setPageNum}
           itemPerPage={itemPerPage}

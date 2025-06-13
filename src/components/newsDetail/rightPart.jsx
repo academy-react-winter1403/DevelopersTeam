@@ -7,10 +7,20 @@ import { MdFavoriteBorder } from "react-icons/md";
 import defaultImg from "./../../assets/images/courses/courseimg.svg";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
-const RightPart = ({ data, id }) => {
+const RightPart = ({
+  data,
+  id,
+  mutateDeleteFav,
+  mutateFavorite,
+  mutateDeleteLike,
+  mutateLike,
+  mutateDisLike,
+ }) => {
+
   const addDefaultImg = (e) => {
     e.target.src = defaultImg;
   };
+
   return (
     <div className="w-1/3 h-[350px] sm:h-[400px] border-4 border-borderGray dark:border-gray-700 rounded-3xl xl:sticky top-5 p-3 sm:space-y-5 m-4 lg:m-0 line-clamp-1 overflow-hidden truncate dark:bg-gray-800">
       <h2 className="text-lg sm:text-3xl font-bold sm:p-4 dark:text-white">

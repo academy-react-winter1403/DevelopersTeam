@@ -6,6 +6,7 @@ import { BiImageAdd } from "react-icons/bi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import FacturePayment from "../facturePayment/facturePayment";
+import { useDarkMode } from "../../../../context/theme/themeContext";
 
 const PaymentModal = ({
   firstModal,
@@ -118,6 +119,7 @@ const PaymentModal = ({
       handleAddPaymentImage(e.target.files[0]);
     }
   };
+  const { darkMode, setDarkMode } = useDarkMode();
 
   return (
     <>
@@ -141,18 +143,18 @@ const PaymentModal = ({
               <Field
                 name="Paid"
                 value={cost}
-                className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray dark:border-gray-900 bg-lightGray dark:bg-gray-900 focus:border-navyBlue transition-all duration-300"
                 placeholder="مبلغ را وارد کنید"
               />
               <Field
                 name="PaymentInvoiceNumber"
-                className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray dark:border-gray-900 bg-lightGray dark:bg-gray-900 focus:border-navyBlue transition-all duration-300"
                 placeholder="کدپیگیری را وارد کنید"
               />
               <Field
                 type="date"
                 name="PeymentDate"
-                className="w-full h-10 outline-none mb-2 mt-3 rounded-xl flex justify-center items-center px-3 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="w-full h-10 outline-none mb-2 mt-3 rounded-xl flex justify-center items-center px-3 placeholder:text-xs border border-lightGray dark:border-gray-900 dark:bg-gray-900 bg-lightGray focus:border-navyBlue transition-all duration-300"
               />
               <button
                 onClick={handleSubmit}

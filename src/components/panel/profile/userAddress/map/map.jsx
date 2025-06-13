@@ -4,6 +4,9 @@ import "leaflet/dist/leaflet.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import http from "./../../../../../core/services/interceptor";
 import toast from "react-hot-toast";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 function Map({ onAddressChange }) {
   return (
@@ -127,11 +130,20 @@ function LocationMarkers({ onAddressChange }) {
       return () => navigator.geolocation.clearWatch(watchId);
     }
   }, [data, map]);
+  const customIcon = new L.Icon({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
 
   return (
     <>
       {markers.map((marker, index) => (
-        <Marker key={index} position={marker} />
+        <Marker key={index} position={marker} icon={customIcon} />
       ))}
     </>
   );
@@ -144,7 +156,7 @@ const UserAddress = () => {
     <div className="w-full mb-10">
       <div className="ml-10 rounded-2xl mt-2 w-full px-3">
         <Map onAddressChange={setAddress} />
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+        <div className="mt-4 p-4 bg-gray-50 dark:bg-[#101828] dark:text-white rounded-lg">
           {address ? (
             <p className="text-sm">
               <strong>آدرس :</strong> {address}

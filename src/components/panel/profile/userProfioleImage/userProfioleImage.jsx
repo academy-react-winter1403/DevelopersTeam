@@ -8,12 +8,14 @@ import toast from "react-hot-toast";
 import { TiTickOutline } from "react-icons/ti";
 import { RiAiGenerate } from "react-icons/ri";
 import axios from "axios";
+import { useDarkMode } from "../../../../context/theme/themeContext";
 
 const UserProfileImage = ({ data }) => {
   const queryClient = useQueryClient();
   const [isGenerating, setIsGenerating] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prompt, setPrompt] = useState("یک تصویر پروفایل حرفه ای و مناسب برای شبکه های اجتماعی");
+  const { darkMode, setDarkMode } = useDarkMode();
 
   const selectProfile = async (id) => {
     const myData = new FormData();
@@ -111,7 +113,7 @@ const UserProfileImage = ({ data }) => {
     },
     onSuccess: () => {
       toast.success("تصویر با موفقیت تولید و آپلود شد");
-      setIsModalOpen(false); // Close modal on success
+      setIsModalOpen(false);  
     },
     onError: () => toast.error("خطا در تولید یا آپلود تصویر"),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["profile"] }),
@@ -171,8 +173,7 @@ const UserProfileImage = ({ data }) => {
           </div>
         ))}
 
-        {/* Upload image */}
-        <label htmlFor="inp-1">
+         <label htmlFor="inp-1">
           <input
             type="file"
             className="hidden"
@@ -191,8 +192,7 @@ const UserProfileImage = ({ data }) => {
           </div>
         </label>
 
-        {/* AI generation */}
-        <div onClick={() => setIsModalOpen(true)} className="relative">
+         <div onClick={() => setIsModalOpen(true)} className="relative">
           <div className="w-60 h-60 border-4 rounded-2xl border-borderGray flex flex-col justify-center items-center cursor-pointer hover:border-blue-200 transition-colors">
             <RiAiGenerate className="text-navyBlue w-10 h-10" />
             <h1 className="font-semibold">
@@ -203,8 +203,7 @@ const UserProfileImage = ({ data }) => {
         </div>
       </div>
 
-      {/* Modal for AI prompt input */}
-      <Modal
+       <Modal
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         onOk={() => mutateGenerateAIImage(prompt)}
@@ -212,6 +211,7 @@ const UserProfileImage = ({ data }) => {
         okText="تولید تصویر"
         cancelText="انصراف"
         title="تولید تصویر با هوش مصنوعی"
+ 
       >
         <Input.TextArea
           rows={4}

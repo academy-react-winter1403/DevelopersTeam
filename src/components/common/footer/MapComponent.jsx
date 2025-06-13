@@ -7,10 +7,14 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIcon2x,
+ const customIcon = new L.Icon({
   iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
   shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
 });
 
 const MapComponent = ({ isModalOpen }) => {
@@ -20,7 +24,7 @@ const MapComponent = ({ isModalOpen }) => {
     <div
       className={`map-container ${
         isModalOpen ? "map-dimmed" : ""
-      } rounded-xl border-2 border-gray-200 h-full dark:border-gray-700 overflow-hidden shadow-md bg-white dark:bg-gray-900 `}
+      } rounded-xl border-2 border-gray-200 h-full dark:border-gray-700 overflow-hidden shadow-md bg-white dark:bg-gray-900`}
     >
       <MapContainer
         center={position}
@@ -32,7 +36,7 @@ const MapComponent = ({ isModalOpen }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={position}></Marker>
+        <Marker position={position} icon={customIcon} />
       </MapContainer>
 
       <div className="p-4 text-sm text-center text-gray-800 dark:text-gray-300">

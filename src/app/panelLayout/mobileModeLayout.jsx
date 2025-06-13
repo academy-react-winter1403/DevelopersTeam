@@ -24,7 +24,7 @@ const MobileModeLayout = () => {
   };
 
   return (
-    <div className="sm:hidden h-[72px] mb-5 fixed bottom-0 left-0 border border-[#F0F0F0] dark:border-gray-700 bg-[#FEFDFF] dark:bg-gray-800 rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3 items-center">
+    <div className="sm:hidden h-[72px] mb-5 fixed bottom-0 left-10 border border-[#F0F0F0] dark:border-gray-700 bg-[#FEFDFF] dark:bg-gray-800 rounded-[47px] flex mx-5 justify-evenly xs:justify-between xs:px-3 items-center">
       <NavLink
         to="/panel/dashboard"
         className={({ isActive }) =>

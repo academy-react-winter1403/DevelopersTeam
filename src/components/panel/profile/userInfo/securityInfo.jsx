@@ -55,7 +55,7 @@ const SecurityInfo = () => {
             <span className="font-semibold">ایمیل بازیابی</span>
             <Field
               name="recoveryEmail"
-              className="h-9 w-full mt-2  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+              className="h-9 w-full mt-2  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray dark:border-[#101828] bg-lightGray dark:bg-[#101828] focus:border-navyBlue transition-all duration-300"
               placeholder="ایمیل خود را وارد کنید"
             />
             <button

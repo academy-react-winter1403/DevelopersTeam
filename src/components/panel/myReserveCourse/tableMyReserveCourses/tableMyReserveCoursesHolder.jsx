@@ -80,9 +80,11 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
               >
                 <PiEyeLight className="w-6 h-6 text-gray" />
               </div>
-              <div onClick={() => mutateDeleteMyReserve(el.reserveId)}>
-                <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
-              </div>
+              {el.accept == false && (
+                <div onClick={() => mutateDeleteMyReserve(el.reserveId)}>
+                  <VscChromeClose className="w-5 h-5 text-red-400 dark:text-gray-400" />
+                </div>
+              )}
             </div>
           ),
         };

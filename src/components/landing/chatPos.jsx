@@ -21,7 +21,7 @@ const ChatTicket = () => {
       </button>
 
       {isModalOpen && (
-        <div className="fixed bottom-20 right-6 w-96 h-[500px] bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 flex flex-col">
+        <div className="fixed bottom-20 right-6 w-96 h-[500px] bg-white rounded-lg shadow-xl overflow-hidden flex flex-col">
           <div className="flex-1">
             <ChatBox />
           </div>

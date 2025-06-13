@@ -6,6 +6,7 @@ import { removeData } from "../../core/localStorage/localStorage";
 import { MdOutlineLogout } from "react-icons/md";
 import { RiFileMarkedLine } from "react-icons/ri";
 import { TfiCommentAlt } from "react-icons/tfi";
+import { useDarkMode } from "../../context/theme/themeContext";
 
 const DrawerMenu = ({ isOpen }) => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const DrawerMenu = ({ isOpen }) => {
     navigate("/");
   };
 
+  const { darkMode, setDarkMode } = useDarkMode();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -23,7 +26,7 @@ const DrawerMenu = ({ isOpen }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.2 }}
-          className="w-52 rounded-2xl p-3 space-y-2 h-64  bg-white border-borderGray border-2 absolute bottom-16 left-10 flex flex-col shadow-lg z-50"
+          className="w-52 rounded-2xl p-3 space-y-2 h-64  bg-white dark:bg-[#101828] border-borderGray dark:border-[#101828] border-2 absolute bottom-16 left-10 flex flex-col shadow-lg z-50"
         >
           <NavLink to="/panel/favcourse">
             <h1 className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded">
@@ -49,8 +52,8 @@ const DrawerMenu = ({ isOpen }) => {
               <span>کامنت های مقالات</span>
             </h1>
           </NavLink>
-          <h1 
-            onClick={handleLogOut} 
+          <h1
+            onClick={handleLogOut}
             className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded cursor-pointer"
           >
             <MdOutlineLogout className="text-[#FF5454]" />

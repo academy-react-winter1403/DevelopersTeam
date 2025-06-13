@@ -220,13 +220,13 @@ const ChatBox = () => {
   });
 
   return (
-    <div className="flex flex-col h-[500px] w-full max-w-md mx-auto border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
-      <div className="bg-blue-600 text-white p-4 flex items-center space-x-3">
+    <div className="flex flex-col h-[500px] w-full max-w-md mx-auto rounded-lg overflow-hidden bg-white shadow-lg">
+      <div className="bg-blue-600  text-white p-4 flex items-center space-x-3">
         <img src={img} alt="" className="w-10 h-10 rounded-full" />
         <h2 className="text-lg font-semibold">پشتیبانی آنلاین</h2>
       </div>
 
-      <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
+      <div className="flex-1 p-4 overflow-y-auto bg-gray-50 dark:bg-[#1e2939] ">
         {combinedData?.allTickets?.map((ticket) => (
           <div key={ticket.id} className="border-gray-200">
             {ticket.ticket_Message.map((message) => (
@@ -253,7 +253,7 @@ const ChatBox = () => {
           </div>
         ))}
       </div>
-      <div className="border-t border-gray-300 p-4 bg-white">
+      <div className="border-t border-gray-300 p-4 bg-white dark:bg-[#1e2939] ">
         <Formik
           onSubmit={(values) => mutate(values)}
           initialValues={{ message: "" }}
