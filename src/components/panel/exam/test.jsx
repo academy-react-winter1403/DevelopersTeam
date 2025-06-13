@@ -74,7 +74,9 @@ const Test = () => {
       .toString()
       .padStart(2, "0")}`;
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   return (
     <div>
       {!tests || tests.length === 0 ? (

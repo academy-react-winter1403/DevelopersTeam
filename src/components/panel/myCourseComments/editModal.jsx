@@ -5,7 +5,13 @@ import http from "./../../../core/services/interceptor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-const EditModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
+const EditModal = ({
+  isModalOpen,
+  handleOk,
+  handleCancel,
+  data,
+  showModal,
+}) => {
   const queryClient = useQueryClient();
 
   const editComment = async (values) => {
@@ -24,6 +30,7 @@ const EditModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
     onSuccess: () => {
       queryClient.invalidateQueries(["myCourseComment"]);
       toast.success("ویرایش با موفقیت انجام شد");
+      showModal(false);
     },
     onError: (error) => {
       toast.error(error.response.data.ErrorMessage);
@@ -49,12 +56,12 @@ const EditModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
           <Form className="space-y-3">
             <Field
               name="Title"
-              className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+              className="h-9 w-full  dark:placeholder:text-gray dark:text-white outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               placeholder="عنوان"
             />
             <Field
               name="Describe"
-              className="h-9 w-full  dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+              className="h-9 w-full  dark:placeholder:text-gray dark:text-white outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               placeholder="متن نظر"
             />
             <button

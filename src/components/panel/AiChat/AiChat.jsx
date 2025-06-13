@@ -86,8 +86,7 @@ const AiChat = () => {
 
   return (
     <div className="flex flex-col h-full w-full mt-8 mx-auto bg -white rounded-lg overflow-hidden">
-      {/* Input form at the top */}
-      <div className="w-full border-b border-gray-200 p-4 shadow-lg rounded-2xl bg-white">
+      <div className="w-full border-b border-gray-200 dark:border-gray-800 p-4 shadow-lg rounded-2xl bg-white dark:bg-gray-800">
         <Formik initialValues={{ text: "" }} onSubmit={handleSubmit}>
           {({ values, handleChange }) => (
             <Form className="flex items-center space-x-2">
@@ -110,8 +109,7 @@ const AiChat = () => {
         </Formik>
       </div>
 
-      {/* Messages container below the input */}
-      <div className="flex-1 p-4 mt-5 overflow-y-auto shadow-sm rounded-2xl bg-white">
+      <div className="flex-1 p-4 mt-5 overflow-y-auto shadow-sm rounded-2xl bg-white dark:bg-gray-800">
         <div className="space-y-4">
           {messages.map((message) => (
             <div

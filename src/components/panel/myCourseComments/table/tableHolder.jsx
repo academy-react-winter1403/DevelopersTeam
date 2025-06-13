@@ -67,6 +67,7 @@ const TableHolder = ({ data, isSuccess, convertedData, setCovertedData }) => {
           isModalOpen={!!currentEditItem}
           handleCancel={handleCancel}
           data={currentEditItem}
+          showModal={showModal}
         />
       )}
     </div>

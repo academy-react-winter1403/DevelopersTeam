@@ -1,31 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import domtoimage from "dom-to-image-more";
 
 const FacturePayment = ({ paymentDetail, setThirdModal, setSecondModal }) => {
   const elementRef = useRef(null);
 
   const generateAndDownloadImage = () => {
-    const originalTransform = elementRef.current.style.transform;
-    const originalWidth = elementRef.current.style.width;
+    const el = elementRef.current;
+    const originalTransform = el.style.transform;
+    const originalWidth = el.style.width;
 
-    elementRef.current.style.transform = "scale(2)";
-    elementRef.current.style.transformOrigin = "top left";
-    elementRef.current.style.width = `${elementRef.current.offsetWidth * 2}px`;
+    el.style.transform = "scale(2)";
+    el.style.transformOrigin = "top left";
+    el.style.width = `${el.offsetWidth * 2}px`;
 
     domtoimage
-      .toPng(elementRef.current, {
+      .toPng(el, {
         quality: 1,
         bgcolor: "#ffffff",
-        width: elementRef.current.scrollWidth,
+        width: el.scrollWidth,
         style: {
           transform: "scale(1)",
           margin: "0 auto",
         },
       })
       .then((dataUrl) => {
-        elementRef.current.style.transform = originalTransform;
-        elementRef.current.style.width = originalWidth;
-
         const link = document.createElement("a");
         link.href = dataUrl;
         link.download = `facture_${
@@ -37,61 +35,59 @@ const FacturePayment = ({ paymentDetail, setThirdModal, setSecondModal }) => {
       })
       .catch((error) => {
         console.error("Error generating image:", error);
-        elementRef.current.style.transform = originalTransform;
-        elementRef.current.style.width = originalWidth;
+      })
+      .finally(() => {
+        el.style.transform = originalTransform;
+        el.style.width = originalWidth;
       });
   };
 
   return (
-    <div className=" ">
+    <div className="flex flex-col items-center justify-center p-4">
       <div
-        id="big"
-        className="lg:w-10/12 md:w-11/12 w-full mx-auto my-auto inset-0"
+        ref={elementRef}
+        className="w-full max-w-3xl bg-gray-100 dark:bg-slate-800 text-black dark:text-white shadow-lg rounded-lg p-6"
       >
-        <table
-          ref={elementRef}
-          className="table-auto w-full text-base bg-gray-400 dark:bg-slate-800 dark:text-white"
-        >
+        <h1 className="text-center text-2xl font-bold mb-2">رسید پرداخت</h1>
+        <p className="text-center mb-6 text-lg">آکادمی بحرالعلوم</p>
+
+        <table className="table-auto w-full text-base border border-slate-300 dark:border-slate-700">
           <tbody>
-            <h1 className="text-center text-2xl font-semibold mt-2">
-              رسید پرداخت
-            </h1>
-            <p className="text-center">اکادمی بحرالعلوم</p>
-            <tr className="flex justify-around border-t border-slate-100 dark:border-slate-900">
-              <td className="border-l-2 border-black w-6/12 text-center">
+            <tr className="border-t border-slate-300 dark:border-slate-700">
+              <td className="w-1/2 p-2 border-l border-slate-300 text-center font-semibold">
                 نام دوره :
               </td>
-              <td className="w-6/12 text-center">{paymentDetail?.title}</td>
+              <td className="w-1/2 p-2 text-center">{paymentDetail?.title}</td>
             </tr>
-            <tr className="flex justify-around border-t border-slate-100 dark:border-slate-900">
-              <td className="border-l-2 border-black w-6/12 text-center">
+            <tr className="border-t border-slate-300 dark:border-slate-700">
+              <td className="w-1/2 p-2 border-l border-slate-300 text-center font-semibold">
                 قیمت :
               </td>
-              <td className="w-6/12 text-center">{paymentDetail?.paid}</td>
+              <td className="w-1/2 p-2 text-center">{paymentDetail?.paid}</td>
             </tr>
-            <tr className="flex justify-around border-t border-slate-100 dark:border-slate-900">
-              <td className="border-l-2 border-black w-6/12 text-center">
-                ایدی دوره :
+            <tr className="border-t border-slate-300 dark:border-slate-700">
+              <td className="w-1/2 p-2 border-l border-slate-300 text-center font-semibold">
+                آیدی دوره :
               </td>
-              <td className="w-6/12 text-center">{paymentDetail?.courseId}</td>
+              <td className="w-1/2 p-2 text-center">
+                {paymentDetail?.courseId}
+              </td>
             </tr>
-            <tr className="flex justify-around border-y border-slate-100 dark:border-slate-900">
-              <td className="border-l-2 border-black w-6/12 text-center">
+            <tr className="border-t border-b border-slate-300 dark:border-slate-700">
+              <td className="w-1/2 p-2 border-l border-slate-300 text-center font-semibold">
                 شناسه پرداخت:
               </td>
-              <td className="w-6/12 text-center">
+              <td className="w-1/2 p-2 text-center">
                 {paymentDetail?.paymentInvoiceNumber}
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+
       <button
-        className="cursor-pointer mt-4 border border-borderGray p-3 rounded-full "
-        onClick={() => {
-          generateAndDownloadImage();
-          setThirdModal(true);
-        }}
+        onClick={generateAndDownloadImage}
+        className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition"
       >
         تبدیل به تصویر و دانلود
       </button>

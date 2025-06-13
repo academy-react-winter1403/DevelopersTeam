@@ -34,6 +34,7 @@ import AiChat from "../../components/panel/AiChat/AiChat";
 import ExamPage from "../../screens/examPage/examPage";
 import Test from "../../components/panel/exam/test";
 import PadcastPage from "../../screens/PadcastPage/PadcastPage";
+import PayRoute from "../../components/panel/payment/payRoute/payRoute";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: "/panel/mycourse",
         element: <MyCoursePage />,
+      },
+      {
+        path: "/panel/mycourse/pay/:id",
+        element: <PayRoute />,
       },
       {
         path: "/panel/myreservecourse",

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Select from "react-select";
 import { Field, Form, Formik } from "formik";
 import { CiEdit } from "react-icons/ci";
+import { useDarkMode } from "../../../../context/theme/themeContext";
 
 const AddJob = ({ isEdit, el }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +19,7 @@ const AddJob = ({ isEdit, el }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const { darkMode, setDarkMode } = useDarkMode();
 
   const queryClient = useQueryClient();
 
@@ -97,28 +99,28 @@ const AddJob = ({ isEdit, el }) => {
                 id="jobTitle"
                 name="jobTitle"
                 placeholder=" نام شغل"
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <Field
                 id="companyName"
                 name="companyName"
                 placeholder=" نام شرکت "
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <Field
                 id="aboutJob"
                 name="aboutJob"
                 placeholder="درباره شغل "
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <Field
                 id="companyWebSite"
                 name="companyWebSite"
                 placeholder="سایت شرکت "
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <Select
@@ -137,8 +139,12 @@ const AddJob = ({ isEdit, el }) => {
                     width: "100%",
                     borderRadius: "12px",
                     padding: "0 8px",
-                    borderColor: state.isFocused ? "#3772ff" : "#f4f4f4",
-                    backgroundColor: "#f3f4f6",
+                    borderColor: darkMode
+                      ? "#101828"
+                      : state.isFocused
+                      ? "#3772ff"
+                      : "#f4f4f4",
+                    backgroundColor: darkMode ? "#101828" : "#f3f4f6",
                     transition: "all 0.3s",
                     "&:hover": {
                       borderColor: "#3772ff",
@@ -160,7 +166,7 @@ const AddJob = ({ isEdit, el }) => {
                 id="companyLinkdin"
                 name="companyLinkdin"
                 placeholder="لینکدین شرکت "
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <Field
@@ -168,7 +174,7 @@ const AddJob = ({ isEdit, el }) => {
                 id="workStartDate"
                 name="workStartDate"
                 placeholder=" تاریخ شروع"
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl px-2 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl px-2 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <Field
@@ -176,7 +182,7 @@ const AddJob = ({ isEdit, el }) => {
                 id="workEndDate"
                 name="workEndDate"
                 placeholder=" تاریخ پایان"
-                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl px-2 placeholder:text-xs border border-lightGray bg-lightGray focus:border-navyBlue transition-all duration-300"
+                className="h-9 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl px-2 placeholder:text-xs border border-lightGray bg-lightGray dark:bg-gray-900 dark:border-gray-900 focus:border-navyBlue transition-all duration-300"
               />
 
               <button

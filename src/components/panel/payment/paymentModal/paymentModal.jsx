@@ -131,10 +131,14 @@ const PaymentModal = ({
         footer={false}
       >
         <Formik
-          onSubmit={handlePay}
+          onSubmit={(values) =>
+            handlePay({
+              ...values,
+              PeymentDate: new Date().toISOString(),
+            })
+          }
           initialValues={{
             PaymentInvoiceNumber: "",
-            PeymentDate: "",
             Paid: cost,
           }}
         >
@@ -145,17 +149,14 @@ const PaymentModal = ({
                 value={cost}
                 className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray dark:border-gray-900 bg-lightGray dark:bg-gray-900 focus:border-navyBlue transition-all duration-300"
                 placeholder="مبلغ را وارد کنید"
+                readOnly
               />
               <Field
                 name="PaymentInvoiceNumber"
                 className="w-full h-9 outline-none mb-2 mt-3 rounded-xl p-5 placeholder:text-xs border border-lightGray dark:border-gray-900 bg-lightGray dark:bg-gray-900 focus:border-navyBlue transition-all duration-300"
                 placeholder="کدپیگیری را وارد کنید"
               />
-              <Field
-                type="date"
-                name="PeymentDate"
-                className="w-full h-10 outline-none mb-2 mt-3 rounded-xl flex justify-center items-center px-3 placeholder:text-xs border border-lightGray dark:border-gray-900 dark:bg-gray-900 bg-lightGray focus:border-navyBlue transition-all duration-300"
-              />
+              {/* Removed PeymentDate input */}
               <button
                 onClick={handleSubmit}
                 type="button"

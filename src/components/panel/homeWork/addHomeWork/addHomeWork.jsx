@@ -81,7 +81,7 @@ const AddHomeWork = ({ courseStudentId, homeWorkId }) => {
   return (
     <Fragment>
       <Button type="text" onClick={mutate}>
-        <TiDocumentAdd className="w-6 h-6" />
+        <TiDocumentAdd className="w-6 h-6 text-navyBlue dark:text-white" />
       </Button>
       <Modal
         title="آپلود تکلیف"

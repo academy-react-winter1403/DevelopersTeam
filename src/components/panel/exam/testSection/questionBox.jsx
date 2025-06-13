@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import React from "react";
 import toast from "react-hot-toast";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const QuestionBox = ({
   tests,
@@ -16,6 +17,7 @@ const QuestionBox = ({
   answers,
   timeLeft,
 }) => {
+  const navigate = useNavigate();
   const { mutate: submitTest, isLoading } = useMutation({
     mutationFn: async () => {
       const submissionData = {
@@ -36,6 +38,7 @@ const QuestionBox = ({
     },
     onSuccess: () => {
       toast.success("ثبت شد");
+      navigate("/panel/exampage");
     },
   });
 
@@ -52,8 +55,8 @@ const QuestionBox = ({
     submitTest();
   };
 
-    if (!tests || tests.length === 0) {
-    return "Cacacvadsvca"; // Or return a message component
+  if (!tests || tests.length === 0) {
+    return "ازمونی ثبت نشده";
   }
 
   return (
