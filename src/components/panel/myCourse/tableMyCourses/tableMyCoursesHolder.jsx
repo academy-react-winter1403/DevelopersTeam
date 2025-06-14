@@ -6,7 +6,7 @@ import PriceComponent from "../../../common/priceComponent/priceComponent";
 import defImg from "./../../../../assets/images/courses/courseimg.svg";
 import ResponsiveMyCourse from "../responsiveMyCourse";
 import { Spin } from "antd";
-import { TagsNotAccept } from "../../tagStatus/tagStatus";
+import { TagsAccept, TagsNotAccept } from "../../tagStatus/tagStatus";
 import PaymentModal from "../../payment/paymentModal/paymentModal";
 import { CiMoneyBill } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
@@ -88,7 +88,12 @@ const TableMyCoursesHolder = ({
               <span className="text-navyBlue">تومان</span>
             </div>
           ),
-          pay: <TagsNotAccept text={el.paymentStatus} />,
+          pay:
+            el.paymentStatus === "پرداخت شده" ? (
+              <TagsAccept text={el.paymentStatus} />
+            ) : (
+              <TagsNotAccept text={el.paymentStatus} />
+            ),
           eye: (
             <div onClick={() => showDrawer(el)} className="flex gap-5">
               <MdOutlineRemoveRedEye className="w-6 h-6 text-gray" />

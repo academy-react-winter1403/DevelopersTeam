@@ -175,7 +175,7 @@ const UserInfo = ({ data }) => {
                     <ErrorMessage
                       name="fname"
                       component="h1"
-                      className="text-navyBlue"
+                      className="text-red-600"
                     />
                   </div>
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
@@ -212,7 +212,7 @@ const UserInfo = ({ data }) => {
                     <ErrorMessage
                       name="lname"
                       component="h1"
-                      className="text-navyBlue"
+                      className="text-red-600"
                     />
                   </div>
                 </div>
@@ -226,6 +226,11 @@ const UserInfo = ({ data }) => {
                       as="textarea"
                       className="h-32 w-full dark:placeholder:text-gray dark:text-gray outline-none rounded-xl p-5 pr-5 placeholder:text-xs border border-lightGray dark:border-[#101828] bg-lightGray dark:bg-[#101828] focus:border-navyBlue transition-all duration-300"
                       placeholder="یک متن درباره خود را وارد کنید"
+                    />
+                    <ErrorMessage
+                      name="aboutMe"
+                      component="h1"
+                      className="text-red-600"
                     />
                     <button
                       type="button"
@@ -250,11 +255,6 @@ const UserInfo = ({ data }) => {
                       <HiOutlineSpeakerWave />
                     </button>
                   </div>
-                  <ErrorMessage
-                    name="aboutMe"
-                    component="h1"
-                    className="text-navyBlue"
-                  />
                 </div>
 
                 {/* شماره همراه */}
@@ -270,7 +270,7 @@ const UserInfo = ({ data }) => {
                     <ErrorMessage
                       name="phone"
                       component="h1"
-                      className="text-navyBlue"
+                      className="text-red-600"
                     />
                   </div>
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
@@ -307,7 +307,7 @@ const UserInfo = ({ data }) => {
                     <ErrorMessage
                       name="code"
                       component="h1"
-                      className="text-navyBlue"
+                      className="text-red-600"
                     />
                   </div>
                 </div>
@@ -346,7 +346,7 @@ const UserInfo = ({ data }) => {
                     <ErrorMessage
                       name="birthday"
                       component="h1"
-                      className="text-navyBlue"
+                      className="text-red-600"
                     />
                   </div>
                   <div className="w-full font-semibold text-xs sm:text-sm lg:text-base flex flex-col space-y-3">
@@ -365,7 +365,7 @@ const UserInfo = ({ data }) => {
                       <ErrorMessage
                         name="gender"
                         component="h1"
-                        className="text-navyBlue"
+                        className="text-red-600"
                       />
                       <label className="flex items-center space-x-2 cursor-pointer">
                         <input
@@ -380,7 +380,7 @@ const UserInfo = ({ data }) => {
                       <ErrorMessage
                         name="gender"
                         component="h1"
-                        className="text-navyBlue"
+                        className="text-red-600"
                       />
                     </div>
                   </div>
@@ -421,7 +421,7 @@ const UserInfo = ({ data }) => {
                   <ErrorMessage
                     name="email"
                     component="h1"
-                    className="text-navyBlue"
+                    className="text-red-600"
                   />
                 </div>
 
@@ -461,7 +461,7 @@ const UserInfo = ({ data }) => {
                   <ErrorMessage
                     name="address"
                     component="h1"
-                    className="text-navyBlue"
+                    className="text-red-600"
                   />
                 </div>
               </div>
