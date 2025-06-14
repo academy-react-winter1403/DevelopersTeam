@@ -12,7 +12,7 @@ const Payment = () => {
     queryKey: ["myCoursesPanel", pageNum, itemPerPage],
     queryFn: async () => {
       const res = await http.get(
-        `/SharePanel/GetMyCourses?PageNumber=${pageNum}&RowsOfPage=${itemPerPage}&SortingCol=DESC&SortType=LastUpdate`
+        `/SharePanel/GetMyCourses?PageNumber=1&RowsOfPage=10000&SortingCol=DESC&SortType=LastUpdate`
       );
       return res;
     },
@@ -37,7 +37,7 @@ const Payment = () => {
     );
     return paymentData.flatMap((res) => res);
   };
-
+  const initialValue = [{}];
   const {
     data: paymentData,
     isSuccess,
@@ -46,6 +46,7 @@ const Payment = () => {
     queryKey: ["paymentList", pageNum, itemPerPage],
     queryFn: getPayment,
     enabled: !!myCourseData,
+    initialData: initialValue,
   });
 
   return (

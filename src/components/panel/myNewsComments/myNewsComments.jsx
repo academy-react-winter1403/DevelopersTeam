@@ -19,7 +19,7 @@ const MyNewsComments = () => {
   return (
     <div>
       <div className="hidden sm:block">
-        <h2 className="w-full h-10 mt-5 font-bold text-xl">کامنت های دوره</h2>
+        <h2 className="w-full h-10 mt-5 font-bold text-xl">کامنت های مقالات</h2>
       </div>
       <TableHolderNews
         data={data}
