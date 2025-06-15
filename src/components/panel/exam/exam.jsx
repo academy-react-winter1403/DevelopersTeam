@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableExamHolder from "./tableExam/tableExamHolder";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
- 
+
 const Exam = () => {
   const [convertedData, setCovertedData] = useState([]);
 
@@ -22,12 +22,14 @@ const Exam = () => {
       <div className="hidden sm:block">
         <h2 className="w-full h-10 mt-5 font-bold text-xl">آزمون های من</h2>
       </div>
-      <TableExamHolder
-        data={data?.data}
-        isSuccess={isSuccess}
-        convertedData={convertedData}
-        setCovertedData={setCovertedData}
-      />
+      {data && (
+        <TableExamHolder
+          data={data?.data}
+          isSuccess={isSuccess}
+          convertedData={convertedData}
+          setCovertedData={setCovertedData}
+        />
+      )}
     </div>
   );
 };

@@ -60,6 +60,7 @@ const TableMyReserveCoursesHolder = ({ data, isSuccess }) => {
           ),
           teacher: el?.courseData.teacherName,
           date: <DateComponent insertDate={el.courseData.startTime} />,
+          startDateRaw: el.reserverDate,
           reserveDate: <DateComponent insertDate={el.reserverDate} />,
           price: (
             <div className="flex items-center space-x-3">

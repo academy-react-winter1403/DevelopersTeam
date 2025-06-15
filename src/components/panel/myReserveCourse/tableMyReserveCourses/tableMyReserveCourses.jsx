@@ -38,6 +38,7 @@ const columns = [
     ellipsis: {
       showTitle: false,
     },
+    sorter: (a, b) => new Date(a.startDateRaw) - new Date(b.startDateRaw),
   },
   {
     title: "قیمت دوره",

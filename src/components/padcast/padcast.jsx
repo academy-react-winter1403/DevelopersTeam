@@ -16,6 +16,8 @@ const Padcast = () => {
     },
   });
 
+  console.log(data);
+
   const podcasts = data?.data?.Dots || [];
 
   return (
